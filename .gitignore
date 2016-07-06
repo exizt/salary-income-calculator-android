@@ -1,0 +1,25 @@
+# trash files by os
+.DS_Store
+Thumbs.db
+
+# log files
+*.log
+
+# Java - class files
+*.class
+
+# Android Studio - Gradle files
+.gradle/
+build/
+gradle/
+
+# Android Studio - captures folder
+captures/
+
+# other files
+*.iml
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+
+

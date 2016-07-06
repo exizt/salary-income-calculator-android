@@ -1,0 +1,6 @@
+apply plugin: 'java'
+
+dependencies {
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
