@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.asv.apps.salarytax.fragments.QuickCalculatorFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="퀵 계산"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editMoney_QMode"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp"
+        android:textSize="45dp"
+        android:gravity="center"
+        />
+
+
+
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="2"
+            android:layout_gravity="right|bottom"
+            android:layout_below="@+id/editMoney_QMode"
+            android:layout_alignParentStart="true">
+
+        </GridLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/editMoney_QMode"
+        android:layout_alignParentStart="true">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_height="wrap_content"
+            android:text="+ 천만원"
+            android:id="@+id/btnPlus1000"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_height="wrap_content"
+            android:text="+ 백만원"
+            android:id="@+id/btnPlus100"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_height="wrap_content"
+            android:text="+ 십만원"
+            android:id="@+id/btnPlus10"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout2">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 천만원"
+            android:id="@+id/btnMinus1000"
+            android:layout_weight="1"
+             />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 백만원"
+            android:id="@+id/btnMinus100"
+            android:layout_weight="1"
+             />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 십만원"
+            android:id="@+id/btnMinus10"
+            android:layout_weight="1"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="35dp"
+        android:id="@+id/linearLayout3"
+        >
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="정정"
+            android:id="@+id/btnClearInput_QM"
+
+         />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="계산하기"
+            android:id="@+id/btnExecute_QMode"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다."
+        android:id="@+id/textView3"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+</RelativeLayout>

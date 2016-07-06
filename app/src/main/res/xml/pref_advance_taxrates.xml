@@ -1,0 +1,52 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="rate_settings_enable"
+        android:defaultValue="false"
+        android:title="세율 고급설정 사용" />
+
+    <EditTextPreference
+        android:key="rate_national_pension"
+        android:inputType="numberDecimal"
+        android:numeric="decimal"
+        android:dependency="rate_settings_enable"
+        android:defaultValue="0"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="국민연금" />
+
+    <EditTextPreference
+        android:key="rate_health_care"
+        android:inputType="numberDecimal"
+        android:numeric="decimal"
+        android:dependency="rate_settings_enable"
+        android:defaultValue="0"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="건강보험" />
+
+    <EditTextPreference
+        android:key="rate_longterm_care"
+        android:inputType="numberDecimal"
+        android:numeric="decimal"
+        android:dependency="rate_settings_enable"
+        android:defaultValue="0"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="장기요양보험" />
+
+    <EditTextPreference
+        android:key="rate_employment_care"
+        android:inputType="numberDecimal"
+        android:numeric="decimal"
+        android:dependency="rate_settings_enable"
+        android:defaultValue="0"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="고용보험" />
+
+    <Preference android:title="세율설정 초기화"
+        android:key="rate_initialize_button"
+        android:dependency="rate_settings_enable"
+        android:summary="세율설정을 기본값으로 맞춥니다."/>
+</PreferenceScreen>

@@ -1,0 +1,123 @@
+package kr.asv.calculators.salary;
+
+/**
+ * 실수령액 계산 클래스.
+ * 실제적으로 컨트롤 하는 클래스 이다.
+ *
+ * prepare().run() 을 거친다.
+ * prepare() 이후에 setOptions() 등을 호출 하고 마지막에 run 을 실행하면 결과를 산출한다.
+ */
+public class SalaryCalculator
+{
+	/**
+	 * Options 값들. 가족수, 자녀수, 비과세액 등
+	 */
+	SalaryCalculatorOptions options;
+	Insurance insurance;
+	IncomeTax incomeTax;
+	Salary salary;
+	double netSalary;
+	/**
+	 * 생성자
+	 */
+	public SalaryCalculator()
+	{
+		this.initialize();
+	}
+	/**
+	 * 생성자
+	 * @param options
+	 */
+	public SalaryCalculator(SalaryCalculatorOptions options)
+	{
+		this.options = options;
+		this.initialize();
+	}
+	/**
+	 * 초기화 메서드.
+	 * 생성시에 한번만 호출되는 메서드.
+	 */
+	private void initialize()
+	{
+		if(this.options == null) this.options = new SalaryCalculatorOptions();
+		
+		insurance = new InsuranceImpl();
+		incomeTax = new IncomeTaxImpl();
+		salary = new SalaryImpl();
+
+
+		if(options.isDebug()){
+			incomeTax.setDebug(true);
+		}		
+	}
+	/**
+	 * 옵션 [가족수, 자녀수, 비과세액 등]
+	 * @param options
+     */
+	public void run(SalaryCalculatorOptions options)
+	{
+		this.options = options;
+		this.run();
+	}
+	/**
+	 * 계산 실행
+	 */
+	public void run()
+	{
+		if(options.isDebug()){
+			debug(options);
+		}
+
+		
+		salary.setAnnualBasis(options.isAnnualBasis());
+		salary.setIncludedSeverance(options.isIncludedSeverance());
+		salary.setInputMoney(options.getInputMoney());
+		salary.setTaxExemption(options.getTaxExemption());
+		salary.execute();
+
+		double basicSalary = salary.getBasicSalary();
+
+		
+		insurance.execute(basicSalary);
+		if(options.isDebug()) debug(insurance);
+
+		incomeTax.setNationalInsurance(insurance.getNationalPension());
+		incomeTax.execute(basicSalary, options.getFamily(), options.getChild());
+		if(options.isDebug()) debug(incomeTax);
+
+		// 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+		netSalary = basicSalary - insurance.get() - incomeTax.get() + options.getTaxExemption();
+		if(options.isDebug()) debug("실수령액 : " + netSalary + "\n");
+	}
+	protected void debug(Object obj)
+	{
+		System.out.println(obj);
+	}
+	public Insurance getInsurance()
+	{
+		return this.insurance;
+	}
+	public IncomeTax getIncomeTax()
+	{
+		return this.incomeTax;
+	}
+	public Salary getSalary(){
+		return this.salary;
+	}
+	/**
+	 * 옵션 객체를 리턴
+	 * @return
+	 */
+	public SalaryCalculatorOptions getOptions()
+	{
+		return this.options;
+	}
+	public double getNetSalary()
+	{
+		return this.netSalary;
+	}
+	public double getNetAnnualSalary()
+	{
+		return this.netSalary * 12;
+	}
+}

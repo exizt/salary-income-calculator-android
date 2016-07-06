@@ -8,6 +8,9 @@ Thumbs.db
 # Java - class files
 *.class
 
+# Android App files
+*.apk
+
 # Android Studio - Gradle files
 .gradle/
 build/

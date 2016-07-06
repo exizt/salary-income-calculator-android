@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="value_default_number">0</string>
+    <string name="value_default_family">1</string>
+    <string name="value_default_taxfree">100,000</string>
+    <string name="vWon">원</string>
+    <string name="vPeople">명</string>
+    <string name="divInsurance4">4대보험</string>
+    <string name="divTax">세금</string>
+    <string name="tiMoneyType">입력방식</string>
+    <string name="tiMoneyYearly">연봉입력</string>
+    <string name="tiMoneyMonthly">월급입력</string>
+    <string name="tiYearlyOpSeverance">퇴직금</string>
+    <string name="tiMoneyLabel">연봉입력(원)</string>
+    <string name="tiOptionFamily">부양가족수(본인포함)</string>
+    <string name="tiOptionChild">20세이하자녀수</string>
+    <string name="tiOptionTaxFree">비과세액(원)</string>
+    <string name="tiViewSalaryY">계산연봉</string>
+    <string name="tiViewSalary">계산월급</string>
+    <string name="tiNetSalary">실수령액</string>
+    <string name="tiNetSalaryY">실수령액(연간)</string>
+    <string name="tiInsuranceNation">국민연금</string>
+    <string name="tiInsuranceHealth">건강보험료</string>
+    <string name="tiInsuranceLongterm">요양보험료</string>
+    <string name="tiInsuranceEmp">고용보험</string>
+    <string name="tiInsuranceOccupational">산재보험</string>
+    <string name="tiTaxEarned">소득세</string>
+    <string name="tiTaxEarnedLocal">주민세</string>
+    <string name="vCalculate">계산</string>
+    <string name="btnClose">닫기</string>
+    <string name="result_help">* 실제결과와 다를 수 있습니다.</string>
+</resources>

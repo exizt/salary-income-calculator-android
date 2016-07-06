@@ -1,0 +1,178 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.asv.apps.salarytax.fragments.OlderCalculatorFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="실수령액 계산"
+        android:id="@+id/textView6" />
+
+    <LinearLayout
+        android:id="@+id/divMoneyType"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titleMoneyType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/tiMoneyType"
+             />
+
+        <RadioGroup
+            android:id="@+id/rgMoneyType"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/raMoneyYearly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/tiMoneyYearly" />
+
+            <RadioButton
+                android:id="@+id/raMoneyMonthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tiMoneyMonthly" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/divYearlyOpSeverance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/titleSeverance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="퇴직금여부" />
+
+        <CheckBox
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="포함"
+            android:id="@+id/checkSeverance"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/divMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/titleMoneyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/tiMoneyLabel" />
+
+        <EditText
+            android:id="@+id/edMoney"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" >
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/divOptionFamily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/titleOptionFamily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/tiOptionFamily" />
+
+        <EditText
+            android:id="@+id/edOptionFamily"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/value_default_family" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/divOptionChild"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/titleOptionChild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/tiOptionChild" />
+
+        <EditText
+            android:id="@+id/edOptionChild"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/value_default_number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/divOptionTaxFree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/titleOptionTaxFree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/tiOptionTaxFree" />
+
+        <EditText
+            android:id="@+id/edOptionTaxFree"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:text="@string/value_default_taxfree" />
+
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/btnCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vCalculate"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textStyle="bold" />
+
+
+
+</LinearLayout>
