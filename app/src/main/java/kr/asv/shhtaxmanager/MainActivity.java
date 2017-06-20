@@ -25,11 +25,11 @@ import kr.asv.apps.salarytax.Services;
 import kr.asv.apps.salarytax.SettingsActivity;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    
     private AdView mAdView;
 
     @Override
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity
         //Services 초기화 및 인스턴스 가져오기
         Services services = Services.getInstanceWithInit(getApplicationContext());
 
-        loadAdMobBanner(R.id.adView);
+        //loadAdMobBanner(R.id.adView);
+        //loadAdmobInterstitial(R.string.banner_ad_unit_id);
     }
 
 
@@ -94,12 +95,12 @@ public class MainActivity extends AppCompatActivity
      * 구글 Admob 광고 추가.
      * 멤버변수 mAdView 필요
      */
-    public void loadAdMobBanner(int id)
+    public void loadAdMobBanner(int adUnitId)
     {
         //AdView adView = (AdView) findViewById(id);
         //adView.loadAd(newAdRequest());
 
-        mAdView = (AdView) findViewById(id);
+        mAdView = (AdView) findViewById(adUnitId);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }

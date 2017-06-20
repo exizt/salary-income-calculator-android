@@ -33,6 +33,11 @@ public class Services {
         return instance;
     }
 
+    /**
+     * 싱글톤 비슷하게 구현. 처음 한번만 init 메서드를 호출하게
+     * @param context
+     * @return
+     */
     public static Services getInstanceWithInit(Context context)
     {
         if(instance.applicationContext == null){
@@ -40,6 +45,10 @@ public class Services {
         }
         return instance;
     }
+
+    /**
+     * 생성자 메서드
+     */
     private Services() {
     }
 
