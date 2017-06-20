@@ -17,20 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
-import com.google.android.gms.ads.AdView;
-
 import kr.asv.apps.salarytax.NavigationItemFactory;
 import kr.asv.apps.salarytax.Services;
 import kr.asv.apps.salarytax.SettingsActivity;
 
-import com.google.android.gms.ads.AdRequest;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    
-    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +48,6 @@ public class MainActivity extends AppCompatActivity
 
         //Services 초기화 및 인스턴스 가져오기
         Services services = Services.getInstanceWithInit(getApplicationContext());
-
-        //loadAdMobBanner(R.id.adView);
-        //loadAdmobInterstitial(R.string.banner_ad_unit_id);
     }
 
 
@@ -89,20 +79,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * 구글 Admob 광고 추가.
-     * 멤버변수 mAdView 필요
-     */
-    public void loadAdMobBanner(int adUnitId)
-    {
-        //AdView adView = (AdView) findViewById(id);
-        //adView.loadAd(newAdRequest());
-
-        mAdView = (AdView) findViewById(adUnitId);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
