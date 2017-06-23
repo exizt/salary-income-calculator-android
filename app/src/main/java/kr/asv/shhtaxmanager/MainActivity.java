@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
 import kr.asv.apps.salarytax.NavigationItemFactory;
 import kr.asv.apps.salarytax.Services;
 import kr.asv.apps.salarytax.SettingsActivity;
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity
 
         //Services 초기화 및 인스턴스 가져오기
         Services services = Services.getInstanceWithInit(getApplicationContext());
-    }
 
+    }
 
     @Override
     public void onBackPressed() {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);//히스토리에 남긴다.
         }
         fragmentTransaction.commit();
+
     }
     /**
      * 키보드 내리기
