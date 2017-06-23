@@ -45,7 +45,8 @@ public class OlderCalculatorFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_older_calculator, container, false);
         setFragmentView(view);
-        setActionBarTitle("실수령액 계산");
+        //setActionBarTitle("실수령액 계산");
+        setActionBarTitle(getResources().getString(R.string.activity_title_normal_mode));
 
         //세자리마다 쉼표표시
         EditText edMoney = (EditText) findViewById(R.id.edMoney);

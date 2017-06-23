@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_calculator_quick"
-            android:icon="@drawable/ic_menu_calculate"
-            android:title="퀵 계산" />
-        <item
-            android:id="@+id/nav_calculator_older"
-            android:icon="@drawable/ic_menu_calculate"
-            android:title="실수령액 계산" />
-        <item
-            android:id="@+id/nav_calculator_tax"
-            android:icon="@drawable/ic_menu_calculate"
-            android:title="세율 계산" />
-    </group>
-
-    <item android:title="Information">
+    <item android:title="@string/menu_group_calculators">
         <menu>
             <item
-                android:id="@+id/nav_word_dictionary"
-                android:icon="@drawable/ic_menu_info"
-                android:title="용어사전" />
+                android:id="@+id/nav_calculator_quick"
+                android:icon="@drawable/ic_menu_calculate"
+                android:title="@string/menu_quick_calculator" />
+            <item
+                android:id="@+id/nav_calculator_older"
+                android:icon="@drawable/ic_menu_calculate"
+                android:title="@string/menu_detail_calculator" />
         </menu>
     </item>
 
-    <item android:title="Settings">
+    <item android:title="@string/menu_group_others">
+        <menu>
+            <item
+                android:id="@+id/nav_calculator_tax"
+                android:icon="@drawable/ic_menu_calculate"
+                android:title="@string/menu_rate_calculator" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_group_settings">
         <menu>
             <item
                 android:id="@+id/nav_settings"
@@ -33,4 +30,14 @@
                 android:title="환경설정" />
         </menu>
     </item>
+
+    <item android:title="@string/menu_group_information">
+        <menu>
+            <item
+                android:id="@+id/nav_word_dictionary"
+                android:icon="@drawable/ic_menu_info"
+                android:title="@string/menu_word_dictionary" />
+        </menu>
+    </item>
+
 </menu>

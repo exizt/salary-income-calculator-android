@@ -1,0 +1,33 @@
+<resources>
+    <!-- app -->
+    <string name="app_name">실수령계산기</string>
+
+    <!-- menus -->
+    <string name="menu_group_information">정보</string>
+    <string name="menu_group_settings">환경 설정</string>
+    <string name="menu_group_calculators">실수령액 계산기</string>
+    <string name="menu_group_others">부가 기능</string>
+    <string name="menu_quick_calculator">실수령액 계산 (퀵 모드)</string>
+    <string name="menu_detail_calculator">실수령액 계산 (일반 모드)</string>
+    <string name="menu_rate_calculator">세율 계산</string>
+    <string name="menu_word_dictionary">용어 사전</string>
+
+    <!-- etc -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">설정변경</string>
+    <string name="nav_header_title">월급 실수령액 계산기</string>
+    <string name="nav_header_subtitle">version 1.0</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_word_list">WordListActivity</string>
+    <string name="title_activity_word">WordActivity</string>
+    <string name="title_activity_settings">환경설정</string>
+
+
+    <string name="close">닫기</string>
+    <string name="activity_title_quick_mode">실수령액 계산 (Quick)</string>
+    <string name="activity_title_normal_mode">실수령액 계산 (일반)</string>
+</resources>

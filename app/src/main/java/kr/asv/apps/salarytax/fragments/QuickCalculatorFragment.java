@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -59,7 +60,7 @@ public class QuickCalculatorFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quick_calculator, container, false);
         setFragmentView(view);
-        setActionBarTitle("퀵 계산");
+        setActionBarTitle(getResources().getString(R.string.activity_title_quick_mode));
         EditText editMoney = (EditText) findViewById(R.id.editMoney_QMode);
         editMoney.addTextChangedListener(new MoneyTextWatcher(editMoney));
 
