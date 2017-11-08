@@ -2,7 +2,6 @@ package kr.asv.apps.salarytax.databases;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 /**
  * Created by Administrator on 2016-04-30.

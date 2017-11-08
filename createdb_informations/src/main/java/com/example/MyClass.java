@@ -1,16 +1,6 @@
 package com.example;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import kr.asv.salary.TableDictionary;
-import kr.asv.sqlite.SQLiteAdapter;
 import kr.asv.sqlite.SQLiteHandler;
 
 public class MyClass {
