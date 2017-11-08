@@ -33,15 +33,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 로그 보여주기
-     * @param msg
-     */
-    protected void debug(String msg)
-    {
-        MainActivity activity = (MainActivity)getActivity();
-        activity.debug(msg);
-    }
-    /**
      * fragment 교체시(또는 이동시)
      * @param fragment
      */

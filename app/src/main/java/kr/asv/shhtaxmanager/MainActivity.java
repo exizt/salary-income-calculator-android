@@ -3,6 +3,7 @@ package kr.asv.shhtaxmanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +29,7 @@ import kr.asv.apps.salarytax.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private boolean isDebug = true;
     private AdView mAdView;
 
     @Override
@@ -131,9 +133,15 @@ public class MainActivity extends AppCompatActivity
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-    public void debug(String msg)
+    /**
+     * 디버깅
+     * @param log
+     */
+    public void debug(String log)
     {
-        Log.e("[SHH DEBUG]", msg);
+        if(isDebug) {
+            Log.e("[EXIZT-DEBUG]", new StringBuilder("[MainActivity]").append(log).toString());
+        }
     }
 
     public void setActionBarTitle(String title)

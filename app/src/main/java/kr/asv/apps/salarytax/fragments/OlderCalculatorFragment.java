@@ -113,7 +113,7 @@ public class OlderCalculatorFragment extends BaseFragment {
         TextView txMoneyLabel = (TextView) findViewById(R.id.titleMoneyLabel);
         LinearLayout layYearlyOpSeverance = (LinearLayout) findViewById(R.id.divYearlyOpSeverance);
 
-        debug("");
+        //debug("");
         if (radioButton.isChecked()) {
             if (radioButton.getId() == R.id.raMoneyMonthly) {
                 moneyType = 'M';
