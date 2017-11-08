@@ -43,22 +43,8 @@ public class MainActivity extends AppCompatActivity
 
         Fabric.with(this, new Crashlytics());
 
-        //네비게이션 바 기능
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                hideSoftKeyboard();
-            }
-        };
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        //네비게이션 바 안에서 메뉴항목 부분
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //네비게이션 드로워 셋팅
+        onCreateNavigationDrawer();
 
         //기본 Fragment 지정
         NavigationItemFactory.getInstance().onNavigationItemFirst(this);
@@ -66,8 +52,37 @@ public class MainActivity extends AppCompatActivity
         //Services 초기화 및 인스턴스 가져오기
         Services services = Services.getInstanceWithInit(this);
 
+        //Ad mob 사용
         loadAdMobBanner(R.id.adView);
 
+    }
+
+    /**
+     * 네비게이션 드로워 셋팅
+     */
+    private void onCreateNavigationDrawer()
+    {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //네비게이션 바 기능
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            /*
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                hideSoftKeyboard();
+            }
+            */
+        };
+        //drawer.setDrawerListener(toggle);//deprecated
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //네비게이션 바 안에서 메뉴항목 부분
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -180,12 +195,4 @@ public class MainActivity extends AppCompatActivity
 
         return adRequest;
     }
-
-    private void getAdMobTestDeviceID()
-    {
-        //String android_id = Settings.Secure.getString(getContext().getContentResolver(),
-         //       Settings.Secure.ANDROID_ID);
-
-    }
-
 }
