@@ -1,6 +1,7 @@
 package kr.asv.apps.salarytax;
 
 import android.content.Context;
+import android.util.Log;
 
 import kr.asv.apps.salarytax.databases.DBInformation;
 import kr.asv.apps.salarytax.databases.TableWordDictionary;
@@ -14,20 +15,19 @@ public class Services {
     //default
     private static Services instance = new Services();
     private Context applicationContext = null;
+    private boolean isDebug = true;
+
     //objects
     private SalaryCalculator calculator = new SalaryCalculator();
     private TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
-
-
-    /*
-    Databases members
-     */
     private DBInformation dbInformation = null;
-
-    /*
-    Tables members
-     */
     TableWordDictionary tableWordDictionary;
+
+    /**
+     * 생성자 메서드
+     */
+    private Services() {
+    }
 
     public static Services getInstance() {
         return instance;
@@ -47,12 +47,6 @@ public class Services {
     }
 
     /**
-     * 생성자 메서드
-     */
-    private Services() {
-    }
-
-    /**
      * 최초 한번만 실행하게끔
      * @param context
      */
@@ -62,9 +56,25 @@ public class Services {
         if(this.applicationContext != null) return;
         this.applicationContext = context;
 
+        debug("[Init] >> ");
+
         //디비 연결
         this.dbInformation = new DBInformation(context);
-        tableWordDictionary = new TableWordDictionary(dbInformation.db());
+        debug("[Init] > set DBInformation");
+
+        this.tableWordDictionary = new TableWordDictionary(dbInformation.db());
+        debug("[Init] > set TableWordDictionary");
+    }
+
+    /**
+     * 디버깅
+     * @param log
+     */
+    private void debug(String log)
+    {
+        if(isDebug) {
+            Log.e("[EXIZT-DEBUG]", new StringBuilder("[Services]").append(log).toString());
+        }
     }
 
     public void onResume(Context context)

@@ -1,16 +1,18 @@
 package kr.asv.apps.salarytax.databases;
 
 import android.content.Context;
+import android.util.Log;
 
 import kr.asv.android.sqlite.SQLiteHandler;
 
 /**
  * DBInformation
+ * DBInformation 테이블 을 처리하기 위한 클래스
  */
 public class DBInformation extends SQLiteHandler {
     protected String dbName = "salarytax_information.db";
     protected int dbVersion = 1;
-    protected boolean debug = false;
+    private boolean isDebug = false;
 
     /**
      * Construction
@@ -18,8 +20,11 @@ public class DBInformation extends SQLiteHandler {
      */
     public DBInformation(Context context)
     {
-        debug("[DBInformation] Construct");
-        super.initialize(context,dbName,dbVersion,debug);
+        debug("[Constructor] >> ");
+        super.initialize(context,dbName,dbVersion,false);
+        if(super.isPassingCopyProcess){
+            debug("[Constructor] passing db copy process");
+        }
     }
 
     /**
@@ -27,7 +32,7 @@ public class DBInformation extends SQLiteHandler {
      */
     public void onCreateDatabase()
     {
-        debug("[DBInformation] onCreateDatabase");
+        debug("[onCreateDatabase] >> ");
         //copyDatabase();
     }
 
@@ -37,7 +42,7 @@ public class DBInformation extends SQLiteHandler {
      * @param newVersion
      */
     public void onUpgradeDatabase(int oldVersion,int newVersion){
-        debug("[DBInformation] onUpgradeDatabase");
+        debug("[onUpgradeDatabase] >>");
         //copyDatabase();
     }
 
@@ -47,7 +52,18 @@ public class DBInformation extends SQLiteHandler {
      * @param newVersion
      */
     public void onDowngradeDatabase(int oldVersion,int newVersion){
-        debug("[DBInformation] onDowngradeDatabase");
+        debug("[onDowngradeDatabase] >>");
         //copyDatabase();
+    }
+
+    /**
+     * 디버깅
+     * @param log
+     */
+    private void debug(String log)
+    {
+        if(isDebug) {
+            Log.e("[EXIZT-DEBUG]", new StringBuilder("[DBInformation]").append(log).toString());
+        }
     }
 }
