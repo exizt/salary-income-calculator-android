@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import kr.asv.apps.salarytax.NavigationItemFactory;
 import kr.asv.apps.salarytax.Services;
 import kr.asv.apps.salarytax.SettingsActivity;
@@ -25,6 +28,7 @@ import kr.asv.apps.salarytax.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,9 @@ public class MainActivity extends AppCompatActivity
         NavigationItemFactory.getInstance().onNavigationItemFirst(this);
 
         //Services 초기화 및 인스턴스 가져오기
-        Services services = Services.getInstanceWithInit(getApplicationContext());
+        Services services = Services.getInstanceWithInit(this);
+
+        loadAdMobBanner(R.id.adView);
 
     }
 
@@ -137,6 +143,37 @@ public class MainActivity extends AppCompatActivity
     public String getAppVersion()
     {
         return BuildConfig.VERSION_NAME;
+    }
+
+
+    /**
+     * 구글 광고 추가할 때에.
+     */
+    public void loadAdMobBanner(int id)
+    {
+        mAdView = (AdView) findViewById(id);
+        mAdView.loadAd(newAdRequest());
+    }
+    /**
+     * 구글 광고의 adRequest 를 생성 및 반환
+     * @return
+     */
+    public AdRequest newAdRequest()
+    {
+        AdRequest.Builder builder = new AdRequest.Builder();
+        builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+        //builder.addTestDevice("621CBEEDE09F6A5B37180A718E74C41C");// G pro code
+
+        AdRequest adRequest = builder.build();
+
+        return adRequest;
+    }
+
+    private void getAdMobTestDeviceID()
+    {
+        //String android_id = Settings.Secure.getString(getContext().getContentResolver(),
+         //       Settings.Secure.ANDROID_ID);
+
     }
 
 }

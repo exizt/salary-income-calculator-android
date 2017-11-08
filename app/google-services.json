@@ -1,0 +1,117 @@
+{
+  "project_info": {
+    "project_number": "252525703797",
+    "firebase_url": "https://admob-app-id-7544323780.firebaseio.com",
+    "project_id": "admob-app-id-7544323780",
+    "storage_bucket": "admob-app-id-7544323780.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252525703797:android:fdb8b305395f4401",
+        "android_client_info": {
+          "package_name": "kr.asv.apps.devicemonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxDBKp6WNcj3KEzSL1kYaMKUljO1QQpxI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252525703797:android:1d6a7f4fcae057d9",
+        "android_client_info": {
+          "package_name": "kr.asv.apps.loancalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxDBKp6WNcj3KEzSL1kYaMKUljO1QQpxI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252525703797:android:34c0b33001d8f062",
+        "android_client_info": {
+          "package_name": "kr.asv.shhtaxmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252525703797-3ohab5q2g901pe9o8pgp9risjk0c8atg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.asv.shhtaxmanager",
+            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
+          }
+        },
+        {
+          "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxDBKp6WNcj3KEzSL1kYaMKUljO1QQpxI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
