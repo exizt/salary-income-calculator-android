@@ -57,9 +57,9 @@ public class SQLiteHandler {
 
             // 보기 좋게 16진수로 만드는 작업
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashbytes.length; i++) {
+            for (byte hashbyte : hashbytes) {
                 // %02x 부분은 0 ~ f 값 까지는 한자리 수이므로 두자리 수로 보정하는 역할을 한다.
-                sb.append(String.format("%02x", hashbytes[i] & 0xff));
+                sb.append(String.format("%02x", hashbyte & 0xff));
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
@@ -105,7 +105,7 @@ public class SQLiteHandler {
         }
         catch (IOException e)
         {
-            System.err.println(e); // 에러가 있다면 메시지 출력
+            System.out.println(e.toString()); // 에러가 있다면 메시지 출력
         }
     }
 }

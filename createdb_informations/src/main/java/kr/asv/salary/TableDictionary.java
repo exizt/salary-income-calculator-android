@@ -119,7 +119,7 @@ public class TableDictionary {
      */
     public void createWithInsert()
     {
-        List<String> queries = new ArrayList<String>();
+        List<String> queries = new ArrayList<>();
         queries.add("drop table if exists "+TABLE_NAME);
         queries.add(
                 "create table "+TABLE_NAME+" (key integer primary key, id string, subject string,explanation string,process string,history string)");
