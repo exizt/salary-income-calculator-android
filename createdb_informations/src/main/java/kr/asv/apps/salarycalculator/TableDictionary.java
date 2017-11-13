@@ -23,43 +23,44 @@ import kr.asv.sqlite.SQLiteAdapter;
  */
 public class TableDictionary {
     private SQLiteAdapter database;
+    @SuppressWarnings("FieldCanBeLocal")
     private final String TABLE_NAME = "word_dictionary";
-    //GoogleDevices googleDevices;
-    //List<GoogleDevices.Device> devices;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String DATA_URL = "http://calculators.asv.kr/salaryCalculator/datas/android.xml";
     public List<DataItem> dataList = new ArrayList<>();
+    @SuppressWarnings("FieldCanBeLocal")
+    private boolean isDebug = false;
 
+    /**
+     * 생성자
+     * @param database SQLiteAdapter
+     */
     public TableDictionary(SQLiteAdapter database)
     {
+        debug("constructor");
         this.database = database;
-
-        //googleDevices = new GoogleDevices();
-        //devices = googleDevices.getDevices();
-        String uri = "http://calculators.asv.kr/salaryCalculator/datas/android.xml";
-        assignData(uri);
+        init();
     }
 
-
-    public void assignData(String uri){
+    /**
+     * 초기 호출 되는 메서드
+     */
+    private void init(){
         debug("Data Importing..");
         try{
-
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document xml = documentBuilder.parse(uri);
+            Document xml = documentBuilder.parse(DATA_URL);
             //document.getDocumentElement().normalize();
 
             Element root = xml.getDocumentElement();
             System.out.println("Root element :" + root.getTagName());
-
-
-
 
             //NodeList nodeList = element.getElementsByTagName("list");
             //NodeList nodeList = element.getChildNodes();
             NodeList nodeList = root.getElementsByTagName("item");
 
             if(nodeList.getLength() ==0) return;
-
 
             for(int i=0; i<nodeList.getLength(); i++){
                 Node nodeItem = nodeList.item(i);
@@ -84,22 +85,18 @@ public class TableDictionary {
 
                     debug("Data Importing["+i+"] Success");
                 } catch (Exception e) {
-                    debug("Exception occur >>"+e);
-
+                    debug("Exception occur >>"+e.toString());
                 }
             }
-
-
         } catch (ParserConfigurationException e){
-
+            debug("Exception occur >>"+e.toString());
         } catch (SAXException e){
-
+            debug("SAXException occur >>"+e.toString());
         } catch (IOException e){
-
+            debug("IOException occur >>"+e.toString());
         } catch (Exception e){
-
+            debug("Exception occur >>"+e.toString());
         }
-
     }
 
 
@@ -162,19 +159,20 @@ public class TableDictionary {
 
     /**
      * 디버깅 메서드
-     * @param str
+     * @param msg 메시지
      */
-    public void debug(String str)
+    private void debug(String msg)
     {
-        System.out.println(str);
+        if(isDebug)
+        System.out.println("[EXIZT-MODULE-DEBUG][DictionaryTable] " + msg);
     }
 
     public class DataItem{
-        public String id;
-        public String subject;
-        public String explanation;
-        public String process;
-        public String history;
+        String id;
+        String subject;
+        String explanation;
+        String process;
+        String history;
 
         public String toString()
         {
