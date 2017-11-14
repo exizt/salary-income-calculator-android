@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class FileHash {
     @SuppressWarnings("FieldCanBeLocal")
     private boolean isDebug = false;
+    private String debugTag = "[EXIZT-DEBUG][FileHash]";
 
     @SuppressWarnings("unused")
     public FileHash(){
@@ -38,9 +39,9 @@ public class FileHash {
         //데이터베이스 파일의 해쉬값 생성
         File file = new File(databaseFilePath);
         String hash = getHashcode(file);
-        System.out.println("-----------------");
-        System.out.println(hash);
-        System.out.println("-----------------");
+        debug("-----------------",true);
+        debug("Hash Code : "+hash,true);
+        debug("-----------------",true);
 
         /*
          * 해쉬값을 별도 파일에 저장
@@ -108,11 +109,29 @@ public class FileHash {
      * 디버깅 메서드
      * @param msg messages
      */
+    @SuppressWarnings("unused")
     private void debug(String msg)
     {
+        debug(msg,false);
+    }
+
+    /**
+     * 디버깅 메서드.
+     * 강제적으로 출력하고 싶을 때에 사용한다.
+     * debug("messages",true)
+     * @param msg messages
+     */
+    @SuppressWarnings({"unused", "SameParameterValue"})
+    private void debug(String msg,boolean debug)
+    {
         //noinspection ConstantConditions
-        if(isDebug) {
-            System.out.println("[EXIZT-MODULE-DEBUG] " + msg);
+        if(isDebug || debug) {
+            System.out.println(debugTag + msg);
         }
+    }
+
+    @SuppressWarnings("unused")
+    public void setDebugTag(String debugTag) {
+        this.debugTag = debugTag;
     }
 }

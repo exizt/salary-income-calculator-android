@@ -1,4 +1,4 @@
-package kr.asv.salary;
+package kr.asv.apps.salarycalculator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,7 +26,7 @@ public class TableDictionary {
     @SuppressWarnings("FieldCanBeLocal")
     private final String TABLE_NAME = "word_dictionary";
     @SuppressWarnings("FieldCanBeLocal")
-    private final String DATA_URL = "http://calculators.asv.kr/salaryCalculator/datas/android.xml";
+    private final String DATA_URL = "https://chosim.asv.kr/salary_description.xml";
     public List<DataItem> dataList = new ArrayList<>();
     @SuppressWarnings("FieldCanBeLocal")
     private boolean isDebug = false;

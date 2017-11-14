@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import kr.asv.shhtaxmanager.R;
 
 public class WordListActivity extends AppCompatActivity {
     private WordDictionaryAdapter adapter;
+    private boolean isDebug = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +37,40 @@ public class WordListActivity extends AppCompatActivity {
 
         drawDictionary();
     }
+
+    /**
+     *
+     */
     private void drawDictionary()
     {
         TableWordDictionary tableWordDictionary = Services.getInstance().getTableWordDictionary();
         //tableWordDictionary.test();;
-
-        Cursor cur = tableWordDictionary.getList();
-
         ArrayList<WordDictionaryItem> items = new ArrayList<>();
+        try{
+            Cursor cur = tableWordDictionary.getList();
+            if (cur.moveToFirst()) {
 
-        if (cur.moveToFirst()) {
+                while (cur.isAfterLast() == false) {
+                    //Log.e("SHH",""+cur.getInt(cur.getColumnIndex("key")));
+                    WordDictionaryItem wItem = new WordDictionaryItem();
+                    wItem.setKey(cur.getInt(cur.getColumnIndex("key")));
+                    wItem.setId(cur.getString(cur.getColumnIndex("id")));
+                    wItem.setSubject(cur.getString(cur.getColumnIndex("subject")));
+                    wItem.setExplanation(cur.getString(cur.getColumnIndex("explanation")));
+                    wItem.setProcess(cur.getString(cur.getColumnIndex("process")));
+                    wItem.setHistory(cur.getString(cur.getColumnIndex("history")));
 
-            while (cur.isAfterLast() == false) {
-                //Log.e("SHH",""+cur.getInt(cur.getColumnIndex("key")));
-                WordDictionaryItem wItem = new WordDictionaryItem();
-                wItem.setKey(cur.getInt(cur.getColumnIndex("key")));
-                wItem.setId(cur.getString(cur.getColumnIndex("id")));
-                wItem.setSubject(cur.getString(cur.getColumnIndex("subject")));
-                wItem.setExplanation(cur.getString(cur.getColumnIndex("explanation")));
-                wItem.setProcess(cur.getString(cur.getColumnIndex("process")));
-                wItem.setHistory(cur.getString(cur.getColumnIndex("history")));
+                    items.add(wItem);
 
-                items.add(wItem);
-
-                cur.moveToNext();
+                    cur.moveToNext();
+                }
             }
+            cur.close();
+        } catch (Exception e) {
+            debug("[drawDictionary] 데이터 로딩 실패 ");
+            debug(e.toString());
+            throw e;
         }
-        cur.close();
 
         adapter = new WordDictionaryAdapter(this,R.layout.listitem_word);
         adapter.setItemList(items);
@@ -78,5 +87,16 @@ public class WordListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * 디버깅
+     * @param log
+     */
+    public void debug(String log)
+    {
+        if(isDebug) {
+            Log.e("[EXIZT-DEBUG]", new StringBuilder("[MainActivity]").append(log).toString());
+        }
     }
 }
