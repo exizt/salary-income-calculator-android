@@ -14,7 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import kr.asv.apps.salarytax.MoneyTextWatcher;
-import kr.asv.apps.salarytax.ReportActivity;
+import kr.asv.apps.salarytax.activities.ReportActivity;
 import kr.asv.apps.salarytax.Services;
 import kr.asv.calculators.salary.SalaryCalculator;
 import kr.asv.shhtaxmanager.R;
@@ -24,6 +24,7 @@ import kr.asv.shhtaxmanager.R;
  */
 public class OlderCalculatorFragment extends BaseFragment {
     private char moneyType = 'Y';
+    @SuppressWarnings("FieldCanBeLocal")
     private boolean includedSeverance = false;
     private boolean annualBasis = false;
 
@@ -106,7 +107,7 @@ public class OlderCalculatorFragment extends BaseFragment {
     /**
      * 월급/연봉 선택
      *
-     * @param v
+     * @param v View
      */
     public void onClickMoneyType(View v) {
         RadioButton radioButton = (RadioButton) v;
@@ -133,7 +134,7 @@ public class OlderCalculatorFragment extends BaseFragment {
     /**
      * 세금 계산하기 버튼 클릭시 발생
      *
-     * @param v
+     * @param v View
      */
     public void onClickButtonCalculate(View v) {
         EditText edMoney = (EditText) findViewById(R.id.edMoney);

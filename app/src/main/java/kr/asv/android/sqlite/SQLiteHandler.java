@@ -282,10 +282,11 @@ public abstract class SQLiteHandler {
     public void createDBFileFromAssets(Context context,String dbName) {
         try {
             debug("[createDBFileFromAssets] >> DB Name > ",dbName);
-            String package_name = context.getPackageName();
+            //String package_name = context.getPackageName();
 
             // DB 파일의 폴더 (내부 저장소)
-            String folderPath = new StringBuffer("/data/data/").append(package_name).append("/databases").toString();
+            //String folderPath = new StringBuffer("/data/data/").append(package_name).append("/databases").toString();
+            String folderPath = context.getDatabasePath(dbName).getParent();
 
             // data/data/databases 폴더가 없을 경우 폴더를 생성해준다.
             File folder = new File(folderPath);
@@ -297,7 +298,8 @@ public abstract class SQLiteHandler {
             }
 
             // DB 파일의 경로 (내부 저장소)
-            String filePath = new StringBuffer(folderPath).append("/").append(dbName).toString();
+            //String filePath = new StringBuffer(folderPath).append("/").append(dbName).toString();
+            String filePath = context.getDatabasePath(dbName).getPath();
             String assetName = new StringBuffer("db/").append(dbName).toString();
             debug("[createDBFileFromAssets] copyAssetFileToLocalStorage before");
             copyAssetFileToLocalStorage(context, filePath, assetName);

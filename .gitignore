@@ -29,5 +29,8 @@ captures/
 .idea/gradle.xml
 .idea/vcs.xml
 
+# inspection 
+.idea/inspectionProfiles/
+
 # Keystore files
 *.jks

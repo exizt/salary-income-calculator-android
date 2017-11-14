@@ -1,6 +1,4 @@
-package com.example;
-
-import kr.asv.apps.salarycalculator.MainController;
+package kr.asv.apps.salarycalculator;
 
 public class MyClass {
     public static void main(String[] args)

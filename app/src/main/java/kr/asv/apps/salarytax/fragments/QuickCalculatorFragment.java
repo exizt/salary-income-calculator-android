@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import kr.asv.apps.salarytax.MoneyTextWatcher;
-import kr.asv.apps.salarytax.ReportActivity;
+import kr.asv.apps.salarytax.activities.ReportActivity;
 import kr.asv.apps.salarytax.Services;
 import kr.asv.calculators.salary.SalaryCalculator;
 import kr.asv.shhtaxmanager.R;

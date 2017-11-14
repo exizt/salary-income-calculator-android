@@ -6,6 +6,7 @@ import android.view.View;
 import kr.asv.shhtaxmanager.MainActivity;
 
 /**
+ * BaseFragment
  * Created by Administrator on 2016-04-08.
  */
 public abstract class BaseFragment extends Fragment {
@@ -30,25 +31,6 @@ public abstract class BaseFragment extends Fragment {
     public View findViewById(int id)
     {
         return this.fragmentView.findViewById(id);
-    }
-
-    /**
-     * fragment 교체시(또는 이동시)
-     * @param fragment
-     */
-    protected void replaceFragments(Fragment fragment)
-    {
-        MainActivity activity = (MainActivity)getActivity();
-        activity.replaceFragments(fragment);
-    }
-    /**
-     * fragment 교체시(또는 이동시)
-     * @param fragment
-     */
-    protected void replaceFragments(Fragment fragment,Boolean backStack)
-    {
-        MainActivity activity = (MainActivity)getActivity();
-        activity.replaceFragments(fragment,backStack);
     }
 
     /**

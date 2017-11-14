@@ -4,3 +4,9 @@ dependencies {
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile){
+    options.encoding = 'UTF-8'
+}

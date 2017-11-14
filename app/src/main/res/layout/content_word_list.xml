@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="kr.asv.apps.salarytax.WordListActivity"
+    tools:context="kr.asv.apps.salarytax.activities.WordListActivity"
     tools:showIn="@layout/activity_word_list">
 
     <ListView
@@ -17,5 +17,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>

@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-
+import kotlinx.android.synthetic.main.activity_report.*
+import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarytax.fragments.ReportInputFragment
 import kr.asv.apps.salarytax.fragments.ReportInsuranceFragment
 import kr.asv.apps.salarytax.fragments.ReportSummaryFragment
@@ -17,15 +17,6 @@ import kr.asv.apps.salarytax.fragments.ReportTaxFragment
 import kr.asv.shhtaxmanager.R
 
 class ReportActivity : AppCompatActivity() {
-
-    /**
-     * The [android.support.v4.view.PagerAdapter] that will provide
-     * fragments for each of the sections. We use a
-     * [FragmentPagerAdapter] derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * [android.support.v4.app.FragmentStatePagerAdapter].
-     */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
@@ -37,25 +28,35 @@ class ReportActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
 
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true)
+        }
 
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        title = "실수령액 조회 결과"
+
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById<View>(R.id.container)
-        mViewPager!!.adapter = mSectionsPagerAdapter
+        //mViewPager = findViewById<View>(R.id.container)
+        //mViewPager!!.adapter = mSectionsPagerAdapter
+        container.adapter = mSectionsPagerAdapter
 
-        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
-        tabLayout.setupWithViewPager(mViewPager)
+        //val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
+        //tabLayout.setupWithViewPager(mViewPager)
+
+        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+
+        title = "실수령액 조회 결과"
 
         //로드하면서 결과값을 조회해온다.
         setResultReport()
+
+        // Admob 호출
+        AdmobAdapter.loadBannerAdMob(adView)
     }
 
     /**

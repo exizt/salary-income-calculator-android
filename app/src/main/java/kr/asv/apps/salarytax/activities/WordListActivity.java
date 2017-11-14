@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax;
+package kr.asv.apps.salarytax.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import kr.asv.apps.salarytax.Services;
+import kr.asv.apps.salarytax.activities.WordActivity;
 import kr.asv.apps.salarytax.databases.TableWordDictionary;
 import kr.asv.apps.salarytax.items.WordDictionaryAdapter;
 import kr.asv.apps.salarytax.items.WordDictionaryItem;

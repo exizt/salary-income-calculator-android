@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax;
+package kr.asv.apps.salarytax.activities;
 
 
 import android.annotation.TargetApi;
@@ -26,6 +26,8 @@ import android.support.v4.app.NavUtils;
 
 import java.util.List;
 
+import kr.asv.apps.salarytax.AppCompatPreferenceActivity;
+import kr.asv.apps.salarytax.Services;
 import kr.asv.shhtaxmanager.R;
 
 /**

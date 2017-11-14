@@ -1,7 +1,6 @@
 package kr.asv.shhtaxmanager
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -17,43 +16,31 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
-
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarytax.NavigationItemFactory
 import kr.asv.apps.salarytax.Services
-import kr.asv.apps.salarytax.activities.SettingsActivity
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private val isDebug = true
-    private var mAdView: AdView? = null
-    val appVersion: String
-        get() = BuildConfig.VERSION_NAME
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-
-        Fabric.with(this, Crashlytics())
 
         //네비게이션 드로워 셋팅
         onCreateNavigationDrawer()
 
         //기본 Fragment 지정
-        NavigationItemFactory.getInstance().onNavigationItemFirst(this)
+        NavigationItemFactory.instance.onNavigationItemFirst(this)
 
         //Services 초기화 및 인스턴스 가져오기
-        val services = Services.getInstanceWithInit(this)
+        Services.getInstanceWithInit(this)
 
-        //Ad mob 사용
-        loadAdMobBanner(R.id.adView)
+        // Admob 호출
+        AdmobAdapter.loadBannerAdMob(adView)
 
     }
 
@@ -101,19 +88,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        if (id == R.id.action_settings) {
-            startActivity(Intent(this, SettingsActivity::class.java))
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        NavigationItemFactory.getInstance().onNavigationItemSelected(this, item)
+        NavigationItemFactory.instance.onNavigationItemSelected(this, item)
         return true
     }
 
@@ -150,33 +126,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * @param log
      */
     fun debug(log: String) {
-        if (isDebug) {
-            Log.e("[EXIZT-DEBUG]", StringBuilder("[MainActivity]").append(log).toString())
-        }
+        Log.e("[EXIZT-DEBUG]", "[MainActivity]" + log)
     }
 
     fun setActionBarTitle(title: String) {
         supportActionBar!!.setTitle(title)
-    }
-
-
-    /**
-     * 구글 광고 추가할 때에.
-     */
-    fun loadAdMobBanner(id: Int) {
-        mAdView = findViewById<View>(id) as AdView
-        mAdView!!.loadAd(newAdRequest())
-    }
-
-    /**
-     * 구글 광고의 adRequest 를 생성 및 반환
-     * @return
-     */
-    fun newAdRequest(): AdRequest {
-        val builder = AdRequest.Builder()
-        builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-        //builder.addTestDevice("621CBEEDE09F6A5B37180A718E74C41C");// G pro code
-
-        return builder.build()
     }
 }
