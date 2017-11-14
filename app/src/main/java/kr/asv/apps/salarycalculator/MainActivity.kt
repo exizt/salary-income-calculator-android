@@ -21,6 +21,11 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarytax.NavigationItemFactory
 import kr.asv.apps.salarytax.Services
+import android.view.ViewGroup
+import android.widget.Button
+import com.crashlytics.android.Crashlytics
+
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +47,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)
 
+        val crashButton = Button(this)
+        crashButton.setText("Crash!")
+        crashButton.setOnClickListener(View.OnClickListener {
+            Crashlytics.getInstance().crash() // Force a crash
+        })
+        addContentView(crashButton,
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 
     /**

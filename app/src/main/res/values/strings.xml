@@ -37,4 +37,8 @@
     <string name="close">close</string>
     <string name="activity_title_quick_mode">Quick Mode</string>
     <string name="activity_title_normal_mode">Normal Mode</string>
+    <string name="report_tab_item_01">요약</string>
+    <string name="report_tab_item_02">입력값</string>
+    <string name="report_tab_item_03">4대보험</string>
+    <string name="report_tab_item_04">세금</string>
 </resources>
