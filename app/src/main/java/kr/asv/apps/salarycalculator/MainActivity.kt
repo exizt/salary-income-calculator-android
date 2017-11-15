@@ -1,4 +1,4 @@
-package kr.asv.shhtaxmanager
+package kr.asv.apps.salarycalculator
 
 import android.content.Context
 import android.os.Bundle
@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarytax.NavigationItemFactory
 import kr.asv.apps.salarytax.Services
+import kr.asv.shhtaxmanager.R
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

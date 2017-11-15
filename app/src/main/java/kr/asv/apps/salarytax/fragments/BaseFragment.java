@@ -3,7 +3,7 @@ package kr.asv.apps.salarytax.fragments;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import kr.asv.shhtaxmanager.MainActivity;
+import kr.asv.apps.salarycalculator.MainActivity;
 
 /**
  * BaseFragment

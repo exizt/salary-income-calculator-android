@@ -14,7 +14,7 @@
         android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name="kr.asv.apps.salarycalculator.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,22 +26,22 @@
         <activity
             android:name="kr.asv.apps.salarytax.activities.ReportActivity"
             android:label="@string/title_activity_report"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.shhtaxmanager.MainActivity" />
+                android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
             android:name="kr.asv.apps.salarytax.activities.WordListActivity"
             android:label="@string/title_activity_word_list"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.shhtaxmanager.MainActivity" />
+                android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
             android:name="kr.asv.apps.salarytax.activities.WordActivity"
@@ -56,10 +56,11 @@
         <activity
             android:name="kr.asv.apps.salarytax.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.shhtaxmanager.MainActivity" />
+                android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
     </application>
 

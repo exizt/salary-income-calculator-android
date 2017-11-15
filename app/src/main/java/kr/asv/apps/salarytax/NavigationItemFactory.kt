@@ -16,7 +16,6 @@ import kr.asv.apps.salarytax.activities.WordListActivity
 import kr.asv.apps.salarytax.fragments.OlderCalculatorFragment
 import kr.asv.apps.salarytax.fragments.QuickCalculatorFragment
 import kr.asv.apps.salarytax.fragments.TaxCalculatorFragment
-import kr.asv.shhtaxmanager.MainActivity
 import kr.asv.shhtaxmanager.R
 
 /**
