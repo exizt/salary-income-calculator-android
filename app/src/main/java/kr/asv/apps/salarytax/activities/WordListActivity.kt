@@ -1,25 +1,21 @@
 package kr.asv.apps.salarytax.activities
 
 import android.content.Intent
-import android.database.Cursor
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-
-import java.util.ArrayList
-
 import kr.asv.apps.salarytax.Services
-import kr.asv.apps.salarytax.databases.TableWordDictionary
 import kr.asv.apps.salarytax.items.WordDictionaryAdapter
 import kr.asv.apps.salarytax.items.WordDictionaryItem
 import kr.asv.shhtaxmanager.R
+import java.util.*
 
 class WordListActivity : AppCompatActivity() {
     private var adapter: WordDictionaryAdapter? = null
+    @SuppressWarnings("FieldCanBeLocal")
     private val isDebug = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,14 +34,12 @@ class WordListActivity : AppCompatActivity() {
      */
     private fun drawDictionary() {
         val tableWordDictionary = Services.getInstance().tableWordDictionary
-        //tableWordDictionary.test();;
         val items = ArrayList<WordDictionaryItem>()
         try {
             val cur = tableWordDictionary.list
             if (cur.moveToFirst()) {
 
                 while (!cur.isAfterLast) {
-                    //Log.e("SHH",""+cur.getInt(cur.getColumnIndex("key")));
                     val wItem = WordDictionaryItem()
                     wItem.key = cur.getInt(cur.getColumnIndex("key"))
                     wItem.setId(cur.getString(cur.getColumnIndex("id")))
@@ -85,6 +79,7 @@ class WordListActivity : AppCompatActivity() {
      * @param msg message
      */
     fun debug(msg: String) {
+        @Suppress("ConstantConditionIf")
         if (isDebug) {
             Log.e("[EXIZT-DEBUG]", "[WordListActivity]" + msg)
         }

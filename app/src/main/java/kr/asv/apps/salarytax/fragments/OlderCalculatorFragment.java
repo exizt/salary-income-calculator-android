@@ -116,14 +116,11 @@ public class OlderCalculatorFragment extends BaseFragment {
 
         //debug("");
         if (radioButton.isChecked()) {
-            char moneyType = 'Y';
             if (radioButton.getId() == R.id.raMoneyMonthly) {
-                moneyType = 'M';
                 this.annualBasis = false;
                 txMoneyLabel.setText("월급입력");
                 layYearlyOpSeverance.setVisibility(View.INVISIBLE);
             } else {
-                moneyType = 'Y';
                 this.annualBasis = true;
                 txMoneyLabel.setText("연봉입력");
                 layYearlyOpSeverance.setVisibility(View.VISIBLE);
@@ -145,7 +142,7 @@ public class OlderCalculatorFragment extends BaseFragment {
         //debug("연산시 - 연봉여부["+this.annualBasis+"]");
 
         // getMoney
-        long inputMoney = 0;
+        long inputMoney;
         if (edMoney.getText().length() <= 1) {
             return;
         }
@@ -157,7 +154,7 @@ public class OlderCalculatorFragment extends BaseFragment {
             inputMoney = 0;
         }
         // getTaxFree
-        long taxExemption = 0;
+        long taxExemption;
         if (edOptionTaxFree.getText().toString().length() <= 1) {
             edOptionTaxFree.setText("0");
         }
@@ -165,14 +162,13 @@ public class OlderCalculatorFragment extends BaseFragment {
         taxExemption = MoneyTextWatcher.getValue(edOptionTaxFree);
 
         // getFamily
-        int family = 1;
         if (edOptionFamily.getText().toString().length() <= 1) {
             edOptionFamily.setText("1");
         }
-        family = Integer.parseInt(edOptionFamily.getText().toString());
+        int family = Integer.parseInt(edOptionFamily.getText().toString());
 
         // getChild
-        int child = 0;
+        int child;
         if (edOptionChild.getText().toString().length() <= 1) {
             edOptionChild.setText("0");
         }

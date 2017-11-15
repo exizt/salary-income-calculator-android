@@ -11,7 +11,9 @@ public class TableWordDictionary {
     /**
      * 데이터베이스 핸들러.
      */
-    private boolean debug = false;
+    @SuppressWarnings("FieldCanBeLocal")
+    private boolean isDebug = false;
+    @SuppressWarnings("unused")
     private final String DEBUG_TAG = "devdebug";
     private final String TABLE_NAME = "word_dictionary";
     private SQLiteDatabase db;
@@ -48,27 +50,34 @@ public class TableWordDictionary {
         return record;
     }
 
+    @SuppressWarnings("unused")
+    public boolean isDebug() {
+        return isDebug;
+    }
+
     public class Record {
         private int key;
         public String id;
-        public String subject;
-        public String explanation;
-        public String process;
-        public String history;
+        String subject;
+        String explanation;
+        String process;
+        String history;
 
         public String toString()
         {
             return "DataItem{id=[" + id + "], subject=["+subject + "] explanation=[" + explanation + "], process=[" + process + "], history=[" + history + "]}";
         }
 
+        @SuppressWarnings("unused")
         public int getKey() {
             return key;
         }
 
-        public void setKey(int key) {
+        void setKey(int key) {
             this.key = key;
         }
 
+        @SuppressWarnings("unused")
         public String getId() {
             return id;
         }
@@ -81,7 +90,7 @@ public class TableWordDictionary {
             return subject;
         }
 
-        public void setSubject(String subject) {
+        void setSubject(String subject) {
             this.subject = subject;
         }
 
@@ -89,7 +98,7 @@ public class TableWordDictionary {
             return explanation;
         }
 
-        public void setExplanation(String explanation) {
+        void setExplanation(String explanation) {
             this.explanation = explanation;
         }
 
@@ -97,7 +106,7 @@ public class TableWordDictionary {
             return process;
         }
 
-        public void setProcess(String process) {
+        void setProcess(String process) {
             this.process = process;
         }
 
@@ -105,7 +114,7 @@ public class TableWordDictionary {
             return history;
         }
 
-        public void setHistory(String history) {
+        void setHistory(String history) {
             this.history = history;
         }
     }

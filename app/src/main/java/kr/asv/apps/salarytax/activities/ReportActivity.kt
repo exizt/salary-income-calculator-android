@@ -27,19 +27,9 @@ class ReportActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
-
-        // Set up the ViewPager with the sections adapter.
-        //mViewPager = findViewById<View>(R.id.container)
-        //mViewPager!!.adapter = mSectionsPagerAdapter
         container.adapter = mSectionsPagerAdapter
-
-        //val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
-        //tabLayout.setupWithViewPager(mViewPager)
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
@@ -58,27 +48,11 @@ class ReportActivity : AppCompatActivity() {
      * @return
      */
     override fun getSupportParentActivityIntent(): Intent? {
-        /*String from = getIntent().getExtras().getString("from");
-    Intent newIntent = null;
-    if(from.equals("MAIN")){
-        newIntent = new Intent(this, MainActivity.class);
-    }else if(from.equals("FAV")){
-        newIntent = new Intent(this, FavoriteActivity.class);
-    }
-
-    return newIntent;*/
         finish()
         return null
     }
 
     private fun setResultReport() {
-        //MainActivity mainActivity = (MainActivity)getSupportParentActivityIntent();
-
-        //getBaseContext();
-        //MainActivity main = (MainActivity)getApplicationContext();
-        //Calculator calculator = main.getCalculator();
-        //Calculator calculator = Services.getInstance().getCalculator();
-
     }
 
     /**
@@ -103,16 +77,6 @@ class ReportActivity : AppCompatActivity() {
          */
         override fun getCount(): Int {
             return 4
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            when (position) {
-                0 -> return "요약"
-                1 -> return "입력값"
-                2 -> return "4대보험"
-                3 -> return "세금"
-            }
-            return null
         }
     }
 }

@@ -329,18 +329,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     public static class InputFilterDoubleMinMax implements InputFilter {
+        private double min = 0.0;
+        private double max;
 
-        private double min, max;
-
-        public InputFilterDoubleMinMax(int min, int max) {
+        InputFilterDoubleMinMax(int min, int max) {
             this.min = min;
             this.max = max;
         }
 
-        public InputFilterDoubleMinMax(double min,double max){
+        @SuppressWarnings("unused")
+        public InputFilterDoubleMinMax(double min, double max){
             this.min = min;
             this.max = max;
         }
+        @SuppressWarnings("unused")
         public InputFilterDoubleMinMax(String min, String max) {
             this.min = Double.parseDouble(min);
             this.max = Double.parseDouble(max);
@@ -352,7 +354,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 Double input = Double.parseDouble(dest.toString() + source.toString());
                 if (isInRange(min, max, input))
                     return null;
-            } catch (NumberFormatException nfe) { }
+            } catch (NumberFormatException ignored) { }
             return "";
         }
 

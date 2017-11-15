@@ -3,14 +3,11 @@
     <string name="value_default_number">0</string>
     <string name="value_default_family">1</string>
     <string name="value_default_taxfree">100,000</string>
-    <string name="vWon">원</string>
-    <string name="vPeople">명</string>
     <string name="divInsurance4">4대보험</string>
     <string name="divTax">세금</string>
     <string name="tiMoneyType">입력방식</string>
     <string name="tiMoneyYearly">연봉입력</string>
     <string name="tiMoneyMonthly">월급입력</string>
-    <string name="tiYearlyOpSeverance">퇴직금</string>
     <string name="tiMoneyLabel">연봉입력(원)</string>
     <string name="tiOptionFamily">부양가족수(본인포함)</string>
     <string name="tiOptionChild">20세이하자녀수</string>

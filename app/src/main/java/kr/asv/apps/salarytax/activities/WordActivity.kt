@@ -27,12 +27,12 @@ class WordActivity : AppCompatActivity() {
             val record = tableWordDictionary.getRow(wordKey)
 
             val actionBar = supportActionBar
-            actionBar?.setTitle(record.getSubject())
+            actionBar?.title = record.subject
 
             //word_subject.setText(record.getSubject());
-            word_explanation.text = record.getExplanation()
-            word_history.text = record.getHistory()
-            word_process.text = record.getProcess()
+            word_explanation.text = record.explanation
+            word_history.text = record.history
+            word_process.text = record.process
 
         }
     }
