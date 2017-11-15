@@ -3,8 +3,8 @@ package kr.asv.apps.salarycalculator;
 import android.content.Context;
 import android.util.Log;
 
+import kr.asv.apps.salarycalculator.databases.WordDictionaryTable;
 import kr.asv.apps.salarycalculator.databases.WordInfoDBHandler;
-import kr.asv.apps.salarycalculator.databases.TableWordDictionary;
 import kr.asv.calculators.salary.SalaryCalculator;
 
 /**
@@ -13,13 +13,12 @@ import kr.asv.calculators.salary.SalaryCalculator;
  */
 public class Services {
 	private static final Services instance = new Services();
-	@SuppressWarnings("FieldCanBeLocal")
-	private final boolean isDebug = true;
+	private boolean isDebug = true;
 	private final SalaryCalculator calculator = new SalaryCalculator();
 	private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
 	@SuppressWarnings("FieldCanBeLocal")
 	private WordInfoDBHandler wordInfoDbHandler = null;
-	private TableWordDictionary tableWordDictionary;
+	private WordDictionaryTable wordDictionaryTable;
 
 	/**
 	 * 생성자 메서드
@@ -47,8 +46,8 @@ public class Services {
 		this.wordInfoDbHandler = new WordInfoDBHandler(context);
 		debug("[Init] > set WordInfoDBHandler");
 
-		this.tableWordDictionary = new TableWordDictionary(wordInfoDbHandler.getDb());
-		debug("[Init] > set TableWordDictionary");
+		this.wordDictionaryTable = new WordDictionaryTable(wordInfoDbHandler.getDb());
+		debug("[Init] > set WordDictionaryTable");
 	}
 
 	/**
@@ -67,12 +66,17 @@ public class Services {
 		return calculator;
 	}
 
-	public TableWordDictionary getTableWordDictionary() {
-		return this.tableWordDictionary;
+	public WordDictionaryTable getWordDictionaryTable() {
+		return this.wordDictionaryTable;
 	}
 
 	public TaxCalculatorRates getTaxCalculatorRates() {
 		return this.taxCalculatorRates;
+	}
+
+	@SuppressWarnings("unused")
+	public void setDebug(boolean debug) {
+		isDebug = debug;
 	}
 
 	public class TaxCalculatorRates {

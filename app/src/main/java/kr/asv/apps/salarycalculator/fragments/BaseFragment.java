@@ -20,17 +20,16 @@ public abstract class BaseFragment extends Fragment {
 	 *
 	 * @param view View
 	 */
-	public void setFragmentView(View view) {
+	protected void setFragmentView(View view) {
 		fragmentView = view;
 	}
 
 	/**
 	 * findViewById 를 편하게 사용하기 위해서 생성
 	 *
-	 * @return View
-	 * @author hong seok-hoon
+	 * @return View view
 	 */
-	public View findViewById(int id) {
+	protected View findViewById(int id) {
 		return this.fragmentView.findViewById(id);
 	}
 

@@ -23,7 +23,7 @@ class WordActivity : AppCompatActivity() {
             val wordKey = extras.getLong("wordKey")
 
             //이제 값을 조회해온다.
-            val tableWordDictionary = Services.getInstance().tableWordDictionary
+            val tableWordDictionary = Services.getInstance().wordDictionaryTable
             val record = tableWordDictionary.getRow(wordKey)
 
             val actionBar = supportActionBar
