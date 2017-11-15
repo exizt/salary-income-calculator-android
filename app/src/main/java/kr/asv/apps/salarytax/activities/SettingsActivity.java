@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
@@ -330,8 +330,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     public static class InputFilterDoubleMinMax implements InputFilter {
         private double min = 0.0;
+        @SuppressWarnings("CanBeFinal")
         private double max;
 
+        @SuppressWarnings("SameParameterValue")
         InputFilterDoubleMinMax(int min, int max) {
             this.min = min;
             this.max = max;

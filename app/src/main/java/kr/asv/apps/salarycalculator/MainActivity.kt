@@ -7,14 +7,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -24,8 +20,14 @@ import kr.asv.apps.salarytax.Services
 import kr.asv.shhtaxmanager.R
 
 
+/**
+ * 기본으로 호출되는 메인 액티비티 클래스
+ */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * 가장 처음에 호출되는 create 메서드
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,44 +50,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * 네비게이션 드로워 셋팅
      */
     private fun onCreateNavigationDrawer() {
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-
         //네비게이션 바 기능
-        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        val toggle = object : ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-
-            /*
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                hideSoftKeyboard();
-            }
-            */
-        }
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         //drawer.setDrawerListener(toggle);//deprecated
-        drawer.addDrawerListener(toggle)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         //네비게이션 바 안에서 메뉴항목 부분
-        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
+    /**
+     * drawer 형태이고 open 이라면 closeDrawer 호출
+     */
     override fun onBackPressed() {
-        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-
-        return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -130,6 +114,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun setActionBarTitle(title: String) {
-        supportActionBar!!.setTitle(title)
+        supportActionBar!!.title = title
     }
 }

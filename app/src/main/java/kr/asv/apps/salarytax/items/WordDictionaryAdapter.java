@@ -16,7 +16,9 @@ import kr.asv.shhtaxmanager.R;
  * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryAdapter extends BaseAdapter {
+    @SuppressWarnings("CanBeFinal")
     private int layout;
+    @SuppressWarnings("CanBeFinal")
     private LayoutInflater inflater;
     private ArrayList<WordDictionaryItem> mList;
 

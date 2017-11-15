@@ -24,8 +24,6 @@ import kr.asv.shhtaxmanager.R;
  * create an instance of this fragment.
  */
 public class ResultFragment extends BaseFragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,20 +41,13 @@ public class ResultFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
         setFragmentView(view);
         return view;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -87,9 +78,12 @@ public class ResultFragment extends BaseFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+    @SuppressWarnings("unused")
     public interface OnFragmentInteractionListener {
+        @SuppressWarnings("unused")
         void onFragmentInteraction(Uri uri);
     }
+
     private void initEventListener()
     {
 
@@ -108,12 +102,13 @@ public class ResultFragment extends BaseFragment {
         });
 
     }
+
     private void closeFragment() {
         // getActivity().onBackPressed();
         // getActivity().getFragmentManager().beginTransaction().remove(this);
         getActivity().getSupportFragmentManager().popBackStack();
-
     }
+
     private void showResult()
     {
         hideSoftKeyboard();

@@ -14,8 +14,6 @@ public interface Insurance
 
 	double get();
 
-	boolean isCalculated();
-
 	String toString();
 
 	InsuranceRates getRates();

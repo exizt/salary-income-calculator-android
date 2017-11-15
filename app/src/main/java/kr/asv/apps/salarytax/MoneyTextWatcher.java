@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
  * Created by EXIZT on 2016-05-03.
  */
 public class MoneyTextWatcher implements TextWatcher {
-    public EditText editText;
+    private final EditText editText;
     public MoneyTextWatcher(EditText editText){
         this.editText = editText;
     }

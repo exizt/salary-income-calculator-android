@@ -13,13 +13,13 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 자기 자신 Fragment
      */
-    protected View fragmentView;//fragment view
+    private View fragmentView;//fragment view
 
     /**
      * Fragment 에서 자신을 지정
      * @param view View
      */
-    public void setFragmentView(View view)
+    void setFragmentView(View view)
     {
         fragmentView = view;
     }
@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
      * @return View
      * @author hong seok-hoon
      */
-    public View findViewById(int id)
+    View findViewById(int id)
     {
         return this.fragmentView.findViewById(id);
     }
@@ -36,7 +36,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 키보드 내리기
      */
-    protected void hideSoftKeyboard() {
+    void hideSoftKeyboard() {
         MainActivity activity = (MainActivity)getActivity();
         activity.hideSoftKeyboard();
     }
@@ -44,7 +44,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 액션바 타이틀 변경
      */
-    protected void setActionBarTitle(String title) {
+    void setActionBarTitle(String title) {
         MainActivity activity = (MainActivity)getActivity();
         activity.setActionBarTitle(title);
     }

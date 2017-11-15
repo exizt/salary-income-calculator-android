@@ -13,17 +13,17 @@ import kr.asv.calculators.salary.SalaryCalculator;
  */
 public class Services {
     //default
-    private static Services instance = new Services();
+    private static final Services instance = new Services();
     private Context applicationContext = null;
     @SuppressWarnings("FieldCanBeLocal")
-    private boolean isDebug = true;
+    private final boolean isDebug = true;
 
     //objects
-    private SalaryCalculator calculator = new SalaryCalculator();
-    private TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
+    private final SalaryCalculator calculator = new SalaryCalculator();
+    private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
     @SuppressWarnings("FieldCanBeLocal")
     private WordInfoDBHandler wordInfoDbHandler = null;
-    TableWordDictionary tableWordDictionary;
+    private TableWordDictionary tableWordDictionary;
 
     /**
      * 생성자 메서드
@@ -52,7 +52,7 @@ public class Services {
      * 최초 한번만 실행하게끔
      * @param context Context
      */
-    public void init(Context context)
+    private void init(Context context)
     {
         //최초 한번만 실행한다.
         if(this.applicationContext != null) return;
@@ -74,6 +74,7 @@ public class Services {
      */
     private void debug(String msg)
     {
+        //noinspection ConstantConditions
         if(isDebug) {
             Log.e("[EXIZT-DEBUG]", "[Services]" + msg);
         }

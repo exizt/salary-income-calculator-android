@@ -48,7 +48,7 @@ public class TaxCalculatorReportFragment extends BaseFragment {
             }
         });
     }
-    public void drawReport()
+    private void drawReport()
     {
         double nationalRate = Services.getInstance().getTaxCalculatorRates().nationalRate;
         double healthCareRate = Services.getInstance().getTaxCalculatorRates().healthCareRate;

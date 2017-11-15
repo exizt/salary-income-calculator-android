@@ -76,6 +76,7 @@ public class SalaryCalculatorOptions
 	{
 		return debug;
 	}
+	@SuppressWarnings("SameParameterValue")
 	public void setDebug(boolean debug)
 	{
 		this.debug = debug;

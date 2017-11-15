@@ -6,11 +6,11 @@ package kr.asv.apps.salarytax.items;
  */
 public class WordDictionaryItem {
     private int key;
-    public String id;
-    public String subject;
-    public String explanation;
-    public String process;
-    public String history;
+    private String id;
+    private String subject;
+    private String explanation;
+    private String process;
+    private String history;
 
     public String toString()
     {

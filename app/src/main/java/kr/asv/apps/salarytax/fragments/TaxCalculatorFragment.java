@@ -59,7 +59,7 @@ public class TaxCalculatorFragment extends BaseFragment {
         initEventListener();
     }
 
-    public void initEventListener()
+    private void initEventListener()
     {
         // 계산하기 버튼 클릭시
         findViewById(R.id.id_btn_calculate).setOnClickListener(new Button.OnClickListener() {
@@ -74,7 +74,7 @@ public class TaxCalculatorFragment extends BaseFragment {
      * 세금 계산하기 버튼 클릭시 발생
      *
      */
-    public void onClickButtonCalculate() {
+    private void onClickButtonCalculate() {
         long salary = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_salary));
         long taxfree = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_taxfree));
         long national = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_national));
@@ -144,9 +144,10 @@ public class TaxCalculatorFragment extends BaseFragment {
     public static class InputFilterMinMax implements InputFilter {
         @SuppressWarnings("FieldCanBeLocal")
         private long min = 0;
-        @SuppressWarnings("FieldCanBeLocal")
+        @SuppressWarnings({"FieldCanBeLocal", "CanBeFinal"})
         private long max;
 
+        @SuppressWarnings("SameParameterValue")
         InputFilterMinMax(int min, int max) {
             this.min = min;
             this.max = max;
@@ -184,7 +185,10 @@ public class TaxCalculatorFragment extends BaseFragment {
 
     public static class InputFilterDoubleMinMax implements InputFilter {
 
-        private double min, max;
+        @SuppressWarnings("CanBeFinal")
+        private double min;
+        @SuppressWarnings("CanBeFinal")
+        private double max;
 
         @SuppressWarnings("unused")
         public InputFilterDoubleMinMax(int min, int max) {

@@ -32,14 +32,9 @@ public class InsuranceImpl implements Insurance
 	 * 4대보험요율
 	 * TODO 싱글톤으로 해서 유일하게 관리해야 할 것 같다...
 	 */
-	private InsuranceRates rates;
+	private final InsuranceRates rates;
 
-	/**
-	 * 계산여부
-	 */
-	private boolean calculated = false;
-
-	public InsuranceImpl()
+	InsuranceImpl()
 	{
 		rates = new InsuranceRates();
 	}
@@ -54,7 +49,6 @@ public class InsuranceImpl implements Insurance
 		this.longTermCare = calculateLongTermCare(adjustedSalary);// 요양보험
 		this.employmentCare = calculateEmploymentCare(adjustedSalary);// 고용보험
 
-		this.calculated = true;
 	}
 
 	/**
@@ -171,16 +165,6 @@ public class InsuranceImpl implements Insurance
 	public double get()
 	{
 		return getNationalPension() + getHealthCare() + getLongTermCare() + getEmploymentCare();
-	}
-
-	/**
-	 * 계산되었는지 여부
-	 * 
-	 * @return double
-	 */
-	public boolean isCalculated()
-	{
-		return calculated;
 	}
 
 	/**

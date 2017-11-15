@@ -53,7 +53,6 @@ public class QuickCalculatorFragment extends BaseFragment {
         setActionBarTitle(getResources().getString(R.string.activity_title_quick_mode));
         EditText editMoney = (EditText) findViewById(R.id.editMoney_QMode);
         editMoney.addTextChangedListener(new MoneyTextWatcher(editMoney));
-
         return view;
     }
 
@@ -63,12 +62,13 @@ public class QuickCalculatorFragment extends BaseFragment {
         initEventListener();
     }
 
+    @SuppressWarnings("unused")
     public interface OnFragmentInteractionListener {
         @SuppressWarnings("unused")
         void onFragmentInteraction(Uri uri);
     }
 
-    public void initEventListener()
+    private void initEventListener()
     {
         // 계산하기 버튼 클릭시
         findViewById(R.id.btnExecute_QMode).setOnClickListener(new Button.OnClickListener() {
@@ -134,12 +134,12 @@ public class QuickCalculatorFragment extends BaseFragment {
             }
         });
     }
-    public void initInputMoney()
+    private void initInputMoney()
     {
         EditText editInputMoney = (EditText) findViewById(R.id.editMoney_QMode);
         editInputMoney.setText("0");
     }
-    public void minusInputMoney(int value)
+    private void minusInputMoney(int value)
     {
         EditText editInputMoney = (EditText) findViewById(R.id.editMoney_QMode);
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
@@ -156,7 +156,7 @@ public class QuickCalculatorFragment extends BaseFragment {
         if(inputMoney < 0) inputMoney = 0;
         editInputMoney.setText(String.valueOf(inputMoney));
     }
-    public void addInputMoney(int value)
+    private void addInputMoney(int value)
     {
         EditText editInputMoney = (EditText) findViewById(R.id.editMoney_QMode);
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
@@ -171,7 +171,7 @@ public class QuickCalculatorFragment extends BaseFragment {
         inputMoney += value;
         editInputMoney.setText(String.valueOf(inputMoney));
     }
-    public void onClickButtonCalculate() {
+    private void onClickButtonCalculate() {
         EditText editInputMoney = (EditText) findViewById(R.id.editMoney_QMode);
         // getMoney
         long inputMoney;

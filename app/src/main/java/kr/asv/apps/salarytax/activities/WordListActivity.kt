@@ -32,6 +32,7 @@ class WordListActivity : AppCompatActivity() {
     /**
      *
      */
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     private fun drawDictionary() {
         val tableWordDictionary = Services.getInstance().tableWordDictionary
         val items = ArrayList<WordDictionaryItem>()

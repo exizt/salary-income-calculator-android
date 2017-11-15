@@ -1,44 +1,53 @@
 <resources>
-    <!-- ad mob ids -->
     <string name="ad_banner_unit_id" translatable="false">ca-app-pub-6702794513299112/2747627743</string>
-    <string name="ad_interstitial_unit_id" translatable="false">ca-app-pub-6702794513299112/7415861384</string>
-
-    <!-- app -->
-    <string name="app_name">실수령계산기</string>
-
-    <!-- menus -->
-    <string name="menu_group_information">Information</string>
-    <string name="menu_group_settings">Settings</string>
-    <string name="menu_group_calculators">Calculators</string>
-    <string name="menu_group_others">Other Calculators</string>
-    <string name="menu_quick_calculator">Income Calculator (Quick Mode)</string>
-    <string name="menu_detail_calculator">Income Calculator (Detail Mode)</string>
-    <string name="menu_rate_calculator">Tax Rate Calculator</string>
-    <string name="menu_word_dictionary">Dictionary</string>
-
-    <!-- etc -->
+    <string name="value_default_number" translatable="false">0</string>
+    <string name="value_default_family" translatable="false">1</string>
+    <string name="value_default_taxfree" translatable="false">100,000</string>
+    <string name="app_name">Salary Calculator</string>
+    <string name="nav_group_settings">Settings</string>
+    <string name="nav_group_calculators">Calculators</string>
+    <string name="nav_group_others">Other Calculators</string>
+    <string name="nav_menu_quick_calculator">Income Calculator (Quick Mode)</string>
+    <string name="nav_menu_detail_calculator">Income Calculator (Detail Mode)</string>
+    <string name="nav_menu_rate_calculator">Tax Rate Calculator</string>
+    <string name="nav_menu_word_dictionary">Dictionary</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">설정변경</string>
-    <string name="nav_header_title">월급 실수령액 계산기</string>
-    <string name="nav_header_subtitle">version 1.0</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_report">ReportActivity</string>
-    <string name="title_activity_word_list">WordListActivity</string>
-    <string name="title_activity_word">WordActivity</string>
-    <string name="title_activity_settings">환경설정</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="nav_header_title">Salary Calculator</string>
+    <string name="activity_report_title">ReportActivity</string>
+    <string name="activity_word_list_title">WordListActivity</string>
+    <string name="activity_word_title">WordActivity</string>
+    <string name="activity_settings_title">환경설정</string>
+    <string name="activity_title_quick_mode">Calculator (Quick)</string>
+    <string name="activity_title_normal_mode">Calculator (Normal)</string>
+    <string name="report_tab_item_01">Summary</string>
+    <string name="report_tab_item_02">Options</string>
+    <string name="report_tab_item_03">National Insurances</string>
+    <string name="report_tab_item_04">Tax</string>
     <string name="pref_ringtone_silent">Silent</string>
+    <string name="divInsurance4">4대보험</string>
 
-    <string name="close">close</string>
-    <string name="activity_title_quick_mode">Quick Mode</string>
-    <string name="activity_title_normal_mode">Normal Mode</string>
-    <string name="report_tab_item_01">요약</string>
-    <string name="report_tab_item_02">입력값</string>
-    <string name="report_tab_item_03">4대보험</string>
-    <string name="report_tab_item_04">세금</string>
+    <string name="divTax">세금</string>
+    <string name="tiMoneyType">입력방식</string>
+    <string name="tiMoneyYearly">연봉입력</string>
+    <string name="tiMoneyMonthly">월급입력</string>
+    <string name="tiMoneyLabel">연봉입력(원)</string>
+    <string name="tiOptionFamily">부양가족수(본인포함)</string>
+    <string name="tiOptionChild">20세이하자녀수</string>
+    <string name="tiOptionTaxFree">비과세액(원)</string>
+    <string name="tiViewSalaryY">계산연봉</string>
+    <string name="tiViewSalary">계산월급</string>
+    <string name="tiNetSalary">실수령액</string>
+    <string name="tiNetSalaryY">실수령액(연간)</string>
+    <string name="tiInsuranceNation">국민연금</string>
+    <string name="tiInsuranceHealth">건강보험료</string>
+    <string name="tiInsuranceLongterm">요양보험료</string>
+    <string name="tiInsuranceEmp">고용보험</string>
+    <string name="tiInsuranceOccupational">산재보험</string>
+    <string name="tiTaxEarned">소득세</string>
+    <string name="tiTaxEarnedLocal">주민세</string>
+    <string name="vCalculate">계산</string>
+    <string name="btnClose">닫기</string>
+    <string name="result_help">* 실제결과와 다를 수 있습니다.</string>
+    <string name="nav_menu_preferences">환경설정</string>
 </resources>

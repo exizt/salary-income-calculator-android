@@ -11,11 +11,9 @@
         android:layout_height="wrap_content"
         android:stretchColumns="1">
 
-        <TableRow
-            android:id="@+id/tableRow2" >
+        <TableRow>
 
             <TextView
-                android:id="@+id/titleViewSalaryY"
                 android:text="@string/tiViewSalaryY"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -27,11 +25,9 @@
 
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableRow3">
+        <TableRow>
 
             <TextView
-                android:id="@+id/titleViewSalary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiViewSalary"
@@ -45,11 +41,9 @@
 
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableRow4" >
+        <TableRow>
 
             <TextView
-                android:id="@+id/titleNetSalary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiNetSalary"
@@ -64,12 +58,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleNetSalaryY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiNetSalaryY"
@@ -84,7 +76,6 @@
         </TableRow>
 
         <TextView
-            android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -93,12 +84,10 @@
             android:textStyle="bold" />
 
         <TableRow
-            android:id="@+id/tableRow5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleInsuranceNation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiInsuranceNation"
@@ -113,12 +102,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleInsuranceHealth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiInsuranceHealth"
@@ -133,12 +120,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleInsuranceLongTerm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiInsuranceLongterm"
@@ -153,12 +138,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleInsuranceEmp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiInsuranceEmp"
@@ -173,12 +156,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleInsuranceOccupational"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiInsuranceOccupational"
@@ -186,7 +167,6 @@
         </TableRow>
 
         <TextView
-            android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/divTax"
@@ -194,12 +174,10 @@
             android:textStyle="bold" />
 
         <TableRow
-            android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleTaxEarned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiTaxEarned"
@@ -214,12 +192,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/titleTaxEarnedLocal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiTaxEarnedLocal"
@@ -235,7 +211,6 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/result_help"

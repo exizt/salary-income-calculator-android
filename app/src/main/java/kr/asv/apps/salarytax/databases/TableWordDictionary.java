@@ -12,11 +12,11 @@ public class TableWordDictionary {
      * 데이터베이스 핸들러.
      */
     @SuppressWarnings("FieldCanBeLocal")
-    private boolean isDebug = false;
+    private final boolean isDebug = false;
     @SuppressWarnings("unused")
     private final String DEBUG_TAG = "devdebug";
     private final String TABLE_NAME = "word_dictionary";
-    private SQLiteDatabase db;
+    private final SQLiteDatabase db;
 
     public TableWordDictionary(SQLiteDatabase db)
     {

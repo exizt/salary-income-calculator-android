@@ -64,7 +64,7 @@ public class OlderCalculatorFragment extends BaseFragment {
         initEventListener();
     }
 
-    public void initEventListener()
+    private void initEventListener()
     {
         //debug("[Older]이벤트 리스너 초기화");
 
@@ -109,7 +109,7 @@ public class OlderCalculatorFragment extends BaseFragment {
      *
      * @param v View
      */
-    public void onClickMoneyType(View v) {
+    private void onClickMoneyType(View v) {
         RadioButton radioButton = (RadioButton) v;
         TextView txMoneyLabel = (TextView) findViewById(R.id.titleMoneyLabel);
         LinearLayout layYearlyOpSeverance = (LinearLayout) findViewById(R.id.divYearlyOpSeverance);
@@ -133,7 +133,7 @@ public class OlderCalculatorFragment extends BaseFragment {
      * 세금 계산하기 버튼 클릭시 발생
      *
      */
-    public void onClickButtonCalculate() {
+    private void onClickButtonCalculate() {
         EditText edMoney = (EditText) findViewById(R.id.edMoney);
         EditText edOptionTaxFree = (EditText) findViewById(R.id.edOptionTaxFree);
         EditText edOptionFamily = (EditText) findViewById(R.id.edOptionFamily);

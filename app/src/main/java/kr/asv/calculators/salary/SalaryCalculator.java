@@ -15,7 +15,7 @@ public class SalaryCalculator
 	private SalaryCalculatorOptions options;
 	private Insurance insurance;
 	private IncomeTax incomeTax;
-	Salary salary;
+	private Salary salary;
 	private double netSalary;
 
 	/**
@@ -96,7 +96,7 @@ public class SalaryCalculator
 		netSalary = basicSalary - insurance.get() - incomeTax.get() + options.getTaxExemption();
 		if(options.isDebug()) debug("실수령액 : " + netSalary + "\n");
 	}
-	protected void debug(Object obj)
+	private void debug(Object obj)
 	{
 		System.out.println(obj);
 	}
