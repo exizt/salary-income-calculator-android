@@ -33,4 +33,15 @@
     <string name="label_longterm_care">요양보험(원)</string>
     <string name="label_employee_care">고용보험(원)</string>
     <string name="label_monthly_input">월급입력</string>
+    <string name="income_tax">소득세</string>
+    <string name="local_tax">주민세</string>
+    <string name="national_pension">국민연금</string>
+    <string name="employee_care">고용보험</string>
+    <string name="longterm_care">요양보험</string>
+    <string name="health_care">건강보험</string>
+    <string name="workers_compensation">산재보험</string>
+    <string name="income_net_salary">실수령액</string>
+    <string name="report_summary_subtitle_02">4대보험+세금</string>
+    <string name="close">Close</string>
+    <string name="included_severance_status">퇴직금여부</string>
 </resources>

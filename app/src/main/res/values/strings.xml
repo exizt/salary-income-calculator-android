@@ -36,17 +36,6 @@
     <string name="tiOptionFamily">부양가족수(본인포함)</string>
     <string name="tiOptionChild">20세이하자녀수</string>
     <string name="tiOptionTaxFree">비과세액(원)</string>
-    <string name="tiViewSalary">계산월급</string>
-    <string name="tiNetSalary">실수령액</string>
-    <string name="tiNetSalaryY">실수령액(연간)</string>
-    <string name="tiInsuranceNation">국민연금</string>
-    <string name="tiInsuranceHealth">건강보험료</string>
-    <string name="tiInsuranceLongterm">요양보험료</string>
-    <string name="tiInsuranceEmp">고용보험</string>
-    <string name="tiInsuranceOccupational">산재보험</string>
-    <string name="tiTaxEarned">소득세</string>
-    <string name="tiTaxEarnedLocal">주민세</string>
-    <string name="result_help">* 실제결과와 다를 수 있습니다.</string>
     <string name="calculate">Calculate</string>
     <string name="included">Included</string>
     <string name="label_taxfree">비과세(원)</string>
@@ -55,4 +44,15 @@
     <string name="label_longterm_care">요양보험(원)</string>
     <string name="label_employee_care">고용보험(원)</string>
     <string name="label_monthly_input">월급입력</string>
+    <string name="income_tax">income tax</string>
+    <string name="local_tax">local tax</string>
+    <string name="national_pension">National Pension</string>
+    <string name="employee_care">Employee Care</string>
+    <string name="longterm_care">LongTerm Care</string>
+    <string name="health_care">Health Care</string>
+    <string name="workers_compensation">Worker\'s compensation</string>
+    <string name="income_net_salary">income net salary</string>
+    <string name="report_summary_subtitle_02">4대보험+세금</string>
+    <string name="close">Close</string>
+    <string name="included_severance_status">Severance include</string>
 </resources>

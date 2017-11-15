@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     tools:context="kr.asv.apps.salarytax.fragments.OlderCalculatorFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="실수령액 계산" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
@@ -55,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="퇴직금여부" />
+            android:text="@string/included_severance_status" />
 
         <CheckBox
             android:layout_width="240dp"

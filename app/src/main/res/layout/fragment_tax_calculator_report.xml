@@ -71,7 +71,7 @@
         android:id="@+id/id_btn_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="닫기"
+        android:text="@string/close"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textStyle="bold" />
 </LinearLayout>

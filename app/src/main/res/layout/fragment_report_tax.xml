@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="소득세" />
+        android:text="@string/income_tax" />
 
     <TextView
         android:id="@+id/txEarnedTax"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="주민세" />
+        android:text="@string/local_tax" />
 
     <TextView
         android:id="@+id/txLocalTax"

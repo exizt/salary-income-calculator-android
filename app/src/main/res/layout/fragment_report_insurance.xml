@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="국민연금" />
+        android:text="@string/national_pension" />
 
     <TextView
         android:id="@+id/txNationPension"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="건강보험료" />
+        android:text="@string/health_care" />
 
     <TextView
         android:id="@+id/txHealthCare"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="요양보험료" />
+        android:text="@string/longterm_care" />
 
     <TextView
         android:id="@+id/txLongtermCare"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="고용보험" />
+        android:text="@string/employee_care" />
 
     <TextView
         android:id="@+id/txEmploymentCare"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="산재보험" />
+        android:text="@string/workers_compensation" />
 
     <TextView
         android:layout_width="match_parent"

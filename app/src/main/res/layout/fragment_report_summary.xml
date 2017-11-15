@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="실수령액" />
+        android:text="@string/income_net_salary" />
 
     <TextView
         android:id="@+id/txNetSalary"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp"
-        android:text="4대보험+세금" />
+        android:text="@string/report_summary_subtitle_02" />
 
     <TextView
         android:id="@+id/txMinusTotal"
