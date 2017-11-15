@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:columnCount="3"
             android:rowCount="2"
-            android:layout_gravity="right|bottom"
+            android:layout_gravity="end|bottom"
             android:layout_below="@+id/editMoney_QMode"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true">
@@ -127,7 +127,7 @@
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="계산하기"
             android:id="@+id/btnExecute_QMode"

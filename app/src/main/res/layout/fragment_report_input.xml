@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp"
-        android:gravity="right"
+        android:gravity="end"
         />
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp"
-        android:gravity="right"
+        android:gravity="end"
         />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp"
-        android:gravity="right"
+        android:gravity="end"
         />
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp"
-        android:gravity="right"
+        android:gravity="end"
         />
 
     <TextView
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp"
-        android:gravity="right"
+        android:gravity="end"
         />
 
 </LinearLayout>

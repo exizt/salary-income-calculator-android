@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * SQLite 를 자바 독립적으로 사용하려 하는데, 클래스가 필요해서 만들게 됨.
  * 어댑터 패턴을 활용해서 만들려고 함.
- * Created by Administrator on 2016-04-10.
+ * Created by EXIZT on 2016-04-10.
  */
 public class SQLiteAdapter {
     private Connection connection = null;

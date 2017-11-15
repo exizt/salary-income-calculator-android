@@ -1,7 +1,6 @@
 package kr.asv.apps.salarytax.databases;
 
 import android.content.Context;
-import android.util.Log;
 
 import kr.asv.android.sqlite.SQLiteHandler;
 
@@ -10,21 +9,18 @@ import kr.asv.android.sqlite.SQLiteHandler;
  * DBInformation 테이블 을 처리하기 위한 클래스
  */
 public class DBInformation extends SQLiteHandler {
-    protected String dbName = "salarytax_information.db";
-    protected int dbVersion = 1;
-    private boolean isDebug = false;
+    private final String dbName = "salarytax_information.db";
+    private final int dbVersion = 1;
+    private final boolean isDebug = false;
 
     /**
      * Construction
-     * @param context
+     * @param context Context
      */
     public DBInformation(Context context)
     {
         debug("[Constructor] >> ");
-        super.initialize(context,dbName,dbVersion,false);
-        if(super.isPassingCopyProcess){
-            debug("[Constructor] passing db copy process");
-        }
+        super.initialize(context,dbName,dbVersion,isDebug);
     }
 
     /**
@@ -38,8 +34,8 @@ public class DBInformation extends SQLiteHandler {
 
     /**
      * onUpgradeDatabase
-     * @param oldVersion
-     * @param newVersion
+     * @param oldVersion int
+     * @param newVersion int
      */
     public void onUpgradeDatabase(int oldVersion,int newVersion){
         debug("[onUpgradeDatabase] >>");
@@ -48,22 +44,25 @@ public class DBInformation extends SQLiteHandler {
 
     /**
      * onDowngradeDatabase
-     * @param oldVersion
-     * @param newVersion
+     * @param oldVersion int
+     * @param newVersion int
      */
     public void onDowngradeDatabase(int oldVersion,int newVersion){
         debug("[onDowngradeDatabase] >>");
         //copyDatabase();
     }
 
-    /**
-     * 디버깅
-     * @param log
-     */
-    private void debug(String log)
-    {
-        if(isDebug) {
-            Log.e("[EXIZT-DEBUG]", new StringBuilder("[DBInformation]").append(log).toString());
-        }
+    @SuppressWarnings("unused")
+    public String getDbName(){
+        return dbName;
+    }
+
+    public int getDbVersion(){
+        return dbVersion;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean isDebug(){
+        return isDebug;
     }
 }
