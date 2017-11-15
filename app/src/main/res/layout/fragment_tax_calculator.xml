@@ -16,7 +16,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="월급입력" />
+            android:text="@string/label_monthly_input" />
 
         <EditText
             android:id="@+id/id_input_salary"
@@ -25,7 +25,7 @@
             android:ems="10"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +39,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="비과세(원)" />
+            android:text="@string/label_taxfree" />
 
         <EditText
             android:id="@+id/id_input_taxfree"
@@ -48,7 +48,7 @@
             android:ems="10"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +62,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="국민연금(원)" />
+            android:text="@string/label_national_pension" />
 
         <EditText
             android:id="@+id/id_input_national"
@@ -71,7 +71,7 @@
             android:ems="10"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
 
     <LinearLayout
@@ -85,7 +85,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="건강보험(원)" />
+            android:text="@string/label_health_care" />
 
         <EditText
             android:id="@+id/id_input_healthcare"
@@ -94,7 +94,7 @@
             android:ems="10"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,7 +108,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="요양보험(원)" />
+            android:text="@string/label_longterm_care" />
 
         <EditText
             android:id="@+id/id_input_longtermcare"
@@ -117,7 +117,7 @@
             android:ems="10"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -130,7 +130,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="고용보험(원)" />
+            android:text="@string/label_employee_care" />
 
         <EditText
             android:id="@+id/id_input_employmentcare"
@@ -140,7 +140,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:textSize="30sp"
-            android:text="0" />
+            android:text="@string/value_default_number" />
     </LinearLayout>
 
     <Button
@@ -148,7 +148,7 @@
         android:id="@+id/id_btn_calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vCalculate"
+        android:text="@string/calculate"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textStyle="bold" />
 </LinearLayout>

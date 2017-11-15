@@ -60,7 +60,7 @@
         <CheckBox
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:text="포함"
+            android:text="@string/included"
             android:id="@+id/checkSeverance"
             />
 
@@ -158,7 +158,7 @@
         android:id="@+id/btnCalculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vCalculate"
+        android:text="@string/calculate"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textStyle="bold" />
 

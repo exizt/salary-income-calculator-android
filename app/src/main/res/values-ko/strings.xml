@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">실수령계산기</string>
+    <string name="nav_header_title">월급 실수령액 계산기</string>
     <string name="nav_group_settings">환경 설정</string>
     <string name="nav_group_calculators">실수령액 계산기</string>
     <string name="nav_group_others">부가 기능</string>
@@ -7,20 +8,29 @@
     <string name="nav_menu_detail_calculator">실수령액 계산 (일반 모드)</string>
     <string name="nav_menu_rate_calculator">세율 계산</string>
     <string name="nav_menu_word_dictionary">용어 사전</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">월급 실수령액 계산기</string>
+    <string name="nav_menu_preferences">환경설정</string>
     <string name="activity_report_title">ReportActivity</string>
     <string name="activity_word_list_title">WordListActivity</string>
     <string name="activity_word_title">WordActivity</string>
     <string name="activity_settings_title">환경설정</string>
-    <string name="pref_ringtone_silent">Silent</string>
+    <string name="activity_title_quick_mode">실수령액 계산 (Quick)</string>
+    <string name="activity_title_normal_mode">실수령액 계산 (일반)</string>
     <string name="report_tab_item_01">요약</string>
     <string name="report_tab_item_02">입력값</string>
     <string name="report_tab_item_03">4대보험</string>
     <string name="report_tab_item_04">세금</string>
-    <string name="activity_title_quick_mode">실수령액 계산 (Quick)</string>
-    <string name="activity_title_normal_mode">실수령액 계산 (일반)</string>
-    <string name="divInsurance4">4대보험</string>
-    <string name="nav_menu_preferences">환경설정</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="word_activity_subtitle_01">용어 설명</string>
+    <string name="word_activity_subtitle_02">계산과정</string>
+    <string name="word_activity_subtitle_03">세율기록</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="calculate">계산하기</string>
+    <string name="included">포함</string>
+    <string name="label_taxfree">비과세(원)</string>
+    <string name="label_national_pension">국민연금(원)</string>
+    <string name="label_health_care">건강보험(원)</string>
+    <string name="label_longterm_care">요양보험(원)</string>
+    <string name="label_employee_care">고용보험(원)</string>
+    <string name="label_monthly_input">월급입력</string>
 </resources>

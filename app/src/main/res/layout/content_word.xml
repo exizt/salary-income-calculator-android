@@ -21,7 +21,7 @@
             android:layout_marginRight="@dimen/text_margin"
             android:layout_marginTop="10dp"
             android:textSize="19sp"
-            android:text="용어 설명"
+            android:text="@string/word_activity_subtitle_01"
             />
         <TextView
             android:id="@+id/word_explanation"
@@ -39,7 +39,7 @@
             android:layout_marginRight="@dimen/text_margin"
             android:layout_marginTop="10dp"
             android:textSize="19sp"
-            android:text="계산과정"
+            android:text="@string/word_activity_subtitle_02"
             />
         <TextView
             android:id="@+id/word_process"
@@ -57,7 +57,7 @@
             android:layout_marginRight="@dimen/text_margin"
             android:layout_marginTop="10dp"
             android:textSize="19sp"
-            android:text="세율기록"
+            android:text="@string/word_activity_subtitle_03"
             />
         <TextView
             android:id="@+id/word_history"

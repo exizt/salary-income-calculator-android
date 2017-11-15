@@ -129,7 +129,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="계산하기"
+            android:text="@string/calculate"
             android:id="@+id/btnExecute_QMode"
             android:layout_weight="1" />
     </LinearLayout>
