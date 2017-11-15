@@ -22,20 +22,20 @@ import kr.asv.shhtaxmanager.R;
 /**
  * create an instance of this fragment.
  */
-public class OlderCalculatorFragment extends BaseFragment {
+public class NormalCalculatorFragment extends BaseFragment {
 	@SuppressWarnings("FieldCanBeLocal")
 	private boolean includedSeverance = false;
 	private boolean annualBasis = false;
 
-	public OlderCalculatorFragment() {
+	public NormalCalculatorFragment() {
 		// Required empty public constructor
 	}
 
 	/**
 	 */
 	@SuppressWarnings("unused")
-	public static OlderCalculatorFragment newInstance() {
-		OlderCalculatorFragment fragment = new OlderCalculatorFragment();
+	public static NormalCalculatorFragment newInstance() {
+		NormalCalculatorFragment fragment = new NormalCalculatorFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
 		return fragment;

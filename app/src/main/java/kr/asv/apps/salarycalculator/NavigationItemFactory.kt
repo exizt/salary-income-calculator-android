@@ -13,7 +13,7 @@ import android.view.View
 
 import kr.asv.apps.salarycalculator.activities.SettingsActivity
 import kr.asv.apps.salarycalculator.activities.WordListActivity
-import kr.asv.apps.salarycalculator.fragments.OlderCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
 import kr.asv.shhtaxmanager.R
@@ -53,7 +53,7 @@ class NavigationItemFactory {
             }
             R.id.nav_calculator_older -> {
                 //실 수령액 계산
-                val fragment = OlderCalculatorFragment()
+                val fragment = NormalCalculatorFragment()
                 replaceFragments(fragmentActivity, fragment, true)
                 isAction = true
             }

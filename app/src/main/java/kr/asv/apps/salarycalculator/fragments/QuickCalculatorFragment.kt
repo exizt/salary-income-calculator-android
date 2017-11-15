@@ -1,7 +1,6 @@
 package kr.asv.apps.salarycalculator.fragments
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -9,14 +8,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-
 import kr.asv.apps.salarycalculator.MoneyTextWatcher
-import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.calculators.salary.SalaryCalculator
+import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
+import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 
 /**
  * A simple [Fragment] subclass.
@@ -31,8 +28,11 @@ class QuickCalculatorFragment : BaseFragment() {
 	override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater!!.inflate(R.layout.fragment_quick_calculator, container, false)
+
 		setFragmentView(view)
+
 		setActionBarTitle(resources.getString(R.string.activity_title_quick_mode))
+
 		val editMoney = findViewById(R.id.editMoney_QMode) as EditText
 		editMoney.addTextChangedListener(MoneyTextWatcher(editMoney))
 		return view
@@ -40,76 +40,61 @@ class QuickCalculatorFragment : BaseFragment() {
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
-		initEventListener()
+		initEventListeners()
 	}
 
 	interface OnFragmentInteractionListener {
 		fun onFragmentInteraction(uri: Uri)
 	}
 
-	private fun initEventListener() {
+	/**
+	 * click event listener 들을 모아둔 메서드.
+	 */
+	private fun initEventListeners() {
 		// 계산하기 버튼 클릭시
-		findViewById(R.id.btnExecute_QMode).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				onClickButtonCalculate()// 계산하기 버튼 클릭시
-			}
-		})
+		btnExecute_QMode.setOnClickListener {
+			calculate()// 계산하기 버튼 클릭시
+		}
 
 		// 금액 추가 버튼 +천만
-		findViewById(R.id.btnPlus1000).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				addInputMoney(10000000)
-			}
-		})
+		btnPlus1000.setOnClickListener {
+			addInputMoney(10000000)
+		}
 
 		// 금액 추가 버튼 +백만
-		findViewById(R.id.btnPlus100).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				addInputMoney(1000000)
-			}
-		})
+		btnPlus100.setOnClickListener {
+			addInputMoney(1000000)
+		}
 
 		// 금액 추가 버튼 +십만
-		findViewById(R.id.btnPlus10).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				addInputMoney(100000)
-			}
-		})
+		btnPlus10.setOnClickListener {
+			addInputMoney(100000)
+		}
 
 		// 금액 감소 버튼 -천만
-		findViewById(R.id.btnMinus1000).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				minusInputMoney(10000000)
-			}
-		})
+		btnMinus1000.setOnClickListener {
+			minusInputMoney(10000000)
+		}
 
 		// 금액 감소 버튼 -백만
-		findViewById(R.id.btnMinus100).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				minusInputMoney(1000000)
-			}
-		})
+		btnMinus100.setOnClickListener {
+			minusInputMoney(1000000)
+		}
 
 		// 금액 감소 버튼 - 십만
-		findViewById(R.id.btnMinus10).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				minusInputMoney(100000)
-			}
-		})
+		btnMinus10.setOnClickListener {
+			minusInputMoney(100000)
+		}
 
 		// 금액 정정 버튼
-		findViewById(R.id.btnClearInput_QM).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				initInputMoney()
-			}
-		})
+		btnClearInput_QM.setOnClickListener {
+			editMoney_QMode.setText("0")
+		}
 	}
 
-	private fun initInputMoney() {
-		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
-		editInputMoney.setText("0")
-	}
-
+	/**
+	 *
+	 */
 	private fun minusInputMoney(value: Int) {
 		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
 		//long inputMoney = getValueEditText(R.id.editMoney_QMode);
@@ -127,6 +112,9 @@ class QuickCalculatorFragment : BaseFragment() {
 		editInputMoney.setText(inputMoney.toString())
 	}
 
+	/**
+	 *
+	 */
 	private fun addInputMoney(value: Int) {
 		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
 		//long inputMoney = getValueEditText(R.id.editMoney_QMode);
@@ -142,13 +130,18 @@ class QuickCalculatorFragment : BaseFragment() {
 		editInputMoney.setText(inputMoney.toString())
 	}
 
-	private fun onClickButtonCalculate() {
-		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
-		// getMoney
-		var inputMoney: Long
-		if (editInputMoney.text.length <= 1) {
+	/**
+	 * 계산하는 동작
+	 */
+	private fun calculate() {
+
+		if (editMoney_QMode.text.length <= 1) {
 			return
 		}
+
+		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
+
+		var inputMoney: Long
 		try {
 			//inputMoney = getValueEditText(R.id.editMoney_QMode);
 			inputMoney = MoneyTextWatcher.getValue(editInputMoney)
@@ -207,7 +200,6 @@ class QuickCalculatorFragment : BaseFragment() {
 		} else {
 			calculator.insurance.rates.init()
 		}
-
 
 		calculator.run()
 
