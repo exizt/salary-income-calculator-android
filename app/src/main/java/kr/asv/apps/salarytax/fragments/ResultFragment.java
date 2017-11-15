@@ -1,6 +1,5 @@
 package kr.asv.apps.salarytax.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,22 +33,13 @@ public class ResultFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(String param1, String param2) {
-        ResultFragment fragment = new ResultFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @SuppressWarnings("unused")
+    public static ResultFragment newInstance() {
+        //Bundle args = new Bundle();
+        //args.putString(ARG_PARAM1, param1);
+        //args.putString(ARG_PARAM2, param2);
+        //fragment.setArguments(args);
+        return new ResultFragment();
     }
 
     @Override
@@ -73,24 +63,12 @@ public class ResultFragment extends BaseFragment {
         initEventListener();
         showResult();
     }
-    // TODO: Rename method, update argument and hook method into UI event
+
+    @SuppressWarnings("unused")
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        /*
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-        */
     }
 
     @Override
@@ -110,7 +88,6 @@ public class ResultFragment extends BaseFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
     private void initEventListener()

@@ -134,7 +134,7 @@ public class IncomeTaxImpl implements IncomeTax
 		double earnedIncomeBefore = salary * 12;// 연간 기준 금액 산출
 		if (debug)
 			debug("소득기준금액-공제전(연기준)" + earnedIncomeBefore);
-		double deduction = 0;
+		double deduction;
 		if (earnedIncomeBefore <= 500 * 10000)
 		{
 			deduction = earnedIncomeBefore * 0.7;
@@ -147,13 +147,13 @@ public class IncomeTaxImpl implements IncomeTax
 		{
 			deduction = 750 * 10000 + (earnedIncomeBefore - 1500 * 10000) * 0.15;
 		}
-		else if (earnedIncomeBefore <= 1 * 10000 * 10000)
+		else if (earnedIncomeBefore <= 10000 * 10000)
 		{
 			deduction = 1200 * 10000 + (earnedIncomeBefore - 4500 * 10000) * 0.05;
 		}
 		else
 		{
-			deduction = 1475 * 10000 + (earnedIncomeBefore - 1 * 10000 * 10000) * 0.02;
+			deduction = 1475 * 10000 + (earnedIncomeBefore - 10000 * 10000) * 0.02;
 		}
 		if (debug)
 			debug("근로소득공제액(연기준):" + deduction);
@@ -206,7 +206,7 @@ public class IncomeTaxImpl implements IncomeTax
 		double salaryY = baseSalary * 12;
 		int calcFamily = family + child;
 
-		double deduct = 0;
+		double deduct;
 		if (calcFamily >= 3)
 		{
 			// 공제대상자 3명 이상인 경우
@@ -270,7 +270,7 @@ public class IncomeTaxImpl implements IncomeTax
 	 */
 	private double calcTaxEarnedTotal(double baseSalary, double taxBase)
 	{
-		double tax = 0;
+		double tax;
 
 		// 세금구간에 따라서, 소득세의 비율 차등 조정
 		if (taxBase <= 1200 * 10000)
@@ -314,7 +314,7 @@ public class IncomeTaxImpl implements IncomeTax
 	private double calculateTaxCredit(double baseSalary, double tax)
 	{
 		double salaryY = baseSalary * 12;
-		double taxCredit = 0;
+		double taxCredit;
 		double creditMax = 0;
 
 		// 근로소득세액공제 한도 지정

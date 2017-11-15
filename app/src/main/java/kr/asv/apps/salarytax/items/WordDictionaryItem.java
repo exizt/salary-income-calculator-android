@@ -25,6 +25,7 @@ public class WordDictionaryItem {
         this.key = key;
     }
 
+    @SuppressWarnings("unused")
     public String getId() {
         return id;
     }
@@ -41,6 +42,7 @@ public class WordDictionaryItem {
         this.subject = subject;
     }
 
+    @SuppressWarnings("unused")
     public String getExplanation() {
         return explanation;
     }
@@ -49,6 +51,7 @@ public class WordDictionaryItem {
         this.explanation = explanation;
     }
 
+    @SuppressWarnings("unused")
     public String getProcess() {
         return process;
     }
@@ -57,6 +60,7 @@ public class WordDictionaryItem {
         this.process = process;
     }
 
+    @SuppressWarnings("unused")
     public String getHistory() {
         return history;
     }

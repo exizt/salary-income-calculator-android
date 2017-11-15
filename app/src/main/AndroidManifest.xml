@@ -27,7 +27,8 @@
             android:name="kr.asv.apps.salarytax.activities.ReportActivity"
             android:label="@string/title_activity_report"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.shhtaxmanager.MainActivity" />
@@ -36,7 +37,8 @@
             android:name="kr.asv.apps.salarytax.activities.WordListActivity"
             android:label="@string/title_activity_word_list"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.shhtaxmanager.MainActivity" />
@@ -45,7 +47,8 @@
             android:name="kr.asv.apps.salarytax.activities.WordActivity"
             android:label="@string/title_activity_word"
             android:parentActivityName="kr.asv.apps.salarytax.activities.WordListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.apps.salarytax.activities.WordListActivity" />

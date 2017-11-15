@@ -74,6 +74,7 @@ public class SalaryImpl implements Salary
 		basicSalary = grossSalary - taxExemption;
 	}
 
+	@SuppressWarnings("unused")
 	public double getInputMoney()
 	{
 		return inputMoney;
@@ -99,6 +100,7 @@ public class SalaryImpl implements Salary
 		return basicSalary;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isAnnualBasis()
 	{
 		return annualBasis;
@@ -109,6 +111,7 @@ public class SalaryImpl implements Salary
 		this.annualBasis = annualBasis;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isIncludedSeverance()
 	{
 		return includedSeverance;
@@ -119,6 +122,7 @@ public class SalaryImpl implements Salary
 		this.includedSeverance = includedSeverance;
 	}
 
+	@SuppressWarnings("unused")
 	public double getTaxExemption()
 	{
 		return taxExemption;

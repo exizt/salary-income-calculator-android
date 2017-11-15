@@ -33,7 +33,8 @@ public class OlderCalculatorFragment extends BaseFragment {
 
     /**
      */
-    public static OlderCalculatorFragment newInstance(String param1, String param2) {
+    @SuppressWarnings("unused")
+    public static OlderCalculatorFragment newInstance() {
         OlderCalculatorFragment fragment = new OlderCalculatorFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -71,7 +72,7 @@ public class OlderCalculatorFragment extends BaseFragment {
         findViewById(R.id.btnCalculate).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickButtonCalculate(v);// 계산하기 버튼 클릭시
+                onClickButtonCalculate();// 계산하기 버튼 클릭시
             }
         });
 
@@ -134,9 +135,8 @@ public class OlderCalculatorFragment extends BaseFragment {
     /**
      * 세금 계산하기 버튼 클릭시 발생
      *
-     * @param v View
      */
-    public void onClickButtonCalculate(View v) {
+    public void onClickButtonCalculate() {
         EditText edMoney = (EditText) findViewById(R.id.edMoney);
         EditText edOptionTaxFree = (EditText) findViewById(R.id.edOptionTaxFree);
         EditText edOptionFamily = (EditText) findViewById(R.id.edOptionFamily);

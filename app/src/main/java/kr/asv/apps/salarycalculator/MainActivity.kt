@@ -21,11 +21,6 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarytax.NavigationItemFactory
 import kr.asv.apps.salarytax.Services
-import android.view.ViewGroup
-import android.widget.Button
-import com.crashlytics.android.Crashlytics
-
-
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

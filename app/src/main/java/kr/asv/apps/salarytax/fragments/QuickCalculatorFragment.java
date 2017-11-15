@@ -1,6 +1,5 @@
 package kr.asv.apps.salarytax.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -33,11 +32,10 @@ public class QuickCalculatorFragment extends BaseFragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment QuickCalculatorFragment.
      */
-    public static QuickCalculatorFragment newInstance(String param1, String param2) {
+    @SuppressWarnings("unused")
+    public static QuickCalculatorFragment newInstance() {
         QuickCalculatorFragment fragment = new QuickCalculatorFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -45,11 +43,6 @@ public class QuickCalculatorFragment extends BaseFragment {
     }
     public QuickCalculatorFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -63,22 +56,15 @@ public class QuickCalculatorFragment extends BaseFragment {
 
         return view;
     }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initEventListener();
     }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 
     public interface OnFragmentInteractionListener {
+        @SuppressWarnings("unused")
         void onFragmentInteraction(Uri uri);
     }
 
@@ -88,7 +74,7 @@ public class QuickCalculatorFragment extends BaseFragment {
         findViewById(R.id.btnExecute_QMode).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickButtonCalculate(v);// 계산하기 버튼 클릭시
+                onClickButtonCalculate();// 계산하기 버튼 클릭시
             }
         });
 
@@ -185,10 +171,10 @@ public class QuickCalculatorFragment extends BaseFragment {
         inputMoney += value;
         editInputMoney.setText(String.valueOf(inputMoney));
     }
-    public void onClickButtonCalculate(View v) {
+    public void onClickButtonCalculate() {
         EditText editInputMoney = (EditText) findViewById(R.id.editMoney_QMode);
         // getMoney
-        long inputMoney = 0;
+        long inputMoney;
         if (editInputMoney.getText().length() <= 1) {
             return;
         }

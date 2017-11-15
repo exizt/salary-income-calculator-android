@@ -27,7 +27,9 @@ public class Simulator
 		options.setTaxExemption(taxExemption);
 		options.setFamily(family);
 		options.setChild(child);
+		//noinspection ConstantConditions
 		options.setAnnualBasis(annualBasis);
+		//noinspection ConstantConditions
 		options.setIncludedSeverance(includedSeverance);
 		options.setDebug(true);
 		

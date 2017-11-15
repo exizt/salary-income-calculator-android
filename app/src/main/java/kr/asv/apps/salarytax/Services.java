@@ -79,10 +79,6 @@ public class Services {
         }
     }
 
-    public void onResume(Context context)
-    {
-
-    }
     public SalaryCalculator getCalculator()
     {
         return calculator;

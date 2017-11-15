@@ -16,18 +16,15 @@ import kr.asv.shhtaxmanager.R;
  * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryAdapter extends BaseAdapter {
-    Context context;
     private int layout;
     private LayoutInflater inflater;
     private ArrayList<WordDictionaryItem> mList;
 
 
     public WordDictionaryAdapter(Context context, int layout) {
-        this.context = context;
         this.layout = layout;
         this.inflater = LayoutInflater.from(context);
         mList = new ArrayList<>();
-
     }
     /**
      * 리스트 객체 내의 item 의 갯수를 반환해주는 함수.
@@ -89,6 +86,7 @@ public class WordDictionaryAdapter extends BaseAdapter {
 
         return convertView;
     }
+    @SuppressWarnings("unused")
     public void add(WordDictionaryItem item)
     {
         mList.add(item);

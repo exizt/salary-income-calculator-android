@@ -23,7 +23,8 @@ public class TaxCalculatorFragment extends BaseFragment {
 
     /**
      */
-    public static TaxCalculatorFragment newInstance(String param1, String param2) {
+    @SuppressWarnings("unused")
+    public static TaxCalculatorFragment newInstance() {
         TaxCalculatorFragment fragment = new TaxCalculatorFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -64,7 +65,7 @@ public class TaxCalculatorFragment extends BaseFragment {
         findViewById(R.id.id_btn_calculate).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickButtonCalculate(v);// 계산하기 버튼 클릭시
+                onClickButtonCalculate();// 계산하기 버튼 클릭시
             }
         });
     }
@@ -72,9 +73,8 @@ public class TaxCalculatorFragment extends BaseFragment {
     /**
      * 세금 계산하기 버튼 클릭시 발생
      *
-     * @param v View
      */
-    public void onClickButtonCalculate(View v) {
+    public void onClickButtonCalculate() {
         long salary = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_salary));
         long taxfree = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_taxfree));
         long national = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_national));
@@ -112,7 +112,8 @@ public class TaxCalculatorFragment extends BaseFragment {
      * @param interest int
      * @return double
      */
-    private double getRates(int origin,int interest)
+    @SuppressWarnings("unused")
+    private double getRates(int origin, int interest)
     {
         return getRates((double)origin,(double)interest);
     }
@@ -128,26 +129,34 @@ public class TaxCalculatorFragment extends BaseFragment {
         //return (double)Math.ceil(result * 10) / 10; //올림
         //return  ((double)interest / (double)origin) * 100.0;
     }
+    @SuppressWarnings("unused")
     private int parseInt(EditText editText)
     {
         return Integer.parseInt(editText.getText().toString());
     }
 
+    @SuppressWarnings("unused")
     private double parseDouble(EditText editText)
     {
         return Double.parseDouble(editText.getText().toString());
     }
 
     public static class InputFilterMinMax implements InputFilter {
-        private long min, max;
-        public InputFilterMinMax(int min, int max) {
+        @SuppressWarnings("FieldCanBeLocal")
+        private long min = 0;
+        @SuppressWarnings("FieldCanBeLocal")
+        private long max;
+
+        InputFilterMinMax(int min, int max) {
             this.min = min;
             this.max = max;
         }
-        public InputFilterMinMax(long min,long max){
+        @SuppressWarnings("unused")
+        public InputFilterMinMax(long min, long max){
             this.min = min;
             this.max = max;
         }
+        @SuppressWarnings("unused")
         public InputFilterMinMax(String min, String max) {
             this.min = Long.parseLong(min);
             this.max = Long.parseLong(max);
@@ -164,7 +173,7 @@ public class TaxCalculatorFragment extends BaseFragment {
 
                 if (isInRange(min, max, input))
                     return null;
-            } catch (NumberFormatException nfe) { }
+            } catch (NumberFormatException ignored) { }
             return "";
         }
 
@@ -177,15 +186,18 @@ public class TaxCalculatorFragment extends BaseFragment {
 
         private double min, max;
 
+        @SuppressWarnings("unused")
         public InputFilterDoubleMinMax(int min, int max) {
             this.min = min;
             this.max = max;
         }
 
-        public InputFilterDoubleMinMax(double min,double max){
+        @SuppressWarnings("unused")
+        public InputFilterDoubleMinMax(double min, double max){
             this.min = min;
             this.max = max;
         }
+        @SuppressWarnings("unused")
         public InputFilterDoubleMinMax(String min, String max) {
             this.min = Double.parseDouble(min);
             this.max = Double.parseDouble(max);
@@ -197,7 +209,7 @@ public class TaxCalculatorFragment extends BaseFragment {
                 Double input = Double.parseDouble(dest.toString() + source.toString());
                 if (isInRange(min, max, input))
                     return null;
-            } catch (NumberFormatException nfe) { }
+            } catch (NumberFormatException ignored) { }
             return "";
         }
 

@@ -12,11 +12,12 @@ public class SalaryCalculator
 	/**
 	 * Options 값들. 가족수, 자녀수, 비과세액 등
 	 */
-	SalaryCalculatorOptions options;
-	Insurance insurance;
-	IncomeTax incomeTax;
+	private SalaryCalculatorOptions options;
+	private Insurance insurance;
+	private IncomeTax incomeTax;
 	Salary salary;
-	double netSalary;
+	private double netSalary;
+
 	/**
 	 * 생성자
 	 */
@@ -24,15 +25,18 @@ public class SalaryCalculator
 	{
 		this.initialize();
 	}
+
 	/**
 	 * 생성자
 	 * @param options Options
 	 */
+	@SuppressWarnings("unused")
 	public SalaryCalculator(SalaryCalculatorOptions options)
 	{
 		this.options = options;
 		this.initialize();
 	}
+
 	/**
 	 * 초기화 메서드.
 	 * 생성시에 한번만 호출되는 메서드.
@@ -50,15 +54,18 @@ public class SalaryCalculator
 			incomeTax.setDebug(true);
 		}		
 	}
+
 	/**
 	 * 옵션 [가족수, 자녀수, 비과세액 등]
 	 * @param options Options
      */
+	@SuppressWarnings("unused")
 	public void run(SalaryCalculatorOptions options)
 	{
 		this.options = options;
 		this.run();
 	}
+
 	/**
 	 * 계산 실행
 	 */

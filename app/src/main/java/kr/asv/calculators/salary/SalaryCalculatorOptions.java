@@ -10,10 +10,10 @@ public class SalaryCalculatorOptions
 	private boolean includedSeverance;
 	private boolean debug;
 	
-	public SalaryCalculatorOptions(){
+	SalaryCalculatorOptions(){
 		this.init();
 	}
-	public void init()
+	private void init()
 	{
 		this.inputMoney = 2000000;
 		this.family = 1;
@@ -40,7 +40,7 @@ public class SalaryCalculatorOptions
 	{
 		this.child = child;
 	}
-	public double getInputMoney()
+	double getInputMoney()
 	{
 		return inputMoney;
 	}
@@ -56,7 +56,7 @@ public class SalaryCalculatorOptions
 	{
 		this.taxExemption = taxExemption;
 	}
-	public boolean isAnnualBasis()
+	boolean isAnnualBasis()
 	{
 		return annualBasis;
 	}
@@ -64,7 +64,7 @@ public class SalaryCalculatorOptions
 	{
 		this.annualBasis = annualBasis;
 	}
-	public boolean isIncludedSeverance()
+	boolean isIncludedSeverance()
 	{
 		return includedSeverance;
 	}

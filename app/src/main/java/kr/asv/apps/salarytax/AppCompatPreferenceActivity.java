@@ -41,6 +41,7 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         getDelegate().setSupportActionBar(toolbar);
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public MenuInflater getMenuInflater() {
         return getDelegate().getMenuInflater();
