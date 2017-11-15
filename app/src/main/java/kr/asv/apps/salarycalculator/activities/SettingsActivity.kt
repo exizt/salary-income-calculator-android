@@ -123,7 +123,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          */
         private fun resetRates() {
             //Calcuator 클래스에서 Rate 기본값으로 설정하면서 기본값을 가져온다.
-            Services.getInstance().calculator.insurance.rates.init()
+            Services.getInstance().calculator.insurance.rates.initValues()
             val defaultNationalPensionRate = Services.getInstance().calculator.insurance.rates.nationalPension
             val defaultHealthCareRate = Services.getInstance().calculator.insurance.rates.healthCare
             val defaultLongTermCareRate = Services.getInstance().calculator.insurance.rates.longTermCare

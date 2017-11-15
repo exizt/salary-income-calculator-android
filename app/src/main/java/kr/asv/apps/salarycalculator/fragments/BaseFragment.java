@@ -38,14 +38,17 @@ public abstract class BaseFragment extends Fragment {
 	 */
 	void hideSoftKeyboard() {
 		MainActivity activity = (MainActivity) getActivity();
+		assert activity != null;
 		activity.hideSoftKeyboard();
 	}
 
 	/**
 	 * 액션바 타이틀 변경
 	 */
+	@SuppressWarnings("SameParameterValue")
 	void setActionBarTitle(String title) {
 		MainActivity activity = (MainActivity) getActivity();
+		assert activity != null;
 		activity.setActionBarTitle(title);
 	}
 }

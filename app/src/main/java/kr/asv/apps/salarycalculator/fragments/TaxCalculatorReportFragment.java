@@ -1,6 +1,7 @@
 package kr.asv.apps.salarycalculator.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class TaxCalculatorReportFragment extends BaseFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_tax_calculator_report, container, false);
 		setFragmentView(view);
@@ -42,6 +43,7 @@ public class TaxCalculatorReportFragment extends BaseFragment {
 	private void initEventListener() {
 		// 닫기 버튼 클릭시
 		findViewById(R.id.id_btn_close).setOnClickListener(new Button.OnClickListener() {
+			@SuppressWarnings("ConstantConditions")
 			@Override
 			public void onClick(View v) {
 				getActivity().getSupportFragmentManager().popBackStack();

@@ -25,9 +25,9 @@ import kotlinx.android.synthetic.main.fragment_quick_calculator.*
  */
 class QuickCalculatorFragment : BaseFragment() {
 
-	override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
-		val view = inflater!!.inflate(R.layout.fragment_quick_calculator, container, false)
+		val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
 
 		setFragmentView(view)
 
@@ -43,6 +43,7 @@ class QuickCalculatorFragment : BaseFragment() {
 		initEventListeners()
 	}
 
+	@Suppress("unused")
 	interface OnFragmentInteractionListener {
 		fun onFragmentInteraction(uri: Uri)
 	}
@@ -135,19 +136,17 @@ class QuickCalculatorFragment : BaseFragment() {
 	 */
 	private fun calculate() {
 
+		// validate checking
 		if (editMoney_QMode.text.length <= 1) {
 			return
 		}
+		//val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
 
-		val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
-
-		var inputMoney: Long
-		try {
-			//inputMoney = getValueEditText(R.id.editMoney_QMode);
-			inputMoney = MoneyTextWatcher.getValue(editInputMoney)
+		// get money value
+		val inputMoney: Long = try {
+			MoneyTextWatcher.getValue(editMoney_QMode)
 		} catch (e: Exception) {
-			//debug("인트 변환 에러");
-			inputMoney = 0
+			0
 		}
 
 		/*
@@ -198,7 +197,7 @@ class QuickCalculatorFragment : BaseFragment() {
 			calculator.insurance.rates.employmentCare = java.lang.Double.parseDouble(pref.getString("rate_employment_care", "0"))
 			//calculator.getInsurance().getRates().setEmploymentCare();
 		} else {
-			calculator.insurance.rates.init()
+			calculator.insurance.rates.initValues()
 		}
 
 		calculator.run()

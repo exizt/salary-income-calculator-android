@@ -19,13 +19,14 @@ public class InsuranceRates {
 	private double employmentCare;
 
 	public InsuranceRates() {
-		init();
+		initValues();
 	}
 
 	/**
 	 * 초기 값 셋팅
 	 */
-	public void init() {
+	@SuppressWarnings("WeakerAccess")
+	public void initValues() {
 		this.nationalPension = 4.5;//국민연금
 		this.healthCare = 3.06;//건강보험
 		this.longTermCare = 6.55;//요양보험

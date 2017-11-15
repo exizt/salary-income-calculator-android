@@ -5,18 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-
+import kotlinx.android.synthetic.main.fragment_older_calculator.*
 import kr.asv.apps.salarycalculator.MoneyTextWatcher
-import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.calculators.salary.SalaryCalculator
+import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
 
 /**
@@ -26,9 +20,9 @@ class NormalCalculatorFragment : BaseFragment() {
 	private var includedSeverance = false
 	private var annualBasis = false
 
-	override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
-		val view = inflater!!.inflate(R.layout.fragment_older_calculator, container, false)
+		val view = inflater.inflate(R.layout.fragment_older_calculator, container, false)
 		setFragmentView(view)
 		//setActionBarTitle("실수령액 계산");
 		setActionBarTitle(resources.getString(R.string.activity_title_normal_mode))
@@ -48,25 +42,13 @@ class NormalCalculatorFragment : BaseFragment() {
 
 	private fun initEventListener() {
 		// 계산하기 버튼 클릭시
-		findViewById(R.id.btnCalculate).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				onClickButtonCalculate()// 계산하기 버튼 클릭시
-			}
-		})
+		btnCalculate.setOnClickListener {
+			calculate()// 계산하기 버튼 클릭시
+		}
 
-		// 연봉선택시
-		findViewById(R.id.raMoneyYearly).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				onClickMoneyType(v)
-			}
-		})
-
-		// 월급선택시
-		findViewById(R.id.raMoneyMonthly).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
-				onClickMoneyType(v)
-			}
-		})
+		// 연봉 or 월급 선택시
+		raMoneyYearly.setOnClickListener{ v ->	onClickMoneyType(v)	}
+		raMoneyMonthly.setOnClickListener{ v ->	onClickMoneyType(v)	}
 
 		/*
         // 퇴직금여부 선택시
@@ -87,84 +69,62 @@ class NormalCalculatorFragment : BaseFragment() {
 	 */
 	private fun onClickMoneyType(v: View) {
 		val radioButton = v as RadioButton
-		val txMoneyLabel = findViewById(R.id.titleMoneyLabel) as TextView
-		val layYearlyOpSeverance = findViewById(R.id.divYearlyOpSeverance) as LinearLayout
-
-		//debug("");
+		//val txMoneyLabel = findViewById(R.id.titleMoneyLabel) as TextView
+		//val layYearlyOpSeverance = findViewById(R.id.divYearlyOpSeverance) as LinearLayout
 		if (radioButton.isChecked) {
 			if (radioButton.id == R.id.raMoneyMonthly) {
 				this.annualBasis = false
-				txMoneyLabel.text = "월급입력"
-				layYearlyOpSeverance.visibility = View.INVISIBLE
+				titleMoneyLabel.text = "월급입력"
+				divYearlyOpSeverance.visibility = View.INVISIBLE
 			} else {
 				this.annualBasis = true
-				txMoneyLabel.text = "연봉입력"
-				layYearlyOpSeverance.visibility = View.VISIBLE
+				titleMoneyLabel.text = "연봉입력"
+				divYearlyOpSeverance.visibility = View.VISIBLE
 			}
-			//debug("체크시 - 연봉여부["+this.annualBasis+"]");
 		}
 	}
 
 	/**
 	 * 세금 계산하기 버튼 클릭시 발생
 	 */
-	private fun onClickButtonCalculate() {
-		val edMoney = findViewById(R.id.edMoney) as EditText
-		val edOptionTaxFree = findViewById(R.id.edOptionTaxFree) as EditText
-		val edOptionFamily = findViewById(R.id.edOptionFamily) as EditText
-		val edOptionChild = findViewById(R.id.edOptionChild) as EditText
+	private fun calculate() {
 
-		// getMoney
-		var inputMoney: Long
+		// validate checking
 		if (edMoney.text.length <= 1) {
 			return
 		}
-		try {
-			//inputMoney = Integer.parseInt(edMoney.getText().toString());
-			inputMoney = MoneyTextWatcher.getValue(edMoney)
+
+		// get money value
+		val inputMoney: Long = try {
+			MoneyTextWatcher.getValue(edMoney)
 		} catch (e: Exception) {
-			//debug("인트 변환 에러");
-			inputMoney = 0
+			0
 		}
 
-		// getTaxFree
-		val taxExemption: Long
+		// get taxfree value
 		if (edOptionTaxFree.text.toString().length <= 1) {
 			edOptionTaxFree.setText("0")
 		}
-		//taxExemption = Integer.parseInt(edOptionTaxFree.getText().toString());
-		taxExemption = MoneyTextWatcher.getValue(edOptionTaxFree)
+		val taxExemption: Long = MoneyTextWatcher.getValue(edOptionTaxFree)
 
-		// getFamily
+		// get family value
 		if (edOptionFamily.text.toString().length <= 1) {
 			edOptionFamily.setText("1")
 		}
 		val family = Integer.parseInt(edOptionFamily.text.toString())
 
-		// getChild
-		val child: Int
+		// get child value
+		val child: Int = Integer.parseInt(edOptionChild.text.toString())
 		if (edOptionChild.text.toString().length <= 1) {
 			edOptionChild.setText("0")
 		}
-		child = Integer.parseInt(edOptionChild.text.toString())
 
-		val moneyType = findViewById(R.id.rgMoneyType) as RadioGroup
+		// 연봉인지, 월급인지 구분값
+		//annualBasis = R.id.raMoneyYearly == rgMoneyType.checkedRadioButtonId
+		annualBasis = raMoneyYearly.isChecked
 
-		if (R.id.raMoneyYearly == moneyType.checkedRadioButtonId) {
-			annualBasis = true
-		} else {
-			annualBasis = false
-		}
-
-		/*
-        Switch swSeverance = (Switch) findViewById(R.id.swYearlyOpSeverance);
-        includedSeverance = swSeverance.isChecked();
-        */
-
-		val checkSeverance = findViewById(R.id.checkSeverance) as CheckBox
+		// 퇴직금 포함 여부
 		includedSeverance = checkSeverance.isChecked
-		//checkSeverance
-
 
 		// 연산
 		val calculator = Services.getInstance().calculator
@@ -187,8 +147,10 @@ class NormalCalculatorFragment : BaseFragment() {
 
 	companion object {
 
+
 		/**
 		 */
+		@Suppress("unused")
 		fun newInstance(): NormalCalculatorFragment {
 			val fragment = NormalCalculatorFragment()
 			val args = Bundle()
