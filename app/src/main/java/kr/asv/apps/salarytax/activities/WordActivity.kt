@@ -13,7 +13,7 @@ class WordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word)
         setSupportActionBar(toolbar)
-        supportActionBar?.run{
+        supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }
 

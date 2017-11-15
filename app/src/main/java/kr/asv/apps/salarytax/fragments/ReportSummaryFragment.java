@@ -15,46 +15,48 @@ import kr.asv.shhtaxmanager.R;
 /**
  */
 public class ReportSummaryFragment extends BaseFragment {
-    public ReportSummaryFragment() {
-        // Required empty public constructor
-    }
+	public ReportSummaryFragment() {
+		// Required empty public constructor
+	}
 
 
-    public static ReportSummaryFragment newInstance() {
-        ReportSummaryFragment fragment = new ReportSummaryFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+	public static ReportSummaryFragment newInstance() {
+		ReportSummaryFragment fragment = new ReportSummaryFragment();
+		Bundle args = new Bundle();
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_report_summary, container, false);
-        setFragmentView(view);
-        return view;
-    }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        showResult();
-    }
-    private void showResult() {
-        //hideSoftKeyboard();
-        SalaryCalculator calculator = Services.getInstance().getCalculator();
-        DecimalFormat format = new java.text.DecimalFormat("###,##0");
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		View view = inflater.inflate(R.layout.fragment_report_summary, container, false);
+		setFragmentView(view);
+		return view;
+	}
 
-        //실 수령액
-        TextView txNetSalary = (TextView) findViewById(R.id.txNetSalary);
-        txNetSalary.setText(format.format(calculator.getNetSalary()));
-        txNetSalary.append(" 원");
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		showResult();
+	}
 
-        //4대보험+세금합계
-        TextView txMinusTotal = (TextView) findViewById(R.id.txMinusTotal);
-        double minusTotal = calculator.getInsurance().get() + calculator.getIncomeTax().get();
-        txMinusTotal.setText(format.format(minusTotal));
-        txMinusTotal.append(" 원");
+	private void showResult() {
+		//hideSoftKeyboard();
+		SalaryCalculator calculator = Services.getInstance().getCalculator();
+		DecimalFormat format = new java.text.DecimalFormat("###,##0");
 
-    }
+		//실 수령액
+		TextView txNetSalary = (TextView) findViewById(R.id.txNetSalary);
+		txNetSalary.setText(format.format(calculator.getNetSalary()));
+		txNetSalary.append(" 원");
+
+		//4대보험+세금합계
+		TextView txMinusTotal = (TextView) findViewById(R.id.txMinusTotal);
+		double minusTotal = calculator.getInsurance().get() + calculator.getIncomeTax().get();
+		txMinusTotal.setText(format.format(minusTotal));
+		txMinusTotal.append(" 원");
+
+	}
 }

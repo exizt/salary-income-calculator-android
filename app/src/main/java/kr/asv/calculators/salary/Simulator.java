@@ -3,12 +3,10 @@ package kr.asv.calculators.salary;
 /**
  * 진입점
  */
-public class Simulator
-{
-	public static void main(String[] args)
-	{
+public class Simulator {
+	public static void main(String[] args) {
 		SalaryCalculator calculator = new SalaryCalculator();
-		
+
 		// 부양가족수 (본인포함)
 		int family = 1;
 		// 20세 이하 자녀수
@@ -21,7 +19,7 @@ public class Simulator
 		boolean annualBasis = false;
 		// 퇴직금 포함여부
 		boolean includedSeverance = false;
-		
+
 		SalaryCalculatorOptions options = calculator.getOptions();
 		options.setInputMoney(inputMoney);
 		options.setTaxExemption(taxExemption);
@@ -32,7 +30,7 @@ public class Simulator
 		//noinspection ConstantConditions
 		options.setIncludedSeverance(includedSeverance);
 		options.setDebug(true);
-		
+
 		calculator.run();
 	}
 }

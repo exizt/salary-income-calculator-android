@@ -1,7 +1,6 @@
 package kr.asv.calculators.salary;
 
-public class InsuranceRates
-{
+public class InsuranceRates {
 	/**
 	 * 국민연금 요율
 	 */
@@ -19,25 +18,26 @@ public class InsuranceRates
 	 */
 	private double employmentCare;
 
-	public InsuranceRates(){
+	public InsuranceRates() {
 		init();
 	}
+
 	/**
 	 * 초기 값 셋팅
 	 */
-	public void init()
-	{
+	public void init() {
 		this.nationalPension = 4.5;//국민연금
 		this.healthCare = 3.06;//건강보험
 		this.longTermCare = 6.55;//요양보험
 		this.employmentCare = 0.65;//고용보험
 	}
+
 	public double getNationalPension() {
 		return nationalPension;
 	}
 
 	public void setNationalPension(double nationalPension) {
-		if(nationalPension>0){
+		if (nationalPension > 0) {
 			this.nationalPension = nationalPension;
 		} else {
 			this.nationalPension = 0;
@@ -49,7 +49,7 @@ public class InsuranceRates
 	}
 
 	public void setHealthCare(double healthCare) {
-		if(healthCare>0){
+		if (healthCare > 0) {
 			this.healthCare = healthCare;
 		} else {
 			this.healthCare = 0;
@@ -61,7 +61,7 @@ public class InsuranceRates
 	}
 
 	public void setLongTermCare(double longTermCare) {
-		if(longTermCare>0){
+		if (longTermCare > 0) {
 			this.longTermCare = longTermCare;
 		} else {
 			this.longTermCare = 0;
@@ -74,7 +74,7 @@ public class InsuranceRates
 	}
 
 	public void setEmploymentCare(double employmentCare) {
-		if(employmentCare>0){
+		if (employmentCare > 0) {
 			this.employmentCare = employmentCare;
 		} else {
 			this.employmentCare = 0;

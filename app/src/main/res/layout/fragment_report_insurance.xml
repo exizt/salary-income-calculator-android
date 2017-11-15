@@ -2,85 +2,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="kr.asv.apps.salarytax.fragments.ReportInsuranceFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/national_pension"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="@string/national_pension" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txNationPension"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/health_care"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="@string/health_care" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txHealthCare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/longterm_care"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="@string/longterm_care" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txLongtermCare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/employee_care"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="@string/employee_care" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txEmploymentCare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/workers_compensation"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="@string/workers_compensation" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
 </LinearLayout>

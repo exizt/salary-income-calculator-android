@@ -16,86 +16,92 @@ import kr.asv.shhtaxmanager.R;
  * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryAdapter extends BaseAdapter {
-    @SuppressWarnings("CanBeFinal")
-    private int layout;
-    @SuppressWarnings("CanBeFinal")
-    private LayoutInflater inflater;
-    private ArrayList<WordDictionaryItem> mList;
+	@SuppressWarnings("CanBeFinal")
+	private int layout;
+	@SuppressWarnings("CanBeFinal")
+	private LayoutInflater inflater;
+	private ArrayList<WordDictionaryItem> mList;
 
 
-    public WordDictionaryAdapter(Context context, int layout) {
-        this.layout = layout;
-        this.inflater = LayoutInflater.from(context);
-        mList = new ArrayList<>();
-    }
-    /**
-     * 리스트 객체 내의 item 의 갯수를 반환해주는 함수.
-     * @return int
-     */
-    @Override
-    public int getCount() {
-        return mList.size();
-    }
-    /**
-     * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 을 반환하는 함수
-     * @param position int
-     * @return Object
-     */
-    @Override
-    public Object getItem(int position) {
-        return mList.get(position);
-    }
-    /**
-     * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 의 row id 를 반환해주는 함수
-     * @param position int
-     * @return long
-     */
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+	public WordDictionaryAdapter(Context context, int layout) {
+		this.layout = layout;
+		this.inflater = LayoutInflater.from(context);
+		mList = new ArrayList<>();
+	}
 
-    public long getItemKey(int position){
-        return mList.get(position).getKey();
-    }
+	/**
+	 * 리스트 객체 내의 item 의 갯수를 반환해주는 함수.
+	 *
+	 * @return int
+	 */
+	@Override
+	public int getCount() {
+		return mList.size();
+	}
 
-    /**
-     * 화면에 출력하는 함수. Listview 에 출력되는 갯수만큼 반복호출된다.
-     * @param position int
-     * @param convertView View
-     * @param parent ViewGroup
-     * @return View
-     */
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        //아마도 처음 출력시에는 convertView 가 null 이고, 재호출인 경우는 null 이 아닐 것으로 추측된다.
-        if (convertView == null) {
-            // view 가 null 일 경우 커스텀 레이아웃을 얻어옴
-            //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(layout, parent,false);
-        }
+	/**
+	 * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 을 반환하는 함수
+	 *
+	 * @param position int
+	 * @return Object
+	 */
+	@Override
+	public Object getItem(int position) {
+		return mList.get(position);
+	}
 
-        TextView subject = convertView.findViewById(R.id.word_subject);
-        //TextView key = (TextView) convertView.findViewById(R.id.word_key);
+	/**
+	 * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 의 row id 를 반환해주는 함수
+	 *
+	 * @param position int
+	 * @return long
+	 */
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
 
-        // 현재 position 에 맞는 값을 가져옴.
-        WordDictionaryItem item = mList.get(position);
+	public long getItemKey(int position) {
+		return mList.get(position).getKey();
+	}
 
-        subject.setText(item.getSubject());
-        //key.setText("TEST");
+	/**
+	 * 화면에 출력하는 함수. Listview 에 출력되는 갯수만큼 반복호출된다.
+	 *
+	 * @param position    int
+	 * @param convertView View
+	 * @param parent      ViewGroup
+	 * @return View
+	 */
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		//아마도 처음 출력시에는 convertView 가 null 이고, 재호출인 경우는 null 이 아닐 것으로 추측된다.
+		if (convertView == null) {
+			// view 가 null 일 경우 커스텀 레이아웃을 얻어옴
+			//LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(layout, parent, false);
+		}
 
-        //LinearLayout item_layout = (LinearLayout)convertView.findViewById(R.id.item_layout);
+		TextView subject = convertView.findViewById(R.id.word_subject);
+		//TextView key = (TextView) convertView.findViewById(R.id.word_key);
 
-        return convertView;
-    }
-    @SuppressWarnings("unused")
-    public void add(WordDictionaryItem item)
-    {
-        mList.add(item);
-    }
+		// 현재 position 에 맞는 값을 가져옴.
+		WordDictionaryItem item = mList.get(position);
 
-    public void setItemList(ArrayList<WordDictionaryItem> items)
-    {
-        mList = items;
-    }
+		subject.setText(item.getSubject());
+		//key.setText("TEST");
+
+		//LinearLayout item_layout = (LinearLayout)convertView.findViewById(R.id.item_layout);
+
+		return convertView;
+	}
+
+	@SuppressWarnings("unused")
+	public void add(WordDictionaryItem item) {
+		mList.add(item);
+	}
+
+	public void setItemList(ArrayList<WordDictionaryItem> items) {
+		mList = items;
+	}
 }

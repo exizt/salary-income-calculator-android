@@ -1,22 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="kr.asv.apps.salarytax.fragments.TaxCalculatorFragment">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_monthly_input" />
+            android:gravity="center_vertical"
+            android:text="@string/label_monthly_input"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_salary"
@@ -24,22 +24,22 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_taxfree" />
+            android:gravity="center_vertical"
+            android:text="@string/label_taxfree"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_taxfree"
@@ -47,22 +47,22 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_national_pension" />
+            android:gravity="center_vertical"
+            android:text="@string/label_national_pension"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_national"
@@ -70,22 +70,22 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_health_care" />
+            android:gravity="center_vertical"
+            android:text="@string/label_health_care"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_healthcare"
@@ -93,22 +93,22 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_longterm_care" />
+            android:gravity="center_vertical"
+            android:text="@string/label_longterm_care"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_longtermcare"
@@ -116,21 +116,22 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="@string/label_employee_care" />
+            android:gravity="center_vertical"
+            android:text="@string/label_employee_care"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/id_input_employmentcare"
@@ -139,13 +140,13 @@
             android:ems="10"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:textSize="30sp"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:id="@+id/id_btn_calculate"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/calculate"

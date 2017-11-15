@@ -29,7 +29,7 @@ class NavigationItemFactory {
      */
     fun onNavigationItemFirst(fragmentActivity: FragmentActivity) {
         val fragment = QuickCalculatorFragment()
-        replaceFragments(fragmentActivity,fragment, false)
+        replaceFragments(fragmentActivity, fragment, false)
         val drawer = fragmentActivity.findViewById<View>(R.id.drawer_layout) as DrawerLayout
         drawer.closeDrawer(GravityCompat.START)
     }
@@ -48,19 +48,19 @@ class NavigationItemFactory {
             R.id.nav_calculator_quick -> {
                 // 퀵계산
                 val fragment = QuickCalculatorFragment()
-                replaceFragments(fragmentActivity,fragment,true)
+                replaceFragments(fragmentActivity, fragment, true)
                 isAction = true
             }
             R.id.nav_calculator_older -> {
                 //실 수령액 계산
                 val fragment = OlderCalculatorFragment()
-                replaceFragments(fragmentActivity, fragment,true)
+                replaceFragments(fragmentActivity, fragment, true)
                 isAction = true
             }
             R.id.nav_calculator_tax -> {
                 // 세율 계산
                 val fragment = TaxCalculatorFragment()
-                replaceFragments(fragmentActivity, fragment,true)
+                replaceFragments(fragmentActivity, fragment, true)
                 isAction = true
             }
             R.id.nav_settings -> {

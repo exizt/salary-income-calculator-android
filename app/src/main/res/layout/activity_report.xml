@@ -9,8 +9,7 @@
     android:orientation="vertical"
     tools:context="kr.asv.apps.salarytax.activities.ReportActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                app:tabIndicatorColor="@color/colorTabIndicator" >
+                app:tabIndicatorColor="@color/colorTabIndicator">
 
                 <android.support.design.widget.TabItem
                     android:id="@+id/tabItem"

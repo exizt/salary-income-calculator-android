@@ -1,74 +1,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="kr.asv.apps.salarytax.fragments.TaxCalculatorReportFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="국민연금 요율(%)"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="국민연금 요율(%)" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/id_view_national"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="건강보험 요율(%)"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="건강보험 요율(%)" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/id_view_healthcare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="요양보험 요율(%)"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="요양보험 요율(%)" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/id_view_longtermcare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="고용보험 요율(%)"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp"
-        android:text="고용보험 요율(%)" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/id_view_employmentcare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp"
         android:gravity="end"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp" />
+
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:id="@+id/id_btn_close"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/close"

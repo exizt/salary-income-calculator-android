@@ -9,7 +9,7 @@ import com.google.android.gms.ads.InterstitialAd
  * Admob 관련 클래스
  * Created by EXIZT on 2017-11-14.
  */
-class AdmobAdapter{
+class AdmobAdapter {
     companion object {
         /**
          * 구글 광고 추가할 때에.
@@ -24,7 +24,7 @@ class AdmobAdapter{
          * @param context
          */
         @Suppress("unused")
-        fun loadInterstitialAdMob(context: Context,adUnitId:String) {
+        fun loadInterstitialAdMob(context: Context, adUnitId: String) {
             val interstitialAd = InterstitialAd(context)
             interstitialAd.adUnitId = adUnitId
             interstitialAd.loadAd(newAdRequest())
@@ -34,7 +34,7 @@ class AdmobAdapter{
          * 구글 광고의 adRequest 를 생성 및 반환
          * @return
          */
-        @Suppress("unused","SpellCheckingInspection")
+        @Suppress("unused", "SpellCheckingInspection")
         private fun newAdRequest(): AdRequest {
             val builder = AdRequest.Builder()
             builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

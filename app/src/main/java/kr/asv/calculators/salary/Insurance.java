@@ -1,7 +1,6 @@
 package kr.asv.calculators.salary;
 
-public interface Insurance
-{
+public interface Insurance {
 	void execute(double adjustedSalary);
 
 	double getNationalPension();

@@ -5,12 +5,10 @@ package kr.asv.calculators.salary;
  * 4대보험요율 및 기준금액 이 변동되면서 계속 동작될 여지가 있으므로,
  * 생성자에서 값을 대입하지 않는다. setter 로 값을 대입하고,
  * calculate 메서드로 연산을 한다.
- * 
- * @author EXIZT
  *
+ * @author EXIZT
  */
-public class InsuranceImpl implements Insurance
-{
+public class InsuranceImpl implements Insurance {
 	/**
 	 * 국민연금
 	 */
@@ -34,16 +32,14 @@ public class InsuranceImpl implements Insurance
 	 */
 	private final InsuranceRates rates;
 
-	InsuranceImpl()
-	{
+	InsuranceImpl() {
 		rates = new InsuranceRates();
 	}
 
 	/**
 	 * 4대 보험 계산
 	 */
-	public void execute(double adjustedSalary)
-	{
+	public void execute(double adjustedSalary) {
 		this.nationalPension = calculateNationalPension(adjustedSalary);// 국민연금
 		this.healthCare = calculateHealthCare(adjustedSalary);// 건강보험
 		this.longTermCare = calculateLongTermCare(adjustedSalary);// 요양보험
@@ -53,13 +49,11 @@ public class InsuranceImpl implements Insurance
 
 	/**
 	 * 국민연금 계산식
-	 * 
-	 * @param adjustedSalary
-	 *            세금의 기준 봉급액(기본급 - 비과세)
+	 *
+	 * @param adjustedSalary 세금의 기준 봉급액(기본급 - 비과세)
 	 * @return double
 	 */
-	private double calculateNationalPension(double adjustedSalary)
-	{
+	private double calculateNationalPension(double adjustedSalary) {
 		// 최소 최대값 보정
 		if (adjustedSalary < 250000)
 			adjustedSalary = 250000;
@@ -79,12 +73,11 @@ public class InsuranceImpl implements Insurance
 
 	/**
 	 * 건강보험 계산식
-	 * 
+	 *
 	 * @param adjustedSalary double
 	 * @return double
 	 */
-	private double calculateHealthCare(double adjustedSalary)
-	{
+	private double calculateHealthCare(double adjustedSalary) {
 		double result = adjustedSalary * 0.01 * rates.getHealthCare();
 
 		// 보험료값 원단위 절사
@@ -92,17 +85,16 @@ public class InsuranceImpl implements Insurance
 		return result;
 	}
 
-	public InsuranceRates getRates()
-	{
+	public InsuranceRates getRates() {
 		return rates;
 	}
+
 	/**
 	 * 장기요양보험 계산식
-	 * 
+	 *
 	 * @return double
 	 */
-	private double calculateLongTermCare(double adjustedSalary)
-	{
+	private double calculateLongTermCare(double adjustedSalary) {
 		double result = this.calculateHealthCare(adjustedSalary) * 0.01 * rates.getLongTermCare();
 		// 원단위 절삭
 		result = Math.floor(result / 10) * 10;
@@ -111,11 +103,10 @@ public class InsuranceImpl implements Insurance
 
 	/**
 	 * 고용보험 계산식
-	 * 
+	 *
 	 * @return double
 	 */
-	private double calculateEmploymentCare(double adjustedSalary)
-	{
+	private double calculateEmploymentCare(double adjustedSalary) {
 		double result = adjustedSalary * 0.01 * rates.getEmploymentCare();
 		// 원단위 절삭
 		result = Math.floor(result / 10) * 10;
@@ -124,54 +115,48 @@ public class InsuranceImpl implements Insurance
 
 	/**
 	 * 국민연금
-	 * 
+	 *
 	 * @return double
 	 */
-	public double getNationalPension()
-	{
+	public double getNationalPension() {
 		return nationalPension;
 	}
 
 	/**
 	 * 건강보험료
-	 * 
+	 *
 	 * @return double
 	 */
-	public double getHealthCare()
-	{
+	public double getHealthCare() {
 		return healthCare;
 	}
 
 	/**
 	 * 장기요양보험료
-	 * 
+	 *
 	 * @return double
 	 */
-	public double getLongTermCare()
-	{
+	public double getLongTermCare() {
 		return longTermCare;
 	}
 
 	/**
 	 * 고용보험료
-	 * 
+	 *
 	 * @return double
 	 */
-	public double getEmploymentCare()
-	{
+	public double getEmploymentCare() {
 		return employmentCare;
 	}
 
-	public double get()
-	{
+	public double get() {
 		return getNationalPension() + getHealthCare() + getLongTermCare() + getEmploymentCare();
 	}
 
 	/**
 	 * 디버깅을 위한 toString 메서드
 	 */
-	public String toString()
-	{
+	public String toString() {
 		String result = "\n<4대보험 연산 클래스>\n";
 		result += "국민연금 : " + getNationalPension() + "\n";
 		result += "건강보험 : " + getHealthCare() + "\n";

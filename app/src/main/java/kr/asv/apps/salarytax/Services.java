@@ -12,89 +12,90 @@ import kr.asv.calculators.salary.SalaryCalculator;
  * Created by EXIZT on 2016-04-27.
  */
 public class Services {
-    //default
-    private static final Services instance = new Services();
-    private Context applicationContext = null;
-    @SuppressWarnings("FieldCanBeLocal")
-    private final boolean isDebug = true;
+	//default
+	private static final Services instance = new Services();
+	private Context applicationContext = null;
+	@SuppressWarnings("FieldCanBeLocal")
+	private final boolean isDebug = true;
 
-    //objects
-    private final SalaryCalculator calculator = new SalaryCalculator();
-    private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
-    @SuppressWarnings("FieldCanBeLocal")
-    private WordInfoDBHandler wordInfoDbHandler = null;
-    private TableWordDictionary tableWordDictionary;
+	//objects
+	private final SalaryCalculator calculator = new SalaryCalculator();
+	private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
+	@SuppressWarnings("FieldCanBeLocal")
+	private WordInfoDBHandler wordInfoDbHandler = null;
+	private TableWordDictionary tableWordDictionary;
 
-    /**
-     * 생성자 메서드
-     */
-    private Services() {
-    }
+	/**
+	 * 생성자 메서드
+	 */
+	private Services() {
+	}
 
-    public static Services getInstance() {
-        return instance;
-    }
+	public static Services getInstance() {
+		return instance;
+	}
 
-    /**
-     * 싱글톤 비슷하게 구현. 처음 한번만 init 메서드를 호출하게
-     * @param context Context
-     * @return Services
-     */
-    public static Services getInstanceWithInit(Context context)
-    {
-        if(instance.applicationContext == null){
-            instance.init(context);
-        }
-        return instance;
-    }
+	/**
+	 * 싱글톤 비슷하게 구현. 처음 한번만 init 메서드를 호출하게
+	 *
+	 * @param context Context
+	 * @return Services
+	 */
+	public static Services getInstanceWithInit(Context context) {
+		if (instance.applicationContext == null) {
+			instance.init(context);
+		}
+		return instance;
+	}
 
-    /**
-     * 최초 한번만 실행하게끔
-     * @param context Context
-     */
-    private void init(Context context)
-    {
-        //최초 한번만 실행한다.
-        if(this.applicationContext != null) return;
-        this.applicationContext = context;
+	/**
+	 * 최초 한번만 실행하게끔
+	 *
+	 * @param context Context
+	 */
+	private void init(Context context) {
+		//최초 한번만 실행한다.
+		if (this.applicationContext != null) return;
+		this.applicationContext = context;
 
-        debug("[Init] >> ");
+		debug("[Init] >> ");
 
-        //디비 연결
-        this.wordInfoDbHandler = new WordInfoDBHandler(context);
-        debug("[Init] > set WordInfoDBHandler");
+		//디비 연결
+		this.wordInfoDbHandler = new WordInfoDBHandler(context);
+		debug("[Init] > set WordInfoDBHandler");
 
-        this.tableWordDictionary = new TableWordDictionary(wordInfoDbHandler.getDb());
-        debug("[Init] > set TableWordDictionary");
-    }
+		this.tableWordDictionary = new TableWordDictionary(wordInfoDbHandler.getDb());
+		debug("[Init] > set TableWordDictionary");
+	}
 
-    /**
-     * 디버깅
-     * @param msg message
-     */
-    private void debug(String msg)
-    {
-        //noinspection ConstantConditions
-        if(isDebug) {
-            Log.e("[EXIZT-DEBUG]", "[Services]" + msg);
-        }
-    }
+	/**
+	 * 디버깅
+	 *
+	 * @param msg message
+	 */
+	private void debug(String msg) {
+		//noinspection ConstantConditions
+		if (isDebug) {
+			Log.e("[EXIZT-DEBUG]", "[Services]" + msg);
+		}
+	}
 
-    public SalaryCalculator getCalculator()
-    {
-        return calculator;
-    }
-    public TableWordDictionary getTableWordDictionary(){
-        return this.tableWordDictionary;
-    }
-    public TaxCalculatorRates getTaxCalculatorRates(){
-        return this.taxCalculatorRates;
-    }
+	public SalaryCalculator getCalculator() {
+		return calculator;
+	}
 
-    public class TaxCalculatorRates{
-        public double nationalRate;
-        public double healthCareRate;
-        public double longTermCareRate;
-        public double employmentCareRate;
-    }
+	public TableWordDictionary getTableWordDictionary() {
+		return this.tableWordDictionary;
+	}
+
+	public TaxCalculatorRates getTaxCalculatorRates() {
+		return this.taxCalculatorRates;
+	}
+
+	public class TaxCalculatorRates {
+		public double nationalRate;
+		public double healthCareRate;
+		public double longTermCareRate;
+		public double employmentCareRate;
+	}
 }

@@ -1,7 +1,6 @@
 package kr.asv.calculators.salary;
 
-public class SalaryCalculatorOptions
-{
+public class SalaryCalculatorOptions {
 	private double inputMoney;
 	private int family;
 	private int child;
@@ -9,12 +8,12 @@ public class SalaryCalculatorOptions
 	private boolean annualBasis;
 	private boolean includedSeverance;
 	private boolean debug;
-	
-	SalaryCalculatorOptions(){
+
+	SalaryCalculatorOptions() {
 		this.init();
 	}
-	private void init()
-	{
+
+	private void init() {
 		this.inputMoney = 2000000;
 		this.family = 1;
 		this.child = 0;
@@ -24,68 +23,67 @@ public class SalaryCalculatorOptions
 		this.debug = false;
 	}
 
-	public int getFamily()
-	{
+	public int getFamily() {
 		return family;
 	}
-	public void setFamily(int family)
-	{
+
+	public void setFamily(int family) {
 		this.family = family;
 	}
-	public int getChild()
-	{
+
+	public int getChild() {
 		return child;
 	}
-	public void setChild(int child)
-	{
+
+	public void setChild(int child) {
 		this.child = child;
 	}
-	double getInputMoney()
-	{
+
+	double getInputMoney() {
 		return inputMoney;
 	}
-	public void setInputMoney(double inputMoney)
-	{
+
+	public void setInputMoney(double inputMoney) {
 		this.inputMoney = inputMoney;
 	}
-	public double getTaxExemption()
-	{
+
+	public double getTaxExemption() {
 		return taxExemption;
 	}
-	public void setTaxExemption(double taxExemption)
-	{
+
+	public void setTaxExemption(double taxExemption) {
 		this.taxExemption = taxExemption;
 	}
-	boolean isAnnualBasis()
-	{
+
+	boolean isAnnualBasis() {
 		return annualBasis;
 	}
-	public void setAnnualBasis(boolean annualBasis)
-	{
+
+	public void setAnnualBasis(boolean annualBasis) {
 		this.annualBasis = annualBasis;
 	}
-	boolean isIncludedSeverance()
-	{
+
+	boolean isIncludedSeverance() {
 		return includedSeverance;
 	}
-	public void setIncludedSeverance(boolean includedSeverance)
-	{
+
+	public void setIncludedSeverance(boolean includedSeverance) {
 		this.includedSeverance = includedSeverance;
 	}
-	public boolean isDebug()
-	{
+
+	public boolean isDebug() {
 		return debug;
 	}
+
 	@SuppressWarnings("SameParameterValue")
-	public void setDebug(boolean debug)
-	{
+	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
+
 	/**
 	 * 디버깅을 위한 toString 메서드
 	 */
-	public String toString()
-	{
+	public String toString() {
 		String result = "\n<옵션값>\n";
 		result += "입력액 : " + inputMoney + "\n";
 		result += "가족수(본인포함) : " + family + "\n";
