@@ -46,15 +46,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)
-
-        val crashButton = Button(this)
-        crashButton.setText("Crash!")
-        crashButton.setOnClickListener(View.OnClickListener {
-            Crashlytics.getInstance().crash() // Force a crash
-        })
-        addContentView(crashButton,
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 
     /**

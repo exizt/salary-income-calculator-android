@@ -2,19 +2,19 @@ package kr.asv.calculators.salary;
 
 public interface Salary
 {
-	public void execute();
+	void execute();
 
-	public void setInputMoney(double inputMoney);
+	void setInputMoney(double inputMoney);
 
-	public void setTaxExemption(double taxExemption);
+	void setTaxExemption(double taxExemption);
 
-	public void setAnnualBasis(boolean annualBasis);
+	void setAnnualBasis(boolean annualBasis);
 
-	public void setIncludedSeverance(boolean includedSeverance);
+	void setIncludedSeverance(boolean includedSeverance);
 
-	public double getBasicSalary();
+	double getBasicSalary();
 	
-	public double getGrossSalary();
+	double getGrossSalary();
 	
-	public double getGrossAnnualSalary();
+	double getGrossAnnualSalary();
 }

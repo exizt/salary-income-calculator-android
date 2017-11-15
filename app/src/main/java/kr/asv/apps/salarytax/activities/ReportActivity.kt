@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_report.*
 import kr.asv.androidutils.AdmobAdapter
@@ -18,11 +17,6 @@ import kr.asv.shhtaxmanager.R
 
 class ReportActivity : AppCompatActivity() {
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-
-    /**
-     * The [ViewPager] that will host the section contents.
-     */
-    private var mViewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +71,7 @@ class ReportActivity : AppCompatActivity() {
         return null
     }
 
-    fun setResultReport() {
+    private fun setResultReport() {
         //MainActivity mainActivity = (MainActivity)getSupportParentActivityIntent();
 
         //getBaseContext();

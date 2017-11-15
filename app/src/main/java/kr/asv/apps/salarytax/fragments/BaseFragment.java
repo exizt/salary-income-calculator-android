@@ -7,7 +7,7 @@ import kr.asv.shhtaxmanager.MainActivity;
 
 /**
  * BaseFragment
- * Created by Administrator on 2016-04-08.
+ * Created by EXIZT on 2016-04-08.
  */
 public abstract class BaseFragment extends Fragment {
     /**
@@ -17,7 +17,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * Fragment 에서 자신을 지정
-     * @param view
+     * @param view View
      */
     public void setFragmentView(View view)
     {

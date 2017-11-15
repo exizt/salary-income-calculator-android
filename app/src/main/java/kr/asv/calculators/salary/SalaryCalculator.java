@@ -26,7 +26,7 @@ public class SalaryCalculator
 	}
 	/**
 	 * 생성자
-	 * @param options
+	 * @param options Options
 	 */
 	public SalaryCalculator(SalaryCalculatorOptions options)
 	{
@@ -52,7 +52,7 @@ public class SalaryCalculator
 	}
 	/**
 	 * 옵션 [가족수, 자녀수, 비과세액 등]
-	 * @param options
+	 * @param options Options
      */
 	public void run(SalaryCalculatorOptions options)
 	{
@@ -106,7 +106,7 @@ public class SalaryCalculator
 	}
 	/**
 	 * 옵션 객체를 리턴
-	 * @return
+	 * @return Options
 	 */
 	public SalaryCalculatorOptions getOptions()
 	{

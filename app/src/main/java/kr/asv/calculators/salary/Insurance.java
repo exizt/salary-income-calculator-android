@@ -2,21 +2,21 @@ package kr.asv.calculators.salary;
 
 public interface Insurance
 {
-	public void execute(double adjustedSalary);
+	void execute(double adjustedSalary);
 
-	public double getNationalPension();
+	double getNationalPension();
 
-	public double getHealthCare();
+	double getHealthCare();
 
-	public double getLongTermCare();
+	double getLongTermCare();
 
-	public double getEmploymentCare();
+	double getEmploymentCare();
 
-	public double get();
+	double get();
 
-	public boolean isCalculated();
+	boolean isCalculated();
 
-	public String toString();
+	String toString();
 
-	public InsuranceRates getRates();
+	InsuranceRates getRates();
 }

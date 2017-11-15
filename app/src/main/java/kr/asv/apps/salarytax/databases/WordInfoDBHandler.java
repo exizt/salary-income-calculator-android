@@ -5,10 +5,10 @@ import android.content.Context;
 import kr.asv.android.sqlite.SQLiteHandler;
 
 /**
- * DBInformation
- * DBInformation 테이블 을 처리하기 위한 클래스
+ * WordInfoDBHandler
+ * WordInfoDBHandler 테이블 을 처리하기 위한 클래스
  */
-public class DBInformation extends SQLiteHandler {
+public class WordInfoDBHandler extends SQLiteHandler {
     private final String dbName = "salarytax_information.db";
     private final int dbVersion = 1;
     private final boolean isDebug = false;
@@ -17,7 +17,7 @@ public class DBInformation extends SQLiteHandler {
      * Construction
      * @param context Context
      */
-    public DBInformation(Context context)
+    public WordInfoDBHandler(Context context)
     {
         debug("[Constructor] >> ");
         super.initialize(context,dbName,dbVersion,isDebug);

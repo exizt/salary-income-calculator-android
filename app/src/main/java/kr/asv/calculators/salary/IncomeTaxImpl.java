@@ -22,9 +22,9 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 계산 동작
 	 * 
-	 * @param salary
-	 * @param family
-	 * @param child
+	 * @param salary double Salary
+	 * @param family int family
+	 * @param child int child
 	 */
 	public void execute(double salary, int family, int child)
 	{
@@ -41,9 +41,8 @@ public class IncomeTaxImpl implements IncomeTax
 
 	/**
 	 * 근로소득세(소득세) 계산식
-	 * 
-	 * @todo 국민연금 금액 갖고 올 방법 고민
-	 * @return
+	 * TODO: 국민연금 금액 갖고 올 방법 고민
+	 * @return double
 	 */
 	private double calculateEarnedTax(double salary, int family, int child)
 	{
@@ -124,7 +123,7 @@ public class IncomeTaxImpl implements IncomeTax
 	 * [소득세 계산 : 근로소득 금액 산출(근로소득 기초공제 후 남는 근로소득금액(연간)]
 	 * 근로소득공제를 제한 후의 연간근로소득금액을 구합니다.
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateBasicDeduction(double salary)
 	{
@@ -173,7 +172,7 @@ public class IncomeTaxImpl implements IncomeTax
 	 * 종합소득공제 산출
 	 * 인적공제, 연금보험료공제, 특별소득공제 등 의 합계를 반환
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateIntegratedDeduction(double salary, int family, int child)
 	{
@@ -200,7 +199,7 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 소득세 중 특별소득공제등
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateOtherDeduction(double baseSalary, int family, int child)
 	{
@@ -267,7 +266,7 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 소득세 중 산출세액
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calcTaxEarnedTotal(double baseSalary, double taxBase)
 	{
@@ -310,7 +309,7 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 근로 소득 세액공제 계산식
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateTaxCredit(double baseSalary, double tax)
 	{
@@ -358,7 +357,7 @@ public class IncomeTaxImpl implements IncomeTax
 	 * 지방세 계산식
 	 * 근로소득세의 10%
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateLocalTax(double incomeTax)
 	{
@@ -402,7 +401,7 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 소득세금 전체 금액 (소득세 + 지역세(주민세))
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public double get()
 	{
@@ -412,7 +411,7 @@ public class IncomeTaxImpl implements IncomeTax
 	/**
 	 * 국민연금료 입력
 	 * 
-	 * @param nationalInsurance
+	 * @param nationalInsurance double
 	 */
 	public void setNationalInsurance(double nationalInsurance)
 	{
@@ -428,7 +427,7 @@ public class IncomeTaxImpl implements IncomeTax
 	}
 	/**
 	 * 디버깅 설정값
-	 * @param debug
+	 * @param debug boolean
 	 */
 	public void setDebug(boolean debug)
 	{

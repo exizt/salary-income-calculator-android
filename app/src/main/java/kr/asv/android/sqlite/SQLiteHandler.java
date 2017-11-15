@@ -1,7 +1,6 @@
 package kr.asv.android.sqlite;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -18,56 +17,60 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 /**
- * Created by Administrator on 2016-04-29.
+ * Created by EXIZT on 2016-04-29.
  * 기존의 DB 파일과 해쉬 체크를 하는 로직이 담겨져 있음. 주의할 것.
- *
+ * Latest Update 2017-11-15
  */
 public abstract class SQLiteHandler {
     //객체들
-    protected Context context;
-    protected SQLiteDatabase db;
-    protected OpenHelper openHelper;
+    private Context context;
+    private SQLiteDatabase db;
+    private OpenHelper openHelper;
 
     //db config
-    protected String dbName;
-    protected int dbVersion;
-    protected String dbHashFileName;
+    private String dbName;
+    private int dbVersion;
+    private String dbHashFileName;
 
     // db 파일 카피 프로세스 를 진행했는지 여부
-    protected boolean isPassingCopyProcess = false;
+    private boolean isPassingCopyProcess = false;
 
     //기타
-    private boolean isDebug;
+    private boolean isDebug = false;
 
     /**
      * 생성자
      */
-    public SQLiteHandler()
+    protected SQLiteHandler()
     {
     }
 
     /**
      * 초기화
-     * @param context
-     * @param dbName
-     * @param dbVersion
-     * @param debug
+     * @param context context
+     * @param dbName String
+     * @param dbVersion int
+     * @param debug boolean
      */
-    public void initialize(Context context,String dbName,int dbVersion,boolean debug)
+    protected void initialize(Context context, String dbName, int dbVersion, boolean debug)
     {
         this.isDebug = debug;
         this.context = context;
         this.dbName = dbName;
         this.dbVersion = dbVersion;
-        this.dbHashFileName = new StringBuffer(this.dbName).append(".hash").toString();
-        debug("[initialize] dbHashFileName > ",dbHashFileName);
+        this.dbHashFileName = this.dbName + ".hash";
 
         // Assets 내에 데이터베이스 파일이 존재하는지 체크를 해봐야 한다. 없다면, 이 로직은 실패이고,
         // 앱 전체가 동작해서는 안 된다.
         try{
-            boolean a = Arrays.asList(context.getAssets().list("")).contains(new StringBuffer("db/").append(dbName).toString());
+            boolean isExistsAssetDBFile = Arrays.asList(context.getAssets().list("db")).contains(dbName);
+            if(!isExistsAssetDBFile){
+                debug("[initialize] not found db file in assets");
+                return;
+            }
         } catch (Exception e){
-            debug("[initialize] not found db file in assets");
+            debug("[initialize] db file check exception");
+            return;
         }
 
 
@@ -97,13 +100,10 @@ public abstract class SQLiteHandler {
      * open 컨트롤
      * @return OpenHelper
      */
+    @SuppressWarnings("unused")
     public OpenHelper getOpenHelper()
     {
         return this.openHelper;
-    }
-    public SQLiteDatabase db()
-    {
-        return getDb();
     }
     public SQLiteDatabase getDb()
     {
@@ -113,42 +113,51 @@ public abstract class SQLiteHandler {
     /**
      * 데이터베이스 생성 과정에서 취할 액션
      */
+    @SuppressWarnings("WeakerAccess")
     public abstract void onCreateDatabase();
 
     /**
      * 데이터베이스 업그레이드 과정에서 취할 액션
      */
+    @SuppressWarnings("unused")
     public abstract void onUpgradeDatabase(int oldVersion,int newVersion);
 
     /**
      * 다운그레이드의 경우
-     * @param oldVersion
-     * @param newVersion
+     * @param oldVersion old version : int
+     * @param newVersion new version : int
      */
+    @SuppressWarnings("unused")
     public abstract void onDowngradeDatabase(int oldVersion,int newVersion);
 
     /**
      * copy 하기전에 동일한 파일인지 확인
      * @return true 동일 / false 동일하지않음
      */
-    public boolean isEqualDatabaseFile()
+    private boolean isEqualDatabaseFile()
     {
-        debug("[isEqualDatabaseFile] >> ");
+        debug("[isEqualDatabaseFile] >> dbHashFileName : "+dbHashFileName);
+
         //저장된 파일이 없는 경우는 false 를 리턴한다.
-        if(!fileExists(context,dbHashFileName)){
-            debug("[isEqualDatabaseFile] > hashFile not found");
-            return false;
+        try{
+            boolean isAvailableHashFile = Arrays.asList(context.getAssets().list("db")).contains(dbHashFileName);
+            if(!isAvailableHashFile){
+                debug("[isEqualDatabaseFile] hashFile not found.");
+                return false;
+            }
+        } catch (Exception e){
+            debug("[initialize] exception has been thrown on hashFile checking");
         }
-        //debug("isDuplicatedDatabase > fileExists true");
+
 
         //저장된 파일의 해쉬코드를 읽어온다.
         String appHashCode = readInternalFile(context,dbHashFileName);
         debug("[isEqualDatabaseFile] > internal DB Hash Code > ",appHashCode);
 
         //asset 의 HashCode 를 읽어온다.
-        String assetHashCode = "";
+        String assetHashCode;
         try{
-            assetHashCode = readFromAssets(context,new StringBuffer("db/").append(dbHashFileName).toString());
+            assetHashCode = readFromAssets(context, "db/" + dbHashFileName);
             debug("[isEqualDatabaseFile] > Asset DB Hash Code > ",assetHashCode);
         } catch (Exception e){
             debug("[isEqualDatabaseFile] > Asset DB Hash File Not found or Not Read");
@@ -158,11 +167,7 @@ public abstract class SQLiteHandler {
         }
 
         // 값이 동일한지 확인해본다.
-        if(appHashCode.equals(assetHashCode)){
-            return true;
-        } else {
-            return false;
-        }
+        return appHashCode.equals(assetHashCode);
     }
 
     /**
@@ -170,7 +175,7 @@ public abstract class SQLiteHandler {
      * 기존에 있는 경우에는 삭제하고 복사.
      *
      */
-    public void copyDatabase(){
+    private void copyDatabase(){
         createDBFileFromAssets(context,dbName);
     }
 
@@ -179,11 +184,11 @@ public abstract class SQLiteHandler {
      * 복사 과정에서 압축해서 복사할 수가 있다고 한다. 그래서 그냥 내용을 읽어서 write 하는 방식으로
      * 하기로 하였다. (이게 더 빠르니까)
      */
-    public void copyDatabaseHashFile(){
+    private void copyDatabaseHashFile(){
         //asset 의 HashCode 를 읽어온다.
-        String assetHashCode = "";
+        String assetHashCode;
         try{
-            assetHashCode = readFromAssets(context,new StringBuffer("db/").append(dbHashFileName).toString());
+            assetHashCode = readFromAssets(context, "db/" + dbHashFileName);
         } catch (Exception e){
             assetHashCode = "";
         }
@@ -195,32 +200,13 @@ public abstract class SQLiteHandler {
     }
 
     /**
-     * 파일 유무 체크 <br>
-     * 접근 권한이나 이상이 있을 시에는 false 리턴. 파일이 없다고 가정한다.
-     * @param context
-     * @param filename
-     * @return
-     */
-    public boolean fileExists(Context context, String filename) {
-        try{
-            File file = context.getFileStreamPath(filename);
-            if(file == null || !file.exists()) {
-                return false;
-            }
-            return true;
-        } catch (Exception e){
-            return false;
-        }
-    }
-
-    /**
      * asset 에서 String 을 읽어오는 메서드.
-     * @param context
-     * @param assetName
-     * @return
-     * @throws IOException
+     * @param context applicationContext : Context
+     * @param assetName asset name : String
+     * @return string
+     * @throws IOException 일반 에러
      */
-    public String readFromAssets(Context context,String assetName) throws IOException
+    private String readFromAssets(Context context, String assetName) throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open(assetName)));
         // do reading, usually loop until end of file reading
@@ -237,12 +223,12 @@ public abstract class SQLiteHandler {
 
     /**
      * Internal 저장소에 텍스트 파일을 저장하는 메서드
-     * @param context
-     * @param filename
-     * @param value
-     * @throws IOException
+     * @param context applicationContext : Context
+     * @param filename 파일명
+     * @param value 넣을 값
+     * @throws IOException 에러
      */
-    public void writeInternalFile(Context context, String filename, String value) throws IOException
+    private void writeInternalFile(Context context, String filename, String value) throws IOException
     {
         FileOutputStream outputStream;
         outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
@@ -252,18 +238,47 @@ public abstract class SQLiteHandler {
 
     /**
      * Internal 저장소에서 텍스트 파일을 읽어오는 메서드
-     * @param context
-     * @param filename
-     * @return
+     * @param context applicationContext : Context
+     * @param filename 파일명
+     * @return string
      */
-    public String readInternalFile(Context context, String filename)
+    private String readInternalFile(Context context, String filename)
+    {
+        debug("[readInternalFile] >> ");
+
+        try {
+            FileInputStream fis = context.openFileInput(filename);
+            InputStreamReader inputStreamReader = new InputStreamReader(fis);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            fis.close();
+            return sb.toString();
+        } catch(Exception e) {
+            debug("[readInternalFile] loadFileHashCode Exception:", e.toString());
+            return "";
+        }
+    }
+
+    /**
+     * Internal 저장소에서 텍스트 파일을 읽어오는 메서드
+     * @param context applicationContext : Context
+     * @param filename 파일명
+     * @return string
+     * @deprecated
+     */
+    @SuppressWarnings("deprecation")
+    private String old_readInternalFile(Context context, String filename)
     {
         debug("[readInternalFile] >> ");
         try {
             FileInputStream fis = context.openFileInput(filename);
             byte[] data = new byte[fis.available()];
+            //noinspection StatementWithEmptyBody
             while (fis.read(data) != -1) {
-                ;
             }
             fis.close();
             return new String(data);
@@ -276,10 +291,10 @@ public abstract class SQLiteHandler {
     /**
      * 동작하는 기기의 내부에 /data/data/{package}/databases 폴더를 생성한다. <br>
      * assets 의 *.db 파일을 이 안으로 복사(생성) 해준다.
-     * @param context
-     * @param dbName
+     * @param context ApplicationContext : Context
+     * @param dbName 파일명
      */
-    public void createDBFileFromAssets(Context context,String dbName) {
+    private void createDBFileFromAssets(Context context, String dbName) {
         try {
             debug("[createDBFileFromAssets] >> DB Name > ",dbName);
             //String package_name = context.getPackageName();
@@ -292,7 +307,9 @@ public abstract class SQLiteHandler {
             File folder = new File(folderPath);
             if (!folder.exists()) {
                 debug("[createDBFileFromAssets] Create Database Folder");
-                folder.mkdirs();
+                if(!folder.mkdirs()){
+                    debug("[createDBFileFromAssets] mkdirs false error");
+                }
             } else {
                 debug("[createDBFileFromAssets] Already exists Database Folder. passing create folder");
             }
@@ -300,7 +317,7 @@ public abstract class SQLiteHandler {
             // DB 파일의 경로 (내부 저장소)
             //String filePath = new StringBuffer(folderPath).append("/").append(dbName).toString();
             String filePath = context.getDatabasePath(dbName).getPath();
-            String assetName = new StringBuffer("db/").append(dbName).toString();
+            String assetName = "db/" + dbName;
             debug("[createDBFileFromAssets] copyAssetFileToLocalStorage before");
             copyAssetFileToLocalStorage(context, filePath, assetName);
 
@@ -309,8 +326,6 @@ public abstract class SQLiteHandler {
             debug("[createDBFileFromAssets] Exception > IOException",e.toString());
         } catch (Exception e){
             debug("[createDBFileFromAssets] Exception > Exception",e.toString());
-        } finally {
-            //debug("[createDBFileFromAssets] Closes CopyDatabase Method");
         }
     }
 
@@ -321,9 +336,9 @@ public abstract class SQLiteHandler {
      * @param context Assets 의 Context
      * @param toFilePath 내부({storage?}/data/data/{package?})에 넣게 될 파일 경로
      * @param assetFileName 복사하고싶은 Assets 의 이름
-     * @throws Exception
+     * @throws Exception 오류
      */
-    public void copyAssetFileToLocalStorage(Context context,String toFilePath,String assetFileName) throws Exception {
+    private void copyAssetFileToLocalStorage(Context context, String toFilePath, String assetFileName) throws Exception {
         BufferedInputStream bis  = null;
         BufferedOutputStream bos = null;
         InputStream ins = null;
@@ -331,10 +346,14 @@ public abstract class SQLiteHandler {
             File file = new File(toFilePath);
             // 파일이 이미 있는 경우 파일을 삭제한다.
             if (file.exists()) {
-                file.delete();
+                if(!file.delete()){
+                    debug("file have been not deleted");
+                }
             }
             //파일을 새로 생성
-            file.createNewFile();
+            if(!file.createNewFile()){
+                debug("file have been not created");
+            }
 
             //AssetFileDescriptor assetFileDescriptor = context.getAssets().openFd(assetFileName);
             //FileDescriptor fileDescriptor = assetFileDescriptor.getFileDescriptor();
@@ -344,6 +363,7 @@ public abstract class SQLiteHandler {
             //파일 Copy 동작
             bos = new BufferedOutputStream(new FileOutputStream(file));
 
+            //noinspection UnusedAssignment
             int read = -1;
             byte[] readBuffer = new byte[1024];
             while ((read = bis.read(readBuffer, 0, 1024)) != -1) {
@@ -354,7 +374,8 @@ public abstract class SQLiteHandler {
             bos.close();
             ins.close();
         } catch (Exception e){
-            throw e;
+            //throw e;
+            debug(e.toString());
         } finally {
             if(bis != null) bis.close();
             if(bos != null) bos.close();
@@ -363,71 +384,41 @@ public abstract class SQLiteHandler {
     }
 
     /**
-     * Deprecated <br>
-     * Asset 의 파일을 Internal 저장소로 복사하는 메서드.<br>
-     * '이미 존재하고 있는 경우'에는 지우고 replace 한다.
-     * @param context Assets 의 Context
-     * @param toFilePath 내부({storage?}/data/data/{package?})에 넣게 될 파일 경로
-     * @param fromAssetName 복사하고싶은 Assets 의 이름
-     * @throws Exception
-     */
-    public void createOrReplaceFileFromAsset(Context context,String toFilePath,String fromAssetName) throws Exception {
-        AssetManager assetManager = context.getAssets();
-
-        File file = new File(toFilePath);
-        // 파일이 이미 있는 경우 파일을 삭제한다.
-        if (file.exists()) {
-            file.delete();
-        }
-        //파일을 새로 생성
-        file.createNewFile();
-
-        //assets 에 있는 DB 파일을 읽어온다.
-        InputStream is = assetManager.open(fromAssetName);
-        BufferedInputStream bis = new BufferedInputStream(is);
-
-        FileOutputStream fos = null;
-        BufferedOutputStream bos = null;
-
-        //파일 Copy 동작
-        fos = new FileOutputStream(file);
-        bos = new BufferedOutputStream(fos);
-        int read = -1;
-        byte[] buffer = new byte[1024];
-        while ((read = bis.read(buffer, 0, 1024)) != -1) {
-            bos.write(buffer, 0, read);
-        }
-        bos.flush();
-        bos.close();
-        fos.close();
-        bis.close();
-        is.close();
-    }
-
-    /**
      * 디버깅
-     * @param log
+     * @param msg 메시지
      */
-    private void debug(String log)
+    protected void debug(String msg)
     {
         if(isDebug) {
-            Log.e("[EXIZT-DEBUG]", new StringBuilder("[SQLiteHandler]").append(log).toString());
+            Log.e("[EXIZT-DEBUG]", "[SQLiteHandler]" + msg);
         }
     }
     private void debug(String log, String log2)
     {
-        debug(new StringBuffer(log).append(log2).toString());
+        debug(log + log2);
+    }
+
+    @SuppressWarnings("unused")
+    public boolean isPassingCopyProcess() {
+        return isPassingCopyProcess;
+    }
+
+
+    @SuppressWarnings("unused")
+    public int getDbVersion() {
+        return dbVersion;
     }
 
     public class OpenHelper extends SQLiteOpenHelper {
         /**
          * 생성자
-         * @param context
-         * @param name
-         * @param factory
-         * @param version
+         * @param context context
+         * @param name database file name
+         * @param factory cursor factory
+         * @param version db file version
          */
-        public OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
+        @SuppressWarnings("SameParameterValue")
+        OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
             super(context, name, factory, version);
         }
         /**

@@ -3,24 +3,26 @@ package kr.asv.apps.salarytax;
 import android.content.Context;
 import android.util.Log;
 
-import kr.asv.apps.salarytax.databases.DBInformation;
+import kr.asv.apps.salarytax.databases.WordInfoDBHandler;
 import kr.asv.apps.salarytax.databases.TableWordDictionary;
 import kr.asv.calculators.salary.SalaryCalculator;
 
 /**
  * 어플 전체적으로 활용되는 기능들을 모아두는 클래스
- * Created by Administrator on 2016-04-27.
+ * Created by EXIZT on 2016-04-27.
  */
 public class Services {
     //default
     private static Services instance = new Services();
     private Context applicationContext = null;
+    @SuppressWarnings("FieldCanBeLocal")
     private boolean isDebug = true;
 
     //objects
     private SalaryCalculator calculator = new SalaryCalculator();
     private TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
-    private DBInformation dbInformation = null;
+    @SuppressWarnings("FieldCanBeLocal")
+    private WordInfoDBHandler wordInfoDbHandler = null;
     TableWordDictionary tableWordDictionary;
 
     /**
@@ -35,8 +37,8 @@ public class Services {
 
     /**
      * 싱글톤 비슷하게 구현. 처음 한번만 init 메서드를 호출하게
-     * @param context
-     * @return
+     * @param context Context
+     * @return Services
      */
     public static Services getInstanceWithInit(Context context)
     {
@@ -48,7 +50,7 @@ public class Services {
 
     /**
      * 최초 한번만 실행하게끔
-     * @param context
+     * @param context Context
      */
     public void init(Context context)
     {
@@ -59,21 +61,21 @@ public class Services {
         debug("[Init] >> ");
 
         //디비 연결
-        this.dbInformation = new DBInformation(context);
-        debug("[Init] > set DBInformation");
+        this.wordInfoDbHandler = new WordInfoDBHandler(context);
+        debug("[Init] > set WordInfoDBHandler");
 
-        this.tableWordDictionary = new TableWordDictionary(dbInformation.db());
+        this.tableWordDictionary = new TableWordDictionary(wordInfoDbHandler.getDb());
         debug("[Init] > set TableWordDictionary");
     }
 
     /**
      * 디버깅
-     * @param log
+     * @param msg message
      */
-    private void debug(String log)
+    private void debug(String msg)
     {
         if(isDebug) {
-            Log.e("[EXIZT-DEBUG]", new StringBuilder("[Services]").append(log).toString());
+            Log.e("[EXIZT-DEBUG]", "[Services]" + msg);
         }
     }
 

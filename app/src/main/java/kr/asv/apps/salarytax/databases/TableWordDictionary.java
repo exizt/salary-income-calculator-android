@@ -4,7 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by Administrator on 2016-04-30.
+ * 단어 사전 테이블 클래스
+ * Created by EXIZT on 2016-04-30.
  */
 public class TableWordDictionary {
     /**
@@ -22,14 +23,13 @@ public class TableWordDictionary {
 
     public Cursor getList()
     {
-        Cursor cur = db.query(TABLE_NAME,new String[] { "key","id","subject","explanation","process","history" }, null, null,null,null,null); //
-        return cur;
+        return db.query(TABLE_NAME,new String[] { "key","id","subject","explanation","process","history" }, null, null,null,null,null);
     }
 
     /**
      *
-     * @param key
-     * @return
+     * @param key long
+     * @return Record
      */
     public Record getRow(long key)
     {

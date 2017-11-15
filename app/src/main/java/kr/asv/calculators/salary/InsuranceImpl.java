@@ -6,7 +6,7 @@ package kr.asv.calculators.salary;
  * 생성자에서 값을 대입하지 않는다. setter 로 값을 대입하고,
  * calculate 메서드로 연산을 한다.
  * 
- * @author Administrator
+ * @author EXIZT
  *
  */
 public class InsuranceImpl implements Insurance
@@ -30,8 +30,7 @@ public class InsuranceImpl implements Insurance
 
 	/**
 	 * 4대보험요율
-	 * 
-	 * @todo 싱글톤으로 해서 유일하게 관리해야 할 것 같다...
+	 * TODO 싱글톤으로 해서 유일하게 관리해야 할 것 같다...
 	 */
 	private InsuranceRates rates;
 
@@ -63,7 +62,7 @@ public class InsuranceImpl implements Insurance
 	 * 
 	 * @param adjustedSalary
 	 *            세금의 기준 봉급액(기본급 - 비과세)
-	 * @return
+	 * @return double
 	 */
 	private double calculateNationalPension(double adjustedSalary)
 	{
@@ -87,8 +86,8 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 건강보험 계산식
 	 * 
-	 * @param adjustedSalary
-	 * @return
+	 * @param adjustedSalary double
+	 * @return double
 	 */
 	private double calculateHealthCare(double adjustedSalary)
 	{
@@ -106,7 +105,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 장기요양보험 계산식
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateLongTermCare(double adjustedSalary)
 	{
@@ -119,7 +118,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 고용보험 계산식
 	 * 
-	 * @return
+	 * @return double
 	 */
 	private double calculateEmploymentCare(double adjustedSalary)
 	{
@@ -132,7 +131,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 국민연금
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public double getNationalPension()
 	{
@@ -142,7 +141,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 건강보험료
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public double getHealthCare()
 	{
@@ -152,7 +151,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 장기요양보험료
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public double getLongTermCare()
 	{
@@ -162,7 +161,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 고용보험료
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public double getEmploymentCare()
 	{
@@ -177,7 +176,7 @@ public class InsuranceImpl implements Insurance
 	/**
 	 * 계산되었는지 여부
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public boolean isCalculated()
 	{

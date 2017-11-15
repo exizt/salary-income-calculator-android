@@ -1,7 +1,8 @@
 package kr.asv.apps.salarytax.items;
 
 /**
- * Created by Administrator on 2016-04-30.
+ *
+ * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryItem {
     private int key;

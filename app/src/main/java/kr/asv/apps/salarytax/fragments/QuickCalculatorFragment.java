@@ -50,8 +50,6 @@ public class QuickCalculatorFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -202,7 +200,7 @@ public class QuickCalculatorFragment extends BaseFragment {
             inputMoney = 0;
         }
 
-        /**
+        /*
          * 연봉기준인지 월급기준인지 구분.
          * 1000만원 이상이면 연봉입력으로 생각하고 계산. (설마 월급이 천만원은 아니겠지)
          */

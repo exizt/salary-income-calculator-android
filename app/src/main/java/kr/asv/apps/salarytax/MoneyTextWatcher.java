@@ -7,7 +7,8 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 
 /**
- * Created by Administrator on 2016-05-03.
+ * MoneyTextEditor 확장하는 클래스
+ * Created by EXIZT on 2016-05-03.
  */
 public class MoneyTextWatcher implements TextWatcher {
     public EditText editText;
@@ -52,8 +53,8 @@ public class MoneyTextWatcher implements TextWatcher {
 
     /**
      * long 타입으로 반환하는 메서드
-      * @param editText
-     * @return
+      * @param editText EditText
+     * @return long
      */
     public static long getValue(EditText editText)
     {

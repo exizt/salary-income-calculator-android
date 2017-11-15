@@ -2,15 +2,15 @@ package kr.asv.calculators.salary;
 
 public interface IncomeTax
 {
-	public void execute(double salary, int family, int child);
+	void execute(double salary, int family, int child);
 
-	public void setNationalInsurance(double nationalInsurance);
+	void setNationalInsurance(double nationalInsurance);
 
-	public double get();
+	double get();
 	
-	public double getEarnedIncomeTax();
+	double getEarnedIncomeTax();
 	
-	public double getLocalTax();
+	double getLocalTax();
 	
-	public void setDebug(boolean debug);
+	void setDebug(boolean debug);
 }

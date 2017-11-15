@@ -72,7 +72,7 @@ public class TaxCalculatorFragment extends BaseFragment {
     /**
      * 세금 계산하기 버튼 클릭시 발생
      *
-     * @param v
+     * @param v View
      */
     public void onClickButtonCalculate(View v) {
         long salary = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_salary));
@@ -108,9 +108,9 @@ public class TaxCalculatorFragment extends BaseFragment {
 
     /**
      * 이자율을 뽑아내는 계산식
-     * @param origin
-     * @param interest
-     * @return
+     * @param origin int
+     * @param interest int
+     * @return double
      */
     private double getRates(int origin,int interest)
     {
@@ -122,7 +122,7 @@ public class TaxCalculatorFragment extends BaseFragment {
     }
     private double getRates(double origin,double interest)
     {
-        double result = ((double)interest / (double)origin) * 100.0;
+        double result = (interest / origin) * 100.0;
         return (double)Math.round(result * 10000) / 10000; //반올림
         //return (double)Math.floor(result * 10) / 10; //버림
         //return (double)Math.ceil(result * 10) / 10; //올림

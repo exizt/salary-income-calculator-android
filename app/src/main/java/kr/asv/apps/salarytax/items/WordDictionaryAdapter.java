@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import kr.asv.shhtaxmanager.R;
 
 /**
- * Created by Administrator on 2016-04-30.
+ * 단어 사전 관련 클래스. 확인 필요함.
+ * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryAdapter extends BaseAdapter {
     Context context;
@@ -30,7 +31,7 @@ public class WordDictionaryAdapter extends BaseAdapter {
     }
     /**
      * 리스트 객체 내의 item 의 갯수를 반환해주는 함수.
-     * @return
+     * @return int
      */
     @Override
     public int getCount() {
@@ -38,8 +39,8 @@ public class WordDictionaryAdapter extends BaseAdapter {
     }
     /**
      * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 을 반환하는 함수
-     * @param position
-     * @return
+     * @param position int
+     * @return Object
      */
     @Override
     public Object getItem(int position) {
@@ -47,8 +48,8 @@ public class WordDictionaryAdapter extends BaseAdapter {
     }
     /**
      * 전달받은 position 의 위치에 해당하는 리스트 객체의 item 의 row id 를 반환해주는 함수
-     * @param position
-     * @return
+     * @param position int
+     * @return long
      */
     @Override
     public long getItemId(int position) {
@@ -61,10 +62,10 @@ public class WordDictionaryAdapter extends BaseAdapter {
 
     /**
      * 화면에 출력하는 함수. Listview 에 출력되는 갯수만큼 반복호출된다.
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     * @param position int
+     * @param convertView View
+     * @param parent ViewGroup
+     * @return View
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -75,7 +76,7 @@ public class WordDictionaryAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parent,false);
         }
 
-        TextView subject = (TextView) convertView.findViewById(R.id.word_subject);
+        TextView subject = convertView.findViewById(R.id.word_subject);
         //TextView key = (TextView) convertView.findViewById(R.id.word_key);
 
         // 현재 position 에 맞는 값을 가져옴.

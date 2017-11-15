@@ -87,17 +87,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             } else if (preference instanceof EditTextPreference) {
                 String key = preference.getKey();
-                if(key.equals("rate_national_pension")||key.equals("rate_health_care")||key.equals("rate_longterm_care")||key.equals("rate_employment_care")) {
-                    if(Float.parseFloat(stringValue)>=100){
-                        stringValue = "100";
-                    }
-                    preference.setSummary(stringValue + " %");
-                } else if(key.equals("quick_settings_tax_exemption")){
-                    preference.setSummary(stringValue + " 원");
-                } else if(key.equals("quick_settings_family")||key.equals("quick_settings_child")){
-                    preference.setSummary(stringValue + " 명");
-                } else {
-                    preference.setSummary(stringValue);
+                switch (key) {
+                    case "rate_national_pension":
+                    case "rate_health_care":
+                    case "rate_longterm_care":
+                    case "rate_employment_care":
+                        if (Float.parseFloat(stringValue) >= 100) {
+                            stringValue = "100";
+                        }
+                        preference.setSummary(stringValue + " %");
+                        break;
+                    case "quick_settings_tax_exemption":
+                        preference.setSummary(stringValue + " 원");
+                        break;
+                    case "quick_settings_family":
+                    case "quick_settings_child":
+                        preference.setSummary(stringValue + " 명");
+                        break;
+                    default:
+                        preference.setSummary(stringValue);
+                        break;
                 }
             } else {
                 preference.setSummary(stringValue);
@@ -220,7 +229,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("rate_employment_care"));
 
             //초기화 버튼
-            Preference prefResetButton = (Preference)findPreference("rate_initialize_button");
+            Preference prefResetButton = findPreference("rate_initialize_button");
             prefResetButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -258,8 +267,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         /**
          * setText 만 하면 값만 바뀌고, Summary 부분이 바뀌지 않으므로. 아래와 같은 구문을 사용.
-         * @param key
-         * @param value
+         * @param key String
+         * @param value String
          */
         public void setTextWithSummary(CharSequence key,String value)
         {

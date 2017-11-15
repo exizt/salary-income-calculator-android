@@ -23,7 +23,6 @@ import kr.asv.shhtaxmanager.R;
  * create an instance of this fragment.
  */
 public class OlderCalculatorFragment extends BaseFragment {
-    private char moneyType = 'Y';
     @SuppressWarnings("FieldCanBeLocal")
     private boolean includedSeverance = false;
     private boolean annualBasis = false;
@@ -116,6 +115,7 @@ public class OlderCalculatorFragment extends BaseFragment {
 
         //debug("");
         if (radioButton.isChecked()) {
+            char moneyType = 'Y';
             if (radioButton.getId() == R.id.raMoneyMonthly) {
                 moneyType = 'M';
                 this.annualBasis = false;
@@ -179,6 +179,7 @@ public class OlderCalculatorFragment extends BaseFragment {
         child = Integer.parseInt(edOptionChild.getText().toString());
 
         RadioGroup moneyType = (RadioGroup)findViewById(R.id.rgMoneyType);
+        //noinspection RedundantIfStatement
         if(R.id.raMoneyYearly==moneyType.getCheckedRadioButtonId()){
             annualBasis = true;
         } else {

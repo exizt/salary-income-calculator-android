@@ -21,13 +21,14 @@ import kr.asv.shhtaxmanager.R;
 
 public class WordListActivity extends AppCompatActivity {
     private WordDictionaryAdapter adapter;
+    @SuppressWarnings("FieldCanBeLocal")
     private boolean isDebug = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -52,7 +53,7 @@ public class WordListActivity extends AppCompatActivity {
             Cursor cur = tableWordDictionary.getList();
             if (cur.moveToFirst()) {
 
-                while (cur.isAfterLast() == false) {
+                while (!cur.isAfterLast()) {
                     //Log.e("SHH",""+cur.getInt(cur.getColumnIndex("key")));
                     WordDictionaryItem wItem = new WordDictionaryItem();
                     wItem.setKey(cur.getInt(cur.getColumnIndex("key")));
@@ -77,7 +78,7 @@ public class WordListActivity extends AppCompatActivity {
         adapter = new WordDictionaryAdapter(this,R.layout.listitem_word);
         adapter.setItemList(items);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,12 +94,12 @@ public class WordListActivity extends AppCompatActivity {
 
     /**
      * 디버깅
-     * @param log
+     * @param msg message
      */
-    public void debug(String log)
+    public void debug(String msg)
     {
         if(isDebug) {
-            Log.e("[EXIZT-DEBUG]", new StringBuilder("[MainActivity]").append(log).toString());
+            Log.e("[EXIZT-DEBUG]", "[WordListActivity]" + msg);
         }
     }
 }

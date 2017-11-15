@@ -1,5 +1,6 @@
 package kr.asv.apps.salarytax.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class ReportInputFragment extends BaseFragment {
         showResult();
     }
 
+    @SuppressLint("DefaultLocale")
     private void showResult() {
         SalaryCalculator calculator = Services.getInstance().getCalculator();
 
