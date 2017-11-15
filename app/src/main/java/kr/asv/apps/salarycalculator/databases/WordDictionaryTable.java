@@ -2,27 +2,26 @@ package kr.asv.apps.salarycalculator.databases;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * 단어 사전 테이블 클래스
  * Created by EXIZT on 2016-04-30.
  */
-public class TableWordDictionary {
-	/**
-	 * 데이터베이스 핸들러.
-	 */
-	@SuppressWarnings("FieldCanBeLocal")
+public class WordDictionaryTable {
 	private boolean isDebug = false;
-	@SuppressWarnings("unused")
+	@SuppressWarnings("FieldCanBeLocal")
 	private final String DEBUG_TAG = "EXIZT-DEBUG";
 	private final String TABLE_NAME = "word_dictionary";
 	private final SQLiteDatabase db;
 
-	public TableWordDictionary(SQLiteDatabase db) {
+	public WordDictionaryTable(SQLiteDatabase db) {
+		debug("Constructor..");
 		this.db = db;
 	}
 
 	public Cursor getList() {
+		debug("query");
 		return db.query(TABLE_NAME, new String[]{"key", "id", "subject", "explanation", "process", "history"}, null, null, null, null, null);
 	}
 
@@ -45,9 +44,19 @@ public class TableWordDictionary {
 		return record;
 	}
 
+	/**
+	 * 디버깅 메서드
+	 * @param msg 메시지
+	 */
+	private void debug(String msg){
+		if(isDebug){
+			Log.e(DEBUG_TAG,"[WordDictionaryTable]"+msg);
+		}
+	}
+
 	@SuppressWarnings("unused")
-	public boolean isDebug() {
-		return isDebug;
+	public void setDebug(boolean debug) {
+		isDebug = debug;
 	}
 
 	public class Record {
