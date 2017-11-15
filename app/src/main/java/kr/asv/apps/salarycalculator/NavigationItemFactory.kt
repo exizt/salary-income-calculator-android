@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax
+package kr.asv.apps.salarycalculator
 
 import android.content.Intent
 import android.support.design.widget.Snackbar
@@ -11,11 +11,11 @@ import android.support.v4.widget.DrawerLayout
 import android.view.MenuItem
 import android.view.View
 
-import kr.asv.apps.salarytax.activities.SettingsActivity
-import kr.asv.apps.salarytax.activities.WordListActivity
-import kr.asv.apps.salarytax.fragments.OlderCalculatorFragment
-import kr.asv.apps.salarytax.fragments.QuickCalculatorFragment
-import kr.asv.apps.salarytax.fragments.TaxCalculatorFragment
+import kr.asv.apps.salarycalculator.activities.SettingsActivity
+import kr.asv.apps.salarycalculator.activities.WordListActivity
+import kr.asv.apps.salarycalculator.fragments.OlderCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
 import kr.asv.shhtaxmanager.R
 
 /**

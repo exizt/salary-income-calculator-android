@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="kr.asv.apps.salarytax.activities.WordActivity">
+    tools:context="kr.asv.apps.salarycalculator.activities.WordActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

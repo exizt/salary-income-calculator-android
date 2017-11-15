@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.fragments;
+package kr.asv.apps.salarycalculator.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import kr.asv.apps.salarytax.MoneyTextWatcher;
-import kr.asv.apps.salarytax.activities.ReportActivity;
-import kr.asv.apps.salarytax.Services;
+import kr.asv.apps.salarycalculator.MoneyTextWatcher;
+import kr.asv.apps.salarycalculator.activities.ReportActivity;
+import kr.asv.apps.salarycalculator.Services;
 import kr.asv.calculators.salary.SalaryCalculator;
 import kr.asv.shhtaxmanager.R;
 

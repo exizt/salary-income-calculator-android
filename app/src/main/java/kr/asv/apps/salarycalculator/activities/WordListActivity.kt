@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.activities
+package kr.asv.apps.salarycalculator.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ListView
-import kr.asv.apps.salarytax.Services
-import kr.asv.apps.salarytax.items.WordDictionaryAdapter
-import kr.asv.apps.salarytax.items.WordDictionaryItem
+import kr.asv.apps.salarycalculator.Services
+import kr.asv.apps.salarycalculator.items.WordDictionaryAdapter
+import kr.asv.apps.salarycalculator.items.WordDictionaryItem
 import kr.asv.shhtaxmanager.R
 import java.util.*
 

@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.fragments;
+package kr.asv.apps.salarycalculator.fragments.report;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-import kr.asv.apps.salarytax.Services;
+import kr.asv.apps.salarycalculator.Services;
+import kr.asv.apps.salarycalculator.fragments.BaseFragment;
 import kr.asv.calculators.salary.SalaryCalculator;
 import kr.asv.shhtaxmanager.R;
 

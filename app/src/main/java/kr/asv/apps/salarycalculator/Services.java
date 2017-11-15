@@ -1,10 +1,10 @@
-package kr.asv.apps.salarytax;
+package kr.asv.apps.salarycalculator;
 
 import android.content.Context;
 import android.util.Log;
 
-import kr.asv.apps.salarytax.databases.WordInfoDBHandler;
-import kr.asv.apps.salarytax.databases.TableWordDictionary;
+import kr.asv.apps.salarycalculator.databases.WordInfoDBHandler;
+import kr.asv.apps.salarycalculator.databases.TableWordDictionary;
 import kr.asv.calculators.salary.SalaryCalculator;
 
 /**

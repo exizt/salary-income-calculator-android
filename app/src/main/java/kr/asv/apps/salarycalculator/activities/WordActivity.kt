@@ -1,10 +1,10 @@
-package kr.asv.apps.salarytax.activities
+package kr.asv.apps.salarycalculator.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
-import kr.asv.apps.salarytax.Services
+import kr.asv.apps.salarycalculator.Services
 import kr.asv.shhtaxmanager.R
 
 class WordActivity : AppCompatActivity() {

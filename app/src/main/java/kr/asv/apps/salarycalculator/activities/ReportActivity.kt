@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.activities
+package kr.asv.apps.salarycalculator.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_report.*
 import kr.asv.androidutils.AdmobAdapter
-import kr.asv.apps.salarytax.fragments.ReportInputFragment
-import kr.asv.apps.salarytax.fragments.ReportInsuranceFragment
-import kr.asv.apps.salarytax.fragments.ReportSummaryFragment
-import kr.asv.apps.salarytax.fragments.ReportTaxFragment
+import kr.asv.apps.salarycalculator.fragments.report.ReportInputFragment
+import kr.asv.apps.salarycalculator.fragments.report.ReportInsuranceFragment
+import kr.asv.apps.salarycalculator.fragments.report.ReportSummaryFragment
+import kr.asv.apps.salarycalculator.fragments.report.ReportTaxFragment
 import kr.asv.shhtaxmanager.R
 
 class ReportActivity : AppCompatActivity() {

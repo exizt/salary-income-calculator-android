@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.activities
+package kr.asv.apps.salarycalculator.activities
 
 
 import android.annotation.TargetApi
@@ -12,8 +12,8 @@ import android.support.v4.app.NavUtils
 import android.text.InputFilter
 import android.text.Spanned
 import android.view.MenuItem
-import kr.asv.apps.salarytax.AppCompatPreferenceActivity
-import kr.asv.apps.salarytax.Services
+import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
+import kr.asv.apps.salarycalculator.Services
 import kr.asv.shhtaxmanager.R
 
 /**

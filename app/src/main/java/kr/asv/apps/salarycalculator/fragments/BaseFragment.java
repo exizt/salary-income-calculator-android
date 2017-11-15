@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.fragments;
+package kr.asv.apps.salarycalculator.fragments;
 
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -20,7 +20,7 @@ public abstract class BaseFragment extends Fragment {
 	 *
 	 * @param view View
 	 */
-	void setFragmentView(View view) {
+	public void setFragmentView(View view) {
 		fragmentView = view;
 	}
 
@@ -30,7 +30,7 @@ public abstract class BaseFragment extends Fragment {
 	 * @return View
 	 * @author hong seok-hoon
 	 */
-	View findViewById(int id) {
+	public View findViewById(int id) {
 		return this.fragmentView.findViewById(id);
 	}
 

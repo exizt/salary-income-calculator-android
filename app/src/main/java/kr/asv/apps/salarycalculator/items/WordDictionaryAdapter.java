@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.items;
+package kr.asv.apps.salarycalculator.items;
 
 import android.content.Context;
 import android.view.LayoutInflater;

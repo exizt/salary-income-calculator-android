@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.items;
+package kr.asv.apps.salarycalculator.items;
 
 /**
  * Word Dictionary Item object

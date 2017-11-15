@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.asv.apps.salarytax.fragments.TaxCalculatorFragment">
+    tools:context="kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

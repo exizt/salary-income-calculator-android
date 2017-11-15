@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.databases;
+package kr.asv.apps.salarycalculator.databases;
 
 import android.content.Context;
 

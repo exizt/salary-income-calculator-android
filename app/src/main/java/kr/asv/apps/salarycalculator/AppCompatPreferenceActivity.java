@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax;
+package kr.asv.apps.salarycalculator;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

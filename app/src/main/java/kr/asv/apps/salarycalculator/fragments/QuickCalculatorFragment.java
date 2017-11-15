@@ -1,4 +1,4 @@
-package kr.asv.apps.salarytax.fragments;
+package kr.asv.apps.salarycalculator.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import kr.asv.apps.salarytax.MoneyTextWatcher;
-import kr.asv.apps.salarytax.activities.ReportActivity;
-import kr.asv.apps.salarytax.Services;
+import kr.asv.apps.salarycalculator.MoneyTextWatcher;
+import kr.asv.apps.salarycalculator.activities.ReportActivity;
+import kr.asv.apps.salarycalculator.Services;
 import kr.asv.calculators.salary.SalaryCalculator;
 import kr.asv.shhtaxmanager.R;
 
