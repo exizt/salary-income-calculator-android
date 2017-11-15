@@ -5,24 +5,19 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 
 import java.util.List;
 
@@ -64,27 +59,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 								? listPreference.getEntries()[index]
 								: null);
 
-			} else if (preference instanceof RingtonePreference) {
-				// For ringtone preferences, look up the correct display value
-				// using RingtoneManager.
-				if (TextUtils.isEmpty(stringValue)) {
-					// Empty values correspond to 'silent' (no ringtone).
-					preference.setSummary(R.string.pref_ringtone_silent);
-
-				} else {
-					Ringtone ringtone = RingtoneManager.getRingtone(
-							preference.getContext(), Uri.parse(stringValue));
-
-					if (ringtone == null) {
-						// Clear the summary if there was a lookup error.
-						preference.setSummary(null);
-					} else {
-						// Set the summary to reflect the new ringtone display
-						// name.
-						String name = ringtone.getTitle(preference.getContext());
-						preference.setSummary(name);
-					}
-				}
 			} else if (preference instanceof EditTextPreference) {
 				String key = preference.getKey();
 				switch (key) {
@@ -277,7 +251,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 			preference.setText(value);
 			sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, value);
 		}
-	    /*
+		/*
         public void setDefaultRates()
         {
             InsuranceRates initInsuranceRates = new InsuranceRates();
@@ -352,7 +326,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 		}
 
 		@Override
-		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int _start, int _end) {
 			try {
 				Double input = Double.parseDouble(dest.toString() + source.toString());
 				if (isInRange(min, max, input))

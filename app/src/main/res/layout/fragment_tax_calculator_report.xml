@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="국민연금 요율(%)"
+        android:text="@string/tax_calc_national_pension_rate"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
@@ -23,12 +23,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="건강보험 요율(%)"
+        android:text="@string/tax_calc_health_care_rate"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/id_view_healthcare"
+        android:id="@+id/id_view_health_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -38,12 +38,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="요양보험 요율(%)"
+        android:text="@string/tax_calc_longterm_care_rate"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/id_view_longtermcare"
+        android:id="@+id/id_view_longterm_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -53,12 +53,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="고용보험 요율(%)"
+        android:text="@string/tax_calc_employment_care_rate"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/id_view_employmentcare"
+        android:id="@+id/id_view_employment_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"

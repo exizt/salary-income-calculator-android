@@ -39,17 +39,17 @@ public class TaxCalculatorFragment extends BaseFragment {
 		((EditText) findViewById(R.id.id_input_salary)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 1000000000)});
 		((EditText) findViewById(R.id.id_input_taxfree)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
 		((EditText) findViewById(R.id.id_input_national)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
-		((EditText) findViewById(R.id.id_input_healthcare)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
-		((EditText) findViewById(R.id.id_input_longtermcare)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
-		((EditText) findViewById(R.id.id_input_employmentcare)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
+		((EditText) findViewById(R.id.id_input_health_care)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
+		((EditText) findViewById(R.id.id_input_longterm_care)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
+		((EditText) findViewById(R.id.id_input_employment_care)).setFilters(new InputFilter[]{new InputFilterMinMax(0, 100000000)});
 		setActionBarTitle("세율 계산");
 
 		((EditText) findViewById(R.id.id_input_salary)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_salary))));
 		((EditText) findViewById(R.id.id_input_taxfree)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_taxfree))));
 		((EditText) findViewById(R.id.id_input_national)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_national))));
-		((EditText) findViewById(R.id.id_input_healthcare)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_healthcare))));
-		((EditText) findViewById(R.id.id_input_longtermcare)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_longtermcare))));
-		((EditText) findViewById(R.id.id_input_employmentcare)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_employmentcare))));
+		((EditText) findViewById(R.id.id_input_health_care)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_health_care))));
+		((EditText) findViewById(R.id.id_input_longterm_care)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_longterm_care))));
+		((EditText) findViewById(R.id.id_input_employment_care)).addTextChangedListener(new MoneyTextWatcher(((EditText) findViewById(R.id.id_input_employment_care))));
 		return view;
 	}
 
@@ -76,9 +76,9 @@ public class TaxCalculatorFragment extends BaseFragment {
 		long salary = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_salary));
 		long taxfree = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_taxfree));
 		long national = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_national));
-		long healthCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_healthcare));
-		long longTermCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_longtermcare));
-		long employmentCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_employmentcare));
+		long healthCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_health_care));
+		long longTermCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_longterm_care));
+		long employmentCare = MoneyTextWatcher.getValue((EditText) findViewById(R.id.id_input_employment_care));
 
         /*
         double salary = parseDouble((EditText) findViewById(R.id.id_input_salary));
@@ -163,7 +163,7 @@ public class TaxCalculatorFragment extends BaseFragment {
 		}
 
 		@Override
-		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int _start, int _end) {
 			try {
 				String str = dest.toString() + source.toString();
 				if (str.contains(",")) {
@@ -209,7 +209,7 @@ public class TaxCalculatorFragment extends BaseFragment {
 		}
 
 		@Override
-		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int _start, int _end) {
 			try {
 				Double input = Double.parseDouble(dest.toString() + source.toString());
 				if (isInRange(min, max, input))

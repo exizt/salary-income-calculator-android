@@ -1,6 +1,7 @@
 package kr.asv.apps.salarytax.items;
 
 /**
+ * Word Dictionary Item object
  * Created by EXIZT on 2016-04-30.
  */
 public class WordDictionaryItem {
@@ -15,6 +16,7 @@ public class WordDictionaryItem {
 		return "DataItem{id=[" + id + "], subject=[" + subject + "] explanation=[" + explanation + "], process=[" + process + "], history=[" + history + "]}";
 	}
 
+	@SuppressWarnings("WeakerAccess")
 	public int getKey() {
 		return key;
 	}
@@ -32,6 +34,7 @@ public class WordDictionaryItem {
 		this.id = id;
 	}
 
+	@SuppressWarnings("WeakerAccess")
 	public String getSubject() {
 		return subject;
 	}

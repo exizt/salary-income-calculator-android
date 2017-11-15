@@ -43,11 +43,11 @@ class WordListActivity : AppCompatActivity() {
                 while (!cur.isAfterLast) {
                     val wItem = WordDictionaryItem()
                     wItem.key = cur.getInt(cur.getColumnIndex("key"))
-                    wItem.setId(cur.getString(cur.getColumnIndex("id")))
-                    wItem.setSubject(cur.getString(cur.getColumnIndex("subject")))
-                    wItem.setExplanation(cur.getString(cur.getColumnIndex("explanation")))
-                    wItem.setProcess(cur.getString(cur.getColumnIndex("process")))
-                    wItem.setHistory(cur.getString(cur.getColumnIndex("history")))
+                    wItem.id = cur.getString(cur.getColumnIndex("id"))
+                    wItem.subject = cur.getString(cur.getColumnIndex("subject"))
+                    wItem.explanation = cur.getString(cur.getColumnIndex("explanation"))
+                    wItem.process = cur.getString(cur.getColumnIndex("process"))
+                    wItem.history = cur.getString(cur.getColumnIndex("history"))
 
                     items.add(wItem)
 

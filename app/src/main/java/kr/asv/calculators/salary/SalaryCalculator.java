@@ -122,6 +122,7 @@ public class SalaryCalculator {
 		return this.netSalary;
 	}
 
+	@SuppressWarnings("unused")
 	public double getNetAnnualSalary() {
 		return this.netSalary * 12;
 	}

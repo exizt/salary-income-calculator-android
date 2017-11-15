@@ -88,7 +88,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/id_input_healthcare"
+            android:id="@+id/id_input_health_care"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -111,7 +111,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/id_input_longtermcare"
+            android:id="@+id/id_input_longterm_care"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -134,7 +134,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/id_input_employmentcare"
+            android:id="@+id/id_input_employment_care"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"

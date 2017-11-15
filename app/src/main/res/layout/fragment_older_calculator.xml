@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/tiMoneyType" />
+            android:text="@string/label_salary_type" />
 
         <RadioGroup
             android:id="@+id/rgMoneyType"
@@ -28,13 +28,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/tiMoneyYearly" />
+                android:text="@string/option_annual_salary" />
 
             <RadioButton
                 android:id="@+id/raMoneyMonthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tiMoneyMonthly" />
+                android:text="@string/option_monthly_salary" />
         </RadioGroup>
     </LinearLayout>
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/tiMoneyLabel" />
+            android:text="@string/label_salary_input" />
 
         <EditText
             android:id="@+id/edMoney"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/tiOptionFamily" />
+            android:text="@string/label_family_input" />
 
         <EditText
             android:id="@+id/edOptionFamily"
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/tiOptionChild" />
+            android:text="@string/label_child_input" />
 
         <EditText
             android:id="@+id/edOptionChild"
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/tiOptionTaxFree" />
+            android:text="@string/label_taxfree_input" />
 
         <EditText
             android:id="@+id/edOptionTaxFree"

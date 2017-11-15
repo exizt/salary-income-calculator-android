@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationItemFactory.instance.onNavigationItemFirst(this)
 
         //Services 초기화 및 인스턴스 가져오기
-        Services.getInstanceWithInit(this)
+        Services.getInstance(this)
 
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)
@@ -79,8 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     @JvmOverloads
     fun replaceFragments(fragment: Fragment, backStack: Boolean? = true) {
-        val fragmentManager: FragmentManager
-        fragmentManager = supportFragmentManager
+        val fragmentManager: FragmentManager = supportFragmentManager
 
         val fragmentTransaction: FragmentTransaction
         fragmentTransaction = fragmentManager.beginTransaction()

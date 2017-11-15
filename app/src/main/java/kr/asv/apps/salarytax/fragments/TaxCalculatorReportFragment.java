@@ -56,9 +56,9 @@ public class TaxCalculatorReportFragment extends BaseFragment {
 		double employmentCareRate = Services.getInstance().getTaxCalculatorRates().employmentCareRate;
 
 		TextView viewNationalRates = (TextView) findViewById(R.id.id_view_national);
-		TextView viewHealthCare = (TextView) findViewById(R.id.id_view_healthcare);
-		TextView viewLongTermCare = (TextView) findViewById(R.id.id_view_longtermcare);
-		TextView viewEmploymentCare = (TextView) findViewById(R.id.id_view_employmentcare);
+		TextView viewHealthCare = (TextView) findViewById(R.id.id_view_health_care);
+		TextView viewLongTermCare = (TextView) findViewById(R.id.id_view_longterm_care);
+		TextView viewEmploymentCare = (TextView) findViewById(R.id.id_view_employment_care);
 
 		viewNationalRates.setText(String.valueOf(nationalRate));
 		viewHealthCare.setText(String.valueOf(healthCareRate));

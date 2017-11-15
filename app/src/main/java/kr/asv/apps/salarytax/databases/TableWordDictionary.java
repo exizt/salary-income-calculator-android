@@ -14,7 +14,7 @@ public class TableWordDictionary {
     @SuppressWarnings("FieldCanBeLocal")
     private final boolean isDebug = false;
     @SuppressWarnings("unused")
-    private final String DEBUG_TAG = "devdebug";
+    private final String DEBUG_TAG = "EXIZT-DEBUG";
     private final String TABLE_NAME = "word_dictionary";
     private final SQLiteDatabase db;
 

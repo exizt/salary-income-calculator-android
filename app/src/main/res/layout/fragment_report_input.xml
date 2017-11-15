@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="입력한연봉"
+        android:text="@string/report_option_salary"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="입력한월급"
+        android:text="@string/report_option_salary_monthly"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
@@ -42,7 +42,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="부양가족수"
+        android:text="@string/report_option_family"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
@@ -57,7 +57,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20세이하자녀수"
+        android:text="@string/report_option_child"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
@@ -72,7 +72,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="입력한비과세액"
+        android:text="@string/report_option_taxfree"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 

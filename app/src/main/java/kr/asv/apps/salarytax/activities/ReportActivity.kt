@@ -75,8 +75,6 @@ class ReportActivity : AppCompatActivity() {
          * 전체 갯수인가? 보여질 갯수인가? 나중에 확인해봐야함
          * @return
          */
-        override fun getCount(): Int {
-            return 4
-        }
+        override fun getCount(): Int = 4
     }
 }

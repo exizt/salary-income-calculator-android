@@ -8,7 +8,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="퀵 계산" />
+        android:text="@string/quick_calculator_page_title" />
 
     <EditText
         android:id="@+id/editMoney_QMode"
@@ -21,18 +21,6 @@
         android:gravity="center"
         android:inputType="number"
         android:textSize="45sp" />
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editMoney_QMode"
-        android:layout_gravity="end|bottom"
-        android:columnCount="3"
-        android:rowCount="2">
-
-    </GridLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -49,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+ 천만원" />
+            android:text="@string/btn_plus_1000" />
 
         <Button
             android:id="@+id/btnPlus100"
@@ -57,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+ 백만원" />
+            android:text="@string/btn_plus_100" />
 
         <Button
             android:id="@+id/btnPlus10"
@@ -65,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+ 십만원" />
+            android:text="@string/btn_plus_10" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="- 천만원" />
+            android:text="@string/btn_minus_1000" />
 
         <Button
             android:id="@+id/btnMinus100"
@@ -91,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="- 백만원" />
+            android:text="@string/btn_minus_100" />
 
         <Button
             android:id="@+id/btnMinus10"
@@ -99,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="- 십만원" />
+            android:text="@string/btn_minus_10" />
     </LinearLayout>
 
     <LinearLayout
@@ -117,8 +105,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="정정"
-
+            android:text="@string/btn_clear"
             />
 
         <Button
@@ -137,6 +124,6 @@
         android:layout_below="@+id/linearLayout3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다." />
+        android:text="@string/quick_calculator_description" />
 
 </RelativeLayout>

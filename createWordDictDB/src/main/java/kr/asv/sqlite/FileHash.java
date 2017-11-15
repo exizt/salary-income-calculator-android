@@ -74,21 +74,21 @@ public class FileHash {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             fis = new FileInputStream(file);
             byte[] dataBytes = new byte[1024];
-            int nread;
-            while ((nread = fis.read(dataBytes)) != -1) {
-                md.update(dataBytes, 0, nread);
+            int read;
+            while ((read = fis.read(dataBytes)) != -1) {
+                md.update(dataBytes, 0, read);
             }
 
             // 해싱된 byte 배열을 digest메서드의 반환값을 통해 얻는다.
-            byte[] hashbytes = md.digest();
+            byte[] hashBytes = md.digest();
             // 해싱할 byte배열을 넘겨준다.
             // SHA-256의 경우 메시지로 전달할 수 있는 최대 bit 수는 2^64-1개 이다.
 
             // 보기 좋게 16진수로 만드는 작업
             StringBuilder sb = new StringBuilder();
-            for (byte hashbyte : hashbytes) {
+            for (byte hashByte : hashBytes) {
                 // %02x 부분은 0 ~ f 값 까지는 한자리 수이므로 두자리 수로 보정하는 역할을 한다.
-                sb.append(String.format("%02x", hashbyte & 0xff));
+                sb.append(String.format("%02x", hashByte & 0xff));
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException | IOException e) {

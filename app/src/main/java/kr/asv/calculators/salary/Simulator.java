@@ -3,7 +3,7 @@ package kr.asv.calculators.salary;
 /**
  * 진입점
  */
-public class Simulator {
+class Simulator {
 	public static void main(String[] args) {
 		SalaryCalculator calculator = new SalaryCalculator();
 

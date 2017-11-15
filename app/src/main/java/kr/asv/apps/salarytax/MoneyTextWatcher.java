@@ -34,14 +34,14 @@ public class MoneyTextWatcher implements TextWatcher {
 		editText.removeTextChangedListener(this);
 
 		try {
-			String givenstring = s.toString();
-			Long longval;
-			if (givenstring.contains(",")) {
-				givenstring = givenstring.replaceAll(",", "");
+			String given_string = s.toString();
+			Long long_val;
+			if (given_string.contains(",")) {
+				given_string = given_string.replaceAll(",", "");
 			}
-			longval = Long.parseLong(givenstring);
+			long_val = Long.parseLong(given_string);
 			DecimalFormat formatter = new DecimalFormat("#,###,###");
-			String formattedString = formatter.format(longval);
+			String formattedString = formatter.format(long_val);
 			editText.setText(formattedString);
 			editText.setSelection(editText.getText().length());
 			// to place the cursor at the end of text

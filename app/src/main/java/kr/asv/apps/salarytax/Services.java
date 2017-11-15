@@ -12,13 +12,9 @@ import kr.asv.calculators.salary.SalaryCalculator;
  * Created by EXIZT on 2016-04-27.
  */
 public class Services {
-	//default
 	private static final Services instance = new Services();
-	private Context applicationContext = null;
 	@SuppressWarnings("FieldCanBeLocal")
 	private final boolean isDebug = true;
-
-	//objects
 	private final SalaryCalculator calculator = new SalaryCalculator();
 	private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
 	@SuppressWarnings("FieldCanBeLocal")
@@ -35,31 +31,18 @@ public class Services {
 		return instance;
 	}
 
-	/**
-	 * 싱글톤 비슷하게 구현. 처음 한번만 init 메서드를 호출하게
-	 *
-	 * @param context Context
-	 * @return Services
-	 */
-	public static Services getInstanceWithInit(Context context) {
-		if (instance.applicationContext == null) {
-			instance.init(context);
-		}
+	@SuppressWarnings("unused")
+	public static Services getInstance(Context context) {
+		instance.load(context);
 		return instance;
 	}
 
-	/**
-	 * 최초 한번만 실행하게끔
-	 *
-	 * @param context Context
-	 */
-	private void init(Context context) {
-		//최초 한번만 실행한다.
-		if (this.applicationContext != null) return;
-		this.applicationContext = context;
+	@SuppressWarnings({"unused", "EmptyMethod"})
+	private void init() {
+	}
 
-		debug("[Init] >> ");
-
+	@SuppressWarnings({"unused", "EmptyMethod"})
+	private void load(Context context) {
 		//디비 연결
 		this.wordInfoDbHandler = new WordInfoDBHandler(context);
 		debug("[Init] > set WordInfoDBHandler");
