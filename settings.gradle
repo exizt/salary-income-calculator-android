@@ -1,1 +1,1 @@
-include ':app', ':createdb_informations'
+include ':app', ':createWordDictDB'

@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SalaryCalculator.iml" filepath="$PROJECT_DIR$/SalaryCalculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/createdb_informations/createdb_informations.iml" filepath="$PROJECT_DIR$/createdb_informations/createdb_informations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/createWordDictDB/createdb_informations.iml" filepath="$PROJECT_DIR$/createWordDictDB/createdb_informations.iml" />
     </modules>
   </component>
 </project>
