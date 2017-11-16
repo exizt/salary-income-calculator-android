@@ -1,5 +1,5 @@
-<resources>
-    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-6702794513299112/2747627743</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="ad_banner_unit_id" translatable="false">ca-app-pub-6702794513299112/8570432502</string>
     <string name="value_default_number" translatable="false">0</string>
     <string name="value_default_family" translatable="false">1</string>
     <string name="value_default_taxfree" translatable="false">100,000</string>
@@ -65,7 +65,7 @@
     <string name="employee_care">Employee Care</string>
     <string name="longterm_care">LongTerm Care</string>
     <string name="health_care">Health Care</string>
-    <string name="workers_compensation">Worker\'s compensation</string>
+    <string name="workers_compensation" tools:keep="@string/workers_compensation">Worker\'s compensation</string>
     <string name="income_net_salary">income net salary</string>
     <string name="report_summary_subtitle_02">4대보험+세금</string>
     <string name="close">Close</string>

@@ -10,7 +10,7 @@ import android.widget.ListView
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.items.WordDictionaryAdapter
 import kr.asv.apps.salarycalculator.items.WordDictionaryItem
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 import java.util.*
 
 class WordListActivity : AppCompatActivity() {

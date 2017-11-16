@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import kr.asv.apps.salarycalculator.MoneyTextWatcher;
 import kr.asv.apps.salarycalculator.MainActivity;
-import kr.asv.shhtaxmanager.R;
+import kr.asv.apps.salarycalculator.R;
 import kr.asv.apps.salarycalculator.Services;
 
 /**

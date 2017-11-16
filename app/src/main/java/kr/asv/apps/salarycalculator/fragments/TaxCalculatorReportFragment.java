@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import kr.asv.shhtaxmanager.R;
+import kr.asv.apps.salarycalculator.R;
 import kr.asv.apps.salarycalculator.Services;
 
 /**

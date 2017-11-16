@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import kr.asv.shhtaxmanager.R;
+import kr.asv.apps.salarycalculator.R;
 
 /**
  * 단어 사전 관련 클래스. 확인 필요함.

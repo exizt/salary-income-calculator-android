@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">실수령계산기</string>
+    <string name="app_name">실수령계산기v2</string>
     <string name="nav_header_title">월급 실수령액 계산기</string>
     <string name="nav_group_settings">환경 설정</string>
     <string name="nav_group_calculators">실수령액 계산기</string>

@@ -5,14 +5,14 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '26.0.3'
     defaultConfig {
-        applicationId "kr.asv.shhtaxmanager"
+        applicationId "kr.asv.apps.salarycalculator"
         minSdkVersion 14
         //noinspection OldTargetApi
         targetSdkVersion 27
-        versionCode 15
-        versionName '1.1.0'
+        versionCode 1
+        versionName '1.1.1'
     }
     buildTypes {
         release {
@@ -37,7 +37,6 @@ dependencies {
         transitive = true
     }
     testCompile 'junit:junit:4.12'
-
 }
 
 repositories {

@@ -25,6 +25,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/value_default_number"
+            android:imeOptions="actionDone"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -48,6 +49,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/value_default_number"
+            android:imeOptions="actionDone"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -71,6 +73,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/value_default_number"
+            android:imeOptions="actionDone"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -94,6 +97,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/value_default_number"
+            android:imeOptions="actionDone"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -117,6 +121,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/value_default_number"
+            android:imeOptions="actionDone"
             android:textSize="30sp" />
     </LinearLayout>
 

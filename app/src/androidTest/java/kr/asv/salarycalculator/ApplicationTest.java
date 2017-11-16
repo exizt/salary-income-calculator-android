@@ -1,4 +1,4 @@
-package kr.asv.shhtaxmanager;
+package kr.asv.salarycalculator;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

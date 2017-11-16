@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import kr.asv.apps.salarycalculator.Services;
 import kr.asv.apps.salarycalculator.fragments.BaseFragment;
 import kr.asv.calculators.salary.SalaryCalculator;
-import kr.asv.shhtaxmanager.R;
+import kr.asv.apps.salarycalculator.R;
 
 /**
  */

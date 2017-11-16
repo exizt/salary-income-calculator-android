@@ -14,7 +14,7 @@ import android.text.Spanned
 import android.view.MenuItem
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On

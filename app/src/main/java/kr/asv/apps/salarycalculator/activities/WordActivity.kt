@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 class WordActivity : AppCompatActivity() {
 

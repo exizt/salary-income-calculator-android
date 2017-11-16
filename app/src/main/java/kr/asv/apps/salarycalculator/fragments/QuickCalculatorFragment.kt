@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.apps.salarycalculator.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  *
@@ -203,12 +203,14 @@ class QuickCalculatorFragment : BaseFragment() {
 	}
 
 	companion object {
+
 		/**
 		 * Use this factory method to create a new instance of
 		 * this fragment using the provided parameters.
 		 *
 		 * @return A new instance of fragment QuickCalculatorFragment.
 		 */
+		@Suppress("unused")
 		fun newInstance(): QuickCalculatorFragment {
 			val fragment = QuickCalculatorFragment()
 			val args = Bundle()

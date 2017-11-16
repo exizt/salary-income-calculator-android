@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_older_calculator.*
 import kr.asv.apps.salarycalculator.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  * create an instance of this fragment.
