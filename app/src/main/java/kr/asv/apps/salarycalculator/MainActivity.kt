@@ -1,11 +1,12 @@
 package kr.asv.apps.salarycalculator
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,11 @@ import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
+import kr.asv.apps.salarycalculator.activities.SettingsActivity
+import kr.asv.apps.salarycalculator.activities.WordListActivity
+import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
 import kr.asv.shhtaxmanager.R
 
 
@@ -35,7 +41,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         onCreateNavigationDrawer()
 
         //기본 Fragment 지정
-        NavigationItemFactory.instance.onNavigationItemFirst(this)
+        //NavigationItemFactory.instance.onNavigationItemFirst(this)
+	    onNavigationItemFirst()
 
         //Services 초기화 및 인스턴스 가져오기
         Services.getInstance(this)
@@ -70,35 +77,87 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+	/**
+	 * 처음 로딩할 첫번째 항목
+	 */
+	private fun onNavigationItemFirst() {
+		//onNavigationItemSelected(nav_view.menu.getItem(1))
+
+        //nav_view.menu.getItem(R.id.nav_calculator_quick)
+        //nav_view.menu.findItem(R.id.nav_calculator_quick)
+
+        onNavigationItemSelected(nav_view.menu.findItem(R.id.nav_calculator_quick))
+	}
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        NavigationItemFactory.instance.onNavigationItemSelected(this, item)
+        var isAction = false
+
+        when (item.itemId) {
+            R.id.nav_calculator_quick -> {
+                // 퀵계산
+                val fragment = QuickCalculatorFragment()
+                replaceFragments(fragment, true)
+                isAction = true
+            }
+            R.id.nav_calculator_older -> {
+                //실 수령액 계산
+                val fragment = NormalCalculatorFragment()
+                replaceFragments(fragment, true)
+                isAction = true
+            }
+            R.id.nav_calculator_tax -> {
+                // 세율 계산
+                val fragment = TaxCalculatorFragment()
+                replaceFragments(fragment, true)
+                isAction = true
+            }
+            R.id.nav_settings -> {
+                // 환경 설정
+                startActivity(Intent(this,SettingsActivity::class.java))
+                isAction = true
+            }
+            R.id.nav_word_dictionary -> {
+                // 용어 사전
+                startActivity(Intent(this,WordListActivity::class.java))
+                isAction = true
+            }
+        }
+
+        /*
+        액티비티 또는 프레그먼트 호출 후에 처리.
+        navigationDrawer(메뉴부분) 을 close 하는 부분.
+        해당 메뉴가 없을 시에는 SnackBar 호출
+         */
+        if (isAction) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            //val view = currentFocus
+            Snackbar.make(this.currentFocus, "준비중입니다", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
         return true
     }
 
     @JvmOverloads
-    fun replaceFragments(fragment: Fragment, backStack: Boolean? = true) {
-        val fragmentManager: FragmentManager = supportFragmentManager
+    fun replaceFragments(fragment: Fragment, backStack: Boolean = true) {
+        val manager: FragmentManager = supportFragmentManager
 
-        val fragmentTransaction: FragmentTransaction
-        fragmentTransaction = fragmentManager.beginTransaction()
-
+        val fragmentTransaction = manager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
 
-        if (backStack!!) {
+        if (backStack) {
             fragmentTransaction.addToBackStack(null)//히스토리에 남긴다.
         }
         fragmentTransaction.commit()
-
     }
 
     /**
      * 키보드 내리기
      */
     fun hideSoftKeyboard() {
-        val view = currentFocus
-        if (view != null) {
+        if (currentFocus != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
         }
     }
 
