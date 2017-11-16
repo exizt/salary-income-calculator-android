@@ -4,33 +4,26 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.apps.salarycalculator.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
-import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [QuickCalculatorFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [QuickCalculatorFragment.newInstance] factory method to
- * create an instance of this fragment.
+ *
+ *
  */
 class QuickCalculatorFragment : BaseFragment() {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
-
 		setFragmentView(view)
-
 		setActionBarTitle(resources.getString(R.string.activity_title_quick_mode))
 
 		val editMoney = findViewById(R.id.editMoney_QMode) as EditText
@@ -41,6 +34,8 @@ class QuickCalculatorFragment : BaseFragment() {
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
 		initEventListeners()
+
+		editMoney_QMode.requestFocus()
 	}
 
 	@Suppress("unused")

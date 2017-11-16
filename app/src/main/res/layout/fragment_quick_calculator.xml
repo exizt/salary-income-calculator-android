@@ -20,7 +20,9 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="number"
-        android:textSize="45sp" />
+        android:imeOptions="actionDone"
+        android:textSize="45sp" >
+    </EditText>
 
     <LinearLayout
         android:id="@+id/linearLayout"

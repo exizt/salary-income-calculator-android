@@ -76,9 +76,8 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="number">
-
-            <requestFocus />
         </EditText>
 
     </LinearLayout>
@@ -100,6 +99,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
+            android:imeOptions="actionDone"
             android:text="@string/value_default_family" />
 
     </LinearLayout>
@@ -121,6 +121,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
+            android:imeOptions="actionDone"
             android:text="@string/value_default_number" />
 
     </LinearLayout>

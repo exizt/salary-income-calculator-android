@@ -24,7 +24,6 @@ class NormalCalculatorFragment : BaseFragment() {
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_older_calculator, container, false)
 		setFragmentView(view)
-		//setActionBarTitle("실수령액 계산");
 		setActionBarTitle(resources.getString(R.string.activity_title_normal_mode))
 
 		//세자리마다 쉼표표시
@@ -38,6 +37,7 @@ class NormalCalculatorFragment : BaseFragment() {
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
 		initEventListener()
+		edMoney.requestFocus()
 	}
 
 	private fun initEventListener() {
