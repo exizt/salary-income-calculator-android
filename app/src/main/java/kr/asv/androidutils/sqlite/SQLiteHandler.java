@@ -1,4 +1,4 @@
-package kr.asv.android.sqlite;
+package kr.asv.androidutils.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -2,7 +2,7 @@ package kr.asv.apps.salarycalculator.databases;
 
 import android.content.Context;
 
-import kr.asv.android.sqlite.SQLiteHandler;
+import kr.asv.androidutils.sqlite.SQLiteHandler;
 
 /**
  * WordInfoDBHandler
