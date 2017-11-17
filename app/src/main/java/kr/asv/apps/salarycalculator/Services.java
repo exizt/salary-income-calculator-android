@@ -16,8 +16,6 @@ public class Services {
 	private boolean isDebug = true;
 	private final SalaryCalculator calculator = new SalaryCalculator();
 	private final TaxCalculatorRates taxCalculatorRates = new TaxCalculatorRates();
-	@SuppressWarnings("FieldCanBeLocal")
-	private WordInfoDBHandler wordInfoDbHandler = null;
 	private WordDictionaryTable wordDictionaryTable;
 
 	/**
@@ -43,9 +41,10 @@ public class Services {
 	@SuppressWarnings({"unused", "EmptyMethod"})
 	private void load(Context context) {
 		//디비 연결
-		this.wordInfoDbHandler = new WordInfoDBHandler(context);
+		WordInfoDBHandler wordInfoDbHandler = new WordInfoDBHandler(context);
 		debug("[Init] > set WordInfoDBHandler");
 
+		// 테이블 클래스 생성. (쿼리는 하기 전)
 		this.wordDictionaryTable = new WordDictionaryTable(wordInfoDbHandler.getDb());
 		debug("[Init] > set WordDictionaryTable");
 	}

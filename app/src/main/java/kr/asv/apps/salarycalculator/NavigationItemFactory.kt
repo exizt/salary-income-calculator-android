@@ -10,10 +10,10 @@ import android.support.v4.widget.DrawerLayout
 import android.view.MenuItem
 import android.view.View
 import kr.asv.apps.salarycalculator.activities.SettingsActivity
-import kr.asv.apps.salarycalculator.activities.WordListActivity
 import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
+import kr.asv.apps.salarycalculator.fragments.WordItemFragment
 
 
 /**
@@ -54,7 +54,8 @@ class NavigationItemFactory {
 				}
 				R.id.nav_word_dictionary -> {
 					// 용어 사전
-					activity.startActivity(Intent(activity, WordListActivity::class.java))
+					//activity.startActivity(Intent(activity, WordListActivity::class.java))
+					replaceFragments(activity, WordItemFragment(), backStack)
 					isAvailable = true
 				}
 				else -> isAvailable = false

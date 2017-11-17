@@ -36,6 +36,7 @@ class WordListActivity : AppCompatActivity() {
 		val tableWordDictionary = Services.getInstance().wordDictionaryTable
 		val items = ArrayList<WordDictionaryItem>()
 		try {
+			// 쿼리 발생
 			val cur = tableWordDictionary.list
 			if (cur.moveToFirst()) {
 
@@ -69,7 +70,7 @@ class WordListActivity : AppCompatActivity() {
 		listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 			//Toast.makeText(getApplicationContext(),"dd",Toast.LENGTH_LONG).show();
 			val intent = Intent(baseContext, WordActivity::class.java)
-			intent.putExtra("wordKey", adapter!!.getItemKey(position))
+			intent.putExtra("wordKey", adapter!!.getItemKey(position).toInt())
 			startActivity(intent)
 		}
 	}

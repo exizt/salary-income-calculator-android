@@ -29,7 +29,7 @@ public class WordDictionaryTable {
 	 * @param key long
 	 * @return Record
 	 */
-	public Record getRow(long key) {
+	public Record getRow(int key) {
 		Record record = new Record();
 		Cursor cur = db.query(TABLE_NAME, new String[]{"key", "id", "subject", "explanation", "process", "history"}, "key = ?", new String[]{String.valueOf(key)}, null, null, null); //
 		if (cur.moveToFirst()) {
