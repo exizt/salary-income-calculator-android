@@ -33,27 +33,32 @@ class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		//title = "용어 사전"
+		debug("onCreate");
+		getDictionaryData()
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
-		getDictionaryData()
+
 		// Set the adapter
 		if (view is RecyclerView) {
 			val context = view.getContext()
-			val recyclerView = view as RecyclerView
+			val recyclerView: RecyclerView = view
 			recyclerView.layoutManager = LinearLayoutManager(context)
 			recyclerView.adapter = MyWordItemRecyclerViewAdapter(WordDictionaryContent.ITEMS, this)
 		}
 		return view
 	}
 
-	@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 	private fun getDictionaryData() {
+		if(WordDictionaryContent.isUsed) return
+
+		debug("getDictionaryData ");
+		// 객체 를 가져오기만 함
 		val table = Services.getInstance().wordDictionaryTable
 		try {
-			// 쿼리 발생
+			// select 쿼리를 실행함
 			val cur = table.list
 			if (cur.moveToFirst()) {
 
@@ -93,12 +98,8 @@ class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
 	companion object {
 		private val ARG_COLUMN_COUNT = "column-count"
 
-		fun newInstance(columnCount: Int): WordItemFragment {
-			val fragment = WordItemFragment()
-			val args = Bundle()
-			args.putInt(ARG_COLUMN_COUNT, columnCount)
-			fragment.arguments = args
-			return fragment
+		fun newInstance(): WordItemFragment {
+			return WordItemFragment()
 		}
 	}
 }
