@@ -14,7 +14,6 @@
     <string name="nav_menu_word_dictionary">Dictionary</string>
     <string name="nav_menu_preferences">Preferences</string>
     <string name="activity_report_title">ReportActivity</string>
-    <string name="activity_word_list_title">WordListActivity</string>
     <string name="activity_word_title">WordActivity</string>
     <string name="activity_settings_title">Settings</string>
     <string name="report_tabBar_item_01">Summary</string>

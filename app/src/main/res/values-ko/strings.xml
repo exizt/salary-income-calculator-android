@@ -10,7 +10,6 @@
     <string name="nav_menu_word_dictionary">용어 사전</string>
     <string name="nav_menu_preferences">환경설정</string>
     <string name="activity_report_title">ReportActivity</string>
-    <string name="activity_word_list_title">WordListActivity</string>
     <string name="activity_word_title">WordActivity</string>
     <string name="activity_settings_title">환경설정</string>
     <string name="report_tabBar_item_01">요약</string>

@@ -35,24 +35,14 @@
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
-            android:name="kr.asv.apps.salarycalculator.activities.WordListActivity"
-            android:label="@string/activity_word_list_title"
+            android:name="kr.asv.apps.salarycalculator.activities.WordActivity"
+            android:label="@string/activity_word_title"
             android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
-        </activity>
-        <activity
-            android:name="kr.asv.apps.salarycalculator.activities.WordActivity"
-            android:label="@string/activity_word_title"
-            android:parentActivityName="kr.asv.apps.salarycalculator.activities.WordListActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            tools:targetApi="jelly_bean">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.apps.salarycalculator.activities.WordListActivity" />
         </activity>
         <activity
             android:name="kr.asv.apps.salarycalculator.activities.SettingsActivity"
