@@ -22,6 +22,7 @@ private constructor() {
 	var wordDictionaryTable: WordDictionaryTable? = null
 		private set
 
+	@Suppress("unused")
 	private fun init() {}
 
 	private fun load(context: Context) {
@@ -46,6 +47,7 @@ private constructor() {
 		}
 	}
 
+	@Suppress("unused")
 	fun setDebug(debug: Boolean) {
 		isDebug = debug
 	}

@@ -24,8 +24,8 @@ public class WordDictionaryAdapter extends BaseAdapter {
 
 	/**
 	 *
-	 * @param context
-	 * @param layout
+	 * @param context context
+	 * @param layout layout
 	 */
 	public WordDictionaryAdapter(Context context, int layout) {
 		this.layout = layout;
