@@ -10,13 +10,13 @@ import android.util.Log
  */
 class WordDictionaryTable(private val db: SQLiteDatabase) {
 	private var isDebug = false
-	private val DEBUG_TAG = "EXIZT-DEBUG"
-	private val TABLE_NAME = "word_dictionary"
+	private val debugTag = "EXIZT-DEBUG"
+	private val tableName = "word_dictionary"
 
 	val list: Cursor
 		get() {
 			debug("query")
-			return db.query(TABLE_NAME, arrayOf("key", "id", "subject", "explanation", "process", "history"), null, null, null, null, null)
+			return db.query(tableName, arrayOf("key", "id", "subject", "explanation", "process", "history"), null, null, null, null, null)
 		}
 
 	init {
@@ -29,7 +29,7 @@ class WordDictionaryTable(private val db: SQLiteDatabase) {
 	 */
 	fun getRow(key: Int): Record {
 		val record = Record()
-		val cur = db.query(TABLE_NAME, arrayOf("key", "id", "subject", "explanation", "process", "history"), "key = ?", arrayOf(key.toString()), null, null, null) //
+		val cur = db.query(tableName, arrayOf("key", "id", "subject", "explanation", "process", "history"), "key = ?", arrayOf(key.toString()), null, null, null) //
 		if (cur.moveToFirst()) {
 			record.key = cur.getInt(cur.getColumnIndex("key"))
 			record.id = cur.getString(cur.getColumnIndex("id"))
@@ -48,7 +48,7 @@ class WordDictionaryTable(private val db: SQLiteDatabase) {
 	 */
 	fun getRowFromId(id: String): Record {
 		val record = Record()
-		val cur = db.query(TABLE_NAME, arrayOf("key", "id", "subject", "explanation", "process", "history"), "id = ?", arrayOf(id.toString()), null, null, null) //
+		val cur = db.query(tableName, arrayOf("key", "id", "subject", "explanation", "process", "history"), "id = ?", arrayOf(id), null, null, null) //
 		if (cur.moveToFirst()) {
 			record.key = cur.getInt(cur.getColumnIndex("key"))
 			record.id = cur.getString(cur.getColumnIndex("id"))
@@ -67,29 +67,16 @@ class WordDictionaryTable(private val db: SQLiteDatabase) {
 	 */
 	private fun debug(msg: String) {
 		if (isDebug) {
-			Log.e(DEBUG_TAG, "[WordDictionaryTable]" + msg)
+			Log.e(debugTag, "[WordDictionaryTable]" + msg)
 		}
 	}
 
+	@Suppress("unused")
 	fun setDebug(debug: Boolean) {
 		isDebug = debug
 	}
 
-	inner class Record {
-		var key: Int = 0
-			internal set
-		var id: String
-		var subject: String
-			internal set
-		var explanation: String
-			internal set
-		var process: String
-			internal set
-		var history: String
-			internal set
-
-		override fun toString(): String {
-			return "DataItem{id=[$id], subject=[$subject] explanation=[$explanation], process=[$process], history=[$history]}"
-		}
+	companion object {
+		data class Record(var key:Int=0, var id:String?="", var subject:String?="", var explanation:String?="", var process:String?="", var history:String?="")
 	}
 }

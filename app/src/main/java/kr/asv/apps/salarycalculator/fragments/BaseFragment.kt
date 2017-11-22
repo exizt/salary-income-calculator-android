@@ -13,7 +13,7 @@ abstract class BaseFragment : Fragment() {
 	/**
 	 * 자기 자신 Fragment
 	 */
-	private var fragmentView: View? = null//fragment view
+	private var fragmentView: View? = null
 
 	/**
 	 * Fragment 에서 자신을 지정
@@ -29,9 +29,7 @@ abstract class BaseFragment : Fragment() {
 	 *
 	 * @return View view
 	 */
-	protected fun findViewById(id: Int): View {
-		return this.fragmentView!!.findViewById(id)
-	}
+	protected fun findViewById(id: Int): View = this.fragmentView!!.findViewById(id)
 
 	/**
 	 * 키보드 내리기

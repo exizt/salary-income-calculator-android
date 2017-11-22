@@ -37,7 +37,7 @@ class WordActivity : AppCompatActivity() {
 		}
 	}
 
-	private fun appendData(record:WordDictionaryTable.Record){
+	private fun appendData(record: WordDictionaryTable.Companion.Record){
 		val actionBar = supportActionBar
 		actionBar?.title = record.subject
 		//word_subject.setText(record.getSubject());
