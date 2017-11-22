@@ -1,17 +1,16 @@
 package kr.asv.apps.salarycalculator.fragments.report
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-import java.text.DecimalFormat
-
-import kr.asv.apps.salarycalculator.Services
-import kr.asv.apps.salarycalculator.fragments.BaseFragment
-import kr.asv.calculators.salary.SalaryCalculator
+import kotlinx.android.synthetic.main.fragment_report_tax.*
 import kr.asv.apps.salarycalculator.R
+import kr.asv.apps.salarycalculator.Services
+import kr.asv.apps.salarycalculator.activities.WordActivity
+import kr.asv.apps.salarycalculator.fragments.BaseFragment
 
 class ReportTaxFragment : BaseFragment() {
 
@@ -25,6 +24,25 @@ class ReportTaxFragment : BaseFragment() {
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
 		showResult()
+
+		infoIncomeTax.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+		infoLocalTax.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+	}
+
+	private fun onInformationDictionaryWord(view: View){
+		val id = view.id
+		var keyId = ""
+		when (id){
+			R.id.infoIncomeTax -> {
+				keyId = "incomeTax"
+			}
+			R.id.infoLocalTax -> {
+				keyId = "incomeLocalTax"
+			}
+		}
+		val intent = Intent(activity, WordActivity::class.java)
+		intent.putExtra("wordId", keyId)
+		startActivity(intent)
 	}
 
 	private fun showResult() {

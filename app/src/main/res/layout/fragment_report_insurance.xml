@@ -1,4 +1,6 @@
+<!--suppress XmlUnusedNamespaceDeclaration -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,12 +11,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportInsuranceFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/national_pension"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/national_pension"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoNationalPension"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txNationPension"
@@ -24,12 +41,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/health_care"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health_care"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoHealthCare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txHealthCare"
@@ -39,12 +70,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/longterm_care"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/longterm_care"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoLongTermCare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txLongtermCare"
@@ -54,12 +99,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/employee_care"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_care"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoEmployeeCare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txEmploymentCare"
@@ -68,4 +127,5 @@
         android:gravity="end"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
+
 </LinearLayout>

@@ -45,6 +45,25 @@ public class WordDictionaryTable {
 	}
 
 	/**
+	 * @param id string
+	 * @return Record
+	 */
+	public Record getRowFromId(String id) {
+		Record record = new Record();
+		Cursor cur = db.query(TABLE_NAME, new String[]{"key", "id", "subject", "explanation", "process", "history"}, "id = ?", new String[]{String.valueOf(id)}, null, null, null); //
+		if (cur.moveToFirst()) {
+			record.setKey(cur.getInt(cur.getColumnIndex("key")));
+			record.setId(cur.getString(cur.getColumnIndex("id")));
+			record.setSubject(cur.getString(cur.getColumnIndex("subject")));
+			record.setExplanation(cur.getString(cur.getColumnIndex("explanation")));
+			record.setProcess(cur.getString(cur.getColumnIndex("process")));
+			record.setHistory(cur.getString(cur.getColumnIndex("history")));
+		}
+		cur.close();
+		return record;
+	}
+
+	/**
 	 * 디버깅 메서드
 	 * @param msg 메시지
 	 */

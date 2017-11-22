@@ -20,6 +20,7 @@ public abstract class BaseFragment extends Fragment {
 	 *
 	 * @param view View
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected void setFragmentView(View view) {
 		fragmentView = view;
 	}
@@ -29,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
 	 *
 	 * @return View view
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected View findViewById(int id) {
 		return this.fragmentView.findViewById(id);
 	}
@@ -36,7 +38,8 @@ public abstract class BaseFragment extends Fragment {
 	/**
 	 * 키보드 내리기
 	 */
-	void hideSoftKeyboard() {
+	@SuppressWarnings("WeakerAccess")
+	protected void hideSoftKeyboard() {
 		MainActivity activity = (MainActivity) getActivity();
 		assert activity != null;
 		activity.hideSoftKeyboard();
@@ -46,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
 	 * 액션바 타이틀 변경
 	 */
 	@SuppressWarnings("SameParameterValue")
-	void setActionBarTitle(String title) {
+	protected void setActionBarTitle(String title) {
 		MainActivity activity = (MainActivity) getActivity();
 		assert activity != null;
 		activity.setActionBarTitle(title);

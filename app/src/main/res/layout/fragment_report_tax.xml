@@ -9,12 +9,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportTaxFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/income_tax"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/income_tax"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoIncomeTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txEarnedTax"
@@ -24,12 +38,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/local_tax"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/local_tax"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/infoLocalTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/default_string"
+            android:src="@android:drawable/ic_menu_info_details" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txLocalTax"
