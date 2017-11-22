@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import kr.asv.apps.salarycalculator.MoneyTextWatcher;
+import kr.asv.androidutils.MoneyTextWatcher;
 import kr.asv.apps.salarycalculator.MainActivity;
 import kr.asv.apps.salarycalculator.R;
 import kr.asv.apps.salarycalculator.Services;

@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioButton
 import kotlinx.android.synthetic.main.fragment_older_calculator.*
-import kr.asv.apps.salarycalculator.MoneyTextWatcher
+import kr.asv.androidutils.MoneyTextWatcher
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
-import kr.asv.apps.salarycalculator.R
 
 /**
  * create an instance of this fragment.

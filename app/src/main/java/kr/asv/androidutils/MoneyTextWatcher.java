@@ -1,4 +1,4 @@
-package kr.asv.apps.salarycalculator;
+package kr.asv.androidutils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
