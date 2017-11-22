@@ -13,12 +13,10 @@
     <string name="activity_word_list_title">WordListActivity</string>
     <string name="activity_word_title">WordActivity</string>
     <string name="activity_settings_title">환경설정</string>
-    <string name="activity_title_quick_mode">실수령액 계산 (Quick)</string>
-    <string name="activity_title_normal_mode">실수령액 계산 (일반)</string>
-    <string name="report_tab_item_01">요약</string>
-    <string name="report_tab_item_02">입력값</string>
-    <string name="report_tab_item_03">4대보험</string>
-    <string name="report_tab_item_04">세금</string>
+    <string name="report_tabBar_item_01">요약</string>
+    <string name="report_tabBar_item_02">입력값</string>
+    <string name="report_tabBar_item_03">4대보험</string>
+    <string name="report_tabBar_item_04">세금</string>
     <string name="word_activity_subtitle_01">용어 설명</string>
     <string name="word_activity_subtitle_02">계산과정</string>
     <string name="word_activity_subtitle_03">세율기록</string>

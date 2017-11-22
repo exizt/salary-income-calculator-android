@@ -20,11 +20,14 @@ class NormalCalculatorFragment : BaseFragment() {
 	private var includedSeverance = false
 	private var annualBasis = false
 
+	/**
+	 *
+	 */
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_older_calculator, container, false)
 		setFragmentView(view)
-		setActionBarTitle(resources.getString(R.string.activity_title_normal_mode))
+		setActionBarTitle(resources.getString(R.string.nav_menu_detail_calculator))
 
 		//세자리마다 쉼표표시
 		val edMoney = findViewById(R.id.edMoney) as EditText
@@ -34,12 +37,18 @@ class NormalCalculatorFragment : BaseFragment() {
 		return view
 	}
 
+	/**
+	 *
+	 */
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
 		initEventListener()
 		edMoney.requestFocus()
 	}
 
+	/**
+	 *
+	 */
 	private fun initEventListener() {
 		// 계산하기 버튼 클릭시
 		btnCalculate.setOnClickListener {
@@ -146,8 +155,6 @@ class NormalCalculatorFragment : BaseFragment() {
 	}
 
 	companion object {
-
-
 		/**
 		 */
 		@Suppress("unused")

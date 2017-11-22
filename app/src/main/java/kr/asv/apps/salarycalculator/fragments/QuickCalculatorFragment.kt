@@ -24,7 +24,7 @@ class QuickCalculatorFragment : BaseFragment() {
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
 		setFragmentView(view)
-		setActionBarTitle(resources.getString(R.string.activity_title_quick_mode))
+		setActionBarTitle(resources.getString(R.string.nav_menu_quick_calculator))
 
 		val editMoney = findViewById(R.id.editMoney_QMode) as EditText
 		editMoney.addTextChangedListener(MoneyTextWatcher(editMoney))

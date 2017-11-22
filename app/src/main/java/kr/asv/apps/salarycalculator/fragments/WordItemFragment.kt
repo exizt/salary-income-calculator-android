@@ -2,13 +2,13 @@ package kr.asv.apps.salarycalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.asv.apps.salarycalculator.MyWordItemRecyclerViewAdapter
 import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordActivity
@@ -21,7 +21,7 @@ import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
  * 단어 목록 Fragment 클래스
  * xml : fragment_dictionary_list 와 연관됨.
  */
-class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
+class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 	private val isDebug = true
 
 	override fun onListFragmentInteraction(item: Item) {
@@ -32,14 +32,15 @@ class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		//title = "용어 사전"
-		debug("onCreate");
+		debug("onCreate")
 		getDictionaryData()
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
+
+		setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
 
 		// Set the adapter
 		if (view is RecyclerView) {
@@ -54,7 +55,7 @@ class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
 	private fun getDictionaryData() {
 		if(WordDictionaryContent.isUsed) return
 
-		debug("getDictionaryData ");
+		debug("getDictionaryData")
 		// 객체 를 가져오기만 함
 		val table = Services.getInstance().wordDictionaryTable
 		try {
@@ -96,11 +97,7 @@ class WordItemFragment : Fragment(), OnListFragmentInteractionListener {
 	}
 
 	companion object {
-		private val ARG_COLUMN_COUNT = "column-count"
-
-		fun newInstance(): WordItemFragment {
-			return WordItemFragment()
-		}
+		fun newInstance(): WordItemFragment = WordItemFragment()
 	}
 }
 interface OnListFragmentInteractionListener {

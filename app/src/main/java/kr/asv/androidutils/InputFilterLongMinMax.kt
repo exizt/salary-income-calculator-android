@@ -3,30 +3,29 @@ package kr.asv.androidutils
 import android.text.InputFilter
 import android.text.Spanned
 
-@Suppress("unused")
 /**
  * EditText 에서 Filter 를 하는 클래스
  * Created by EXIZT on 2017-11-22.
  */
-class InputFilterDoubleMinMax : InputFilter {
-	private var min = 0.0
-	private var max: Double = 0.toDouble()
+class InputFilterLongMinMax : InputFilter {
+	private var min : Long = 0
+	private var max: Long = 0
 
 	internal constructor(min: Int, max: Int) {
-		this.min = min.toDouble()
-		this.max = max.toDouble()
+		this.min = min.toLong()
+		this.max = max.toLong()
 	}
 
 	@Suppress("unused")
-	constructor(min: Double, max: Double) {
+	constructor(min: Long, max: Long) {
 		this.min = min
 		this.max = max
 	}
 
 	@Suppress("unused")
 	constructor(min: String, max: String) {
-		this.min = java.lang.Double.parseDouble(min)
-		this.max = java.lang.Double.parseDouble(max)
+		this.min = java.lang.Long.parseLong(min)
+		this.max = java.lang.Long.parseLong(max)
 	}
 
 	override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, _start: Int, _end: Int): CharSequence? {
@@ -35,7 +34,7 @@ class InputFilterDoubleMinMax : InputFilter {
 			if (str.contains(",")) {
 				str = str.replace(",".toRegex(), "")
 			}
-			val input = java.lang.Double.parseDouble(str)
+			val input = java.lang.Long.parseLong(str)
 			if (isInRange(min, max, input))
 				return null
 		} catch (ignored: NumberFormatException) {
@@ -43,7 +42,7 @@ class InputFilterDoubleMinMax : InputFilter {
 		return ""
 	}
 
-	private fun isInRange(a: Double, b: Double, c: Double): Boolean {
+	private fun isInRange(a: Long, b: Long, c: Long): Boolean {
 		return if(b > a){
 			c in a..b
 		} else {

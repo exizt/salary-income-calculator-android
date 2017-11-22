@@ -17,12 +17,10 @@
     <string name="activity_word_list_title">WordListActivity</string>
     <string name="activity_word_title">WordActivity</string>
     <string name="activity_settings_title">Settings</string>
-    <string name="activity_title_quick_mode">Calculator (Quick)</string>
-    <string name="activity_title_normal_mode">Calculator (Normal)</string>
-    <string name="report_tab_item_01">Summary</string>
-    <string name="report_tab_item_02">Options</string>
-    <string name="report_tab_item_03">National Insurances</string>
-    <string name="report_tab_item_04">Tax</string>
+    <string name="report_tabBar_item_01">Summary</string>
+    <string name="report_tabBar_item_02">Options</string>
+    <string name="report_tabBar_item_03">National Insurances</string>
+    <string name="report_tabBar_item_04">Tax</string>
     <string name="word_activity_subtitle_01">Summary</string>
     <string name="word_activity_subtitle_02">Calculate</string>
     <string name="word_activity_subtitle_03">History</string>
