@@ -22,7 +22,11 @@ public class WordDictionaryAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private ArrayList<WordDictionaryItem> mList;
 
-
+	/**
+	 *
+	 * @param context
+	 * @param layout
+	 */
 	public WordDictionaryAdapter(Context context, int layout) {
 		this.layout = layout;
 		this.inflater = LayoutInflater.from(context);

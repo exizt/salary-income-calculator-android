@@ -50,8 +50,8 @@ class WordActivity : AppCompatActivity() {
 	 *
 	 */
 	private fun initData(wordKey: Int){
-		val tableWordDictionary = Services.getInstance().wordDictionaryTable
-		val record = tableWordDictionary.getRow(wordKey)
+		val tableWordDictionary = Services.instance.wordDictionaryTable
+		val record = tableWordDictionary!!.getRow(wordKey)
 		appendData(record)
 	}
 
@@ -59,8 +59,8 @@ class WordActivity : AppCompatActivity() {
 	 *
 	 */
 	private fun initData(wordId: String){
-		val tableWordDictionary = Services.getInstance().wordDictionaryTable
-		val record = tableWordDictionary.getRowFromId(wordId)
+		val tableWordDictionary = Services.instance.wordDictionaryTable
+		val record = tableWordDictionary!!.getRowFromId(wordId)
 		appendData(record)
 	}
 

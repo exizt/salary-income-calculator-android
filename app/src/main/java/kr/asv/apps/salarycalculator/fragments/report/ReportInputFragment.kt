@@ -28,7 +28,7 @@ class ReportInputFragment : BaseFragment() {
 
 	@SuppressLint("DefaultLocale")
 	private fun showResult() {
-		val calculator = Services.getInstance().calculator
+		val calculator = Services.instance.calculator
 
 		val format = java.text.DecimalFormat("###,##0")
 

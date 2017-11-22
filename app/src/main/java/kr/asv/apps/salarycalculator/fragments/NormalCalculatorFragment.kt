@@ -136,7 +136,7 @@ class NormalCalculatorFragment : BaseFragment() {
 		includedSeverance = checkSeverance.isChecked
 
 		// 연산
-		val calculator = Services.getInstance().calculator
+		val calculator = Services.instance.calculator
 
 		//옵션값 셋팅
 		//CalculatorOptions options = ;

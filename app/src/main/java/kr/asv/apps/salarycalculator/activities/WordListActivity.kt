@@ -7,10 +7,10 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ListView
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.items.WordDictionaryAdapter
 import kr.asv.apps.salarycalculator.items.WordDictionaryItem
-import kr.asv.apps.salarycalculator.R
 import java.util.*
 
 class WordListActivity : AppCompatActivity() {
@@ -33,11 +33,11 @@ class WordListActivity : AppCompatActivity() {
 	 */
 	@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 	private fun drawDictionary() {
-		val tableWordDictionary = Services.getInstance().wordDictionaryTable
+		val tableWordDictionary = Services.instance.wordDictionaryTable
 		val items = ArrayList<WordDictionaryItem>()
 		try {
 			// 쿼리 발생
-			val cur = tableWordDictionary.list
+			val cur = tableWordDictionary!!.list
 			if (cur.moveToFirst()) {
 
 				while (!cur.isAfterLast) {

@@ -15,7 +15,6 @@ import kr.asv.apps.salarycalculator.activities.WordActivity
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
 
-
 /**
  * 형태 : 리스트 형 Fragment
  * 단어 목록 Fragment 클래스
@@ -57,10 +56,10 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
 		debug("getDictionaryData")
 		// 객체 를 가져오기만 함
-		val table = Services.getInstance().wordDictionaryTable
+		val table = Services.instance.wordDictionaryTable
 		try {
 			// select 쿼리를 실행함
-			val cur = table.list
+			val cur = table!!.list
 			if (cur.moveToFirst()) {
 
 				while (!cur.isAfterLast) {

@@ -28,7 +28,7 @@ class ReportSummaryFragment : BaseFragment() {
 
 	private fun showResult() {
 		//hideSoftKeyboard();
-		val calculator = Services.getInstance().calculator
+		val calculator = Services.instance.calculator
 		val format = java.text.DecimalFormat("###,##0")
 
 		//실 수령액

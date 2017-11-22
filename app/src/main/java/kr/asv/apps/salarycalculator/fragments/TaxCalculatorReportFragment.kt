@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-
 import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 
@@ -31,28 +29,26 @@ class TaxCalculatorReportFragment : BaseFragment() {
 
 	private fun initEventListener() {
 		// 닫기 버튼 클릭시
-		findViewById(R.id.id_btn_close).setOnClickListener(object : Button.OnClickListener {
-			override fun onClick(v: View) {
+		findViewById(R.id.id_btn_close).setOnClickListener{
 				activity!!.supportFragmentManager.popBackStack()
-			}
-		})
+		}
 	}
 
 	private fun drawReport() {
-		val nationalRate = Services.getInstance().getTaxCalculatorRates().getNationalRate()
-		val healthCareRate = Services.getInstance().getTaxCalculatorRates().getHealthCareRate()
-		val longTermCareRate = Services.getInstance().getTaxCalculatorRates().getLongTermCareRate()
-		val employmentCareRate = Services.getInstance().getTaxCalculatorRates().getEmploymentCareRate()
+		val nationalRate = Services.instance.taxCalculatorRates.nationalRate
+		val healthCareRate = Services.instance.taxCalculatorRates.healthCareRate
+		val longTermCareRate = Services.instance.taxCalculatorRates.longTermCareRate
+		val employmentCareRate = Services.instance.taxCalculatorRates.employmentCareRate
 
 		val viewNationalRates = findViewById(R.id.id_view_national) as TextView
 		val viewHealthCare = findViewById(R.id.id_view_health_care) as TextView
 		val viewLongTermCare = findViewById(R.id.id_view_longterm_care) as TextView
 		val viewEmploymentCare = findViewById(R.id.id_view_employment_care) as TextView
 
-		viewNationalRates.setText(nationalRate.toString())
-		viewHealthCare.setText(healthCareRate.toString())
-		viewLongTermCare.setText(longTermCareRate.toString())
-		viewEmploymentCare.setText(employmentCareRate.toString())
+		viewNationalRates.text = nationalRate.toString()
+		viewHealthCare.text = healthCareRate.toString()
+		viewLongTermCare.text = longTermCareRate.toString()
+		viewEmploymentCare.text = employmentCareRate.toString()
 	}
 
 	companion object {

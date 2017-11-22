@@ -175,7 +175,7 @@ class QuickCalculatorFragment : BaseFragment() {
 			includedSeverance = pref.getBoolean("quick_settings_severance", false)
 		}
 
-		val calculator = Services.getInstance().calculator
+		val calculator = Services.instance.calculator
 
 		//옵션값 셋팅
 		calculator.options.setInputMoney(inputMoney.toDouble())
