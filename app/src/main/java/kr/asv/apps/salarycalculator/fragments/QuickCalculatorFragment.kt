@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.R
@@ -36,6 +37,18 @@ class QuickCalculatorFragment : BaseFragment() {
 		initEventListeners()
 
 		editMoney_QMode.requestFocus()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		//[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
+		val pref = PreferenceManager.getDefaultSharedPreferences(this.activity)
+		if (pref.getBoolean("quick_settings_enable", false)) {
+			Toast.makeText(activity,"'퀵계산설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 퀵계산 설정] 을 변경해주세요.", Toast.LENGTH_LONG).show()
+		}
+		if (pref.getBoolean("rate_settings_enable", false)) {
+			Toast.makeText(activity,"'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
+		}
 	}
 
 	@Suppress("unused")

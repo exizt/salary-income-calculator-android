@@ -2,11 +2,13 @@ package kr.asv.apps.salarycalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_older_calculator.*
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.R
@@ -44,6 +46,14 @@ class NormalCalculatorFragment : BaseFragment() {
 		super.onActivityCreated(savedInstanceState)
 		initEventListener()
 		edMoney.requestFocus()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		val pref = PreferenceManager.getDefaultSharedPreferences(this.activity)
+		if (pref.getBoolean("rate_settings_enable", false)) {
+			Toast.makeText(activity,"'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
+		}
 	}
 
 	/**
