@@ -1,4 +1,4 @@
-package kr.asv.calculators.salary;
+package kr.asv.salarycalculator;
 
 /**
  * 4대 보험 계산 클래스

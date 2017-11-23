@@ -5,7 +5,7 @@ import android.util.Log
 
 import kr.asv.apps.salarycalculator.databases.WordDictionaryTable
 import kr.asv.apps.salarycalculator.databases.WordInfoDBHandler
-import kr.asv.calculators.salary.SalaryCalculator
+import kr.asv.salarycalculator.SalaryCalculator
 
 /**
  * 어플 전체적으로 활용되는 기능들을 모아두는 클래스

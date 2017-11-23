@@ -1,4 +1,4 @@
-package kr.asv.calculators.salary;
+package kr.asv.salarycalculator;
 
 public interface Salary {
 	void execute();

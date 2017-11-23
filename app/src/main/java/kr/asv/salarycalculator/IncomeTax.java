@@ -1,4 +1,4 @@
-package kr.asv.calculators.salary;
+package kr.asv.salarycalculator;
 
 public interface IncomeTax {
 	void execute(double salary, int family, int child);
