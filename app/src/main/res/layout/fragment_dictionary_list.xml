@@ -9,6 +9,6 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginBottom="25dp"
-    app:layoutManager="LinearLayoutManager"
+    app:layoutManager="android.support.v7.widget.GridLayoutManager"
     tools:context="kr.asv.apps.salarycalculator.fragments.WordItemFragment"
     tools:listitem="@layout/fragment_dictionary_item" />
