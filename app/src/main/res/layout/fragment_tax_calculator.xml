@@ -26,7 +26,10 @@
             android:inputType="number"
             android:text="@string/value_default_number"
             android:imeOptions="actionDone"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +53,10 @@
             android:inputType="number"
             android:text="@string/value_default_number"
             android:imeOptions="actionDone"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +80,10 @@
             android:inputType="number"
             android:text="@string/value_default_number"
             android:imeOptions="actionDone"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +107,10 @@
             android:inputType="number"
             android:text="@string/value_default_number"
             android:imeOptions="actionDone"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <LinearLayout
@@ -122,7 +134,10 @@
             android:inputType="number"
             android:text="@string/value_default_number"
             android:imeOptions="actionDone"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <LinearLayout
@@ -146,7 +161,10 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:text="@string/value_default_number"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
     </LinearLayout>
 
     <Button

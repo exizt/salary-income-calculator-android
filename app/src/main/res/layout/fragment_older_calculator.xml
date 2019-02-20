@@ -77,7 +77,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:imeOptions="actionDone"
-            android:inputType="number">
+            android:inputType="number"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor">
         </EditText>
 
     </LinearLayout>
@@ -100,7 +103,10 @@
             android:ems="10"
             android:inputType="number"
             android:imeOptions="actionDone"
-            android:text="@string/value_default_family" />
+            android:text="@string/value_default_family"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
 
     </LinearLayout>
 
@@ -122,7 +128,10 @@
             android:ems="10"
             android:inputType="number"
             android:imeOptions="actionDone"
-            android:text="@string/value_default_number" />
+            android:text="@string/value_default_number"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
 
     </LinearLayout>
 
@@ -144,7 +153,10 @@
             android:ems="10"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:text="@string/value_default_taxfree" />
+            android:text="@string/value_default_taxfree"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            tools:ignore="LabelFor" />
 
     </LinearLayout>
 
