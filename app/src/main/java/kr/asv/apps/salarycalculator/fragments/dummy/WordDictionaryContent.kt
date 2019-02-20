@@ -10,7 +10,7 @@ object WordDictionaryContent {
 
 	fun addItem(item: Item) {
 		ITEMS.add(item)
-		ITEM_MAP.put(item.id, item)
+		ITEM_MAP[item.id] = item
 		isUsed = true
 	}
 

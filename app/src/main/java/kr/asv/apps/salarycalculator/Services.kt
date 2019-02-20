@@ -43,7 +43,7 @@ private constructor() {
 	private fun debug(msg: String) {
 
 		if (isDebug) {
-			Log.e("[EXIZT-DEBUG]", "[Services]" + msg)
+			Log.e("[EXIZT-DEBUG]", "[Services]$msg")
 		}
 	}
 

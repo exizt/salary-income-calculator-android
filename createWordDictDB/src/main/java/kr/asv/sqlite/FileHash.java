@@ -63,8 +63,8 @@ public class FileHash {
     /**
      * byte 배열로부터 SHA-256를 이용해 해시된 값을 얻는 메서드
      *
-     * NoSuchAlgorithmException :  getInstance메서드의 인자 전달한 암호화 암고리즘이 존재하지 않을 때 발생
-     * @return message의 해시된 값으로 16진수 표현의 String으로 반환된다.
+     * NoSuchAlgorithmException :  getInstance 메서드의 인자 전달한 암호화 암고리즘이 존재하지 않을 때 발생
+     * @return message 의 해시된 값으로 16진수 표현의 String 으로 반환된다.
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public String getHashcode(File file) {
@@ -79,9 +79,9 @@ public class FileHash {
                 md.update(dataBytes, 0, read);
             }
 
-            // 해싱된 byte 배열을 digest메서드의 반환값을 통해 얻는다.
+            // 해싱된 byte 배열을 digest 메서드의 반환값을 통해 얻는다.
             byte[] hashBytes = md.digest();
-            // 해싱할 byte배열을 넘겨준다.
+            // 해싱할 byte 배열을 넘겨준다.
             // SHA-256의 경우 메시지로 전달할 수 있는 최대 bit 수는 2^64-1개 이다.
 
             // 보기 좋게 16진수로 만드는 작업

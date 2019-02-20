@@ -67,7 +67,7 @@ class WordDictionaryTable(private val db: SQLiteDatabase) {
 	 */
 	private fun debug(msg: String) {
 		if (isDebug) {
-			Log.e(debugTag, "[WordDictionaryTable]" + msg)
+			Log.e(debugTag, "[WordDictionaryTable]$msg")
 		}
 	}
 

@@ -6,7 +6,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 
 /**
- * Admob 관련 클래스
+ * AdMob 관련 클래스
  * Created by EXIZT on 2017-11-14.
  */
 class AdmobAdapter {

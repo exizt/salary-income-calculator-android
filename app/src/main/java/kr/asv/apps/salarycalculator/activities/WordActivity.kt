@@ -81,6 +81,6 @@ class WordActivity : AppCompatActivity() {
 	 * @param msg
 	 */
 	fun debug(msg: String) {
-		Log.e("[EXIZT-DEBUG]", "[WordActivity]" + msg)
+		Log.e("[EXIZT-DEBUG]", "[WordActivity]$msg")
 	}
 }

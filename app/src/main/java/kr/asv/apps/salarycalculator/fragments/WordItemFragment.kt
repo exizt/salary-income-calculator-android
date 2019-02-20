@@ -91,7 +91,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 	fun debug(msg: String) {
 		@Suppress("ConstantConditionIf")
 		if (isDebug) {
-			Log.e("[EXIZT-DEBUG]", "[WordItemFragment]" + msg)
+			Log.e("[EXIZT-DEBUG]", "[WordItemFragment]$msg")
 		}
 	}
 

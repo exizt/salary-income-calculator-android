@@ -15,7 +15,7 @@ public class SalaryImpl implements Salary {
 	private double grossAnnualSalary = 0;
 	/**
 	 * 세금 기준 봉급 (월단위)
-	 * = grossSalary - taxExemtpion
+	 * = grossSalary - taxExemption
 	 */
 	private double basicSalary = 0;
 

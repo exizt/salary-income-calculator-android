@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 	 * @param msg
 	 */
 	fun debug(msg: String) {
-		Log.e("[EXIZT-DEBUG]", "[MainActivity]" + msg)
+		Log.e("[EXIZT-DEBUG]", "[MainActivity]$msg")
 	}
 
 	fun setActionBarTitle(title: String) {

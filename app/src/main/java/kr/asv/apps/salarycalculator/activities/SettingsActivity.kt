@@ -119,10 +119,10 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         }
 
         /**
-         * Cacluator 클래스를 통해서, Rate 기본설정 및, 기본설정값을 가져오고, 기본값을 배치한다.
+         * Calculator 클래스를 통해서, Rate 기본설정 및, 기본설정값을 가져오고, 기본값을 배치한다.
          */
         private fun resetRates() {
-            //Calcuator 클래스에서 Rate 기본값으로 설정하면서 기본값을 가져온다.
+            //Calculator 클래스에서 Rate 기본값으로 설정하면서 기본값을 가져온다.
             Services.instance.calculator.insurance.rates.initValues()
             val defaultNationalPensionRate = Services.instance.calculator.insurance.rates.nationalPension
             val defaultHealthCareRate = Services.instance.calculator.insurance.rates.healthCare
@@ -266,10 +266,10 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                             if (java.lang.Float.parseFloat(stringValue) >= 100) {
                                 stringValue = "100"
                             }
-                            preference.setSummary(stringValue + " %")
+                            preference.setSummary("$stringValue %")
                         }
-                        "quick_settings_tax_exemption" -> preference.setSummary(stringValue + " 원")
-                        "quick_settings_family", "quick_settings_child" -> preference.setSummary(stringValue + " 명")
+                        "quick_settings_tax_exemption" -> preference.setSummary("$stringValue 원")
+                        "quick_settings_family", "quick_settings_child" -> preference.setSummary("$stringValue 명")
                         else -> preference.setSummary(stringValue)
                     }
                 }
