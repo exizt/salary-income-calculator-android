@@ -13,7 +13,9 @@ public interface Salary {
 
 	double getBasicSalary();
 
+	@SuppressWarnings("UnusedReturnValue")
 	double getGrossSalary();
 
+	@SuppressWarnings("UnusedReturnValue")
 	double getGrossAnnualSalary();
 }

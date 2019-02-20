@@ -15,5 +15,6 @@ public interface Insurance {
 
 	String toString();
 
+	@SuppressWarnings("UnusedReturnValue")
 	InsuranceRates getRates();
 }

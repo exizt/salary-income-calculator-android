@@ -296,7 +296,7 @@ class WordDictionaryTable {
 		this.debugTag = debugTag;
 	}
 
-	public class DataItem {
+	class DataItem {
 		String id;
 		String subject;
 		String explanation;

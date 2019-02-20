@@ -98,14 +98,17 @@ public class SalaryCalculator {
 		System.out.println(obj);
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public Insurance getInsurance() {
 		return this.insurance;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public IncomeTax getIncomeTax() {
 		return this.incomeTax;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public Salary getSalary() {
 		return this.salary;
 	}
@@ -119,6 +122,7 @@ public class SalaryCalculator {
 		return this.options;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public double getNetSalary() {
 		return this.netSalary;
 	}

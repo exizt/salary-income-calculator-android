@@ -105,6 +105,7 @@ public abstract class SQLiteHandler {
 		return this.openHelper;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public SQLiteDatabase getDb() {
 		return this.db;
 	}
@@ -339,6 +340,7 @@ public abstract class SQLiteHandler {
 	 * @param assetFileName 복사하고싶은 Assets 의 이름
 	 * @throws Exception 오류
 	 */
+	@SuppressWarnings("TryFinallyCanBeTryWithResources")
 	private void copyAssetFileToLocalStorage(Context context, String toFilePath, String assetFileName) throws Exception {
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;

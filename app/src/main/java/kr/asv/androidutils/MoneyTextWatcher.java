@@ -59,6 +59,7 @@ public class MoneyTextWatcher implements TextWatcher {
 	 * @param editText EditText
 	 * @return long
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	public static long getValue(EditText editText) {
 		try {
 			String text = editText.getText().toString();
