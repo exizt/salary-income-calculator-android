@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="MyScope" pattern="!file[app]:src/main/assets/*.*&amp;&amp;!file[*]:google-services.json&amp;&amp;!file[*]:LICENSE" />
-</component>
