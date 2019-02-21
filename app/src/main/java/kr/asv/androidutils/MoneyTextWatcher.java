@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 public class MoneyTextWatcher implements TextWatcher {
 	private final EditText editText;
 
+	@SuppressWarnings("unused")
 	public MoneyTextWatcher(EditText editText) {
 		this.editText = editText;
 	}
@@ -35,7 +36,7 @@ public class MoneyTextWatcher implements TextWatcher {
 
 		try {
 			String given_string = s.toString();
-			Long long_val;
+			long long_val;
 			if (given_string.contains(",")) {
 				given_string = given_string.replaceAll(",", "");
 			}

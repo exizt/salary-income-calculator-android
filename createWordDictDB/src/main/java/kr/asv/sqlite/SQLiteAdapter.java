@@ -17,7 +17,7 @@ public class SQLiteAdapter {
     private Connection connection = null;
     private Statement statement = null;
     private PreparedStatement prepareStatement = null;
-    private String dbFilePath;
+    private final String dbFilePath;
     @SuppressWarnings("FieldCanBeLocal")
     private final boolean isDebug = false;
     private String debugTag = "[EXIZT-DEBUG][SQLiteAdapter]";

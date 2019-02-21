@@ -21,6 +21,7 @@ import java.util.Arrays;
  * 기존의 DB 파일과 해쉬 체크를 하는 로직이 담겨져 있음. 주의할 것.
  * Latest Update 2017-11-15
  */
+@SuppressWarnings("unused")
 public abstract class SQLiteHandler {
 	//객체들
 	private Context context;
@@ -62,6 +63,7 @@ public abstract class SQLiteHandler {
 		// Assets 내에 데이터베이스 파일이 존재하는지 체크를 해봐야 한다. 없다면, 이 로직은 실패이고,
 		// 앱 전체가 동작해서는 안 된다.
 		try {
+			//noinspection ConstantConditions
 			boolean isExistsAssetDBFile = Arrays.asList(context.getAssets().list("db")).contains(dbName);
 			if (!isExistsAssetDBFile) {
 				debug("[initialize] not found db file in assets");
@@ -91,7 +93,7 @@ public abstract class SQLiteHandler {
 		try {
 			this.db = this.openHelper.getWritableDatabase();
 		} catch (Exception e) {
-			debug("[initialize] openHelper getWritableDatabase > Exception : ", e.toString());
+			debug("[initialize] openHelper getWritableDatabase > Exception : " + e.toString());
 		}
 	}
 
@@ -141,7 +143,8 @@ public abstract class SQLiteHandler {
 
 		//저장된 파일이 없는 경우는 false 를 리턴한다.
 		try {
-			boolean isAvailableHashFile = Arrays.asList(context.getAssets().list("db")).contains(dbHashFileName);
+			//noinspection ConstantConditions
+			@SuppressWarnings("ConstantConditions") boolean isAvailableHashFile = Arrays.asList(context.getAssets().list("db")).contains(dbHashFileName);
 			if (!isAvailableHashFile) {
 				debug("[isEqualDatabaseFile] hashFile not found.");
 				return false;
@@ -153,13 +156,13 @@ public abstract class SQLiteHandler {
 
 		//저장된 파일의 해쉬코드를 읽어온다.
 		String appHashCode = readInternalFile(context, dbHashFileName);
-		debug("[isEqualDatabaseFile] > internal DB Hash Code > ", appHashCode);
+		debug("[isEqualDatabaseFile] > internal DB Hash Code > " + appHashCode);
 
 		//asset 의 HashCode 를 읽어온다.
 		String assetHashCode;
 		try {
 			assetHashCode = readFromAssets(context, "db/" + dbHashFileName);
-			debug("[isEqualDatabaseFile] > Asset DB Hash Code > ", assetHashCode);
+			debug("[isEqualDatabaseFile] > Asset DB Hash Code > " + assetHashCode);
 		} catch (Exception e) {
 			debug("[isEqualDatabaseFile] > Asset DB Hash File Not found or Not Read");
 
@@ -258,7 +261,7 @@ public abstract class SQLiteHandler {
 			fis.close();
 			return sb.toString();
 		} catch (Exception e) {
-			debug("[readInternalFile] loadFileHashCode Exception:", e.toString());
+			debug("[readInternalFile] loadFileHashCode Exception: " + e.toString());
 			return "";
 		}
 	}
@@ -283,7 +286,7 @@ public abstract class SQLiteHandler {
 			fis.close();
 			return new String(data);
 		} catch (Exception e) {
-			debug("[readInternalFile] loadFileHashCode Exception:", e.toString());
+			debug("[readInternalFile] loadFileHashCode Exception:" + e.toString());
 			return "";
 		}
 	}
@@ -297,7 +300,7 @@ public abstract class SQLiteHandler {
 	 */
 	private void createDBFileFromAssets(Context context, String dbName) {
 		try {
-			debug("[createDBFileFromAssets] >> DB Name > ", dbName);
+			debug("[createDBFileFromAssets] >> DB Name > " + dbName);
 			//String package_name = context.getPackageName();
 
 			// DB 파일의 폴더 (내부 저장소)
@@ -324,9 +327,9 @@ public abstract class SQLiteHandler {
 
 			debug("[createDBFileFromAssets] Complete");
 		} catch (IOException e) {
-			debug("[createDBFileFromAssets] Exception > IOException", e.toString());
+			debug("[createDBFileFromAssets] Exception > IOException : " + e.toString());
 		} catch (Exception e) {
-			debug("[createDBFileFromAssets] Exception > Exception", e.toString());
+			debug("[createDBFileFromAssets] Exception > Exception : " + e.toString());
 		}
 	}
 
@@ -391,14 +394,11 @@ public abstract class SQLiteHandler {
 	 *
 	 * @param msg 메시지
 	 */
+	@SuppressWarnings("unused")
 	protected void debug(String msg) {
 		if (isDebug) {
 			Log.e("[EXIZT-DEBUG]", "[SQLiteHandler]" + msg);
 		}
-	}
-
-	private void debug(String log, String log2) {
-		debug(log + log2);
 	}
 
 	@SuppressWarnings("unused")
@@ -421,7 +421,7 @@ public abstract class SQLiteHandler {
 		 * @param factory cursor factory
 		 * @param version db file version
 		 */
-		@SuppressWarnings("SameParameterValue")
+		@SuppressWarnings({"SameParameterValue", "unused"})
 		OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 			super(context, name, factory, version);
 		}
