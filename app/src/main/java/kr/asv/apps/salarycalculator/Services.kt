@@ -8,7 +8,8 @@ import kr.asv.apps.salarycalculator.databases.WordInfoDBHandler
 import kr.asv.salarycalculator.SalaryCalculator
 
 /**
- * 어플 전체적으로 활용되는 기능들을 모아두는 클래스
+ * 전체적인 프로세스를 담당하는 클래스.
+ * 싱글톤 으로 생성되어서, 앱의 수명 주기와 동일하게 유지한다.
  * Created by EXIZT on 2016-04-27.
  */
 class Services
