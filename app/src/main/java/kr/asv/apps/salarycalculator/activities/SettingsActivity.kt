@@ -228,7 +228,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         }
 
         private fun isInRange(a: Double, b: Double, c: Double): Boolean {
-            return if(b > a){
+            return if (b > a) {
                 c in a..b
             } else {
                 c in b..a

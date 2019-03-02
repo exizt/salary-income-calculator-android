@@ -21,84 +21,85 @@ import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-	private val isDebug = true
+    private val isDebug = true
 
-	override fun onListFragmentInteraction(item: Item) {
-		val intent = Intent(activity, WordActivity::class.java)
-		intent.putExtra("wordKey", item.key)
-		startActivity(intent)
-	}
+    override fun onListFragmentInteraction(item: Item) {
+        val intent = Intent(activity, WordActivity::class.java)
+        intent.putExtra("wordKey", item.key)
+        startActivity(intent)
+    }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		debug("onCreate")
-		getDictionaryData()
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        debug("onCreate")
+        getDictionaryData()
+    }
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-	                          savedInstanceState: Bundle?): View? {
-		val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
 
-		setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
+        setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
 
-		// Set the adapter
-		if (view is RecyclerView) {
-			val context = view.getContext()
-			val recyclerView: RecyclerView = view
-			recyclerView.layoutManager = LinearLayoutManager(context)
-			recyclerView.adapter = MyWordItemRecyclerViewAdapter(WordDictionaryContent.ITEMS, this)
-		}
-		return view
-	}
+        // Set the adapter
+        if (view is RecyclerView) {
+            val context = view.getContext()
+            val recyclerView: RecyclerView = view
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = MyWordItemRecyclerViewAdapter(WordDictionaryContent.ITEMS, this)
+        }
+        return view
+    }
 
-	private fun getDictionaryData() {
-		if(WordDictionaryContent.isUsed) return
+    private fun getDictionaryData() {
+        if (WordDictionaryContent.isUsed) return
 
-		debug("getDictionaryData")
-		// 객체 를 가져오기만 함
-		val table = Services.instance.wordDictionaryTable
-		try {
-			// select 쿼리를 실행함
-			val cur = table!!.list
-			if (cur.moveToFirst()) {
+        debug("getDictionaryData")
+        // 객체 를 가져오기만 함
+        val table = Services.instance.wordDictionaryTable
+        try {
+            // select 쿼리를 실행함
+            val cur = table!!.list
+            if (cur.moveToFirst()) {
 
-				while (!cur.isAfterLast) {
-					//val wItem = WordDictionaryItem()
-					val item = Item()
-					item.key = cur.getInt(cur.getColumnIndex("key"))
-					item.id = cur.getString(cur.getColumnIndex("id"))
-					item.subject = cur.getString(cur.getColumnIndex("subject"))
-					//item.explanation = cur.getString(cur.getColumnIndex("explanation"))
-					//item.process = cur.getString(cur.getColumnIndex("process"))
-					//item.history = cur.getString(cur.getColumnIndex("history"))
-					WordDictionaryContent.addItem(item)
-					// cursor move
-					cur.moveToNext()
-				}
-			}
-			cur.close()
-		} catch (e: Exception) {
-			debug("[drawDictionary] 데이터 로딩 실패 ")
-			debug(e.toString())
-			throw e
-		}
-	}
+                while (!cur.isAfterLast) {
+                    //val wItem = WordDictionaryItem()
+                    val item = Item()
+                    item.key = cur.getInt(cur.getColumnIndex("key"))
+                    item.id = cur.getString(cur.getColumnIndex("id"))
+                    item.subject = cur.getString(cur.getColumnIndex("subject"))
+                    //item.explanation = cur.getString(cur.getColumnIndex("explanation"))
+                    //item.process = cur.getString(cur.getColumnIndex("process"))
+                    //item.history = cur.getString(cur.getColumnIndex("history"))
+                    WordDictionaryContent.addItem(item)
+                    // cursor move
+                    cur.moveToNext()
+                }
+            }
+            cur.close()
+        } catch (e: Exception) {
+            debug("[drawDictionary] 데이터 로딩 실패 ")
+            debug(e.toString())
+            throw e
+        }
+    }
 
-	/**
-	 * 디버깅
-	 * @param msg message
-	 */
-	fun debug(msg: String) {
-		@Suppress("ConstantConditionIf")
-		if (isDebug) {
-			Log.e("[EXIZT-DEBUG]", "[WordItemFragment]$msg")
-		}
-	}
+    /**
+     * 디버깅
+     * @param msg message
+     */
+    fun debug(msg: String) {
+        @Suppress("ConstantConditionIf")
+        if (isDebug) {
+            Log.e("[EXIZT-DEBUG]", "[WordItemFragment]$msg")
+        }
+    }
 
-	companion object {
-		fun newInstance(): WordItemFragment = WordItemFragment()
-	}
+    companion object {
+        fun newInstance(): WordItemFragment = WordItemFragment()
+    }
 }
+
 interface OnListFragmentInteractionListener {
-	fun onListFragmentInteraction(item: Item)
+    fun onListFragmentInteraction(item: Item)
 }
