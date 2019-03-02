@@ -17,55 +17,56 @@ class Services
  * 생성자 메서드
  */
 private constructor() {
-	private var isDebug = true
-	val calculator = SalaryCalculator()
-	val taxCalculatorRates = TaxCalculatorRates()
-	var wordDictionaryTable: WordDictionaryTable? = null
-		private set
+    private var isDebug = true
+    val calculator = SalaryCalculator()
+    val taxCalculatorRates = TaxCalculatorRates()
+    var wordDictionaryTable: WordDictionaryTable? = null
+        private set
 
-	@Suppress("unused")
-	private fun init() {}
+    @Suppress("unused")
+    private fun init() {
+    }
 
-	private fun load(context: Context) {
-		//디비 연결
-		val wordInfoDbHandler = WordInfoDBHandler(context)
-		debug("[Init] > set WordInfoDBHandler")
+    private fun load(context: Context) {
+        //디비 연결
+        val wordInfoDbHandler = WordInfoDBHandler(context)
+        debug("[Init] > set WordInfoDBHandler")
 
-		// 테이블 클래스 생성. (쿼리는 하기 전)
-		this.wordDictionaryTable = WordDictionaryTable(wordInfoDbHandler.db)
-		debug("[Init] > set WordDictionaryTable")
-	}
+        // 테이블 클래스 생성. (쿼리는 하기 전)
+        this.wordDictionaryTable = WordDictionaryTable(wordInfoDbHandler.db)
+        debug("[Init] > set WordDictionaryTable")
+    }
 
-	/**
-	 * 디버깅
-	 *
-	 * @param msg message
-	 */
-	private fun debug(msg: String) {
+    /**
+     * 디버깅
+     *
+     * @param msg message
+     */
+    private fun debug(msg: String) {
 
-		if (isDebug) {
-			Log.e("[EXIZT-DEBUG]", "[Services]$msg")
-		}
-	}
+        if (isDebug) {
+            Log.e("[EXIZT-DEBUG]", "[Services]$msg")
+        }
+    }
 
-	@Suppress("unused")
-	fun setDebug(debug: Boolean) {
-		isDebug = debug
-	}
+    @Suppress("unused")
+    fun setDebug(debug: Boolean) {
+        isDebug = debug
+    }
 
-	inner class TaxCalculatorRates {
-		var nationalRate: Double = 0.toDouble()
-		var healthCareRate: Double = 0.toDouble()
-		var longTermCareRate: Double = 0.toDouble()
-		var employmentCareRate: Double = 0.toDouble()
-	}
+    inner class TaxCalculatorRates {
+        var nationalRate: Double = 0.toDouble()
+        var healthCareRate: Double = 0.toDouble()
+        var longTermCareRate: Double = 0.toDouble()
+        var employmentCareRate: Double = 0.toDouble()
+    }
 
-	companion object {
-		val instance = Services()
+    companion object {
+        val instance = Services()
 
-		fun getInstance(context: Context): Services {
-			instance.load(context)
-			return instance
-		}
-	}
+        fun getInstance(context: Context): Services {
+            instance.load(context)
+            return instance
+        }
+    }
 }
