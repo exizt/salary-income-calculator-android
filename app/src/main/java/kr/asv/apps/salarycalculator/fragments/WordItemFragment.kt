@@ -25,7 +25,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
     override fun onListFragmentInteraction(item: Item) {
         val intent = Intent(activity, WordActivity::class.java)
-        intent.putExtra("wordKey", item.key)
+        intent.putExtra("wordKey", item.id)
         startActivity(intent)
     }
 
@@ -56,7 +56,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
         debug("getDictionaryData")
         // 객체 를 가져오기만 함
-        val table = Services.instance.wordDictionaryTable
+        val table = Services.instance.termDictionaryDao
         try {
             // select 쿼리를 실행함
             val cur = table!!.list
@@ -65,9 +65,9 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
                 while (!cur.isAfterLast) {
                     //val wItem = WordDictionaryItem()
                     val item = Item()
-                    item.key = cur.getInt(cur.getColumnIndex("key"))
-                    item.id = cur.getString(cur.getColumnIndex("id"))
-                    item.subject = cur.getString(cur.getColumnIndex("subject"))
+                    item.id = cur.getInt(cur.getColumnIndex("id"))
+                    item.cid = cur.getString(cur.getColumnIndex("cid"))
+                    item.name = cur.getString(cur.getColumnIndex("name"))
                     //item.explanation = cur.getString(cur.getColumnIndex("explanation"))
                     //item.process = cur.getString(cur.getColumnIndex("process"))
                     //item.history = cur.getString(cur.getColumnIndex("history"))

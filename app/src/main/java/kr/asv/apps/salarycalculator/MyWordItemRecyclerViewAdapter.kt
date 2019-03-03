@@ -28,7 +28,7 @@ class MyWordItemRecyclerViewAdapter(private val mValues: List<WordDictionaryCont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mItem = mValues[position]
         //holder.mIdView.text = mValues[position].id
-        holder.mContentView.text = mValues[position].subject
+        holder.mContentView.text = mValues[position].name
 
         holder.mView.setOnClickListener {
             // 목록에서 클릭을 말함. (컨텐츠가 아니다. 컨텐츠 프레그먼트는 따로 만드셔)

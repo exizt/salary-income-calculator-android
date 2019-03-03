@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.apps.salarycalculator.databases.WordDictionaryTable
+import kr.asv.apps.salarycalculator.model.TermDictionary
 
 class WordActivity : AppCompatActivity() {
 
@@ -22,8 +22,8 @@ class WordActivity : AppCompatActivity() {
 
         val extras = intent.extras
         if (extras != null) {
-            val wordKey = extras.getInt("wordKey")
-            val wordId = extras.getString("wordId")
+            val wordKey = extras.getInt("wordKey") //숫자값. 인덱스.
+            val wordId = extras.getString("wordId") //cid 값. 문자열.
             //debug("Word ID" + wordId)
             //debug("Word KEY" + wordKey.toString())
 
@@ -37,30 +37,30 @@ class WordActivity : AppCompatActivity() {
         }
     }
 
-    private fun appendData(record: WordDictionaryTable.Companion.Record) {
+    private fun appendData(record: TermDictionary) {
         val actionBar = supportActionBar
-        actionBar?.title = record.subject
+        actionBar?.title = record.name
         //word_subject.setText(record.getSubject());
-        word_explanation.text = record.explanation
+        word_explanation.text = record.description
         word_history.text = record.history
         word_process.text = record.process
     }
 
     /**
-     *
+     * 숫자 id (id) 값을 받았을 때.
      */
     private fun initData(wordKey: Int) {
-        val tableWordDictionary = Services.instance.wordDictionaryTable
+        val tableWordDictionary = Services.instance.termDictionaryDao
         val record = tableWordDictionary!!.getRow(wordKey)
         appendData(record)
     }
 
     /**
-     *
+     * 문자열 id (cid) 값을 받았을 때.
      */
     private fun initData(wordId: String) {
-        val tableWordDictionary = Services.instance.wordDictionaryTable
-        val record = tableWordDictionary!!.getRowFromId(wordId)
+        val tableWordDictionary = Services.instance.termDictionaryDao
+        val record = tableWordDictionary!!.getRowFromCID(wordId)
         appendData(record)
     }
 

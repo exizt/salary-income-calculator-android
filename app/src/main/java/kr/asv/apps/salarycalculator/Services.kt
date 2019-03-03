@@ -2,9 +2,8 @@ package kr.asv.apps.salarycalculator
 
 import android.content.Context
 import android.util.Log
-
-import kr.asv.apps.salarycalculator.databases.WordDictionaryTable
-import kr.asv.apps.salarycalculator.databases.WordInfoDBHandler
+import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
+import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 
 /**
@@ -13,28 +12,32 @@ import kr.asv.salarycalculator.SalaryCalculator
  * Created by EXIZT on 2016-04-27.
  */
 class Services
-/**
- * 생성자 메서드
- */
 private constructor() {
-    private var isDebug = true
+    // 계산기 클래스
     val calculator = SalaryCalculator()
+    // 세율 클래스
     val taxCalculatorRates = TaxCalculatorRates()
-    var wordDictionaryTable: WordDictionaryTable? = null
+    private var isDebug = true
+
+    var termDictionaryDao : TermDictionaryDao? = null
         private set
 
     @Suppress("unused")
     private fun init() {
     }
 
+    /**
+     * 앱실행 최초 1회 실행되는 메서드.
+     * getInstance 에서 호출한다.
+     */
     private fun load(context: Context) {
-        //디비 연결
-        val wordInfoDbHandler = WordInfoDBHandler(context)
-        debug("[Init] > set WordInfoDBHandler")
+         //디비 연결
+        val appDatabaseHandler = AppDatabaseHandler(context)
+        debug("[load] > new AppDatabaseHandler")
 
         // 테이블 클래스 생성. (쿼리는 하기 전)
-        this.wordDictionaryTable = WordDictionaryTable(wordInfoDbHandler.db)
-        debug("[Init] > set WordDictionaryTable")
+        this.termDictionaryDao = TermDictionaryDao(appDatabaseHandler.getDb())
+        debug("[load] > new TermDictionaryDao")
     }
 
     /**

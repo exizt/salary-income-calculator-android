@@ -31,6 +31,7 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 		getDelegate().onPostCreate(savedInstanceState);
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	protected ActionBar getSupportActionBar() {
 		return getDelegate().getSupportActionBar();
 	}

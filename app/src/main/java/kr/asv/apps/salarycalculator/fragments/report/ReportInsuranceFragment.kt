@@ -36,16 +36,16 @@ class ReportInsuranceFragment : BaseFragment() {
         var keyId = ""
         when (id) {
             R.id.infoNationalPension -> {
-                keyId = "nationalPension"
+                keyId = "national_pension"
             }
             R.id.infoHealthCare -> {
-                keyId = "healthCare"
+                keyId = "health_care"
             }
             R.id.infoLongTermCare -> {
-                keyId = "longTermCare"
+                keyId = "long_term_care"
             }
             R.id.infoEmployeeCare -> {
-                keyId = "employmentCare"
+                keyId = "employment_care"
             }
         }
         val intent = Intent(activity, WordActivity::class.java)

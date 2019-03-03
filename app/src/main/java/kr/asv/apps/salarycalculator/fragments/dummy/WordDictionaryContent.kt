@@ -14,5 +14,5 @@ object WordDictionaryContent {
         isUsed = true
     }
 
-    data class Item(var key: Int = 0, var id: String = "", var subject: String? = "", var explanation: String? = "", var process: String? = "", var history: String? = "")
+    data class Item(var id: Int = 0, var cid: String = "", var name: String? = "", var description: String? = "", var process: String? = "", var history: String? = "")
 }
