@@ -34,10 +34,10 @@ class ReportTaxFragment : BaseFragment() {
         var keyId = ""
         when (id) {
             R.id.infoIncomeTax -> {
-                keyId = "incomeTax"
+                keyId = "income_tax"
             }
             R.id.infoLocalTax -> {
-                keyId = "incomeLocalTax"
+                keyId = "income_local_tax"
             }
         }
         val intent = Intent(activity, WordActivity::class.java)
