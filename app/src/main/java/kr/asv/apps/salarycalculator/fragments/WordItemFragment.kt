@@ -56,7 +56,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
         debug("getDictionaryData")
         // 객체 를 가져오기만 함
-        val table = Services.instance.termDictionaryDao
+        val table = Services.instance.getTermDictionaryDao()
         try {
             // select 쿼리를 실행함
             val cur = table!!.list

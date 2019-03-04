@@ -1,6 +1,7 @@
 package kr.asv.apps.salarycalculator
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
@@ -17,10 +18,11 @@ private constructor() {
     val calculator = SalaryCalculator()
     // 세율 클래스
     val taxCalculatorRates = TaxCalculatorRates()
-    private var isDebug = true
+    private var isDebug = false
 
-    var termDictionaryDao : TermDictionaryDao? = null
-        private set
+    //var termDictionaryDao : TermDictionaryDao? = null
+    //    private set
+    var appDatabasePath = ""
 
     @Suppress("unused")
     private fun init() {
@@ -31,15 +33,25 @@ private constructor() {
      * getInstance 에서 호출한다.
      */
     private fun load(context: Context) {
+
          //디비 연결
-        val appDatabaseHandler = AppDatabaseHandler(context)
+        val appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
         debug("[load] > new AppDatabaseHandler")
+        appDatabasePath = appDatabaseHandler.getDatabasePath()
 
         // 테이블 클래스 생성. (쿼리는 하기 전)
-        this.termDictionaryDao = TermDictionaryDao(appDatabaseHandler.getDb())
-        debug("[load] > new TermDictionaryDao")
+        //this.termDictionaryDao = TermDictionaryDao(appDatabaseHandler.getDb())
+        //debug("[load] > new TermDictionaryDao")
     }
 
+    /**
+     * 메서드가 호출될 때, TermDictionaryDao 를 새로 생성해서 리턴한다.
+     * (가비지 컬렉션을 고려함)
+     */
+    fun getTermDictionaryDao():TermDictionaryDao{
+        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
+        return TermDictionaryDao(db)
+    }
     /**
      * 디버깅
      *
