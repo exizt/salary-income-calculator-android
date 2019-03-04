@@ -59,7 +59,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         val table = Services.instance.getTermDictionaryDao()
         try {
             // select 쿼리를 실행함
-            val cur = table!!.list
+            val cur = table.list
             if (cur.moveToFirst()) {
 
                 while (!cur.isAfterLast) {

@@ -51,7 +51,7 @@ class WordActivity : AppCompatActivity() {
      */
     private fun initData(wordKey: Int) {
         val tableWordDictionary = Services.instance.getTermDictionaryDao()
-        val record = tableWordDictionary!!.getRow(wordKey)
+        val record = tableWordDictionary.getRow(wordKey)
         appendData(record)
     }
 
@@ -60,7 +60,7 @@ class WordActivity : AppCompatActivity() {
      */
     private fun initData(wordId: String) {
         val tableWordDictionary = Services.instance.getTermDictionaryDao()
-        val record = tableWordDictionary!!.getRowFromCID(wordId)
+        val record = tableWordDictionary.getRowFromCID(wordId)
         appendData(record)
     }
 

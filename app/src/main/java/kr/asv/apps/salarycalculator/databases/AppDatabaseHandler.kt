@@ -106,10 +106,6 @@ class AppDatabaseHandler (context: Context){
         debug("[open] DB 버전 : ${mDatabase.version}")
     }
 
-    fun getDb() : SQLiteDatabase{
-        return mDatabase
-    }
-
     /**
      * 데이터베이스 경로를 리턴.
      */
@@ -146,19 +142,6 @@ class AppDatabaseHandler (context: Context){
         editor.apply()
     }
 
-    /**
-     * LocalDB 의 버전값을 변경하고, 이 값을 Preferences 에 저장한다.
-     * 두 가지를 항상 같이 이행해야 하기 때문에, 하나의 함수에 넣도록 함.
-     * <주의> LocalDB 가 오픈되어 있어야 함.
-     */
-    private fun changeLocalDbVersion(changedVersion:Int, prefs : SharedPreferences){
-        // 데이터베이스의 version 값을 변경한다.
-        mDatabase.version = changedVersion
-
-        // 현재 디비의 버전 정보를 Preferences 에 담는다.
-        setLocalDbVersionToPreferences(prefs)
-        debug("[changeLocalDbVersion] 데이터베이스 버전값 변경됨 : $changedVersion")
-    }
     /**
      * Assets 에 있는 Version 이 담긴 text 파일에서 버전 정보를 읽어온다.
      * 에러가 있을 경우 그저 0 을 반환한다.

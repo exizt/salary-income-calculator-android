@@ -22,7 +22,7 @@ private constructor() {
 
     //var termDictionaryDao : TermDictionaryDao? = null
     //    private set
-    var appDatabasePath = ""
+    private var appDatabasePath = ""
 
     @Suppress("unused")
     private fun init() {
@@ -38,10 +38,6 @@ private constructor() {
         val appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
         debug("[load] > new AppDatabaseHandler")
         appDatabasePath = appDatabaseHandler.getDatabasePath()
-
-        // 테이블 클래스 생성. (쿼리는 하기 전)
-        //this.termDictionaryDao = TermDictionaryDao(appDatabaseHandler.getDb())
-        //debug("[load] > new TermDictionaryDao")
     }
 
     /**
