@@ -43,6 +43,9 @@ object Services {
 
                 // 데이터베이스의 경로만 갖는다.
                 appDatabasePath = appDatabaseHandler.getDatabasePath()
+
+                // 여기서 firebase 관련 처리를 해야함.
+                appDatabaseHandler.copyStorageDBFile()
             }
         }
     }
