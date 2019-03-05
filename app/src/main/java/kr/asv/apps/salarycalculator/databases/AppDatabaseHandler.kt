@@ -28,8 +28,6 @@ import java.io.IOException
 class AppDatabaseHandler (context: Context){
     // context 레퍼런스
     private val mContext = context
-    // database 객체
-    private lateinit var mDatabase : SQLiteDatabase
     // 앱에서 실행되는 Database File 의 이름
     private val mDatabaseName = "salarytax_information.db"
     // 앱에서 실행되는 Database File 의 전체 경로
@@ -250,15 +248,22 @@ class AppDatabaseHandler (context: Context){
      */
     @Suppress("unused")
     fun copyStorageDBFile(){
+        copyFirebaseStorageDbFile(mContext,firebaseStorageDBFilePath,mDatabaseName,"testDb.db")
+    }
+
+    /**
+     * Firebase 를 통해서 db 파일을 다운르도 하고, 복사하는 로직.
+     */
+    private fun copyFirebaseStorageDbFile(context: Context, firebasePath : String, databaseName : String, cacheFileName : String = "tempDB.db")
+    {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
-        val islandRef = storageRef.child(firebaseStorageDBFilePath)
-        val cacheFileName = "testDB.db"
+        val islandRef = storageRef.child(firebasePath)
         val localFile = File.createTempFile(cacheFileName, ".db")
 
         // firebase cloud 에서 파일을 다운로드 함
         islandRef.getFile(localFile).addOnSuccessListener {
-            val prefs = PreferenceManager.getDefaultSharedPreferences(mContext)
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
             // 현재 LocalDB 의 버전
             val localDbVersion = getLocalDbVersionFromPreferences(prefs)
@@ -268,22 +273,36 @@ class AppDatabaseHandler (context: Context){
 
             // 버전과 기존 디비의 버전을 비교하고, 새로 받은 파일의 버전이 높다면, 복사를 시행함.
             if(localDbVersion < version){
+                debug("[copyFirebaseStorageDbFile] 복사 시도")
+
                 // 복사하기 전에, 기존의 디비는 close 시켜야 함.
                 //mDatabase.close()
 
                 // 복사 시행
-                localFile.copyTo(File(mContext.getDatabasePath(mDatabaseName).path),true)
+                try{
+                    localFile.copyTo(File(context.getDatabasePath(databaseName).path),true)
+                } catch (e: Exception) {
+                    debug("[copyFirebaseStorageDbFile] localFile copyTo Error")
+                }
 
                 // 복사 완료된 DB 로 재배치.
                 //mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
                 setLocalDbVersionToPreferences(prefs,version)
 
                 // cache 에 있는 데이터베이스 파일을 삭제해야 할 듯...
-                localFile.delete()
+
+                // 완료
+                debug("[copyFirebaseStorageDbFile] 복사 완료")
+
+                // 여기서 버전 히스토리를 남겨도 좋을 듯 한데... 어디다 남길지 모르겠음...
+            } else {
+                debug("[copyFirebaseStorageDbFile] 새로운 버전이 아니므로, 복사 안 함")
             }
+            localFile.delete()
         }.addOnFailureListener {
             // Handle any errors
-        }
+            // 에러시 어떤 동작을 취할지도 고민... 에러시 에러를 개발자에게 알려주는 것이 좋을 듯.
 
+        }
     }
 }

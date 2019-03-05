@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //기본 Fragment 지정
         onNavigationItemFirst()
 
-        //Services 초기화 및 인스턴스 가져오기
+        //Services 초기화 및 인스턴스 가져오기, 처음 한번만 호출하도록 함.
         Services.load(this)
 
         // Admob 호출
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * @param msg
      */
     fun debug(msg: String) {
-        Log.e("[EXIZT-DEBUG]", "[MainActivity]$msg")
+        Log.d("[EXIZT-DEBUG]", "[MainActivity]$msg")
     }
 
     fun setActionBarTitle(title: String) {

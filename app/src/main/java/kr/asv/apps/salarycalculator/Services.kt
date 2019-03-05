@@ -25,20 +25,23 @@ object Services {
     //    private set
     private var appDatabasePath = ""
 
-    @Suppress("unused")
-    private fun init() {
-    }
+    @SuppressLint("StaticFieldLeak")
+    lateinit var appDatabaseHandler : AppDatabaseHandler
 
     /**
      * 앱실행 최초 1회 실행되는 메서드.
      * getInstance 에서 호출한다.
      */
     fun load(context: Context) {
+        // 최초 1회만 시도되도록, appDatabasePath 를 체크함.
+        // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다...
         if(appDatabasePath==""){
             doAsync {
-                 //디비 연결
-                appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
+                 //디비 연결 및 생성과 Assets 을 통한 업데이트
                 debug("[load] > new AppDatabaseHandler")
+                appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
+
+                // 데이터베이스의 경로만 갖는다.
                 appDatabasePath = appDatabaseHandler.getDatabasePath()
             }
         }
