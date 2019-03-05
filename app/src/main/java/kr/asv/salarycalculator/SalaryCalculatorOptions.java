@@ -1,58 +1,83 @@
 package kr.asv.salarycalculator;
 
 public class SalaryCalculatorOptions {
-    private double inputMoney;
-    private int family;
-    private int child;
-    private double taxExemption;
-    private boolean annualBasis;
-    private boolean includedSeverance;
-    private boolean debug;
+    /**
+     * 입력 금액
+     */
+    private double inputMoney = 0;
+    /**
+     * 가족수 (최소 본인 1명)
+     */
+    private int family = 1;
+    /**
+     * 20세 이하 자녀수
+     */
+    private int child = 0;
+    /**
+     * 비과세
+     */
+    private double taxExemption = 0;
+    /**
+     * 입력금액이 연봉인지 여부. true 일 경우 '연봉' (기본값 false)
+     */
+    private boolean annualBasis = false;
+    /**
+     * 퇴직금 포함 계산인지 유무 (기본값 false)
+     */
+    private boolean includedSeverance = false;
+    private boolean debug = false;
 
-    SalaryCalculatorOptions() {
-        this.init();
-    }
-
-    private void init() {
-        this.inputMoney = 2000000;
-        this.family = 1;
-        this.child = 0;
-        this.taxExemption = 100000;
-        this.annualBasis = false;
-        this.includedSeverance = false;
-        this.debug = false;
-    }
 
     public int getFamily() {
         return family;
     }
 
-    public void setFamily(int family) {
-        this.family = family;
+	/**
+	 * family 값은 최소 1 이상.
+	 * @param value
+	 */
+	public void setFamily(int value) {
+    	if(value > 1){
+        	family = value;
+		} else {
+    		family = 0;
+		}
     }
 
     public int getChild() {
         return child;
     }
 
-    public void setChild(int child) {
-        this.child = child;
+    public void setChild(int value) {
+		if(value > 0){
+        	child = value;
+		} else {
+			child = 0;
+		}
     }
 
     double getInputMoney() {
         return inputMoney;
     }
 
-    public void setInputMoney(double inputMoney) {
-        this.inputMoney = inputMoney;
+    public void setInputMoney(double value) {
+	    if(value > 0){
+            inputMoney = value;
+        } else {
+	        inputMoney = 0;
+        }
     }
 
     public double getTaxExemption() {
         return taxExemption;
     }
 
-    public void setTaxExemption(double taxExemption) {
-        this.taxExemption = taxExemption;
+    public void setTaxExemption(double value) {
+	    if(value > 0){
+            taxExemption = value;
+        } else {
+	        taxExemption = 0;
+        }
     }
 
     boolean isAnnualBasis() {

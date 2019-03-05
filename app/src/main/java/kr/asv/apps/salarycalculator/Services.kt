@@ -46,6 +46,9 @@ object Services {
 
                 // 여기서 firebase 관련 처리를 해야함.
                 appDatabaseHandler.copyStorageDBFile()
+
+                // 세율 변경이 필요함.
+                // preferences 를 이용해야함. 데이터베이스를 읽어와서, 세율 값을 적용시킨다.
             }
         }
     }

@@ -71,10 +71,23 @@ class AppDatabaseHandler (context: Context){
             // 최초 실행이므로, 이 정도만 하도록 함.
 
             // assets 디비 파일이 있는지 체크하고, 있을 시에 복사함
-            if(existsAssetsDatabase(mContext)) {
-                val assetDbVersion = getAssetDbVersion(mContext)
-                copyDatabaseFromAssets(mContext)
-                setLocalDbVersionToPreferences(prefs,assetDbVersion)
+            try {
+                if (existsAssetsDatabase(mContext)) {
+                    // 한번은 생성을 해야할 듯 하다...
+                    // 오래된 버전의 경우 databases 디렉토리를 생성 안 하는 버그가 있다.
+                    File(mDatabasePath).also{
+                        file -> file.parentFile.mkdirs()
+                    }.createNewFile()
+
+                    debug("[open] Assets 에서 데이터베이스 파일 복사 실행")
+                    copyDatabaseFromAssets(mContext)
+                    debug("[open] getAssetDbVersion")
+                    val assetDbVersion = getAssetDbVersion(mContext)
+                    debug("[open] setLocalDbVersionToPreferences")
+                    setLocalDbVersionToPreferences(prefs, assetDbVersion)
+                }
+            } catch (e: Exception){
+                debug("[open] Assets 에서 복사 실패 $e")
             }
 
         } else {
@@ -96,7 +109,7 @@ class AppDatabaseHandler (context: Context){
                         setLocalDbVersionToPreferences(prefs,assetDbVersion)
                     }
                 } catch (e: Exception) {
-                    debug("[open] copyDatabaseFromAssets 에러 $e")
+                    debug("[open] Assets 에서 복사 실패  $e")
                 }
             }
         }

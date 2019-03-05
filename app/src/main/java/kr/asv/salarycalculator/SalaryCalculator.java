@@ -22,46 +22,10 @@ public class SalaryCalculator {
 	 * 생성자
 	 */
 	public SalaryCalculator() {
-		this.initialize();
-	}
-
-	/**
-	 * 생성자
-	 *
-	 * @param options Options
-	 */
-	@SuppressWarnings("unused")
-	public SalaryCalculator(SalaryCalculatorOptions options) {
-		this.options = options;
-		this.initialize();
-	}
-
-	/**
-	 * 초기화 메서드.
-	 * 생성시에 한번만 호출되는 메서드.
-	 */
-	private void initialize() {
-		if (this.options == null) this.options = new SalaryCalculatorOptions();
-
+		options = new SalaryCalculatorOptions();
 		insurance = new InsuranceImpl();
 		incomeTax = new IncomeTaxImpl();
 		salary = new SalaryImpl();
-
-
-		if (options.isDebug()) {
-			incomeTax.setDebug(true);
-		}
-	}
-
-	/**
-	 * 옵션 [가족수, 자녀수, 비과세액 등]
-	 *
-	 * @param options Options
-	 */
-	@SuppressWarnings("unused")
-	public void run(SalaryCalculatorOptions options) {
-		this.options = options;
-		this.run();
 	}
 
 	/**
@@ -70,8 +34,8 @@ public class SalaryCalculator {
 	public void run() {
 		if (options.isDebug()) {
 			debug(options);
+			incomeTax.setDebug(true);
 		}
-
 
 		salary.setAnnualBasis(options.isAnnualBasis());
 		salary.setIncludedSeverance(options.isIncludedSeverance());

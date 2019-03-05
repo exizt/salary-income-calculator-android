@@ -16,7 +16,7 @@ public class InsuranceImpl implements Insurance {
     /**
      * 건강보험
      */
-    private double healthCare = 0;
+	private double healthCare = 0;
     /**
      * 장기요양보험
      */
@@ -28,23 +28,18 @@ public class InsuranceImpl implements Insurance {
 
     /**
      * 4대보험요율
-     * TODO 싱글톤으로 해서 유일하게 관리해야 할 것 같다...
      */
-    private final InsuranceRates rates;
-
-    InsuranceImpl() {
-        rates = new InsuranceRates();
-    }
+    private final InsuranceRates rates = new InsuranceRates();
 
     /**
      * 4대 보험 계산
+     * 각각의 보험요율을 계산한다.
      */
     public void execute(double adjustedSalary) {
         this.nationalPension = calculateNationalPension(adjustedSalary);// 국민연금
         this.healthCare = calculateHealthCare(adjustedSalary);// 건강보험
         this.longTermCare = calculateLongTermCare(adjustedSalary);// 요양보험
         this.employmentCare = calculateEmploymentCare(adjustedSalary);// 고용보험
-
     }
 
     /**
