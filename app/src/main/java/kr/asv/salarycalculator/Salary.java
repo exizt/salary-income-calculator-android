@@ -1,21 +1,21 @@
 package kr.asv.salarycalculator;
 
 public interface Salary {
-	void execute();
+    void execute();
 
-	void setInputMoney(double inputMoney);
+    void setInputMoney(double inputMoney);
 
-	void setTaxExemption(double taxExemption);
+    void setTaxExemption(double taxExemption);
 
-	void setAnnualBasis(boolean annualBasis);
+    void setAnnualBasis(boolean annualBasis);
 
-	void setIncludedSeverance(boolean includedSeverance);
+    void setIncludedSeverance(boolean includedSeverance);
 
-	double getBasicSalary();
+    double getBasicSalary();
 
-	@SuppressWarnings("UnusedReturnValue")
-	double getGrossSalary();
+    @SuppressWarnings("UnusedReturnValue")
+    double getGrossSalary();
 
-	@SuppressWarnings("UnusedReturnValue")
-	double getGrossAnnualSalary();
+    @SuppressWarnings("UnusedReturnValue")
+    double getGrossAnnualSalary();
 }

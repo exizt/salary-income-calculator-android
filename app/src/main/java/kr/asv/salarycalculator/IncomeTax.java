@@ -1,16 +1,16 @@
 package kr.asv.salarycalculator;
 
 public interface IncomeTax {
-	void execute(double salary, int family, int child);
+    void execute(double salary, int family, int child);
 
-	void setNationalInsurance(double nationalInsurance);
+    void setNationalInsurance(double nationalInsurance);
 
-	double get();
+    double get();
 
-	double getEarnedIncomeTax();
+    double getEarnedIncomeTax();
 
-	double getLocalTax();
-	
-	@SuppressWarnings("SameParameterValue")
-	void setDebug(boolean debug);
+    double getLocalTax();
+
+    @SuppressWarnings("SameParameterValue")
+    void setDebug(boolean debug);
 }

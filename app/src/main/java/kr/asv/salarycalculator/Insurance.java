@@ -1,20 +1,20 @@
 package kr.asv.salarycalculator;
 
 public interface Insurance {
-	void execute(double adjustedSalary);
+    void execute(double adjustedSalary);
 
-	double getNationalPension();
+    double getNationalPension();
 
-	double getHealthCare();
+    double getHealthCare();
 
-	double getLongTermCare();
+    double getLongTermCare();
 
-	double getEmploymentCare();
+    double getEmploymentCare();
 
-	double get();
+    double get();
 
-	String toString();
+    String toString();
 
-	@SuppressWarnings("UnusedReturnValue")
-	InsuranceRates getRates();
+    @SuppressWarnings("UnusedReturnValue")
+    InsuranceRates getRates();
 }
