@@ -54,7 +54,7 @@ class ReportInsuranceFragment : BaseFragment() {
     }
 
     private fun showResult() {
-        val calculator = Services.instance.calculator
+        val calculator = Services.calculator
 
         val format = java.text.DecimalFormat("###,##0")
 

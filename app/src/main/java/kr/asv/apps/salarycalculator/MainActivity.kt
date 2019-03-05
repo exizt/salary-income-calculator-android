@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         onNavigationItemFirst()
 
         //Services 초기화 및 인스턴스 가져오기
-        Services.getInstance(this)
+        Services.load(this)
 
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)

@@ -50,7 +50,7 @@ class WordActivity : AppCompatActivity() {
      * 숫자 id (id) 값을 받았을 때.
      */
     private fun initData(wordKey: Int) {
-        val tableWordDictionary = Services.instance.getTermDictionaryDao()
+        val tableWordDictionary = Services.getTermDictionaryDao()
         val record = tableWordDictionary.getRow(wordKey)
         appendData(record)
     }
@@ -59,7 +59,7 @@ class WordActivity : AppCompatActivity() {
      * 문자열 id (cid) 값을 받았을 때.
      */
     private fun initData(wordId: String) {
-        val tableWordDictionary = Services.instance.getTermDictionaryDao()
+        val tableWordDictionary = Services.getTermDictionaryDao()
         val record = tableWordDictionary.getRowFromCID(wordId)
         appendData(record)
     }

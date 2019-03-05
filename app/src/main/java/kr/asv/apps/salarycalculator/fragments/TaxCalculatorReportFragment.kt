@@ -35,10 +35,10 @@ class TaxCalculatorReportFragment : BaseFragment() {
     }
 
     private fun drawReport() {
-        val nationalRate = Services.instance.taxCalculatorRates.nationalRate
-        val healthCareRate = Services.instance.taxCalculatorRates.healthCareRate
-        val longTermCareRate = Services.instance.taxCalculatorRates.longTermCareRate
-        val employmentCareRate = Services.instance.taxCalculatorRates.employmentCareRate
+        val nationalRate = Services.taxCalculatorRates.nationalRate
+        val healthCareRate = Services.taxCalculatorRates.healthCareRate
+        val longTermCareRate = Services.taxCalculatorRates.longTermCareRate
+        val employmentCareRate = Services.taxCalculatorRates.employmentCareRate
 
         val viewNationalRates = findViewById(R.id.id_view_national) as TextView
         val viewHealthCare = findViewById(R.id.id_view_health_care) as TextView

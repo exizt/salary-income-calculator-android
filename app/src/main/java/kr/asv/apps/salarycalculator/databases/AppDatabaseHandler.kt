@@ -74,7 +74,9 @@ class AppDatabaseHandler (context: Context){
 
             // assets 디비 파일이 있는지 체크하고, 있을 시에 복사함
             if(existsAssetsDatabase(mContext)) {
+                val assetDbVersion = getAssetDbVersion(mContext)
                 copyDatabaseFromAssets(mContext)
+                setLocalDbVersionToPreferences(prefs,assetDbVersion)
             }
 
         } else {
@@ -93,6 +95,7 @@ class AppDatabaseHandler (context: Context){
                     if(existsAssetsDatabase(mContext)) {
                         debug("[open] Assets 에서 데이터베이스 파일 복사 실행")
                         copyDatabaseFromAssets(mContext)
+                        setLocalDbVersionToPreferences(prefs,assetDbVersion)
                     }
                 } catch (e: Exception) {
                     debug("[open] copyDatabaseFromAssets 에러 $e")
@@ -101,9 +104,9 @@ class AppDatabaseHandler (context: Context){
         }
 
         // 데이터베이스 를 Open
-        mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
-        setLocalDbVersionToPreferences(prefs)
-        debug("[open] DB 버전 : ${mDatabase.version}")
+        //mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
+        //setLocalDbVersionToPreferences(prefs)
+        //debug("[open] DB 버전 : ${mDatabase.version}")
     }
 
     /**
@@ -133,12 +136,11 @@ class AppDatabaseHandler (context: Context){
     }
 
     /**
-     * 버전 정보값을 Preferences 에 저장
-     * <주의> LocalDB 가 오픈되어 있어야 함.
+     * 버전 정보값을 Preferences 에 저장 하는 메서드.
      */
-    private fun setLocalDbVersionToPreferences(prefs : SharedPreferences){
+    private fun setLocalDbVersionToPreferences(prefs : SharedPreferences, version:Int){
         val editor = prefs.edit()
-        editor.putInt(localDbVersionPreferenceCode,mDatabase.version)
+        editor.putInt(localDbVersionPreferenceCode,version)
         editor.apply()
     }
 
@@ -267,14 +269,14 @@ class AppDatabaseHandler (context: Context){
             // 버전과 기존 디비의 버전을 비교하고, 새로 받은 파일의 버전이 높다면, 복사를 시행함.
             if(localDbVersion < version){
                 // 복사하기 전에, 기존의 디비는 close 시켜야 함.
-                mDatabase.close()
+                //mDatabase.close()
 
                 // 복사 시행
                 localFile.copyTo(File(mContext.getDatabasePath(mDatabaseName).path),true)
 
                 // 복사 완료된 DB 로 재배치.
-                mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
-                setLocalDbVersionToPreferences(prefs)
+                //mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
+                setLocalDbVersionToPreferences(prefs,version)
 
                 // cache 에 있는 데이터베이스 파일을 삭제해야 할 듯...
                 localFile.delete()

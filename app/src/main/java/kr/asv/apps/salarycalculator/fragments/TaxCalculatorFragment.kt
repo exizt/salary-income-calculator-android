@@ -84,10 +84,10 @@ class TaxCalculatorFragment : BaseFragment() {
 
         val baseMoney = salary - taxfree
 
-        Services.instance.taxCalculatorRates.nationalRate = getRates(baseMoney, national)
-        Services.instance.taxCalculatorRates.healthCareRate = getRates(baseMoney, healthCare)
-        Services.instance.taxCalculatorRates.longTermCareRate = getRates(healthCare, longTermCare)
-        Services.instance.taxCalculatorRates.employmentCareRate = getRates(baseMoney, employmentCare)
+        Services.taxCalculatorRates.nationalRate = getRates(baseMoney, national)
+        Services.taxCalculatorRates.healthCareRate = getRates(baseMoney, healthCare)
+        Services.taxCalculatorRates.longTermCareRate = getRates(healthCare, longTermCare)
+        Services.taxCalculatorRates.employmentCareRate = getRates(baseMoney, employmentCare)
 
         //결과 화면 호출
         //Intent intent=new Intent(getActivity(),ReportActivity.class);

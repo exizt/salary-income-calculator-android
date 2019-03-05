@@ -21,7 +21,7 @@ import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-    private val isDebug = true
+    private val isDebug = false
 
     override fun onListFragmentInteraction(item: Item) {
         val intent = Intent(activity, WordActivity::class.java)
@@ -56,7 +56,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
         debug("getDictionaryData")
         // 객체 를 가져오기만 함
-        val table = Services.instance.getTermDictionaryDao()
+        val table = Services.getTermDictionaryDao()
         try {
             // select 쿼리를 실행함
             val cur = table.list
