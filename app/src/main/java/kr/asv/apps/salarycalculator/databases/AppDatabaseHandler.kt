@@ -240,7 +240,7 @@ class AppDatabaseHandler (context: Context){
     private fun debug(msg: String) {
         @Suppress("ConstantConditionIf")
         if (isDebug) {
-            Log.e(debugTag, "[AppDatabaseHandler] $msg")
+            Log.d(debugTag, "[AppDatabaseHandler] $msg")
         }
     }
 

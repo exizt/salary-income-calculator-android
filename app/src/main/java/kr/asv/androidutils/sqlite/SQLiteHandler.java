@@ -397,7 +397,7 @@ public abstract class SQLiteHandler {
     @SuppressWarnings("unused")
     protected void debug(String msg) {
         if (isDebug) {
-            Log.e("[EXIZT-DEBUG]", "[SQLiteHandler]" + msg);
+            Log.d("[EXIZT-DEBUG]", "[SQLiteHandler]" + msg);
         }
     }
 

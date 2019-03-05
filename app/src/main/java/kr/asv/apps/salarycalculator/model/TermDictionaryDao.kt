@@ -65,7 +65,7 @@ class TermDictionaryDao(private val db: SQLiteDatabase) {
      */
     private fun debug(msg: String) {
         if (isDebug) {
-            Log.e(debugTag, "[TermDictionaryDao] $msg")
+            Log.d(debugTag, "[TermDictionaryDao] $msg")
         }
     }
 }

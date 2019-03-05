@@ -60,7 +60,7 @@ object Services {
     private fun debug(msg: String) {
 
         if (isDebug) {
-            Log.e("[EXIZT-DEBUG]", "[Services]$msg")
+            Log.d("[EXIZT-DEBUG]", "[Services]$msg")
         }
     }
 
