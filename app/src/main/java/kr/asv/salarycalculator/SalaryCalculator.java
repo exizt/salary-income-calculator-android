@@ -12,10 +12,10 @@ public class SalaryCalculator {
 	/**
 	 * Options 값들. 가족수, 자녀수, 비과세액 등
 	 */
-	private SalaryCalculatorOptions options;
-	private Insurance insurance;
-	private IncomeTax incomeTax;
-	private Salary salary;
+	private final SalaryCalculatorOptions options;
+	private final Insurance insurance;
+	private final IncomeTax incomeTax;
+	private final Salary salary;
 	private double netSalary;
 
 	/**

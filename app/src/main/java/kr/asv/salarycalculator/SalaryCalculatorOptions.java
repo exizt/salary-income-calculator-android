@@ -34,7 +34,7 @@ public class SalaryCalculatorOptions {
 
 	/**
 	 * family 값은 최소 1 이상.
-	 * @param value
+	 * @param value int
 	 */
 	public void setFamily(int value) {
     	if(value > 1){
