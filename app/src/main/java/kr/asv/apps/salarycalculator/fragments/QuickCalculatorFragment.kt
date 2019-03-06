@@ -141,6 +141,7 @@ class QuickCalculatorFragment : BaseFragment() {
 
     /**
      * 계산하는 동작
+     * @todo 세율의 기본값을 가져오는 루틴을 손 봐야 한다.
      */
     private fun calculate() {
 
@@ -189,14 +190,15 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         val calculator = Services.calculator
+        val options = calculator.options
 
         //옵션값 셋팅
-        calculator.options.setInputMoney(inputMoney.toDouble())
-        calculator.options.taxExemption = taxExemption.toDouble()
-        calculator.options.family = family
-        calculator.options.child = child
-        calculator.options.setAnnualBasis(annualBasis)
-        calculator.options.setIncludedSeverance(includedSeverance)
+        options.setInputMoney(inputMoney.toDouble())
+        options.taxExemption = taxExemption.toDouble()
+        options.family = family
+        options.child = child
+        options.setAnnualBasis(annualBasis)
+        options.setIncludedSeverance(includedSeverance)
 
         if (pref.getBoolean("rate_settings_enable", false)) {
             calculator.insurance.rates.nationalPension = java.lang.Double.parseDouble(pref.getString("rate_national_pension", "0"))
@@ -205,7 +207,7 @@ class QuickCalculatorFragment : BaseFragment() {
             calculator.insurance.rates.employmentCare = java.lang.Double.parseDouble(pref.getString("rate_employment_care", "0"))
             //calculator.getInsurance().getRates().setEmploymentCare();
         } else {
-            calculator.insurance.rates.initValues()
+            //calculator.insurance.rates.initValues()
         }
 
         calculator.run()

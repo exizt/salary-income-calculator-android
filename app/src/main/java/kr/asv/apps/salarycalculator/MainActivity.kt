@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Services 초기화 및 인스턴스 가져오기, 처음 한번만 호출하도록 함.
         Services.load(this)
 
+        // MobileAds.initialize 는 AdMob 에 이 앱을 등록시키는 구문 으로 생각됨.
+        //MobileAds.initialize(this, "ca-app-pub-6702794513299112~9173067732")
+
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)
     }

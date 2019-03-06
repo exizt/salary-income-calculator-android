@@ -120,10 +120,11 @@ class SettingsActivity : AppCompatPreferenceActivity() {
 
         /**
          * Calculator 클래스를 통해서, Rate 기본설정 및, 기본설정값을 가져오고, 기본값을 배치한다.
+         * @todo 기존에는 InsuranceRates 의 default 값을 가져오는 방식이었으나, preferences 를 이용하는 방식으로 교체해야 한다.
+         *
          */
         private fun resetRates() {
             //Calculator 클래스에서 Rate 기본값으로 설정하면서 기본값을 가져온다.
-            Services.calculator.insurance.rates.initValues()
             val defaultNationalPensionRate = Services.calculator.insurance.rates.nationalPension
             val defaultHealthCareRate = Services.calculator.insurance.rates.healthCare
             val defaultLongTermCareRate = Services.calculator.insurance.rates.longTermCare
