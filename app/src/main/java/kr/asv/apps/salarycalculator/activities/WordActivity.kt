@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
-import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.model.TermDictionary
+import kr.asv.shhtaxmanager.R
 
 class WordActivity : AppCompatActivity() {
 

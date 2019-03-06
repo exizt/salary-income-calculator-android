@@ -13,7 +13,7 @@ import kr.asv.apps.salarycalculator.fragments.report.ReportInputFragment
 import kr.asv.apps.salarycalculator.fragments.report.ReportInsuranceFragment
 import kr.asv.apps.salarycalculator.fragments.report.ReportSummaryFragment
 import kr.asv.apps.salarycalculator.fragments.report.ReportTaxFragment
-import kr.asv.apps.salarycalculator.R
+import kr.asv.shhtaxmanager.R
 
 class ReportActivity : AppCompatActivity() {
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null

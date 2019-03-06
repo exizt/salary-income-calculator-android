@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kr.asv.apps.salarycalculator.fragments.OnListFragmentInteractionListener
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
+import kr.asv.shhtaxmanager.R
 
 /**
  * Fragment_wordItem.xml 과 연관된 클래스

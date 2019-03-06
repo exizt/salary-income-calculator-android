@@ -14,6 +14,7 @@ import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
 import kr.asv.apps.salarycalculator.fragments.WordItemFragment
+import kr.asv.shhtaxmanager.R
 
 
 /**

@@ -11,9 +11,9 @@ import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.androidutils.MoneyTextWatcher
-import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
+import kr.asv.shhtaxmanager.R
 
 /**
  *

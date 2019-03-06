@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.fragment_tax_calculator.*
 import kr.asv.androidutils.InputFilterLongMinMax
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.MainActivity
-import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
+import kr.asv.shhtaxmanager.R
 
 /**
  *

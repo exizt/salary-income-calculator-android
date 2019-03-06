@@ -9,11 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.asv.apps.salarycalculator.MyWordItemRecyclerViewAdapter
-import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordActivity
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
+import kr.asv.shhtaxmanager.R
 
 /**
  * 형태 : 리스트 형 Fragment

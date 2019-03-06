@@ -12,16 +12,20 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
+import kr.asv.shhtaxmanager.R
 
 
 /**
  * 기본으로 호출되는 메인 액티비티 클래스
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private val mAuth = FirebaseAuth.getInstance()
     /**
      * 가장 처음에 호출되는 create 메서드
      */
@@ -39,8 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Services 초기화 및 인스턴스 가져오기, 처음 한번만 호출하도록 함.
         Services.load(this)
 
-        // MobileAds.initialize 는 AdMob 에 이 앱을 등록시키는 구문 으로 생각됨.
-        //MobileAds.initialize(this, "ca-app-pub-6702794513299112~9173067732")
+        //firebaseAnalytics 호출
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Admob 호출
         AdmobAdapter.loadBannerAdMob(adView)

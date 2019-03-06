@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_report_insurance.*
-import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordActivity
 import kr.asv.apps.salarycalculator.fragments.BaseFragment
+import kr.asv.shhtaxmanager.R
 
 class ReportInsuranceFragment : BaseFragment() {
 
