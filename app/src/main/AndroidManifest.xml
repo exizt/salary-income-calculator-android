@@ -35,7 +35,7 @@
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
-            android:name="kr.asv.apps.salarycalculator.activities.WordActivity"
+            android:name="kr.asv.apps.salarycalculator.activities.WordPageActivity"
             android:label="@string/activity_word_title"
             android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"

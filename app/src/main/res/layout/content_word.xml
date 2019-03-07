@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="kr.asv.apps.salarycalculator.activities.WordActivity"
+    tools:context="kr.asv.apps.salarycalculator.activities.WordPageActivity"
     tools:showIn="@layout/activity_word">
 
     <LinearLayout

@@ -10,7 +10,10 @@ import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.model.TermDictionary
 import kr.asv.shhtaxmanager.R
 
-class WordActivity : AppCompatActivity() {
+/**
+ * 용어 상세 정보를 보여주는 페이지 액티비티 이다.
+ */
+class WordPageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +86,6 @@ class WordActivity : AppCompatActivity() {
      * @param msg
      */
     fun debug(msg: String) {
-        Log.d("[EXIZT-DEBUG]", "[WordActivity]$msg")
+        Log.d("[EXIZT-DEBUG]", "[WordPageActivity]$msg")
     }
 }

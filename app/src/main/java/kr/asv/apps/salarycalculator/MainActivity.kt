@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
@@ -25,7 +24,7 @@ import kr.asv.shhtaxmanager.R
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    private val mAuth = FirebaseAuth.getInstance()
+
     /**
      * 가장 처음에 호출되는 create 메서드
      */

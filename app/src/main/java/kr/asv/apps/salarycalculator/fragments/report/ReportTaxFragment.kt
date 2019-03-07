@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_report_tax.*
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.apps.salarycalculator.activities.WordActivity
+import kr.asv.apps.salarycalculator.activities.WordPageActivity
 import kr.asv.apps.salarycalculator.fragments.BaseFragment
 import kr.asv.shhtaxmanager.R
 
@@ -40,7 +40,7 @@ class ReportTaxFragment : BaseFragment() {
                 keyId = "income_local_tax"
             }
         }
-        val intent = Intent(activity, WordActivity::class.java)
+        val intent = Intent(activity, WordPageActivity::class.java)
         intent.putExtra("wordId", keyId)
         startActivity(intent)
     }
