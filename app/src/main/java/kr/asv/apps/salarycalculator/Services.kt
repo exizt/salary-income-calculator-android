@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.preference.PreferenceManager
 import android.util.Log
 import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
+import kr.asv.apps.salarycalculator.model.IncomeTaxDao
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 import org.jetbrains.anko.doAsync
@@ -34,7 +35,6 @@ object Services {
      * getInstance 에서 호출한다.
      */
     fun load(context: Context) {
-
         // 앱이 켜지고 최초 1회에만 시도된다. appDatabasePath 가 초기값이 "" 이므로, 아직 값이 정해지기 전이다.
         // 동작이 되고 나면 appDatabasePath 값이 생성된다.
         // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
@@ -69,6 +69,11 @@ object Services {
         return TermDictionaryDao(db)
     }
 
+    fun getIncomeTaxDao(): IncomeTaxDao{
+        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
+        return IncomeTaxDao(db)
+    }
+
     /**
      * 기본 세율값을 지정하는 메서드
      * 세율 클래스와 설정값의 싱크를 맞춘다.
@@ -91,9 +96,12 @@ object Services {
             rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
             rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
         }
-        debug("세율",rates)
+        //debug("세율",rates)
     }
 
+    /**
+     * 세율의 값을 데이터베이스에서 가져와서 설정 Preferences 에 셋팅한다.
+     */
     fun setDefaultInsuranceRates(context: Context){
         debug("[setDefaultInsuranceRates]")
 
@@ -126,7 +134,7 @@ object Services {
             editor.putString(DefaultRatesPrefKey.employmentCare, rates.employmentCare.toString())
             editor.apply()
 
-            debug("세율", rates)
+            //debug("세율", rates)
         } else {
             debug("[setDefaultInsuranceRates] 쿼리 결과 없음")
         }

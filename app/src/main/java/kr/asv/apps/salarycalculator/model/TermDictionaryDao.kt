@@ -59,6 +59,7 @@ class TermDictionaryDao(private val db: SQLiteDatabase) {
         cur.close()
         return record
     }
+
     /**
      * 디버깅 메서드
      * 변수가 두개 넘어올 경우의 처리 추가
