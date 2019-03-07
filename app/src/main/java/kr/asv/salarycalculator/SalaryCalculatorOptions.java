@@ -27,6 +27,11 @@ public class SalaryCalculatorOptions {
     private boolean includedSeverance = false;
     private boolean debug = false;
 
+    public void setIncomeTaxCalculationDisabled(boolean incomeTaxCalculationDisabled) {
+        isIncomeTaxCalculationDisabled = incomeTaxCalculationDisabled;
+    }
+
+    boolean isIncomeTaxCalculationDisabled = false;
 
     public int getFamily() {
         return family;

@@ -173,11 +173,8 @@ class QuickCalculatorFragment : BaseFragment() {
         var child = 0 // 20세 이하 자녀수
         var includedSeverance = false // 퇴직금 포함인지
 
-
-        //환경설정 값 가져오기.
+        //[퀵계산 설정 사용]일 때는 미리 설정한 값들을 불러온다.
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-
-        //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
         if (prefs.getBoolean("quick_settings_enable", false)) {
             family = Integer.parseInt(prefs.getString("quick_settings_family", "default"))
             child = Integer.parseInt(prefs.getString("quick_settings_child", "0"))
@@ -188,15 +185,17 @@ class QuickCalculatorFragment : BaseFragment() {
         val calculator = Services.calculator
         val options = calculator.options
 
-        //옵션값 셋팅
+        // 옵션값 셋팅
         options.setInputMoney(inputMoney.toDouble())
         options.taxExemption = taxExemption.toDouble()
         options.family = family
         options.child = child
         options.setAnnualBasis(annualBasis)
         options.setIncludedSeverance(includedSeverance)
+        options.setIncomeTaxCalculationDisabled(true)
 
-
+        // 세율 정보 가져오기
+        // 커스텀 설정했을 경우에는 preferences 의 값을 가져오고, 아닌 경우에는 기본값들을 가져온다.
         val rates = calculator.insurance.rates
         if (prefs.getBoolean("rate_settings_enable", false)) {
             rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
@@ -207,7 +206,15 @@ class QuickCalculatorFragment : BaseFragment() {
             Services.setDefaultInsuranceRatesInitialize(this.activity!!)
         }
 
-        calculator.run()
+
+        // 연봉, 월급, 4대 보험 계산
+        calculator.calculateSalariesWithInsurances()
+
+        // 소득세 계산 (데이터베이스 에서 읽어오기)
+        var incomeTaxDao = Services.getIncomeTaxDao()
+        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toInt(), family, "201802").toDouble()
+
+        calculator.calculateOnlyNetSalary()
 
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)

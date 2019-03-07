@@ -19,6 +19,28 @@ public class IncomeTaxImpl implements IncomeTax {
     private double nationalInsurance = 0;
 
     /**
+     * 소득세 를 지정하고, 동시에 지방세도 같이 계산한다.
+     * @param earnedIncomeTax double
+     */
+    public void setEarnedIncomeTax(double earnedIncomeTax){
+        this.earnedIncomeTax = earnedIncomeTax;
+        this.localTax = calculateLocalTax(earnedIncomeTax);
+    }
+
+    /**
+     * 지방세 계산식
+     * 근로소득세의 10%
+     *
+     * @return double
+     */
+    private double calculateLocalTax(double incomeTax) {
+        double tax = incomeTax * 0.1;
+        // 원단위 절삭
+        tax = Math.floor(tax / 10) * 10;
+        return tax;
+    }
+
+    /**
      * 계산 동작
      *
      * @param salary double Salary
@@ -283,19 +305,6 @@ public class IncomeTaxImpl implements IncomeTax {
 
     private void debug(String str) {
         System.out.println(str);
-    }
-
-    /**
-     * 지방세 계산식
-     * 근로소득세의 10%
-     *
-     * @return double
-     */
-    private double calculateLocalTax(double incomeTax) {
-        double tax = incomeTax * 0.1;
-        // 원단위 절삭
-        tax = Math.floor(tax / 10) * 10;
-        return tax;
     }
 
     /**

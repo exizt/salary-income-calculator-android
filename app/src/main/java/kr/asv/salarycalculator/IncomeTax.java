@@ -5,6 +5,8 @@ public interface IncomeTax {
 
     void setNationalInsurance(double nationalInsurance);
 
+    void setEarnedIncomeTax(double earnedIncomeTax);
+
     double get();
 
     double getEarnedIncomeTax();
@@ -13,4 +15,5 @@ public interface IncomeTax {
 
     @SuppressWarnings("SameParameterValue")
     void setDebug(boolean debug);
+
 }

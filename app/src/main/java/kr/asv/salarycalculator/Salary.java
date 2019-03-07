@@ -18,4 +18,6 @@ public interface Salary {
 
     @SuppressWarnings("UnusedReturnValue")
     double getGrossAnnualSalary();
+
+    void setNetSalary(double netSalary);
 }

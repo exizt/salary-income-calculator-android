@@ -29,6 +29,40 @@ public class SalaryCalculator {
     }
 
     /**
+     * 연봉, 월급, 4대보험 계산
+     */
+    public void calculateSalariesWithInsurances()
+    {
+        calculateSalaries();
+        calculateInsurances(salary.getBasicSalary());
+    }
+    /**
+     * 연봉 클래스 만 먼저 계산. 연봉/월급 을 계산함.
+     * (Options 클래스 를 몰라도 되게 하기 위해서) 필수값들을 하나씩 set 해줌.
+     * (역할이 섞이지 않게 한 것임. 자꾸 까먹어서 적어두는 것....)
+     */
+    public void calculateSalaries(){
+        // 필수값 지정
+        salary.setInputMoney(options.getInputMoney());// 입력 금액
+        salary.setTaxExemption(options.getTaxExemption());// 비과세 금액
+        salary.setAnnualBasis(options.isAnnualBasis());// 입력값이 연봉인지 유무. true 이면 연봉, false 이면 월급
+        salary.setSeveranceIncluded(options.isIncludedSeverance());// 퇴직금 포함 금액인지 유무. true 이면 포함된 금액임.
+
+        // 계산
+        salary.calculate();
+    }
+
+    /**
+     * 4대 보험을 계산함.
+     * 입력된 기준금액을 통하여 계산함.
+     */
+    public void calculateInsurances(double basicSalary)
+    {
+        insurance.execute(basicSalary);
+        if (options.isDebug()) debug(insurance);
+    }
+
+    /**
      * 계산 실행
      */
     public void run() {
@@ -37,24 +71,28 @@ public class SalaryCalculator {
             incomeTax.setDebug(true);
         }
 
-        salary.setAnnualBasis(options.isAnnualBasis());
-        salary.setIncludedSeverance(options.isIncludedSeverance());
-        salary.setInputMoney(options.getInputMoney());
-        salary.setTaxExemption(options.getTaxExemption());
-        salary.execute();
+        // 연봉, 월급, 4대보험 계산
+        calculateSalariesWithInsurances();
 
-        double basicSalary = salary.getBasicSalary();
-
-        insurance.execute(basicSalary);
-        if (options.isDebug()) debug(insurance);
-
-
-        incomeTax.setNationalInsurance(insurance.getNationalPension());
-        incomeTax.execute(basicSalary, options.getFamily(), options.getChild());
-        if (options.isDebug()) debug(incomeTax);
+        // 소득세 계산
+        if(!options.isIncomeTaxCalculationDisabled){
+            incomeTax.setNationalInsurance(insurance.getNationalPension());
+            incomeTax.execute(salary.getBasicSalary(), options.getFamily(), options.getChild());
+            if (options.isDebug()) debug(incomeTax);
+        }
 
         // 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
-        netSalary = basicSalary - insurance.get() - incomeTax.get() + options.getTaxExemption();
+        calculateOnlyNetSalary();
+    }
+
+    /**
+     * 실수령액 계산
+     * 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+     */
+    public void calculateOnlyNetSalary()
+    {
+        netSalary = salary.getBasicSalary() - insurance.get() - incomeTax.get() + options.getTaxExemption();
+        salary.setNetSalary(netSalary);
         if (options.isDebug()) debug("실수령액 : " + netSalary + "\n");
     }
 
@@ -77,11 +115,7 @@ public class SalaryCalculator {
         return this.salary;
     }
 
-    /**
-     * 옵션 객체를 리턴
-     *
-     * @return Options
-     */
+    @SuppressWarnings("UnusedReturnValue")
     public SalaryCalculatorOptions getOptions() {
         return this.options;
     }
