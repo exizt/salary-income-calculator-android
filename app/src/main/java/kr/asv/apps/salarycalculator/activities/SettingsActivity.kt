@@ -84,15 +84,22 @@ class SettingsActivity : AppCompatPreferenceActivity() {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     class AdvanceTaxRatesPreferenceFragment : PreferenceFragment() {
-        private val nationalPensionCustomRatePrefKey = resources.getString(R.string.pref_key_custom_national_pension_rate)
-        private val healthCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_health_care_rate)
-        private val longTermCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_long_term_care_rate)
-        private val employmentCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_employment_care_rate)
+        private var nationalPensionCustomRatePrefKey = ""
+        private var healthCareCustomRatePrefKey = ""
+        private var longTermCareCustomRatePrefKey = ""
+        private var employmentCareCustomRatePrefKey = ""
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
             addPreferencesFromResource(R.xml.pref_advance_taxrates)
             setHasOptionsMenu(true)
+
+
+            nationalPensionCustomRatePrefKey = resources.getString(R.string.pref_key_custom_national_pension_rate)
+            healthCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_health_care_rate)
+            longTermCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_long_term_care_rate)
+            employmentCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_employment_care_rate)
 
             // 에디트 필터 설정
             (findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
