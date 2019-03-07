@@ -168,25 +168,21 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         //옵션의 기본값
-        // 비과세
-        var taxExemption: Long = 100000
-        // 부양가족수
-        var family = 1
-        // 20세 이하 자녀수
-        var child = 0
-        // 퇴직금 포함인지
-        var includedSeverance = false
+        var taxExemption: Long = 100000 // 비과세
+        var family = 1 // 부양가족수
+        var child = 0 // 20세 이하 자녀수
+        var includedSeverance = false // 퇴직금 포함인지
 
 
         //환경설정 값 가져오기.
-        val pref = PreferenceManager.getDefaultSharedPreferences(activity)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
 
         //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
-        if (pref.getBoolean("quick_settings_enable", false)) {
-            family = Integer.parseInt(pref.getString("quick_settings_family", "default"))
-            child = Integer.parseInt(pref.getString("quick_settings_child", "0"))
-            taxExemption = Integer.parseInt(pref.getString("quick_settings_tax_exemption", "100000")).toLong()
-            includedSeverance = pref.getBoolean("quick_settings_severance", false)
+        if (prefs.getBoolean("quick_settings_enable", false)) {
+            family = Integer.parseInt(prefs.getString("quick_settings_family", "default"))
+            child = Integer.parseInt(prefs.getString("quick_settings_child", "0"))
+            taxExemption = Integer.parseInt(prefs.getString("quick_settings_tax_exemption", "100000")).toLong()
+            includedSeverance = prefs.getBoolean("quick_settings_severance", false)
         }
 
         val calculator = Services.calculator
@@ -200,14 +196,15 @@ class QuickCalculatorFragment : BaseFragment() {
         options.setAnnualBasis(annualBasis)
         options.setIncludedSeverance(includedSeverance)
 
-        if (pref.getBoolean("rate_settings_enable", false)) {
-            calculator.insurance.rates.nationalPension = java.lang.Double.parseDouble(pref.getString("rate_national_pension", "0"))
-            calculator.insurance.rates.healthCare = java.lang.Double.parseDouble(pref.getString("rate_health_care", "0"))
-            calculator.insurance.rates.longTermCare = java.lang.Double.parseDouble(pref.getString("rate_longterm_care", "0"))
-            calculator.insurance.rates.employmentCare = java.lang.Double.parseDouble(pref.getString("rate_employment_care", "0"))
-            //calculator.getInsurance().getRates().setEmploymentCare();
+
+        val rates = calculator.insurance.rates
+        if (prefs.getBoolean("rate_settings_enable", false)) {
+            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
+            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0").toDouble()
+            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
+            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
         } else {
-            //calculator.insurance.rates.initValues()
+            Services.setDefaultInsuranceRatesInitialize(this.activity!!)
         }
 
         calculator.run()

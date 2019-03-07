@@ -3,11 +3,13 @@ package kr.asv.apps.salarycalculator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.preference.PreferenceManager
 import android.util.Log
 import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 import org.jetbrains.anko.doAsync
+import java.util.*
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -19,7 +21,7 @@ object Services {
     val calculator = SalaryCalculator()
     // 세율 클래스
     val taxCalculatorRates = TaxCalculatorRates()
-    private var isDebug = false
+    private var isDebug = true
 
     //var termDictionaryDao : TermDictionaryDao? = null
     //    private set
@@ -33,12 +35,17 @@ object Services {
      * getInstance 에서 호출한다.
      */
     fun load(context: Context) {
-        // 최초 1회만 시도되도록, appDatabasePath 를 체크함.
-        // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다...
+
+        // 앱이 켜지고 최초 1회에만 시도된다. appDatabasePath 가 초기값이 "" 이므로, 아직 값이 정해지기 전이다.
+        // 동작이 되고 나면 appDatabasePath 값이 생성된다.
+        // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
         if(appDatabasePath==""){
+            // 데이터베이스도 없는지 확인해야 하는데...음...
+            setDefaultInsuranceRatesInitialize(context)
+
             doAsync {
                  //디비 연결 및 생성과 Assets 을 통한 업데이트
-                debug("[load] > new AppDatabaseHandler")
+                //debug("[load] > new AppDatabaseHandler")
                 appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
 
                 // 데이터베이스의 경로만 갖는다.
@@ -49,6 +56,7 @@ object Services {
 
                 // 세율 변경이 필요함.
                 // preferences 를 이용해야함. 데이터베이스를 읽어와서, 세율 값을 적용시킨다.
+                setDefaultInsuranceRates(context)
             }
         }
     }
@@ -61,6 +69,71 @@ object Services {
         val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
         return TermDictionaryDao(db)
     }
+
+    /**
+     * 기본 세율값을 지정하는 메서드
+     * 세율 클래스와 설정값의 싱크를 맞춘다.
+     */
+    fun setDefaultInsuranceRatesInitialize(context: Context){
+        debug("[setDefaultInsuranceRatesInitialize]")
+        val rates = calculator.insurance.rates
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+
+        if(!prefs.contains(DefaultRatesPrefKey.nationalPension)){
+            val editor = prefs.edit()
+            editor.putString(DefaultRatesPrefKey.nationalPension,rates.nationalPension.toString())
+            editor.putString(DefaultRatesPrefKey.healthCare,rates.healthCare.toString())
+            editor.putString(DefaultRatesPrefKey.longTermCare,rates.longTermCare.toString())
+            editor.putString(DefaultRatesPrefKey.employmentCare,rates.employmentCare.toString())
+            editor.apply()
+        } else {
+            rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0").toDouble()
+            rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0").toDouble()
+            rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
+            rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
+        }
+        debug(rates.toString())
+    }
+
+    fun setDefaultInsuranceRates(context: Context){
+        debug("[setDefaultInsuranceRates]")
+
+        // 조건절이 이용될 yearmonth ('201902' 같은 형식) 을 만드는 구문.
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR).toString()
+        val month = cal.get(Calendar.MONTH).toString().padStart(2,'0')
+
+        // 데이터베이스 에서 4대보험 세율을 조회
+        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
+        val cur = db.query("insurance_tax_rates",
+                arrayOf("national_pension", "health_care", "long_term_care", "employment_care"), "yearmonth <= ?",
+                arrayOf("$year$month"), null, null, "yearmonth desc", "1")
+        if (cur.moveToFirst()) {
+            val rates = calculator.insurance.rates
+
+            // singleton 으로 묶인 멤버 변수에 값을 지정해준다.
+            rates.nationalPension = cur.getDouble(cur.getColumnIndex("national_pension"))
+            rates.healthCare = cur.getDouble(cur.getColumnIndex("health_care"))
+            rates.longTermCare = cur.getDouble(cur.getColumnIndex("long_term_care"))
+            rates.employmentCare = cur.getDouble(cur.getColumnIndex("employment_care"))
+
+
+            // 세율 정보를 '설정 변수' 에 넣어준다.
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = prefs.edit()
+            editor.putString(DefaultRatesPrefKey.nationalPension, rates.nationalPension.toString())
+            editor.putString(DefaultRatesPrefKey.healthCare, rates.healthCare.toString())
+            editor.putString(DefaultRatesPrefKey.longTermCare, rates.longTermCare.toString())
+            editor.putString(DefaultRatesPrefKey.employmentCare, rates.employmentCare.toString())
+            editor.apply()
+
+            debug(rates.toString())
+        } else {
+            debug("[setDefaultInsuranceRates] 쿼리 결과 없음")
+        }
+        cur.close()
+    }
+
     /**
      * 디버깅
      *
@@ -83,5 +156,12 @@ object Services {
         var healthCareRate: Double = 0.toDouble()
         var longTermCareRate: Double = 0.toDouble()
         var employmentCareRate: Double = 0.toDouble()
+    }
+
+    object DefaultRatesPrefKey {
+        const val nationalPension = "rate_default_national_pension"
+        const val healthCare = "rate_default_health_care"
+        const val longTermCare = "rate_default_long_term_care"
+        const val employmentCare = "rate_default_employment_care"
     }
 }

@@ -72,4 +72,17 @@ public class InsuranceRates {
             this.employmentCare = 0;
         }
     }
+
+    /**
+     * 디버깅용 문자열 리턴 메서드
+     * @return String
+     */
+    public String toString(){
+        String result = "\n<보험세율 연산 클래스>\n";
+        result += "국민연금 : " + this.nationalPension + "\n";
+        result += "건강보험 : " + this.healthCare + "\n";
+        result += "요양보험 : " + this.longTermCare + "\n";
+        result += "고용보험 : " + this.employmentCare + "\n";
+        return result;
+    }
 }

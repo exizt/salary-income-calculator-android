@@ -52,6 +52,7 @@ class NormalCalculatorFragment : BaseFragment() {
         super.onResume()
         val pref = PreferenceManager.getDefaultSharedPreferences(this.activity)
         if (pref.getBoolean("rate_settings_enable", false)) {
+            // 효과가 너무 약하다...강한 효과가 필요함...
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
     }
@@ -156,6 +157,18 @@ class NormalCalculatorFragment : BaseFragment() {
         calculator.options.child = child
         calculator.options.setAnnualBasis(annualBasis)
         calculator.options.setIncludedSeverance(includedSeverance)
+
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+        val rates = calculator.insurance.rates
+        if (prefs.getBoolean("rate_settings_enable", false)) {
+            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
+            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0").toDouble()
+            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
+            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
+        } else {
+            Services.setDefaultInsuranceRatesInitialize(this.activity!!)
+        }
 
         calculator.run()
 

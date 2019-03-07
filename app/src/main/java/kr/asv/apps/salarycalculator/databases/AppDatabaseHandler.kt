@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.preference.PreferenceManager
 import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
+import kr.asv.apps.salarycalculator.Services
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -33,7 +34,7 @@ class AppDatabaseHandler (context: Context){
     // 앱에서 실행되는 Database File 의 전체 경로
     private var mDatabasePath :String
     // 앱에서 실행되는 Database 의 버전의 설정값 이름
-    private val localDbVersionPreferenceCode = "DB_CURRENT_VERSION"
+    private val versionPreferencesKey = "DB_CURRENT_VERSION"
     // assets 의 DB 파일의 경로
     private val assetDbFilePath = "db"
     // assets 의 DB 파일의 파일명
@@ -44,7 +45,7 @@ class AppDatabaseHandler (context: Context){
     private val firebaseStorageDBFilePath = "apps/income-salary-calculator/income-salary-calculator-db.db"
 
     private val isDebug = true
-    private val debugTag = "EXIZT-DEBUG"
+    private val debugTag = "[EXIZT-DEBUG]"
 
 
     init{
@@ -143,7 +144,7 @@ class AppDatabaseHandler (context: Context){
      */
     @Suppress("unused")
     private fun getLocalDbVersionFromPreferences(prefs : SharedPreferences) : Int{
-        return prefs.getInt(localDbVersionPreferenceCode,0)
+        return prefs.getInt(versionPreferencesKey,0)
     }
 
     /**
@@ -151,7 +152,7 @@ class AppDatabaseHandler (context: Context){
      */
     private fun setLocalDbVersionToPreferences(prefs : SharedPreferences, version:Int){
         val editor = prefs.edit()
-        editor.putInt(localDbVersionPreferenceCode,version)
+        editor.putInt(versionPreferencesKey,version)
         editor.apply()
     }
 
@@ -308,6 +309,9 @@ class AppDatabaseHandler (context: Context){
                 debug("[copyFirebaseStorageDbFile] 복사 완료")
 
                 // 여기서 버전 히스토리를 남겨도 좋을 듯 한데... 어디다 남길지 모르겠음...
+
+                // 세율 정보값에 변경된 값을 반영함.
+                Services.setDefaultInsuranceRates(context)
             } else {
                 debug("[copyFirebaseStorageDbFile] 새로운 버전이 아니므로, 복사 안 함")
             }

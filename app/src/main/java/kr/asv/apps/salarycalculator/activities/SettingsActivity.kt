@@ -4,6 +4,7 @@ package kr.asv.apps.salarycalculator.activities
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -83,28 +84,38 @@ class SettingsActivity : AppCompatPreferenceActivity() {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     class AdvanceTaxRatesPreferenceFragment : PreferenceFragment() {
+        private val nationalPensionCustomRatePrefKey = resources.getString(R.string.pref_key_custom_national_pension_rate)
+        private val healthCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_health_care_rate)
+        private val longTermCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_long_term_care_rate)
+        private val employmentCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_employment_care_rate)
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
             addPreferencesFromResource(R.xml.pref_advance_taxrates)
             setHasOptionsMenu(true)
 
-            //setDefaultRates();
+            // 에디트 필터 설정
+            (findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(healthCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(longTermCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(employmentCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
 
-            (findPreference("rate_national_pension") as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference("rate_health_care") as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference("rate_longterm_care") as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference("rate_employment_care") as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            // 이벤트 바인딩
+            bindPreferenceSummaryToValue(findPreference(nationalPensionCustomRatePrefKey))
+            bindPreferenceSummaryToValue(findPreference(healthCareCustomRatePrefKey))
+            bindPreferenceSummaryToValue(findPreference(longTermCareCustomRatePrefKey))
+            bindPreferenceSummaryToValue(findPreference(employmentCareCustomRatePrefKey))
 
-            bindPreferenceSummaryToValue(findPreference("rate_national_pension"))
-            bindPreferenceSummaryToValue(findPreference("rate_health_care"))
-            bindPreferenceSummaryToValue(findPreference("rate_longterm_care"))
-            bindPreferenceSummaryToValue(findPreference("rate_employment_care"))
+            // 기본값 설정
+            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+            if(! prefs.contains(nationalPensionCustomRatePrefKey)){
+                resetRates(prefs)
+            }
 
             //초기화 버튼
             val prefResetButton = findPreference("rate_initialize_button")
             prefResetButton.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                resetRates()
+                resetRates(prefs)
                 false
             }
         }
@@ -123,22 +134,17 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * @todo 기존에는 InsuranceRates 의 default 값을 가져오는 방식이었으나, preferences 를 이용하는 방식으로 교체해야 한다.
          *
          */
-        private fun resetRates() {
-            //Calculator 클래스에서 Rate 기본값으로 설정하면서 기본값을 가져온다.
-            val defaultNationalPensionRate = Services.calculator.insurance.rates.nationalPension
-            val defaultHealthCareRate = Services.calculator.insurance.rates.healthCare
-            val defaultLongTermCareRate = Services.calculator.insurance.rates.longTermCare
-            val defaultEmploymentCareRate = Services.calculator.insurance.rates.employmentCare
-
-            setTextWithSummary("rate_national_pension", defaultNationalPensionRate.toString())
-            setTextWithSummary("rate_health_care", defaultHealthCareRate.toString())
-            setTextWithSummary("rate_longterm_care", defaultLongTermCareRate.toString())
-            setTextWithSummary("rate_employment_care", defaultEmploymentCareRate.toString())
+        private fun resetRates(prefs : SharedPreferences) {
+            // 초기화 값을 가져와서 셋팅한다.
+            setTextWithSummary(nationalPensionCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.nationalPension,""))
+            setTextWithSummary(healthCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.healthCare,""))
+            setTextWithSummary(longTermCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.longTermCare,""))
+            setTextWithSummary(employmentCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.employmentCare,""))
         }
 
         /**
          * setText 만 하면 값만 바뀌고, Summary 부분이 바뀌지 않으므로. 아래와 같은 구문을 사용.
-         *
+         * 결과적으로, view 의 text 변경되고 preference 도 변경됨.
          * @param key   String
          * @param value String
          */
@@ -147,25 +153,6 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             preference.text = value
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, value)
         }
-        /*
-        public void setDefaultRates()
-        {
-            InsuranceRates initInsuranceRates = new InsuranceRates();
-            Double defaultNationalPensionRate = initInsuranceRates.getNationalPension();
-            Double defaultHealthCareRate = initInsuranceRates.getHealthCare();
-            Double defaultLongTermCareRate = initInsuranceRates.getLongTermCare();
-            Double defaultEmploymentCareRate = initInsuranceRates.getEmploymentCare();
-
-            setDefaultValue("rate_national_pension",String.valueOf(defaultNationalPensionRate));
-            setDefaultValue("rate_health_care",String.valueOf(defaultHealthCareRate));
-            setDefaultValue("rate_longterm_care",String.valueOf(defaultLongTermCareRate));
-        }
-        public void setDefaultValue(CharSequence key,String value)
-        {
-            EditTextPreference preference = ((EditTextPreference)findPreference(key));
-            preference.setDefaultValue(value);
-        }
-        */
     }
 
     /**
@@ -242,6 +229,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         /**
          * A preference value change listener that updates the preference's summary
          * to reflect its new value.
+         * @todo 하드 코딩된 부분이 있어서, 이 부분을 처리할 아이디어가 필요함.
          */
         private val sBindPreferenceSummaryToValueListener = Preference.OnPreferenceChangeListener { preference, value ->
             var stringValue = value.toString()
@@ -293,6 +281,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * immediately updated upon calling this method. The exact display format is
          * dependent on the type of preference.
          *
+         * 주의) 이벤트도 바인딩하는 메서드임. onCreate 같은 곳에서 호출해야 함.
          * @see .sBindPreferenceSummaryToValueListener
          */
         private fun bindPreferenceSummaryToValue(preference: Preference) {
