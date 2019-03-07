@@ -15,6 +15,7 @@ import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
 
+
 /**
  *
  *
@@ -144,7 +145,6 @@ class QuickCalculatorFragment : BaseFragment() {
      * @todo 세율의 기본값을 가져오는 루틴을 손 봐야 한다.
      */
     private fun calculate() {
-
         // validate checking
         if (editMoney_QMode.text.length <= 1) {
             return
@@ -162,12 +162,10 @@ class QuickCalculatorFragment : BaseFragment() {
          * 연봉기준인지 월급기준인지 구분.
          * 1000만원 이상이면 연봉입력으로 생각하고 계산. (설마 월급이 천만원은 아니겠지)
          */
-        var annualBasis = false
-        if (inputMoney >= 10000000) {
-            annualBasis = true
-        }
+        val annualBasis = inputMoney >= 10000000
 
         //옵션의 기본값
+
         var taxExemption: Long = 100000 // 비과세
         var family = 1 // 부양가족수
         var child = 0 // 20세 이하 자녀수
@@ -183,10 +181,10 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         val calculator = Services.calculator
-        val options = calculator.options
 
         // 옵션값 셋팅
-        options.setInputMoney(inputMoney.toDouble())
+        val options = calculator.options
+        options.inputMoney = inputMoney.toDouble()
         options.taxExemption = taxExemption.toDouble()
         options.family = family
         options.child = child
@@ -203,17 +201,17 @@ class QuickCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
         } else {
-            Services.setDefaultInsuranceRatesInitialize(this.activity!!)
+            Services.initInsuranceRates(prefs)
         }
-
 
         // 연봉, 월급, 4대 보험 계산
         calculator.calculateSalariesWithInsurances()
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
-        var incomeTaxDao = Services.getIncomeTaxDao()
+        val incomeTaxDao = Services.getIncomeTaxDao()
         calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toInt(), family, "201802").toDouble()
 
+        // 실수령액 계산
         calculator.calculateOnlyNetSalary()
 
         //결과 화면 호출

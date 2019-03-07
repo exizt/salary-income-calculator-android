@@ -151,7 +151,7 @@ class NormalCalculatorFragment : BaseFragment() {
 
         //옵션값 셋팅
         //CalculatorOptions options = ;
-        calculator.options.setInputMoney(inputMoney.toDouble())
+        calculator.options.inputMoney = inputMoney.toDouble()
         calculator.options.taxExemption = taxExemption.toDouble()
         calculator.options.family = family
         calculator.options.child = child
@@ -167,7 +167,7 @@ class NormalCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
         } else {
-            Services.setDefaultInsuranceRatesInitialize(this.activity!!)
+            Services.initializeDefaultInsuranceRates(this.activity!!)
         }
 
         calculator.run()

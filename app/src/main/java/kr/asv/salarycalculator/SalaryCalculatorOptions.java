@@ -61,7 +61,8 @@ public class SalaryCalculatorOptions {
         }
     }
 
-    double getInputMoney() {
+    @SuppressWarnings("WeakerAccess")
+    public double getInputMoney() {
         return inputMoney;
     }
 

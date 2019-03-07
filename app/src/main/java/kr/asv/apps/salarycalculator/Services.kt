@@ -2,6 +2,7 @@ package kr.asv.apps.salarycalculator
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.preference.PreferenceManager
 import android.util.Log
@@ -40,7 +41,7 @@ object Services {
         // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
         if(appDatabasePath==""){
             // 데이터베이스도 없는지 확인해야 하는데...음...
-            setDefaultInsuranceRatesInitialize(context)
+            initializeDefaultInsuranceRates(context)
 
             doAsync {
                  //디비 연결 및 생성과 Assets 을 통한 업데이트
@@ -75,11 +76,12 @@ object Services {
     }
 
     /**
-     * 기본 세율값을 지정하는 메서드
-     * 세율 클래스와 설정값의 싱크를 맞춘다.
+     * 기본 세율 값을 재조정하는 메서드.
+     * preferences 에 값이 없으면, Rates 클래스의 값을 참조해 기본값을 넣어두고,
+     * 이후부터는, Preferences 의 기본값을 가져와서 Rates 에 보정한다.
      */
-    fun setDefaultInsuranceRatesInitialize(context: Context){
-        debug("[setDefaultInsuranceRatesInitialize]")
+    fun initializeDefaultInsuranceRates(context: Context){
+        debug("[initializeDefaultInsuranceRates]")
         val rates = calculator.insurance.rates
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -97,6 +99,28 @@ object Services {
             rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
         }
         //debug("세율",rates)
+    }
+
+    /**
+     * 세율 초기화 메서드
+     * 세율 값을 Pref 의 Default 값으로 재조정한다.
+     */
+    fun initInsuranceRates(context: Context){
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        initInsuranceRates(prefs)
+    }
+
+    /**
+     * 세율 초기화 메서드
+     * 세율 값을 Pref 의 Default 값으로 재조정한다.
+     */
+    fun initInsuranceRates(prefs: SharedPreferences){
+        debug("[initInsuranceRates]")
+        val rates = calculator.insurance.rates
+        rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0").toDouble()
+        rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0").toDouble()
+        rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
+        rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
     }
 
     /**
