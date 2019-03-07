@@ -29,26 +29,31 @@ public class InsuranceImpl implements Insurance {
     /**
      * 4대보험요율
      */
-    private final InsuranceRates rates = new InsuranceRates();
+    private final InsuranceRates rates;
+
+    /**
+     * 생성자
+     */
+    InsuranceImpl(){
+        this.rates = new InsuranceRates();
+    }
 
     /**
      * 4대 보험 계산
      * 각각의 보험요율을 계산한다.
      */
     public void execute(double adjustedSalary) {
-        this.nationalPension = calculateNationalPension(adjustedSalary);// 국민연금
-        this.healthCare = calculateHealthCare(adjustedSalary);// 건강보험
-        this.longTermCare = calculateLongTermCare(adjustedSalary);// 요양보험
-        this.employmentCare = calculateEmploymentCare(adjustedSalary);// 고용보험
+        calculateNationalPension(adjustedSalary);// 국민연금
+        calculateHealthCareWithLongTermCare(adjustedSalary);// 건강보험 과 요양보험
+        calculateEmploymentCare(adjustedSalary);// 고용보험
     }
 
     /**
      * 국민연금 계산식
      *
      * @param adjustedSalary 세금의 기준 봉급액(기본급 - 비과세)
-     * @return double
      */
-    private double calculateNationalPension(double adjustedSalary) {
+    private void calculateNationalPension(double adjustedSalary) {
         // 최소 최대값 보정
         if (adjustedSalary < 250000)
             adjustedSalary = 250000;
@@ -62,50 +67,48 @@ public class InsuranceImpl implements Insurance {
         double result = adjustedSalary * 0.01 * rates.getNationalPension();
 
         // 보험료값 원단위 절사
-        result = Math.floor(result / 10) * 10;
-        return result;
+        this.nationalPension = Math.floor(result / 10) * 10;
     }
 
     /**
      * 건강보험 계산식
      *
      * @param adjustedSalary double
-     * @return double
      */
-    private double calculateHealthCare(double adjustedSalary) {
+    private void calculateHealthCareWithLongTermCare(double adjustedSalary) {
         double result = adjustedSalary * 0.01 * rates.getHealthCare();
 
         // 보험료값 원단위 절사
-        result = Math.floor(result / 10) * 10;
-        return result;
-    }
+        this.healthCare = Math.floor(result / 10) * 10;
 
-    public InsuranceRates getRates() {
-        return rates;
+        calculateLongTermCare(this.healthCare);
     }
 
     /**
      * 장기요양보험 계산식
      *
-     * @return double
      */
-    private double calculateLongTermCare(double adjustedSalary) {
-        double result = this.calculateHealthCare(adjustedSalary) * 0.01 * rates.getLongTermCare();
+    private void calculateLongTermCare(double healthCare) {
+        double result = healthCare * 0.01 * rates.getLongTermCare();
         // 원단위 절삭
-        result = Math.floor(result / 10) * 10;
-        return result;
+        this.longTermCare = Math.floor(result / 10) * 10;
     }
 
     /**
      * 고용보험 계산식
-     *
-     * @return double
      */
-    private double calculateEmploymentCare(double adjustedSalary) {
+    private void calculateEmploymentCare(double adjustedSalary) {
         double result = adjustedSalary * 0.01 * rates.getEmploymentCare();
         // 원단위 절삭
-        result = Math.floor(result / 10) * 10;
-        return result;
+        this.employmentCare = Math.floor(result / 10) * 10;
+    }
+
+    /**
+     * 세율 리턴
+     * @return InsuranceRates
+     */
+    public InsuranceRates getRates() {
+        return rates;
     }
 
     /**
