@@ -80,7 +80,7 @@ object Services {
      * preferences 에 값이 없으면, Rates 클래스의 값을 참조해 기본값을 넣어두고,
      * 이후부터는, Preferences 의 기본값을 가져와서 Rates 에 보정한다.
      */
-    fun initializeDefaultInsuranceRates(context: Context){
+    private fun initializeDefaultInsuranceRates(context: Context){
         debug("[initializeDefaultInsuranceRates]")
         val rates = calculator.insurance.rates
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
@@ -105,6 +105,7 @@ object Services {
      * 세율 초기화 메서드
      * 세율 값을 Pref 의 Default 값으로 재조정한다.
      */
+    @Suppress("unused")
     fun initInsuranceRates(context: Context){
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         initInsuranceRates(prefs)

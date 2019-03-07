@@ -64,9 +64,9 @@ class ReportActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             when (position) {
                 0 -> return ReportSummaryFragment.newInstance()
-                1 -> return ReportInputFragment.newInstance()
-                2 -> return ReportInsuranceFragment.newInstance()
-                3 -> return ReportTaxFragment.newInstance()
+                1 -> return ReportInsuranceFragment.newInstance()
+                2 -> return ReportTaxFragment.newInstance()
+                3 -> return ReportInputFragment.newInstance()
             }
             return ReportSummaryFragment.newInstance()
         }

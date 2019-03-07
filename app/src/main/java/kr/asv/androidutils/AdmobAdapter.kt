@@ -37,7 +37,7 @@ class AdmobAdapter {
         @Suppress("unused", "SpellCheckingInspection")
         private fun newAdRequest(): AdRequest {
             val builder = AdRequest.Builder()
-            //builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            //builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // 이제는 에뮬레이터는 기본으로 지정되어 있으니, 넣으면 오히려 에러나는 구문.
             //builder.addTestDevice("621CBEEDE09F6A5B37180A718E74C41C");// G pro 테스트 기기
             //builder.addTestDevice("2D81264572D2AB096C895509EDBD419F");// Samsung G3 테스트 기기
             return builder.build()

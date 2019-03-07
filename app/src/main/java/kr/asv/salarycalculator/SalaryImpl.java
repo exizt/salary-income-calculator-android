@@ -71,8 +71,10 @@ public class SalaryImpl implements Salary {
         basicAnnualSalary = basicSalary * 12;
     }
 
-    public void setInputMoney(double inputMoney) {
-        this.inputMoney = inputMoney;
+    public void setInputMoney(double value) {
+        double maximum = 10000000000000000000000000000000000000000000d;
+        if(value>maximum) value = maximum;
+        this.inputMoney = value;
     }
 
     public double getGrossSalary() {

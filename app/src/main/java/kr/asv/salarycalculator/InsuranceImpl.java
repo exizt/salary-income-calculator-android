@@ -31,6 +31,14 @@ public class InsuranceImpl implements Insurance {
      */
     private final InsuranceRates rates;
 
+    // 국민연금 상한, 하한액
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int NP_DOWN_LIMIT = 300000;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int NP_UP_LIMIT = 4680000;
+    // 건강보험 상한액
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int HC_UP_LIMIT = 3182760;
     /**
      * 생성자
      */
@@ -55,10 +63,10 @@ public class InsuranceImpl implements Insurance {
      */
     private void calculateNationalPension(double adjustedSalary) {
         // 최소 최대값 보정
-        if (adjustedSalary < 250000)
-            adjustedSalary = 250000;
-        if (adjustedSalary > 3980000)
-            adjustedSalary = 3980000;
+        if (adjustedSalary < NP_DOWN_LIMIT)
+            adjustedSalary = NP_DOWN_LIMIT;
+        if (adjustedSalary > NP_UP_LIMIT)
+            adjustedSalary = NP_UP_LIMIT;
 
         // 소득월액 천원미만 절사
         adjustedSalary = Math.floor(adjustedSalary / 1000) * 1000;
@@ -76,12 +84,28 @@ public class InsuranceImpl implements Insurance {
      * @param adjustedSalary double
      */
     private void calculateHealthCareWithLongTermCare(double adjustedSalary) {
+        calculateHealthCare(adjustedSalary);
+
+        calculateLongTermCare(this.healthCare);
+    }
+
+    /**
+     * 건강보험 계산식
+     *
+     * @param adjustedSalary double
+     */
+    private void calculateHealthCare(double adjustedSalary) {
         double result = adjustedSalary * 0.01 * rates.getHealthCare();
+
+        result = Math.floor(result / 10) * 10;
+
+        // 상한액
+        if(result >= HC_UP_LIMIT){
+            result = HC_UP_LIMIT;
+        }
 
         // 보험료값 원단위 절사
         this.healthCare = Math.floor(result / 10) * 10;
-
-        calculateLongTermCare(this.healthCare);
     }
 
     /**

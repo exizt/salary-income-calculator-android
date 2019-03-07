@@ -209,7 +209,7 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
-        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toInt(), family, "201802").toDouble()
+        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
 
         // 실수령액 계산
         calculator.calculateOnlyNetSalary()

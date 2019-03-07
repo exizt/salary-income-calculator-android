@@ -3,6 +3,7 @@ package kr.asv.apps.salarycalculator.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_older_calculator.*
+import kr.asv.androidutils.InputFilterLongMinMax
+import kr.asv.androidutils.InputFilterMinMax
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
@@ -19,7 +22,6 @@ import kr.asv.shhtaxmanager.R
  * create an instance of this fragment.
  */
 class NormalCalculatorFragment : BaseFragment() {
-    private var includedSeverance = false
     private var annualBasis = false
 
     /**
@@ -36,6 +38,7 @@ class NormalCalculatorFragment : BaseFragment() {
         val edOptionTaxFree = findViewById(R.id.edOptionTaxFree) as EditText
         edMoney.addTextChangedListener(MoneyTextWatcher(edMoney))
         edOptionTaxFree.addTextChangedListener(MoneyTextWatcher(edOptionTaxFree))
+
         return view
     }
 
@@ -46,6 +49,12 @@ class NormalCalculatorFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initEventListener()
         edMoney.requestFocus()
+
+        // 최대 최소값 지정
+        edMoney.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999999))
+        edOptionTaxFree.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 99999999999))
+        edOptionFamily.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
+        edOptionChild.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
     }
 
     override fun onResume() {
@@ -93,11 +102,11 @@ class NormalCalculatorFragment : BaseFragment() {
         //val layYearlyOpSeverance = findViewById(R.id.divYearlyOpSeverance) as LinearLayout
         if (radioButton.isChecked) {
             if (radioButton.id == R.id.raMoneyMonthly) {
-                this.annualBasis = false
+                //this.annualBasis = false
                 titleMoneyLabel.text = "월급입력"
                 divYearlyOpSeverance.visibility = View.INVISIBLE
             } else {
-                this.annualBasis = true
+                //this.annualBasis = true
                 titleMoneyLabel.text = "연봉입력"
                 divYearlyOpSeverance.visibility = View.VISIBLE
             }
@@ -139,12 +148,16 @@ class NormalCalculatorFragment : BaseFragment() {
             edOptionChild.setText("0")
         }
 
+        if(inputMoney < taxExemption){
+            return
+        }
+
         // 연봉인지, 월급인지 구분값
         //annualBasis = R.id.raMoneyYearly == rgMoneyType.checkedRadioButtonId
-        annualBasis = raMoneyYearly.isChecked
+        val annualBasis = raMoneyYearly.isChecked
 
         // 퇴직금 포함 여부
-        includedSeverance = checkSeverance.isChecked
+        val includedSeverance = checkSeverance.isChecked
 
         // 연산
         val calculator = Services.calculator
@@ -176,7 +189,7 @@ class NormalCalculatorFragment : BaseFragment() {
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
-        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toInt(), family, "201802").toDouble()
+        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
 
         // 실수령액 계산
         calculator.calculateOnlyNetSalary()
