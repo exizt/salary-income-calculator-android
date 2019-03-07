@@ -32,16 +32,16 @@ public class SalaryCalculatorOptions {
         return family;
     }
 
-	/**
-	 * family 값은 최소 1 이상.
-	 * @param value int
-	 */
-	public void setFamily(int value) {
-    	if(value > 1){
-        	family = value;
-		} else {
-    		family = 0;
-		}
+    /**
+     * family 값은 최소 1 이상.
+     * @param value int
+     */
+    public void setFamily(int value) {
+        if(value > 1){
+            family = value;
+        } else {
+            family = 0;
+        }
     }
 
     public int getChild() {
@@ -49,11 +49,11 @@ public class SalaryCalculatorOptions {
     }
 
     public void setChild(int value) {
-		if(value > 0){
-        	child = value;
-		} else {
-			child = 0;
-		}
+        if(value > 0){
+            child = value;
+        } else {
+            child = 0;
+        }
     }
 
     double getInputMoney() {
@@ -61,10 +61,10 @@ public class SalaryCalculatorOptions {
     }
 
     public void setInputMoney(double value) {
-	    if(value > 0){
+        if(value > 0){
             inputMoney = value;
         } else {
-	        inputMoney = 0;
+            inputMoney = 0;
         }
     }
 
@@ -73,10 +73,10 @@ public class SalaryCalculatorOptions {
     }
 
     public void setTaxExemption(double value) {
-	    if(value > 0){
+        if(value > 0){
             taxExemption = value;
         } else {
-	        taxExemption = 0;
+            taxExemption = 0;
         }
     }
 

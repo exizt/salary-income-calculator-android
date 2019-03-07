@@ -16,7 +16,7 @@ public class InsuranceImpl implements Insurance {
     /**
      * 건강보험
      */
-	private double healthCare = 0;
+    private double healthCare = 0;
     /**
      * 장기요양보험
      */
