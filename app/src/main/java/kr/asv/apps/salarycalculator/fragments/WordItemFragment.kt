@@ -21,20 +21,16 @@ import kr.asv.shhtaxmanager.R
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-    private val isDebug = false
-
-    override fun onListFragmentInteraction(item: Item) {
-        val intent = Intent(activity, WordPageActivity::class.java)
-        intent.putExtra("wordKey", item.id)
-        startActivity(intent)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         debug("onCreate")
-        getDictionaryData()
+        getWordDictionaryListData()
     }
 
+    /**
+     * onCreateView
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
@@ -51,10 +47,23 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         return view
     }
 
-    private fun getDictionaryData() {
+    /**
+     * item 을 넘겨 받았을 때의 액션
+     * WordPageActivity 를 새로 호출.
+     */
+    override fun onListFragmentInteraction(item: Item) {
+        val intent = Intent(activity, WordPageActivity::class.java)
+        intent.putExtra("wordKey", item.id)
+        startActivity(intent)
+    }
+
+    /**
+     * 데이터베이스 에서 목록을 조회하는 메서드
+     */
+    private fun getWordDictionaryListData() {
         if (WordDictionaryContent.isUsed) return
 
-        debug("getDictionaryData")
+        debug("getWordDictionaryListData")
         // 객체 를 가져오기만 함
         val table = Services.getTermDictionaryDao()
         try {
