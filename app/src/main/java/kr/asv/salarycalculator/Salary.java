@@ -1,7 +1,7 @@
 package kr.asv.salarycalculator;
 
 public interface Salary {
-    void execute();
+    void calculate();
 
     void setInputMoney(double inputMoney);
 
@@ -9,7 +9,7 @@ public interface Salary {
 
     void setAnnualBasis(boolean annualBasis);
 
-    void setIncludedSeverance(boolean includedSeverance);
+    void setSeveranceIncluded(boolean severanceIncluded);
 
     double getBasicSalary();
 
