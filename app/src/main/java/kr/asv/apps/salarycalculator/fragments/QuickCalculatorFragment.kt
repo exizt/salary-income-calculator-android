@@ -47,7 +47,7 @@ class QuickCalculatorFragment : BaseFragment() {
         if (pref.getBoolean("quick_settings_enable", false)) {
             Toast.makeText(activity, "'퀵계산설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 퀵계산 설정] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
-        if (pref.getBoolean("rate_settings_enable", false)) {
+        if (pref.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
     }
@@ -195,7 +195,7 @@ class QuickCalculatorFragment : BaseFragment() {
         // 세율 정보 가져오기
         // 커스텀 설정했을 경우에는 preferences 의 값을 가져오고, 아닌 경우에는 기본값들을 가져온다.
         val rates = calculator.insurance.rates
-        if (prefs.getBoolean("rate_settings_enable", false)) {
+        if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
             rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
             rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0").toDouble()
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()

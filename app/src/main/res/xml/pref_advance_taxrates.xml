@@ -1,20 +1,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:key="rate_settings_enable"
+        android:key="@string/pref_key_custom_rates_enabled"
         android:defaultValue="false"
         android:title="세율 고급설정 사용" />
 
     <Preference android:title="세율설정 변경 초기화"
         android:key="rate_initialize_button"
-        android:dependency="rate_settings_enable"
+        android:dependency="@string/pref_key_custom_rates_enabled"
         android:summary="세율설정을 원래 값으로 돌려놓습니다."/>
 
     <EditTextPreference
         android:key="@string/pref_key_custom_national_pension_rate"
         android:inputType="numberDecimal"
         android:numeric="decimal"
-        android:dependency="rate_settings_enable"
+        android:dependency="@string/pref_key_custom_rates_enabled"
         android:defaultValue="0"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -24,7 +24,7 @@
         android:key="@string/pref_key_custom_health_care_rate"
         android:inputType="numberDecimal"
         android:numeric="decimal"
-        android:dependency="rate_settings_enable"
+        android:dependency="@string/pref_key_custom_rates_enabled"
         android:defaultValue="0"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -34,7 +34,7 @@
         android:key="@string/pref_key_custom_long_term_care_rate"
         android:inputType="numberDecimal"
         android:numeric="decimal"
-        android:dependency="rate_settings_enable"
+        android:dependency="@string/pref_key_custom_rates_enabled"
         android:defaultValue="0"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -44,7 +44,7 @@
         android:key="@string/pref_key_custom_employment_care_rate"
         android:inputType="numberDecimal"
         android:numeric="decimal"
-        android:dependency="rate_settings_enable"
+        android:dependency="@string/pref_key_custom_rates_enabled"
         android:defaultValue="0"
         android:selectAllOnFocus="true"
         android:singleLine="true"
