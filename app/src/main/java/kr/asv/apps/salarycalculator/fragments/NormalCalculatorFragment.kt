@@ -150,15 +150,16 @@ class NormalCalculatorFragment : BaseFragment() {
         val calculator = Services.calculator
 
         //옵션값 셋팅
-        //CalculatorOptions options = ;
-        calculator.options.inputMoney = inputMoney.toDouble()
-        calculator.options.taxExemption = taxExemption.toDouble()
-        calculator.options.family = family
-        calculator.options.child = child
-        calculator.options.setAnnualBasis(annualBasis)
-        calculator.options.setIncludedSeverance(includedSeverance)
+        val options = calculator.options
+        options.inputMoney = inputMoney.toDouble()
+        options.taxExemption = taxExemption.toDouble()
+        options.family = family
+        options.child = child
+        options.setAnnualBasis(annualBasis)
+        options.setIncludedSeverance(includedSeverance)
+        options.setIncomeTaxCalculationDisabled(true)
 
-
+        // 세율 정보 가져오기
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val rates = calculator.insurance.rates
         if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
@@ -167,10 +168,18 @@ class NormalCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
         } else {
-            Services.initializeDefaultInsuranceRates(this.activity!!)
+            Services.initInsuranceRates(prefs)
         }
 
-        calculator.run()
+        // 연봉, 월급, 4대 보험 계산
+        calculator.calculateSalariesWithInsurances()
+
+        // 소득세 계산 (데이터베이스 에서 읽어오기)
+        val incomeTaxDao = Services.getIncomeTaxDao()
+        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toInt(), family, "201802").toDouble()
+
+        // 실수령액 계산
+        calculator.calculateOnlyNetSalary()
 
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)
