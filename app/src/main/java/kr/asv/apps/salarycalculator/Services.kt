@@ -17,16 +17,15 @@ import java.util.*
  * Created by EXIZT on 2016-04-27.
  */
 object Services {
+    private const val TAG = "[EXIZT-DEBUG][Services]"
+    private const val isDebug = true
     // 계산기 클래스
     val calculator = SalaryCalculator()
     // 세율 클래스
     val taxCalculatorRates = TaxCalculatorRates()
-    private var isDebug = true
-
-    //var termDictionaryDao : TermDictionaryDao? = null
-    //    private set
+    // private set
     private var appDatabasePath = ""
-
+    // Database Handler
     @SuppressLint("StaticFieldLeak")
     lateinit var appDatabaseHandler : AppDatabaseHandler
 
@@ -92,7 +91,7 @@ object Services {
             rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
             rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
         }
-        debug(rates.toString())
+        debug("세율",rates)
     }
 
     fun setDefaultInsuranceRates(context: Context){
@@ -127,7 +126,7 @@ object Services {
             editor.putString(DefaultRatesPrefKey.employmentCare, rates.employmentCare.toString())
             editor.apply()
 
-            debug(rates.toString())
+            debug("세율", rates)
         } else {
             debug("[setDefaultInsuranceRates] 쿼리 결과 없음")
         }
@@ -135,20 +134,16 @@ object Services {
     }
 
     /**
-     * 디버깅
-     *
-     * @param msg message
+     * 디버깅 메서드
+     * 변수가 두개 넘어올 경우의 처리 추가
+     * @param msg 메시지
      */
-    private fun debug(msg: String) {
-
-        if (isDebug) {
-            Log.d("[EXIZT-DEBUG]", "[Services]$msg")
-        }
-    }
-
     @Suppress("unused")
-    fun setDebug(debug: Boolean) {
-        isDebug = debug
+    private fun debug(msg: String, msg2 : Any = "") {
+        @Suppress("ConstantConditionIf")
+        if (isDebug) {
+            Log.d(TAG, "$msg $msg2")
+        }
     }
 
     class TaxCalculatorRates {

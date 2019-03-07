@@ -5,10 +5,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 
 class TermDictionaryDao(private val db: SQLiteDatabase) {
-    private var isDebug = false
-    private val debugTag = "EXIZT-DEBUG"
     private val tableName = "terminology_information"
 
+    /**
+     * list 를 호출했을 때, 쿼리를 수행하고 Cursor 를 반환함
+     */
     val list: Cursor
         get() {
             debug("getAll")
@@ -58,14 +59,21 @@ class TermDictionaryDao(private val db: SQLiteDatabase) {
         cur.close()
         return record
     }
-
     /**
      * 디버깅 메서드
+     * 변수가 두개 넘어올 경우의 처리 추가
      * @param msg 메시지
      */
-    private fun debug(msg: String) {
+    @Suppress("unused")
+    private fun debug(msg: String, msg2 : Any = "") {
+        @Suppress("ConstantConditionIf")
         if (isDebug) {
-            Log.d(debugTag, "[TermDictionaryDao] $msg")
+            Log.d(TAG, "$msg $msg2")
         }
+    }
+
+    companion object {
+        private const val TAG = "[EXIZT-DEBUG][TermDictionaryDao]"
+        private const val isDebug = false
     }
 }

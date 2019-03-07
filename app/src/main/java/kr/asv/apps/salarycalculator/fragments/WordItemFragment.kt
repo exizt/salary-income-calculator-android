@@ -78,20 +78,21 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
             }
             cur.close()
         } catch (e: Exception) {
-            debug("[drawDictionary] 데이터 로딩 실패 ")
-            debug(e.toString())
+            debug("[drawDictionary] 데이터 로딩 실패 ",e)
             throw e
         }
     }
 
     /**
-     * 디버깅
-     * @param msg message
+     * 디버깅 메서드
+     * 변수가 두개 넘어올 경우의 처리 추가
+     * @param msg 메시지
      */
-    fun debug(msg: String) {
+    @Suppress("unused")
+    private fun debug(msg: String, msg2 : Any = "") {
         @Suppress("ConstantConditionIf")
         if (isDebug) {
-            Log.d("[EXIZT-DEBUG]", "[WordItemFragment]$msg")
+            Log.d(TAG, "$msg $msg2")
         }
     }
 
@@ -134,6 +135,8 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         }
     }
     companion object {
+        private const val TAG = "[EXIZT-DEBUG][WordItemFragment]"
+        private const val isDebug = false
         fun newInstance(): WordItemFragment = WordItemFragment()
     }
 }

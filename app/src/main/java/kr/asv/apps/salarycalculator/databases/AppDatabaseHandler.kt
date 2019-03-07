@@ -44,9 +44,6 @@ class AppDatabaseHandler (context: Context){
     // firebaseStorage 에 위치한 파일위치
     private val firebaseStorageDBFilePath = "apps/income-salary-calculator/income-salary-calculator-db.db"
 
-    private val isDebug = true
-    private val debugTag = "[EXIZT-DEBUG]"
-
 
     init{
         mDatabasePath = context.getDatabasePath(mDatabaseName).path
@@ -88,7 +85,7 @@ class AppDatabaseHandler (context: Context){
                     setLocalDbVersionToPreferences(prefs, assetDbVersion)
                 }
             } catch (e: Exception){
-                debug("[open] Assets 에서 복사 실패 $e")
+                debug("[open] Assets 에서 복사 실패 ",e)
             }
 
         } else {
@@ -97,8 +94,8 @@ class AppDatabaseHandler (context: Context){
             val localDbVersion = getLocalDbVersionFromPreferences(prefs)
             val assetDbVersion = getAssetDbVersion(mContext)
 
-            debug("[open] 실행 초기 로컬 DB 버전 : $localDbVersion")
-            debug("[open] Assets 에 위치한 DB 버전 : $assetDbVersion")
+            debug("[open] 실행 초기 로컬 DB 버전 : ",localDbVersion)
+            debug("[open] Assets 에 위치한 DB 버전 : ",assetDbVersion)
 
             // assets 의 버전이 높을 경우, assets 의 파일을 다운로드 함.
             if(localDbVersion < assetDbVersion){
@@ -110,7 +107,7 @@ class AppDatabaseHandler (context: Context){
                         setLocalDbVersionToPreferences(prefs,assetDbVersion)
                     }
                 } catch (e: Exception) {
-                    debug("[open] Assets 에서 복사 실패  $e")
+                    debug("[open] Assets 에서 복사 실패  ",e)
                 }
             }
         }
@@ -196,7 +193,7 @@ class AppDatabaseHandler (context: Context){
      */
     private fun existsDatabaseLoaded(context:Context): Boolean{
         val dbFile = context.getDatabasePath(mDatabaseName)
-        //debug("[existsDatabaseLoaded]"+dbFile.path)
+        //debug("[existsDatabaseLoaded]",dbFile.path)
         return dbFile.exists()
     }
 
@@ -247,12 +244,14 @@ class AppDatabaseHandler (context: Context){
 
     /**
      * 디버깅 메서드
+     * 변수가 두개 넘어올 경우의 처리 추가
      * @param msg 메시지
      */
-    private fun debug(msg: String) {
+    @Suppress("unused")
+    private fun debug(msg: String, msg2 : Any = "") {
         @Suppress("ConstantConditionIf")
         if (isDebug) {
-            Log.d(debugTag, "[AppDatabaseHandler] $msg")
+            Log.d(TAG, "$msg $msg2")
         }
     }
 
@@ -321,5 +320,10 @@ class AppDatabaseHandler (context: Context){
             // 에러시 어떤 동작을 취할지도 고민... 에러시 에러를 개발자에게 알려주는 것이 좋을 듯.
 
         }
+    }
+
+    companion object {
+        private const val TAG = "[EXIZT-DEBUG][AppDatabaseHandler]"
+        private const val isDebug = false
     }
 }
