@@ -16,7 +16,9 @@ import android.view.MenuItem
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
 import kr.asv.apps.salarycalculator.Services
+import kr.asv.shhtaxmanager.BuildConfig
 import kr.asv.shhtaxmanager.R
+import org.jetbrains.anko.defaultSharedPreferences
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
@@ -76,7 +78,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     override fun isValidFragment(fragmentName: String): Boolean {
         return (PreferenceFragment::class.java.name == fragmentName
                 || AdvanceTaxRatesPreferenceFragment::class.java.name == fragmentName
-                || QuickCalculatePreferenceFragment::class.java.name == fragmentName)
+                || QuickCalculatePreferenceFragment::class.java.name == fragmentName
+                || AppAboutPreferenceFragment::class.java.name == fragmentName)
     }
 
     /**
@@ -191,6 +194,34 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         }
     }
 
+    /**
+     * activity is showing a two-pane settings UI.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    class AppAboutPreferenceFragment : PreferenceFragment() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            addPreferencesFromResource(R.xml.pref_about)
+            setHasOptionsMenu(true)
+
+            //findPreference("quick_settings_family")
+            //(findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText
+            (findPreference("app_version") as Preference).summary = "v"+BuildConfig.VERSION_NAME
+            (findPreference("app_version_code") as Preference).summary = "Number "+BuildConfig.VERSION_CODE.toString()
+            (findPreference("main_database_version") as Preference).summary = defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
+            (findPreference("main_database_version") as Preference).summary = defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
+
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            val id = item.itemId
+            if (id == android.R.id.home) {
+                startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            return super.onOptionsItemSelected(item)
+        }
+    }
 
     companion object {
 

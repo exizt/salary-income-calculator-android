@@ -3,11 +3,16 @@
     <header
         android:fragment="kr.asv.apps.salarycalculator.activities.SettingsActivity$QuickCalculatePreferenceFragment"
         android:icon="@drawable/ic_menu_send"
-        android:title="퀵계산 설정" />
+        android:title="@string/ui_act_settings_menu_qc" />
 
     <header
         android:fragment="kr.asv.apps.salarycalculator.activities.SettingsActivity$AdvanceTaxRatesPreferenceFragment"
         android:icon="@drawable/ic_menu_settings"
-        android:title="고급설정(세율조정)" />
+        android:title="@string/ui_act_settings_menu_tr" />
+
+    <header
+        android:fragment="kr.asv.apps.salarycalculator.activities.SettingsActivity$AppAboutPreferenceFragment"
+        android:icon="@drawable/ic_menu_info"
+        android:title="앱 정보" />
 
 </preference-headers>
