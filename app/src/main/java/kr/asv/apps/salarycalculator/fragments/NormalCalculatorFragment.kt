@@ -11,8 +11,8 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_older_calculator.*
-import kr.asv.androidutils.InputFilterLongMinMax
-import kr.asv.androidutils.InputFilterMinMax
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
+import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
@@ -39,6 +39,12 @@ class NormalCalculatorFragment : BaseFragment() {
         edMoney.addTextChangedListener(MoneyTextWatcher(edMoney))
         edOptionTaxFree.addTextChangedListener(MoneyTextWatcher(edOptionTaxFree))
 
+        // 최대 최소값 지정
+        (findViewById(R.id.edMoney) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
+        (findViewById(R.id.edOptionTaxFree) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 99999999999))
+        (findViewById(R.id.edOptionFamily) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
+        (findViewById(R.id.edOptionChild) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
+
         return view
     }
 
@@ -50,11 +56,6 @@ class NormalCalculatorFragment : BaseFragment() {
         initEventListener()
         edMoney.requestFocus()
 
-        // 최대 최소값 지정
-        edMoney.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999999))
-        edOptionTaxFree.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 99999999999))
-        edOptionFamily.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
-        edOptionChild.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
     }
 
     override fun onResume() {

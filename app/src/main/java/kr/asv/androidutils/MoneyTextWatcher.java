@@ -47,10 +47,10 @@ public class MoneyTextWatcher implements TextWatcher {
             editText.setSelection(editText.getText().length());
             // to place the cursor at the end of text
         } catch (NumberFormatException nfe) {
-            editText.setText("1");
+            editText.setText("0");
             nfe.printStackTrace();
         } catch (Exception e) {
-            editText.setText("1");
+            editText.setText("0");
             e.printStackTrace();
         }
         editText.addTextChangedListener(this);

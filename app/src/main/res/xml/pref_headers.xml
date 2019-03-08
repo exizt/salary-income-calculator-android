@@ -10,9 +10,4 @@
         android:icon="@drawable/ic_menu_settings"
         android:title="고급설정(세율조정)" />
 
-    <header
-        android:fragment="kr.asv.apps.salarycalculator.activities.SettingsActivity$AdvanceTaxRatesPreferenceFragment"
-        android:icon="@drawable/ic_menu_settings"
-        android:title="앱 정보" />
-
 </preference-headers>

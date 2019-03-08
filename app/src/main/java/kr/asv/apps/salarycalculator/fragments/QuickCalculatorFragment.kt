@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.androidutils.MoneyTextWatcher
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
+import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
@@ -30,6 +33,8 @@ class QuickCalculatorFragment : BaseFragment() {
 
         val editMoney = findViewById(R.id.editMoney_QMode) as EditText
         editMoney.addTextChangedListener(MoneyTextWatcher(editMoney))
+        editMoney.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
+
         return view
     }
 

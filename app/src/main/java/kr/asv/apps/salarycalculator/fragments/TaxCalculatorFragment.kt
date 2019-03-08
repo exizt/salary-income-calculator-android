@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_tax_calculator.*
-import kr.asv.androidutils.InputFilterLongMinMax
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.MoneyTextWatcher
+import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.MainActivity
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.shhtaxmanager.R
@@ -27,12 +28,12 @@ class TaxCalculatorFragment : BaseFragment() {
         setFragmentView(view)
         setActionBarTitle(resources.getString(R.string.nav_menu_rate_calculator))
 
-        (findViewById(R.id.id_input_salary) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 1000000000))
-        (findViewById(R.id.id_input_taxfree) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 100000000))
-        (findViewById(R.id.id_input_national) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 100000000))
-        (findViewById(R.id.id_input_health_care) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 100000000))
-        (findViewById(R.id.id_input_longterm_care) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 100000000))
-        (findViewById(R.id.id_input_employment_care) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 100000000))
+        (findViewById(R.id.id_input_salary) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
+        (findViewById(R.id.id_input_taxfree) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 10000000))
+        (findViewById(R.id.id_input_national) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 10000000))
+        (findViewById(R.id.id_input_health_care) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 10000000))
+        (findViewById(R.id.id_input_longterm_care) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 10000000))
+        (findViewById(R.id.id_input_employment_care) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 10000000))
 
         (findViewById(R.id.id_input_salary) as EditText).addTextChangedListener(MoneyTextWatcher(findViewById(R.id.id_input_salary) as EditText))
         (findViewById(R.id.id_input_taxfree) as EditText).addTextChangedListener(MoneyTextWatcher(findViewById(R.id.id_input_taxfree) as EditText))

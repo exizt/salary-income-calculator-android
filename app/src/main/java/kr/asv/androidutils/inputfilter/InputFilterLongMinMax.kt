@@ -1,4 +1,4 @@
-package kr.asv.androidutils
+package kr.asv.androidutils.inputfilter
 
 import android.text.InputFilter
 import android.text.Spanned
@@ -7,19 +7,25 @@ import android.text.Spanned
  * EditText 에서 Filter 를 하는 클래스
  * Created by EXIZT on 2017-11-22.
  */
-class InputFilterMinMax : InputFilter {
-    private var min = 0
-    private var max = 0
+class InputFilterLongMinMax : InputFilter {
+    private var min: Long = 0
+    private var max: Long = 0
 
-    constructor(min: Int, max: Int) {
+    internal constructor(min: Int, max: Int) {
+        this.min = min.toLong()
+        this.max = max.toLong()
+    }
+
+    @Suppress("unused")
+    constructor(min: Long, max: Long) {
         this.min = min
         this.max = max
     }
 
     @Suppress("unused")
     constructor(min: String, max: String) {
-        this.min = Integer.parseInt(min)
-        this.max = Integer.parseInt(max)
+        this.min = java.lang.Long.parseLong(min)
+        this.max = java.lang.Long.parseLong(max)
     }
 
     override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, _start: Int, _end: Int): CharSequence? {
@@ -28,7 +34,7 @@ class InputFilterMinMax : InputFilter {
             if (str.contains(",")) {
                 str = str.replace(",".toRegex(), "")
             }
-            val input = Integer.parseInt(str)
+            val input = java.lang.Long.parseLong(str)
             if (isInRange(min, max, input))
                 return null
         } catch (ignored: NumberFormatException) {
@@ -36,7 +42,7 @@ class InputFilterMinMax : InputFilter {
         return ""
     }
 
-    private fun isInRange(a: Int, b: Int, c: Int): Boolean {
+    private fun isInRange(a: Long, b: Long, c: Long): Boolean {
         return if (b > a) {
             c in a..b
         } else {
