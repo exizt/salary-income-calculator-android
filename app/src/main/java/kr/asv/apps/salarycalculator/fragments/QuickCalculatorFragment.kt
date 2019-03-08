@@ -47,11 +47,11 @@ class QuickCalculatorFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
-        val pref = PreferenceManager.getDefaultSharedPreferences(this.activity)
-        if (pref.getBoolean("quick_settings_enable", false)) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this.activity)
+        if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
             Toast.makeText(activity, "'퀵계산설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 퀵계산 설정] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
-        if (pref.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
+        if (prefs.getBoolean(getString(R.string.pref_key_custom_rates_enabled), false)) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
     }
@@ -176,11 +176,11 @@ class QuickCalculatorFragment : BaseFragment() {
 
         //[퀵계산 설정 사용]일 때는 미리 설정한 값들을 불러온다.
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        if (prefs.getBoolean("quick_settings_enable", false)) {
-            family = Integer.parseInt(prefs.getString("quick_settings_family", "default"))
-            child = Integer.parseInt(prefs.getString("quick_settings_child", "0"))
-            taxExemption = Integer.parseInt(prefs.getString("quick_settings_tax_exemption", "100000")).toLong()
-            includedSeverance = prefs.getBoolean("quick_settings_severance", false)
+        if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
+            family = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_family), "default"))
+            child = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_child), "0"))
+            taxExemption = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_tax_exemption), "100000")).toLong()
+            includedSeverance = prefs.getBoolean(getString(R.string.pref_key_quick_severance), false)
         }
 
         val calculator = Services.calculator

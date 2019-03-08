@@ -13,6 +13,8 @@ import android.support.v4.app.NavUtils
 import android.text.InputFilter
 import android.view.MenuItem
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
+import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
 import kr.asv.apps.salarycalculator.BuildConfig
 import kr.asv.apps.salarycalculator.Services
@@ -87,10 +89,10 @@ class SettingsActivity : AppCompatPreferenceActivity() {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     class AdvanceTaxRatesPreferenceFragment : PreferenceFragment() {
-        private var nationalPensionCustomRatePrefKey = ""
-        private var healthCareCustomRatePrefKey = ""
-        private var longTermCareCustomRatePrefKey = ""
-        private var employmentCareCustomRatePrefKey = ""
+        private var npPrefKey = ""
+        private var hcPrefKey = ""
+        private var ltcPrefKey = ""
+        private var emcPrefKey = ""
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -98,27 +100,26 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_advance_taxrates)
             setHasOptionsMenu(true)
 
-
-            nationalPensionCustomRatePrefKey = resources.getString(R.string.pref_key_custom_national_pension_rate)
-            healthCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_health_care_rate)
-            longTermCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_long_term_care_rate)
-            employmentCareCustomRatePrefKey = resources.getString(R.string.pref_key_custom_employment_care_rate)
+            npPrefKey = resources.getString(R.string.pref_key_custom_national_pension_rate)
+            hcPrefKey = resources.getString(R.string.pref_key_custom_health_care_rate)
+            ltcPrefKey = resources.getString(R.string.pref_key_custom_long_term_care_rate)
+            emcPrefKey = resources.getString(R.string.pref_key_custom_employment_care_rate)
 
             // 에디트 필터 설정
-            (findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference(healthCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference(longTermCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
-            (findPreference(employmentCareCustomRatePrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(npPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(hcPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(ltcPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
+            (findPreference(emcPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterDoubleMinMax(0, 100))
 
             // 이벤트 바인딩
-            bindPreferenceSummaryToValue(findPreference(nationalPensionCustomRatePrefKey))
-            bindPreferenceSummaryToValue(findPreference(healthCareCustomRatePrefKey))
-            bindPreferenceSummaryToValue(findPreference(longTermCareCustomRatePrefKey))
-            bindPreferenceSummaryToValue(findPreference(employmentCareCustomRatePrefKey))
+            bindPreferenceSummaryToValue(findPreference(npPrefKey))
+            bindPreferenceSummaryToValue(findPreference(hcPrefKey))
+            bindPreferenceSummaryToValue(findPreference(ltcPrefKey))
+            bindPreferenceSummaryToValue(findPreference(emcPrefKey))
 
             // 기본값 설정
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-            if(! prefs.contains(nationalPensionCustomRatePrefKey)){
+            if(! prefs.contains(npPrefKey)){
                 resetRates(prefs)
             }
 
@@ -144,10 +145,10 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          */
         private fun resetRates(prefs : SharedPreferences) {
             // 초기화 값을 가져와서 셋팅한다.
-            setTextWithSummary(nationalPensionCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.nationalPension,""))
-            setTextWithSummary(healthCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.healthCare,""))
-            setTextWithSummary(longTermCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.longTermCare,""))
-            setTextWithSummary(employmentCareCustomRatePrefKey, prefs.getString( Services.DefaultRatesPrefKey.employmentCare,""))
+            setTextWithSummary(npPrefKey, prefs.getString( Services.DefaultRatesPrefKey.nationalPension,""))
+            setTextWithSummary(hcPrefKey, prefs.getString( Services.DefaultRatesPrefKey.healthCare,""))
+            setTextWithSummary(ltcPrefKey, prefs.getString( Services.DefaultRatesPrefKey.longTermCare,""))
+            setTextWithSummary(emcPrefKey, prefs.getString( Services.DefaultRatesPrefKey.employmentCare,""))
         }
 
         /**
@@ -173,12 +174,17 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_quickcalculate)
             setHasOptionsMenu(true)
 
+            val familyPrefKey = getString(R.string.pref_key_quick_family)
+            val childPrefKey = getString(R.string.pref_key_quick_child)
+            val exemptionPrefKey = getString(R.string.pref_key_quick_tax_exemption)
 
-            bindPreferenceSummaryToValue(findPreference("quick_settings_family"))
-            bindPreferenceSummaryToValue(findPreference("quick_settings_child"))
-            bindPreferenceSummaryToValue(findPreference("quick_settings_tax_exemption"))
+            bindPreferenceSummaryToValue(findPreference(familyPrefKey))
+            bindPreferenceSummaryToValue(findPreference(childPrefKey))
+            bindPreferenceSummaryToValue(findPreference(exemptionPrefKey))
 
-
+            (findPreference(familyPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
+            (findPreference(childPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
+            (findPreference(exemptionPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, "999999999999"))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -201,8 +207,6 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_about)
             setHasOptionsMenu(true)
 
-            //findPreference("quick_settings_family")
-            //(findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText
             (findPreference("app_version") as Preference).summary = "v"+ BuildConfig.VERSION_NAME
             (findPreference("app_version_code") as Preference).summary = "Number "+ BuildConfig.VERSION_CODE.toString()
             (findPreference("main_database_version") as Preference).summary = defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
@@ -221,7 +225,6 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     }
 
     companion object {
-
         /**
          * A preference value change listener that updates the preference's summary
          * to reflect its new value.
@@ -246,15 +249,17 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                 }
                 is EditTextPreference -> {
                     val key = preference.getKey()
+                    val res = preference.context.resources
                     when (key) {
-                        "rate_national_pension", "rate_health_care", "rate_longterm_care", "rate_employment_care" -> {
+                        res.getString(R.string.pref_key_custom_national_pension_rate), res.getString(R.string.pref_key_custom_health_care_rate),
+                        res.getString(R.string.pref_key_custom_long_term_care_rate), res.getString(R.string.pref_key_custom_employment_care_rate) -> {
                             if (java.lang.Float.parseFloat(stringValue) >= 100) {
                                 stringValue = "100"
                             }
                             preference.setSummary("$stringValue %")
                         }
-                        "quick_settings_tax_exemption" -> preference.setSummary("$stringValue 원")
-                        "quick_settings_family", "quick_settings_child" -> preference.setSummary("$stringValue 명")
+                        res.getString(R.string.pref_key_quick_tax_exemption) -> preference.setSummary("$stringValue 원")
+                        res.getString(R.string.pref_key_quick_family), res.getString(R.string.pref_key_quick_child) -> preference.setSummary("$stringValue 명")
                         else -> preference.setSummary(stringValue)
                     }
                 }
@@ -278,6 +283,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * dependent on the type of preference.
          *
          * 주의) 이벤트도 바인딩하는 메서드임. onCreate 같은 곳에서 호출해야 함.
+         * preference 의 실제값이 바뀌면, 그에 대응해서 summary 의 값이 바뀌도록 하는 이벤트 리스너임.
+         * 이게 동작되는 환경은, 다른 클래스나 다른 곳에서 '설정값'에 change 되어었을 때.
          * @see .sBindPreferenceSummaryToValueListener
          */
         private fun bindPreferenceSummaryToValue(preference: Preference) {

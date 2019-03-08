@@ -40,8 +40,8 @@ class NormalCalculatorFragment : BaseFragment() {
         // 최대 최소값 지정
         (findViewById(R.id.edMoney) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
         (findViewById(R.id.edOptionTaxFree) as EditText).filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 99999999999))
-        (findViewById(R.id.edOptionFamily) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
-        (findViewById(R.id.edOptionChild) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 20))
+        (findViewById(R.id.edOptionFamily) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
+        (findViewById(R.id.edOptionChild) as EditText).filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
 
         return view
     }
@@ -58,8 +58,8 @@ class NormalCalculatorFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        val pref = PreferenceManager.getDefaultSharedPreferences(this.activity)
-        if (pref.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this.activity)
+        if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
             // 효과가 너무 약하다...강한 효과가 필요함...
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }

@@ -12,15 +12,20 @@ class InputFilterDoubleMinMax : InputFilter {
     private var min = 0.0
     private var max: Double = 0.toDouble()
 
-    internal constructor(min: Int, max: Int) {
-        this.min = min.toDouble()
-        this.max = max.toDouble()
-    }
-
     @Suppress("unused")
     constructor(min: Double, max: Double) {
         this.min = min
         this.max = max
+    }
+
+    constructor(min: Int, max: Double) {
+        this.min = min.toDouble()
+        this.max = max
+    }
+
+    constructor(min: Int, max: Int) {
+        this.min = min.toDouble()
+        this.max = max.toDouble()
     }
 
     @Suppress("unused")

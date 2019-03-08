@@ -3,42 +3,35 @@ package kr.asv.androidutils.inputfilter
 import android.text.InputFilter
 import android.text.Spanned
 
+@Suppress("unused")
 /**
  * EditText 에서 Filter 를 하는 클래스
  * Created by EXIZT on 2017-11-22.
  */
-class InputFilterLongMinMax : InputFilter {
-    private var min: Long = 0
-    private var max: Long = 0
+class InputFilterFloatMinMax : InputFilter {
+    private var min : Float = 0.0f
+    private var max : Float = 0.0f
 
     @Suppress("unused")
-    constructor(min: Int, max: Int) {
-        this.min = min.toLong()
-        this.max = max.toLong()
-    }
-
-    @Suppress("unused")
-    constructor(min: Long, max: Long) {
+    constructor(min: Float, max: Float) {
         this.min = min
         this.max = max
     }
 
-    @Suppress("unused")
-    constructor(min: Int, max: Long) {
-        this.min = min.toLong()
+    constructor(min: Int, max: Float) {
+        this.min = min.toFloat()
         this.max = max
     }
 
-    @Suppress("unused")
-    constructor(min: Int, max: String) {
-        this.min = min.toLong()
-        this.max = max.toLong()
+    constructor(min: Int, max: Int) {
+        this.min = min.toFloat()
+        this.max = max.toFloat()
     }
 
     @Suppress("unused")
     constructor(min: String, max: String) {
-        this.min = java.lang.Long.parseLong(min)
-        this.max = java.lang.Long.parseLong(max)
+        this.min = min.toFloat()
+        this.max = max.toFloat()
     }
 
     override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, _start: Int, _end: Int): CharSequence? {
@@ -47,7 +40,7 @@ class InputFilterLongMinMax : InputFilter {
             if (str.contains(",")) {
                 str = str.replace(",".toRegex(), "")
             }
-            val input = java.lang.Long.parseLong(str)
+            val input = str.toFloat()
             if (isInRange(min, max, input))
                 return null
         } catch (ignored: NumberFormatException) {
@@ -55,7 +48,7 @@ class InputFilterLongMinMax : InputFilter {
         return ""
     }
 
-    private fun isInRange(a: Long, b: Long, c: Long): Boolean {
+    private fun isInRange(a: Float, b: Float, c: Float): Boolean {
         return if (b > a) {
             c in a..b
         } else {
