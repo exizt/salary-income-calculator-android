@@ -16,7 +16,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kr.asv.androidutils.AdmobAdapter
-import kr.asv.shhtaxmanager.R
 
 
 /**

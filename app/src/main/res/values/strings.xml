@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="ad_unit_id_banner" translatable="false">ca-app-pub-6702794513299112/2747627743</string>
+    <string name="ad_unit_id_banner" translatable="false">ca-app-pub-6702794513299112/8570432502</string>
     <string name="ad_unit_id_banner_test" translatable="false" tools:keep="@string/ad_unit_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="value_default_number" translatable="false">0</string>
     <string name="value_default_family" translatable="false">1</string>

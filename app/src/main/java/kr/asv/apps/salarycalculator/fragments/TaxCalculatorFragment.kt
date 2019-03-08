@@ -12,7 +12,7 @@ import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.MainActivity
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  *

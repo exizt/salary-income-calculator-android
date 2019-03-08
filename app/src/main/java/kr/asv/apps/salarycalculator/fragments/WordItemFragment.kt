@@ -13,7 +13,7 @@ import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordPageActivity
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  * 형태 : 리스트 형 Fragment

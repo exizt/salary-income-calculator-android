@@ -8,12 +8,12 @@ android {
     compileSdkVersion 27
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId 'kr.asv.shhtaxmanager'
+        applicationId 'kr.asv.apps.salarycalculator'
         minSdkVersion 14
         //noinspection OldTargetApi
         targetSdkVersion 27
-        versionCode 25
-        versionName '1.2.25'
+        versionCode 26
+        versionName '1.2.26'
     }
     buildTypes {
         release {

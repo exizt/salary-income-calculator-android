@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_report_tax.*
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordPageActivity
 import kr.asv.apps.salarycalculator.fragments.BaseFragment
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 class ReportTaxFragment : BaseFragment() {
 

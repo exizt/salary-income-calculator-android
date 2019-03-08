@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.model.TermDictionary
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 
 /**
  * 용어 상세 정보를 보여주는 페이지 액티비티 이다.

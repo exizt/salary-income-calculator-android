@@ -14,9 +14,9 @@ import android.text.InputFilter
 import android.view.MenuItem
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
+import kr.asv.apps.salarycalculator.BuildConfig
 import kr.asv.apps.salarycalculator.Services
-import kr.asv.shhtaxmanager.BuildConfig
-import kr.asv.shhtaxmanager.R
+import kr.asv.apps.salarycalculator.R
 import org.jetbrains.anko.defaultSharedPreferences
 
 /**
@@ -205,8 +205,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
 
             //findPreference("quick_settings_family")
             //(findPreference(nationalPensionCustomRatePrefKey) as EditTextPreference).editText
-            (findPreference("app_version") as Preference).summary = "v"+BuildConfig.VERSION_NAME
-            (findPreference("app_version_code") as Preference).summary = "Number "+BuildConfig.VERSION_CODE.toString()
+            (findPreference("app_version") as Preference).summary = "v"+ BuildConfig.VERSION_NAME
+            (findPreference("app_version_code") as Preference).summary = "Number "+ BuildConfig.VERSION_CODE.toString()
             (findPreference("main_database_version") as Preference).summary = defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
             (findPreference("main_database_version") as Preference).summary = defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
 
