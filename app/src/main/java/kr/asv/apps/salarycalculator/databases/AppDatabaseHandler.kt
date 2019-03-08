@@ -55,6 +55,7 @@ class AppDatabaseHandler (context: Context){
      * 데이터베이스 파일을 생성하고 업데이트 하는 메서드
      * 디비 파일이 없으면, 디비 파일을 복사해 온다.
      * 디비 버전을 체크해서, Assets 에 있는 DB 가 최신 것이라면 복사해온다.
+     * @todo 최초 설치와 업데이트 설치에만 Assets 에서 복사해 오도록 변경할 필요 있음. (급하지는 않음. 지금도 속도는 충분)
      */
     private fun initialize(){
         // 설정 관리자
@@ -81,8 +82,8 @@ class AppDatabaseHandler (context: Context){
                     copyDatabaseFromAssets(mContext)
                     debug("[open] getAssetDbVersion")
                     val assetDbVersion = getAssetDbVersion(mContext)
-                    debug("[open] setLocalDbVersionToPreferences")
-                    setLocalDbVersionToPreferences(prefs, assetDbVersion)
+                    debug("[open] setAppDbVersionPreference")
+                    setAppDbVersionPreference(prefs, assetDbVersion)
                 }
             } catch (e: Exception){
                 debug("[open] Assets 에서 복사 실패 ",e)
@@ -91,7 +92,7 @@ class AppDatabaseHandler (context: Context){
         } else {
             // 앱을 실행하거나, 업데이트 했을 때 등의 동작.
             debug("[open] 데이터베이스가 존재함")
-            val localDbVersion = getLocalDbVersionFromPreferences(prefs)
+            val localDbVersion = getAppDbVersionPreference(prefs)
             val assetDbVersion = getAssetDbVersion(mContext)
 
             debug("[open] 실행 초기 로컬 DB 버전 : ",localDbVersion)
@@ -104,18 +105,13 @@ class AppDatabaseHandler (context: Context){
                     if(existsAssetsDatabase(mContext)) {
                         debug("[open] Assets 에서 데이터베이스 파일 복사 실행")
                         copyDatabaseFromAssets(mContext)
-                        setLocalDbVersionToPreferences(prefs,assetDbVersion)
+                        setAppDbVersionPreference(prefs,assetDbVersion)
                     }
                 } catch (e: Exception) {
                     debug("[open] Assets 에서 복사 실패  ",e)
                 }
             }
         }
-
-        // 데이터베이스 를 Open
-        //mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
-        //setLocalDbVersionToPreferences(prefs)
-        //debug("[open] DB 버전 : ${mDatabase.version}")
     }
 
     /**
@@ -126,28 +122,28 @@ class AppDatabaseHandler (context: Context){
     }
 
     /**
-     * Preferences 에서 LocalDB 버전 값을 가져옴.
+     * Preferences 에서 App DB 버전 값을 가져옴.
      * PreferenceManager 를 여러번 이용할 경우에는
-     * getLocalDbVersionFromPreferences(prefs : SharedPreferences) 를 이용하기를 권장함.
+     * getAppDbVersionPreference(prefs : SharedPreferences) 를 이용하기를 권장함.
      */
     @Suppress("unused")
-    private fun getLocalDbVersionFromPreferences() : Int{
+    private fun getAppDbVersionPreference() : Int{
         val prefs = PreferenceManager.getDefaultSharedPreferences(mContext)
-        return getLocalDbVersionFromPreferences(prefs)
+        return getAppDbVersionPreference(prefs)
     }
 
     /**
-     * Preferences 에서 LocalDB 버전 값을 가져옴
+     * Preferences 에서 App DB 버전 값을 가져옴
      */
     @Suppress("unused")
-    private fun getLocalDbVersionFromPreferences(prefs : SharedPreferences) : Int{
+    private fun getAppDbVersionPreference(prefs : SharedPreferences) : Int{
         return prefs.getInt(versionPreferencesKey,0)
     }
 
     /**
      * 버전 정보값을 Preferences 에 저장 하는 메서드.
      */
-    private fun setLocalDbVersionToPreferences(prefs : SharedPreferences, version:Int){
+    private fun setAppDbVersionPreference(prefs : SharedPreferences, version:Int){
         val editor = prefs.edit()
         editor.putInt(versionPreferencesKey,version)
         editor.apply()
@@ -279,7 +275,7 @@ class AppDatabaseHandler (context: Context){
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
             // 현재 LocalDB 의 버전
-            val localDbVersion = getLocalDbVersionFromPreferences(prefs)
+            val localDbVersion = getAppDbVersionPreference(prefs)
 
             // 받은 파일의 버전
             val version = getVersionFromDatabaseFile(localFile)
@@ -300,7 +296,7 @@ class AppDatabaseHandler (context: Context){
 
                 // 복사 완료된 DB 로 재배치.
                 //mDatabase = SQLiteDatabase.openOrCreateDatabase(mDatabasePath,  null)
-                setLocalDbVersionToPreferences(prefs,version)
+                setAppDbVersionPreference(prefs,version)
 
                 // cache 에 있는 데이터베이스 파일을 삭제해야 할 듯...
 

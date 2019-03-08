@@ -60,7 +60,6 @@ public class IncomeTaxImpl implements IncomeTax {
 
     /**
      * 근로소득세(소득세) 계산식
-     * TODO: 국민연금 금액 갖고 올 방법 고민
      *
      * @return double
      */

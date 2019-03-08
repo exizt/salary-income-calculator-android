@@ -146,7 +146,6 @@ class QuickCalculatorFragment : BaseFragment() {
 
     /**
      * 계산하는 동작
-     * @todo 세율의 기본값을 가져오는 루틴을 손 봐야 한다.
      */
     private fun calculate() {
         // validate checking
