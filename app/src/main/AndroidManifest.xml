@@ -2,16 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.asv.apps.salarycalculator">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="kr.asv.apps.salarycalculator.MainActivity"
@@ -25,9 +26,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="kr.asv.apps.salarycalculator.activities.ReportActivity"
+            android:name=".activities.ReportActivity"
             android:label="@string/activity_report_title"
-            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:targetApi="jelly_bean">
             <meta-data
@@ -35,9 +36,9 @@
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
-            android:name="kr.asv.apps.salarycalculator.activities.WordPageActivity"
+            android:name=".activities.WordPageActivity"
             android:label="@string/activity_word_title"
-            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:targetApi="jelly_bean">
             <meta-data
@@ -45,17 +46,18 @@
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
         <activity
-            android:name="kr.asv.apps.salarycalculator.activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/activity_settings_title"
-            android:parentActivityName="kr.asv.apps.salarycalculator.MainActivity"
+            android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
+
         <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-6702794513299112~9173067732"/>
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6702794513299112~9173067732" />
     </application>
 
 </manifest>
