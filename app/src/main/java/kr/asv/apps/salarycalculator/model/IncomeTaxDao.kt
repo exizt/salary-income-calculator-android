@@ -132,6 +132,6 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
 
     companion object {
         private const val TAG = "[EXIZT-DEBUG][IncomeTaxDao]"
-        private const val isDebug = true
+        private const val isDebug = false
     }
 }

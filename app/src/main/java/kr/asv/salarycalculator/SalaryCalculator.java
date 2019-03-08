@@ -42,6 +42,8 @@ public class SalaryCalculator {
      * (역할이 섞이지 않게 한 것임. 자꾸 까먹어서 적어두는 것....)
      */
     public void calculateSalaries(){
+        if (options.isDebug()) debug(options);
+
         // 필수값 지정
         salary.setInputMoney(options.getInputMoney());// 입력 금액
         salary.setTaxExemption(options.getTaxExemption());// 비과세 금액
@@ -67,7 +69,6 @@ public class SalaryCalculator {
      */
     public void run() {
         if (options.isDebug()) {
-            debug(options);
             incomeTax.setDebug(true);
         }
 

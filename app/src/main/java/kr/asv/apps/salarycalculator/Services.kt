@@ -81,11 +81,11 @@ object Services {
      * 이후부터는, Preferences 의 기본값을 가져와서 Rates 에 보정한다.
      */
     private fun initializeDefaultInsuranceRates(context: Context){
-        debug("[initializeDefaultInsuranceRates]")
         val rates = calculator.insurance.rates
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
         if(!prefs.contains(DefaultRatesPrefKey.nationalPension)){
+            debug("[initializeDefaultInsuranceRates] 초기화세율 값을 셋팅")
             val editor = prefs.edit()
             editor.putString(DefaultRatesPrefKey.nationalPension,rates.nationalPension.toString())
             editor.putString(DefaultRatesPrefKey.healthCare,rates.healthCare.toString())
@@ -116,7 +116,7 @@ object Services {
      * 세율 값을 Pref 의 Default 값으로 재조정한다.
      */
     fun initInsuranceRates(prefs: SharedPreferences){
-        debug("[initInsuranceRates]")
+        debug("[initInsuranceRates] 적용세율 초기화")
         val rates = calculator.insurance.rates
         rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0").toDouble()
         rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0").toDouble()
@@ -128,7 +128,7 @@ object Services {
      * 세율의 값을 데이터베이스에서 가져와서 설정 Preferences 에 셋팅한다.
      */
     fun setDefaultInsuranceRates(context: Context){
-        debug("[setDefaultInsuranceRates]")
+        debug("[setDefaultInsuranceRates] 초기화세율 값을 DB 값에서 배치")
 
         // 조건절이 이용될 yearmonth ('201902' 같은 형식) 을 만드는 구문.
         val cal = Calendar.getInstance()

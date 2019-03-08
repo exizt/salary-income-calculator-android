@@ -42,10 +42,10 @@ public class SalaryCalculatorOptions {
      * @param value int
      */
     public void setFamily(int value) {
-        if(value > 1){
-            family = value;
+        if(value <= 1){
+            family = 1;
         } else {
-            family = 0;
+            family = value;
         }
     }
 
@@ -54,10 +54,10 @@ public class SalaryCalculatorOptions {
     }
 
     public void setChild(int value) {
-        if(value > 0){
-            child = value;
-        } else {
+        if(value < 0){
             child = 0;
+        } else {
+            child = value;
         }
     }
 
@@ -67,10 +67,10 @@ public class SalaryCalculatorOptions {
     }
 
     public void setInputMoney(double value) {
-        if(value > 0){
-            inputMoney = value;
-        } else {
+        if(value < 0){
             inputMoney = 0;
+        } else {
+            inputMoney = value;
         }
     }
 
@@ -79,10 +79,10 @@ public class SalaryCalculatorOptions {
     }
 
     public void setTaxExemption(double value) {
-        if(value > 0){
-            taxExemption = value;
-        } else {
+        if(value < 0){
             taxExemption = 0;
+        } else {
+            taxExemption = value;
         }
     }
 
@@ -116,10 +116,10 @@ public class SalaryCalculatorOptions {
      */
     public String toString() {
         String result = "\n<옵션값>\n";
-        result += "입력액 : " + inputMoney + "\n";
-        result += "가족수(본인포함) : " + family + "\n";
+        result += "입력 금액 : " + inputMoney + "\n";
+        result += "가족 수(본인포함) : " + family + "\n";
         result += "20세이하자녀수 : " + child + "\n";
-        result += "입력기준 : 연급인지 여부 (" + annualBasis + ")\n";
+        result += "입력기준 : 연봉인지 여부 (" + annualBasis + ")\n";
         result += "입력기준 : 퇴직금 포함여부 (" + includedSeverance + ")\n";
         result += "디버깅 여부(" + debug + ")\n";
         return result;

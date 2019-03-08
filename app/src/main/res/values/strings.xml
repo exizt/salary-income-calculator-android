@@ -36,18 +36,18 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="label_salary_type">입력방식</string>
+    <string name="label_salary_type">input type</string>
     <string name="quick_calculator_description">quick calculator</string>
-    <string name="quick_calculator_page_title">퀵 계산</string>
+    <string name="quick_calculator_page_title">simple calculator</string>
     <string name="report_option_salary">입력한연봉</string>
     <string name="report_option_salary_monthly">입력한월급</string>
     <string name="report_option_family">부양가족수</string>
     <string name="report_option_child">20세이하자녀수</string>
     <string name="report_option_taxfree">입력한비과세액</string>
-    <string name="tax_calc_national_pension_rate">국민연금 요율(%)</string>
-    <string name="tax_calc_health_care_rate">건강보험 요율(%)</string>
-    <string name="tax_calc_longterm_care_rate">요양보험 요율(%)</string>
-    <string name="tax_calc_employment_care_rate">고용보험 요율(%)</string>
+    <string name="tax_calc_national_pension_rate">National Pension Rates(%)</string>
+    <string name="tax_calc_health_care_rate">Health Care Rates(%)</string>
+    <string name="tax_calc_longterm_care_rate">Longterm Care Rates(%)</string>
+    <string name="tax_calc_employment_care_rate">Employment Care Rates(%)</string>
     <string name="btn_plus_1000">+ 천만원</string>
     <string name="btn_plus_100">+ 백만원</string>
     <string name="btn_plus_10">+ 십만원</string>
@@ -60,12 +60,12 @@
     <string name="income_tax">income tax</string>
     <string name="local_tax">local tax</string>
     <string name="national_pension">National Pension</string>
-    <string name="employee_care">Employee Care</string>
+    <string name="employee_care">Employment Care</string>
     <string name="longterm_care">LongTerm Care</string>
     <string name="health_care">Health Care</string>
     <string name="workers_compensation" tools:keep="@string/workers_compensation">Worker\'s compensation</string>
     <string name="income_net_salary">income net salary</string>
-    <string name="report_summary_subtitle_02">4대보험+세금</string>
+    <string name="report_summary_subtitle_02">total tax</string>
     <string name="close">Close</string>
     <string name="included_severance_status">Severance include</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -76,4 +76,6 @@
     <string name="pref_key_custom_health_care_rate" translatable="false">rate_health_care</string>
     <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
     <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
+    <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
+    <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
 </resources>

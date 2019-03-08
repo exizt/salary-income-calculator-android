@@ -72,7 +72,7 @@ public class SalaryImpl implements Salary {
     }
 
     public void setInputMoney(double value) {
-        double maximum = 10000000000000000000000000000000000000000000d;
+        double maximum = 1000000000000000d;
         if(value>maximum) value = maximum;
         this.inputMoney = value;
     }

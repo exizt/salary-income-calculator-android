@@ -1,0 +1,44 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="quick_settings_enable"
+        android:defaultValue="false"
+        android:title="퀵계산 설정 사용" />
+
+    <SwitchPreference
+        android:key="quick_settings_severance"
+        android:dependency="quick_settings_enable"
+        android:defaultValue="false"
+        android:title="퇴직금 포함여부" />
+
+    <EditTextPreference
+        android:key="quick_settings_family"
+        android:inputType="number"
+        android:numeric="integer"
+        android:dependency="quick_settings_enable"
+        android:defaultValue="1"
+        android:summary=""
+        android:singleLine="true"
+        android:title="부양가족수" />
+
+    <EditTextPreference
+        android:key="quick_settings_child"
+        android:inputType="number"
+        android:numeric="integer"
+        android:dependency="quick_settings_enable"
+        android:defaultValue="0"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="20세 이하 자녀수" />
+
+    <EditTextPreference
+        android:key="quick_settings_tax_exemption"
+        android:inputType="number"
+        android:numeric="integer"
+        android:dependency="quick_settings_enable"
+        android:defaultValue="100000"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="비과세액" />
+</PreferenceScreen>
