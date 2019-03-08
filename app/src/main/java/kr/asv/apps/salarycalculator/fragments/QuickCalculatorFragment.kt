@@ -13,15 +13,14 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
-import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.shhtaxmanager.R
 
 
 /**
- *
- *
+ * 심플 연봉 계산기
+ * 특정 수치를 기준으로, 연봉 or 월급을 나누고 간이 계산한다.
  */
 class QuickCalculatorFragment : BaseFragment() {
 

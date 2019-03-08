@@ -11,6 +11,7 @@ class InputFilterLongMinMax : InputFilter {
     private var min: Long = 0
     private var max: Long = 0
 
+    @Suppress("unused")
     internal constructor(min: Int, max: Int) {
         this.min = min.toLong()
         this.max = max.toLong()

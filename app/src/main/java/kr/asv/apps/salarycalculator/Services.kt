@@ -175,7 +175,11 @@ object Services {
     private fun debug(msg: String, msg2 : Any = "") {
         @Suppress("ConstantConditionIf")
         if (isDebug) {
-            Log.d(TAG, "$msg $msg2")
+            if(msg2 == ""){
+                Log.d(TAG, msg)
+            } else {
+                Log.d(TAG, "$msg $msg2")
+            }
         }
     }
 

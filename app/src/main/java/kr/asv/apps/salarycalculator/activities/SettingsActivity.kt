@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.preference.*
 import android.support.v4.app.NavUtils
 import android.text.InputFilter
-import android.text.Spanned
 import android.view.MenuItem
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity

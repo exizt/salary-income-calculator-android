@@ -22,8 +22,6 @@ import kr.asv.shhtaxmanager.R
  * create an instance of this fragment.
  */
 class NormalCalculatorFragment : BaseFragment() {
-    private var annualBasis = false
-
     /**
      *
      */

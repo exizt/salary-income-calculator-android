@@ -6,20 +6,36 @@ import java.util.*
 
 class IncomeTaxDao(private val db: SQLiteDatabase) {
 
-    fun getValue(money: Long, family: Int, yearmonth: String) : Long{
+
+    fun getValue(_money: Long, _family: Int, _yearmonth: String) : Long{
         debug("getCurrentRates 호출")
-        var resultTax : Long = 0
+        // [인수값 검증 및 보정] 가족 수 (초과값에 대한 보정)
+        val family = if(_family > 11){
+            11
+        } else {
+            if(_family < 0) {
+                0
+            } else {
+                _family
+            }
+        }
+
+        // [인수값 검증 및 보정] 6 글자까지만 이용. 더 들어온 것을 잘못 들어온 것이므로 잘라버림.
+        val yearmonth = _yearmonth.take(6)
+
+        // [인수값 검증 및 보정] 양수만 허용.
+        val money = if(_money <0) 0 else _money
+
+        // 표에서의 단위는 천 단위.
         val searchMoneyUnit = money / 1000
 
+        // 확인
         debug("기준 금액 검색 단위",searchMoneyUnit)
-        debug("family",family)
-        debug("yearmonth",yearmonth)
+        debug("가족 수 (보정됨)",family)
+        debug("년월 (보정됨)",yearmonth)
 
-        // 조건절이 이용될 yearmonth ('201902' 같은 형식) 을 만드는 구문.
-        val cal = Calendar.getInstance()
-        val year = cal.get(Calendar.YEAR).toString()
-        val month = cal.get(Calendar.MONTH).toString().padStart(2,'0')
-        //val yearmonth = "$year$month"
+        // 결과값
+        var resultTax : Long = 0
 
         // 데이터베이스 에서 4대보험 세율을 조회
         val cur = db.query("income_tax_table",
@@ -75,15 +91,17 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
                 arrayOf("10000","28000",(0.35*0.98).toString())
         )
 
-        when (yearmonth){
-            "201802" -> {
-                return calculateIntervalMultiplicationWrap(v201802,value)
+        return when (yearmonth.toInt()){
+            in 201802 .. 210001 -> {
+                calculateIntervalMultiplicationWrap(v201802,value)
             }
-            "201702" -> {
-                return calculateIntervalMultiplicationWrap(v201702,value)
+            in 201702..201801 -> {
+                calculateIntervalMultiplicationWrap(v201702,value)
+            }
+            else -> {
+                calculateIntervalMultiplicationWrap(v201702,value)
             }
         }
-        return 0
     }
 
     /**
@@ -115,6 +133,17 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
             }
         }
         return res
+    }
+
+    /**
+     * 현재의 년월 (예: 201908)을 만드는 메서드
+     */
+    @Suppress("unused")
+    fun currentYearmonth() : String{
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR).toString()
+        val month = cal.get(Calendar.MONTH).toString().padStart(2,'0')
+        return "$year$month"
     }
 
     /**
