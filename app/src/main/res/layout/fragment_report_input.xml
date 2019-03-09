@@ -91,6 +91,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="15dp"
         android:text="계산 기준 세율"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp" />
@@ -98,108 +100,62 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="건강 보험"
+        android:text="국민연금 요율"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/txNationPensionRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:text="4.5 %"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="건강 보험"
+        android:text="건강 보험 요율"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/txHealthCareRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:text="4.5 %"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="건강 보험"
+        android:text="요양 보험 요율"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/txLongtermCareRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:text="4.5 %"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="건강 보험"
+        android:text="고용 보험 요율"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/txEmploymentCareRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:text="4.5 %"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="30sp" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="건강 보험"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="4.5 %"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="건강 보험"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="4.5 %"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="건강 보험"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="4.5 %"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
