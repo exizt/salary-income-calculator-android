@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
+import kr.asv.androidutils.AdmobAdapter
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.model.TermDictionary
 import kr.asv.apps.salarycalculator.R
@@ -38,6 +39,9 @@ class WordPageActivity : AppCompatActivity() {
         } else {
             debug("extras is null")
         }
+
+        // Admob 호출
+        AdmobAdapter.loadBannerAdMob(adView)
     }
 
     private fun appendData(record: TermDictionary) {
