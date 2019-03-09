@@ -13,8 +13,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"

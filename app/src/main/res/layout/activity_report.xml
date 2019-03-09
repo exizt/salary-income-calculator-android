@@ -14,13 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
-        >
+        android:fitsSystemWindows="true"
+        ads:statusBarBackground="@color/colorAccent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
@@ -74,6 +78,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/adView"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </android.support.design.widget.CoordinatorLayout>
     </android.support.design.widget.CoordinatorLayout>
 
     <com.google.android.gms.ads.AdView

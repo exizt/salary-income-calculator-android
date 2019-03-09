@@ -176,7 +176,5 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/calculate"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:textStyle="bold" />
+        android:text="@string/calculate" />
 </LinearLayout>
