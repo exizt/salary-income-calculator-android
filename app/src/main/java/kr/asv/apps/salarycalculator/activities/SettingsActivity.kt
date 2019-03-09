@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.preference.*
@@ -46,6 +47,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     private fun setupActionBar() {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorAccent)))
     }
 
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
