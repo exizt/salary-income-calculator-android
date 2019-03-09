@@ -5,6 +5,15 @@
         android:defaultValue="false"
         android:title="퀵계산 설정 사용" />
 
+    <EditTextPreference
+        android:key="@string/pref_key_quick_input_criteria"
+        android:inputType="number"
+        android:numeric="integer"
+        android:dependency="@string/pref_key_quick_settings_enabled"
+        android:defaultValue="1"
+        android:summary="0"
+        android:singleLine="true"
+        android:title="연봉,월급 구분 기준액" />
 
     <EditTextPreference
         android:key="@string/pref_key_quick_family"

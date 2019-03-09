@@ -179,14 +179,17 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             val familyPrefKey = getString(R.string.pref_key_quick_family)
             val childPrefKey = getString(R.string.pref_key_quick_child)
             val exemptionPrefKey = getString(R.string.pref_key_quick_tax_exemption)
+            val inputCriteriaPrefKey = getString(R.string.pref_key_quick_input_criteria)
 
             bindPreferenceSummaryToValue(findPreference(familyPrefKey))
             bindPreferenceSummaryToValue(findPreference(childPrefKey))
             bindPreferenceSummaryToValue(findPreference(exemptionPrefKey))
+            bindPreferenceSummaryToValue(findPreference(inputCriteriaPrefKey))
 
             (findPreference(familyPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
             (findPreference(childPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
             (findPreference(exemptionPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, "999999999999"))
+            (findPreference(inputCriteriaPrefKey) as EditTextPreference).editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99999999))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {

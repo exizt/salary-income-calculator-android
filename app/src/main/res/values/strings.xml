@@ -77,6 +77,7 @@
     <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
     <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
     <string name="pref_key_quick_settings_enabled" translatable="false">quick_settings_enable</string>
+    <string name="pref_key_quick_input_criteria" translatable="false">quick_input_criteria</string>
     <string name="pref_key_quick_severance" translatable="false">quick_settings_severance</string>
     <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
     <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>

@@ -163,12 +163,11 @@ class QuickCalculatorFragment : BaseFragment() {
 
         /*
          * 연봉기준인지 월급기준인지 구분.
-         * 1000만원 이상이면 연봉입력으로 생각하고 계산. (설마 월급이 천만원은 아니겠지)
+         * 1000만원 이상이면 연봉입력으로 생각하고 계산. (아래에서, 퀵 설정 시 커스텀 처리 구문 추가됨)
          */
-        val annualBasis = inputMoney >= 10000000
+        var annualBasis = inputMoney >= 10000000
 
         //옵션의 기본값
-
         var taxExemption: Long = 100000 // 비과세
         var family = 1 // 부양가족수
         var child = 0 // 20세 이하 자녀수
@@ -177,6 +176,9 @@ class QuickCalculatorFragment : BaseFragment() {
         //[퀵계산 설정 사용]일 때는 미리 설정한 값들을 불러온다.
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
+            // 설정된 값을 기준으로 연봉/월급을 재조정
+            annualBasis = inputMoney >= Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_input_criteria), "0"))
+            // 이하 값들을 설정된 값으로 보정
             family = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_family), "default"))
             child = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_child), "0"))
             taxExemption = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_tax_exemption), "100000")).toLong()
