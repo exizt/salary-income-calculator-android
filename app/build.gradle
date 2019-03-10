@@ -12,12 +12,12 @@ android {
         minSdkVersion 14
         //noinspection OldTargetApi
         targetSdkVersion 27
-        versionCode 26
-        versionName '1.2.26'
+        versionCode 33
+        versionName '1.2.33'
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

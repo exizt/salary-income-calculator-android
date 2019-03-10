@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.preference.*
+import android.support.annotation.RequiresApi
 import android.support.v4.app.NavUtils
 import android.text.InputFilter
 import android.view.MenuItem
@@ -55,12 +56,15 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(applicationContext,R.color.colorAccent)))
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     private fun setupStatusBar(){
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorAccent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorAccent)
+        }
     }
+
 
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
         val id = item.itemId
