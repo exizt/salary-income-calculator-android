@@ -31,7 +31,6 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="label_salary_type">입력 방식</string>
     <string name="quick_calculator_description">설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다.</string>
     <string name="quick_calculator_page_title">간이 계산</string>
     <string name="report_option_salary">입력된 연봉</string>
@@ -67,4 +66,5 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
     <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
+    <string name="report_option_rates">계산 기준 세율</string>
 </resources>

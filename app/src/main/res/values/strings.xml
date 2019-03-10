@@ -36,7 +36,6 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="label_salary_type">input type</string>
     <string name="quick_calculator_description">quick calculator</string>
     <string name="quick_calculator_page_title">simple calculator</string>
     <string name="report_option_salary">입력한연봉</string>
@@ -84,4 +83,5 @@
     <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
     <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
     <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
+    <string name="report_option_rates">계산 기준 세율</string>
 </resources>
