@@ -21,6 +21,10 @@ import kr.asv.apps.salarycalculator.BuildConfig
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
 import org.jetbrains.anko.defaultSharedPreferences
+import android.support.v4.content.ContextCompat
+import android.view.WindowManager
+
+
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
@@ -38,7 +42,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupActionBar()
-
+        setupStatusBar()
     }
 
     /**
@@ -47,7 +51,15 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     private fun setupActionBar() {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorAccent)))
+        //actionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorAccent)))
+        actionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(applicationContext,R.color.colorAccent)))
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun setupStatusBar(){
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorAccent)
     }
 
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
