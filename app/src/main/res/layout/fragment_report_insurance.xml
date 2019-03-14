@@ -1,135 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!--suppress XmlUnusedNamespaceDeclaration -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportInsuranceFragment">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportInsuranceFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/national_pension"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/infoNationalPension"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/default_string"
+                android:src="@android:drawable/ic_menu_info_details" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txNationPension"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/national_pension"
+            android:gravity="end"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/infoNationalPension"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/default_string"
-            android:src="@android:drawable/ic_menu_info_details" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/health_care"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txNationPension"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/infoHealthCare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/default_string"
+                android:src="@android:drawable/ic_menu_info_details" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txHealthCare"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/health_care"
+            android:gravity="end"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/infoHealthCare"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/default_string"
-            android:src="@android:drawable/ic_menu_info_details" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
-    <TextView
-        android:id="@+id/txHealthCare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/longterm_care"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/infoLongTermCare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/default_string"
+                android:src="@android:drawable/ic_menu_info_details" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txLongtermCare"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/longterm_care"
+            android:gravity="end"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/infoLongTermCare"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/default_string"
-            android:src="@android:drawable/ic_menu_info_details" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
-    <TextView
-        android:id="@+id/txLongtermCare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/employee_care"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/infoEmployeeCare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/default_string"
+                android:src="@android:drawable/ic_menu_info_details" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txEmploymentCare"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/employee_care"
+            android:gravity="end"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/infoEmployeeCare"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/default_string"
-            android:src="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txEmploymentCare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
-
-</LinearLayout>
 </android.support.v4.widget.NestedScrollView>

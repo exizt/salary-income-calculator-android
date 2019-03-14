@@ -168,7 +168,6 @@ object Services {
 
     /**
      * 디버깅 메서드
-     * 변수가 두개 넘어올 경우의 처리 추가
      * @param msg 메시지
      */
     @Suppress("unused")

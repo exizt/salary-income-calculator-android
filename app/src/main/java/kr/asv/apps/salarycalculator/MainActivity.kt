@@ -134,14 +134,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * 디버깅
-     * @param msg
+     * 디버깅 메서드
+     * @param msg 메시지
      */
-    fun debug(msg: String) {
-        Log.d("[EXIZT-DEBUG]", "[MainActivity]$msg")
+    @Suppress("unused")
+    private fun debug(msg: String, msg2 : Any = "") {
+        @Suppress("ConstantConditionIf")
+        if (IS_DEBUG) {
+            if(msg2 == ""){
+                Log.d(TAG, msg)
+            } else {
+                Log.d(TAG, "$msg $msg2")
+            }
+        }
     }
 
     fun setActionBarTitle(title: String) {
         supportActionBar!!.title = title
+    }
+    companion object {
+        private const val TAG = "[EXIZT][MainActivity]"
+        private const val IS_DEBUG = false
     }
 }

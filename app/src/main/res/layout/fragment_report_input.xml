@@ -1,161 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportInputFragment">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_option_salary"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txInputSalaryAnnual"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="kr.asv.apps.salarycalculator.fragments.report.ReportInputFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_option_salary_monthly"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_option_salary"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txInputSalary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txInputSalaryAnnual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_option_family"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_option_salary_monthly"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txInputFamily"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txInputSalary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_option_child"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_option_family"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txInputChild"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txInputFamily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_option_taxfree"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_option_child"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txInputTaxExemption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txInputChild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/report_option_rates"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_option_taxfree"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tax_calc_national_pension_rate"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/txInputTaxExemption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/txNationPensionRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/report_option_rates"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="25sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tax_calc_health_care_rate"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tax_calc_national_pension_rate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txHealthCareRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txNationPensionRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tax_calc_longterm_care_rate"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tax_calc_health_care_rate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txLongtermCareRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txHealthCareRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tax_calc_employment_care_rate"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tax_calc_longterm_care_rate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txEmploymentCareRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txLongtermCareRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tax_calc_employment_care_rate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txEmploymentCareRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

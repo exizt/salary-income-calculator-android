@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "252525703797-t14qjifr61a2pliu8tugtq208jvqu21s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.asv.apps.devicemonitor",
+            "certificate_hash": "b1b1ba0af8f44aea5ce7d3a1c8c8fa05ae9e24bc"
+          }
+        },
+        {
           "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
           "client_type": 3
         }
