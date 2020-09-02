@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SalaryCalculator2.iml" filepath="$PROJECT_DIR$/SalaryCalculator2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/createWordDictDB/createWordDictDB.iml" filepath="$PROJECT_DIR$/createWordDictDB/createWordDictDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SalaryCalculator2.iml" filepath="$PROJECT_DIR$/SalaryCalculator2.iml" group="SalaryCalculator2" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SalaryCalculator2/app" />
+      <module fileurl="file://$PROJECT_DIR$/createWordDictDB/createWordDictDB.iml" filepath="$PROJECT_DIR$/createWordDictDB/createWordDictDB.iml" group="SalaryCalculator2/createWordDictDB" />
     </modules>
   </component>
 </project>
