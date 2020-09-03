@@ -175,9 +175,9 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * @param key   String
          * @param value String
          */
-        private fun setTextWithSummary(key: CharSequence, value: String) {
+        private fun setTextWithSummary(key: CharSequence, value: String?) {
             val preference = findPreference(key) as EditTextPreference
-            preference.text = value
+            preference.text = value?:""
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, value)
         }
     }
