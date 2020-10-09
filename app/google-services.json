@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "252525703797-2n833pgf7ppsmpg7jtkmg4qvjp0ql2fa.apps.googleusercontent.com",
+          "client_id": "252525703797-t14qjifr61a2pliu8tugtq208jvqu21s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "kr.asv.apps.devicemonitor",
-            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
+            "certificate_hash": "b1b1ba0af8f44aea5ce7d3a1c8c8fa05ae9e24bc"
           }
         },
         {
@@ -31,11 +31,11 @@
           }
         },
         {
-          "client_id": "252525703797-t14qjifr61a2pliu8tugtq208jvqu21s.apps.googleusercontent.com",
+          "client_id": "252525703797-2n833pgf7ppsmpg7jtkmg4qvjp0ql2fa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "kr.asv.apps.devicemonitor",
-            "certificate_hash": "b1b1ba0af8f44aea5ce7d3a1c8c8fa05ae9e24bc"
+            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
           }
         },
         {
@@ -49,15 +49,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       },
       "admob_app_id": "ca-app-pub-6702794513299112~7544323780"
@@ -71,19 +69,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "252525703797-20d3uf3pbmu7cnr5311rtc99eberg071.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "kr.asv.apps.loancalculator",
-            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
-          }
-        },
-        {
           "client_id": "252525703797-8csof8fvb2dn8kloomlh38n2tdanjnk3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "kr.asv.apps.loancalculator",
             "certificate_hash": "2d4cba5551b2f0d5d48c5b26d83483b556e44077"
+          }
+        },
+        {
+          "client_id": "252525703797-20d3uf3pbmu7cnr5311rtc99eberg071.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.asv.apps.loancalculator",
+            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
           }
         },
         {
@@ -97,15 +95,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       },
       "admob_app_id": "ca-app-pub-6702794513299112~2678962185"
@@ -119,14 +115,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "252525703797-rb62rph5cg7c28qu5qg7bh9u8jgsm16m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "kr.asv.apps.salarycalculator",
-            "certificate_hash": "515759bf9a30b46c5db5f01fba8549060ff571eb"
-          }
-        },
-        {
           "client_id": "252525703797-pi99r18cq50f3c8mu41ftbfcpddtjbd4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -135,6 +123,14 @@
           }
         },
         {
+          "client_id": "252525703797-rb62rph5cg7c28qu5qg7bh9u8jgsm16m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.asv.apps.salarycalculator",
+            "certificate_hash": "515759bf9a30b46c5db5f01fba8549060ff571eb"
+          }
+        },
+        {
           "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -145,84 +141,16 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       },
       "admob_app_id": "ca-app-pub-6702794513299112~9173067732"
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:252525703797:android:34c0b33001d8f062",
-        "android_client_info": {
-          "package_name": "kr.asv.shhtaxmanager"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "252525703797-3ohab5q2g901pe9o8pgp9risjk0c8atg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "kr.asv.shhtaxmanager",
-            "certificate_hash": "0aee5475f66ea8d93530bd6a71720849c247f507"
-          }
-        },
-        {
-          "client_id": "252525703797-j7goa0k851st925frsjldcja6el92rns.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "kr.asv.shhtaxmanager",
-            "certificate_hash": "2d4cba5551b2f0d5d48c5b26d83483b556e44077"
-          }
-        },
-        {
-          "client_id": "252525703797-4vfugtgfu0cpiogld185db6i0m4mhu7g.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "kr.asv.shhtaxmanager",
-            "certificate_hash": "b1b1ba0af8f44aea5ce7d3a1c8c8fa05ae9e24bc"
-          }
-        },
-        {
-          "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCxDBKp6WNcj3KEzSL1kYaMKUljO1QQpxI"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "252525703797-tkd5comdv4kqgoqi71ihr5eji8krs8dg.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      },
-      "admob_app_id": "ca-app-pub-6702794513299112~2823406189"
     }
   ],
   "configuration_version": "1"
