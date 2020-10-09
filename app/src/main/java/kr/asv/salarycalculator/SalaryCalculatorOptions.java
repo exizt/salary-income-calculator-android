@@ -42,11 +42,7 @@ public class SalaryCalculatorOptions {
      * @param value int
      */
     public void setFamily(int value) {
-        if(value <= 1){
-            family = 1;
-        } else {
-            family = value;
-        }
+        family = Math.max(value, 1);
     }
 
     public int getChild() {
@@ -54,11 +50,7 @@ public class SalaryCalculatorOptions {
     }
 
     public void setChild(int value) {
-        if(value < 0){
-            child = 0;
-        } else {
-            child = value;
-        }
+        child = Math.max(value, 0);
     }
 
     @SuppressWarnings("WeakerAccess")

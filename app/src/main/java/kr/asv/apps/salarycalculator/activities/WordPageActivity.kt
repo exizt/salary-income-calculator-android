@@ -86,10 +86,10 @@ class WordPageActivity : AppCompatActivity() {
     }
 
     /**
-     * 디버깅
-     * @param msg
+     * 디버깅 메서드
      */
-    fun debug(msg: String) {
-        Log.d("[EXIZT-DEBUG]", "[WordPageActivity]$msg")
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
+        Services.debugLog("WordPageActivity", msg)
     }
 }
