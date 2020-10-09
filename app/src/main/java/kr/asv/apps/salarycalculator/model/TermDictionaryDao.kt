@@ -3,12 +3,13 @@ package kr.asv.apps.salarycalculator.model
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
+import kr.asv.apps.salarycalculator.Services
 
 /**
  * 용어 사전 데이터베이스에 연결하는 Dao 클래스
  */
 class TermDictionaryDao(private val db: SQLiteDatabase) {
-
+    private val isDebug = false
     /**
      * list 를 호출했을 때, 쿼리를 수행하고 Cursor 를 반환함
      */
@@ -66,24 +67,15 @@ class TermDictionaryDao(private val db: SQLiteDatabase) {
 
     /**
      * 디버깅 메서드
-     * 변수가 두개 넘어올 경우의 처리 추가
-     * @param msg 메시지
      */
-    @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
-        @Suppress("ConstantConditionIf")
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
-            if(msg2 == ""){
-                Log.d(TAG, msg)
-            } else {
-                Log.d(TAG, "$msg $msg2")
-            }
+            Services.debugLog("TermDictionaryDao", msg)
         }
     }
 
     companion object {
-        private const val TAG = "[EXIZT-DEBUG][TermDictionaryDao]"
-        private const val isDebug = false
         private const val TABLE_NAME = "terminology_information"
     }
 }

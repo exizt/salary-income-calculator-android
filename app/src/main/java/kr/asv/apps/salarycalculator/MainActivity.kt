@@ -24,6 +24,7 @@ import kr.asv.androidutils.AdmobAdapter
  * 기본으로 호출되는 메인 액티비티 클래스
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val isDebug = false
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     /**
@@ -134,25 +135,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * 디버깅 메서드
-     * @param msg 메시지
      */
-    @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
-        @Suppress("ConstantConditionIf")
-        if (IS_DEBUG) {
-            if(msg2 == ""){
-                Log.d(TAG, msg)
-            } else {
-                Log.d(TAG, "$msg $msg2")
-            }
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
+        if (isDebug) {
+            Services.debugLog("IncomeTaxDao", msg)
         }
     }
 
     fun setActionBarTitle(title: String) {
         supportActionBar!!.title = title
-    }
-    companion object {
-        private const val TAG = "[EXIZT][MainActivity]"
-        private const val IS_DEBUG = false
     }
 }

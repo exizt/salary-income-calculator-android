@@ -21,7 +21,7 @@ import kr.asv.apps.salarycalculator.R
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-
+    private val isDebug = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         debug("onCreate")
@@ -94,16 +94,14 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
     /**
      * 디버깅 메서드
-     * 변수가 두개 넘어올 경우의 처리 추가
-     * @param msg 메시지
      */
-    @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
-        @Suppress("ConstantConditionIf")
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
-            Log.d(TAG, "$msg $msg2")
+            Services.debugLog("WordItemFragment", msg)
         }
     }
+
 
     /**
      * Fragment_wordItem.xml 과 연관된 클래스
@@ -144,8 +142,6 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         }
     }
     companion object {
-        private const val TAG = "[EXIZT-DEBUG][WordItemFragment]"
-        private const val isDebug = false
         fun newInstance(): WordItemFragment = WordItemFragment()
     }
 }

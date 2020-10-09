@@ -16,11 +16,10 @@ import java.util.*
 /**
  * 전체적인 프로세스를 담당하는 클래스.
  * 싱글톤 으로 생성되어서, 앱의 수명 주기와 동일하게 유지한다.
- * Created by EXIZT on 2016-04-27.
  */
 object Services {
-    private const val TAG = "[EXIZT-DEBUG][Services]"
     private const val isDebug = true
+
     // 계산기 클래스
     val calculator = SalaryCalculator()
     // 세율 클래스
@@ -166,19 +165,19 @@ object Services {
         cur.close()
     }
 
+    fun debug(msg: String) {
+        debugLog("Services", msg)
+    }
+
     /**
      * 디버깅 메서드
      * @param msg 메시지
      */
     @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
+    fun debugLog(subTag: String, msg: Any, msg2 : Any = "") {
         @Suppress("ConstantConditionIf")
         if (isDebug) {
-            if(msg2 == ""){
-                Log.d(TAG, msg)
-            } else {
-                Log.d(TAG, "$msg $msg2")
-            }
+            Log.d("[EXIZT-SCalculator]", "($subTag) $msg $msg2")
         }
     }
 
