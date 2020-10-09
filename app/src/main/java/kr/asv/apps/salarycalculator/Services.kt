@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.util.Log
 import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
 import kr.asv.apps.salarycalculator.model.IncomeTaxDao
@@ -48,10 +48,10 @@ object Services {
                 appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
 
                 // 데이터베이스의 경로만 갖는다.
-                appDatabasePath = appDatabaseHandler.getDatabasePath()
+                appDatabasePath = appDatabaseHandler.databasePath
 
                 // 여기서 firebase 관련 처리를 해야함.
-                appDatabaseHandler.copyStorageDBFile()
+                appDatabaseHandler.copyFirebaseStorageDbFile()
 
                 // 세율 변경이 필요함.
                 // preferences 를 이용해야함. 데이터베이스를 읽어와서, 세율 값을 적용시킨다.
@@ -92,10 +92,10 @@ object Services {
             editor.putString(DefaultRatesPrefKey.employmentCare,rates.employmentCare.toString())
             editor.apply()
         } else {
-            rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
-            rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
-            rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
-            rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
+            rates.nationalPension = prefs.getString(DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
+            rates.healthCare = prefs.getString(DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
+            rates.longTermCare = prefs.getString(DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
+            rates.employmentCare = prefs.getString(DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
         }
         //debug("세율",rates)
     }
@@ -117,10 +117,10 @@ object Services {
     fun initInsuranceRates(prefs: SharedPreferences){
         debug("[initInsuranceRates] 적용세율 초기화")
         val rates = calculator.insurance.rates
-        rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
-        rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
-        rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
-        rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
+        rates.nationalPension = prefs.getString(DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
+        rates.healthCare = prefs.getString(DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
+        rates.longTermCare = prefs.getString(DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
+        rates.employmentCare = prefs.getString(DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
     }
 
     /**

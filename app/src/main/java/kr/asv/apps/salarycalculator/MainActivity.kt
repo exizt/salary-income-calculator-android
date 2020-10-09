@@ -53,12 +53,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * 네비게이션 드로워 셋팅
      */
     private fun onCreateNavigationDrawer() {
-        //네비게이션 바 기능
-        //val toggle = ActionBarDrawerToggle(
-        //        this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-
-        val toggle = object : ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-
+        val toggle = object : ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 hideSoftKeyboard()
@@ -90,19 +86,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * default 로 로딩하는 fragment
-     * navigation menu 의 특정 항목을 불러오게함.
-     * 백스택 히스토리에는 기록하지 않는다.
-     */
-    private fun onNavigationItemFirst() {
-        NavigationItemFactory.onItemSelected(this, nav_view.menu.findItem(R.id.nav_calculator_quick), false)
-    }
-
-    /**
      * navigationDrawer 에서 item 을 선택했을 때 발생하는 메서드
      * 해당 항목이 없을 시에는 '준비중입니다' 가 뜨도록 처리
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        @Suppress("ControlFlowWithEmptyBody")
         if (!NavigationItemFactory.onItemSelected(this, item, true)) {
             //Snackbar.make(this.currentFocus, "준비중입니다", Snackbar.LENGTH_LONG).setAction("Action", null).show()
         }
@@ -133,6 +121,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
+    }
+
     /**
      * 디버깅 메서드
      */
@@ -141,9 +133,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (isDebug) {
             Services.debugLog("IncomeTaxDao", msg)
         }
-    }
-
-    fun setActionBarTitle(title: String) {
-        supportActionBar!!.title = title
     }
 }
