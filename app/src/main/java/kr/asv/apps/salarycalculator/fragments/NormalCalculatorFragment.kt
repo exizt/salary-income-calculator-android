@@ -175,10 +175,10 @@ class NormalCalculatorFragment : BaseFragment() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val rates = calculator.insurance.rates
         if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
-            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
-            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0").toDouble()
-            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
-            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
+            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0")?.toDouble() ?: 0.0
+            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0")?.toDouble() ?: 0.0
+            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?: 0.0
+            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?: 0.0
         } else {
             Services.initInsuranceRates(prefs)
         }

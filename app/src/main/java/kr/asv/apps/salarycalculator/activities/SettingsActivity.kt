@@ -10,8 +10,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.preference.*
-import android.support.annotation.RequiresApi
-import android.support.v4.app.NavUtils
+import androidx.annotation.RequiresApi
+import androidx.core.app.NavUtils
 import android.text.InputFilter
 import android.view.MenuItem
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
@@ -22,7 +22,7 @@ import kr.asv.apps.salarycalculator.BuildConfig
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
 import org.jetbrains.anko.defaultSharedPreferences
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.WindowManager
 
 
@@ -175,9 +175,9 @@ class SettingsActivity : AppCompatPreferenceActivity() {
          * @param key   String
          * @param value String
          */
-        private fun setTextWithSummary(key: CharSequence, value: String) {
+        private fun setTextWithSummary(key: CharSequence, value: String?) {
             val preference = findPreference(key) as EditTextPreference
-            preference.text = value
+            preference.text = value?:""
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, value)
         }
     }

@@ -177,11 +177,11 @@ class QuickCalculatorFragment : BaseFragment() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
             // 설정된 값을 기준으로 연봉/월급을 재조정
-            annualBasis = inputMoney >= Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_input_criteria), "0"))
+            annualBasis = inputMoney >= Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_input_criteria), "0")?:"")
             // 이하 값들을 설정된 값으로 보정
-            family = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_family), "default"))
-            child = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_child), "0"))
-            taxExemption = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_tax_exemption), "100000")).toLong()
+            family = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_family), "default")?:"")
+            child = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_child), "0")?:"")
+            taxExemption = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_tax_exemption), "100000")?:"").toLong()
             includedSeverance = prefs.getBoolean(getString(R.string.pref_key_quick_severance), false)
         }
 
@@ -201,10 +201,10 @@ class QuickCalculatorFragment : BaseFragment() {
         // 커스텀 설정했을 경우에는 preferences 의 값을 가져오고, 아닌 경우에는 기본값들을 가져온다.
         val rates = calculator.insurance.rates
         if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
-            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0").toDouble()
-            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0").toDouble()
-            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0").toDouble()
-            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0").toDouble()
+            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0")?.toDouble() ?:0.0
+            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0")?.toDouble() ?:0.0
+            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?:0.0
+            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?:0.0
         } else {
             Services.initInsuranceRates(prefs)
         }

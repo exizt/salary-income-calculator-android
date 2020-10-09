@@ -214,7 +214,8 @@ class AppDatabaseHandler (context: Context){
      * 두 단계 이상으로는 구현 안 함. 오히려 비효율적일 수 있어서.
      */
     private fun existsAssetFile(context:Context,path:String,fileName:String):Boolean {
-        return context.assets.list(path).toList().contains(fileName)
+        if(context.assets.list(path)==null) return false;
+        return context.assets.list(path)!!.toList().contains(fileName)
     }
 
     /**

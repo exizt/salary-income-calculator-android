@@ -93,10 +93,10 @@ object Services {
             editor.putString(DefaultRatesPrefKey.employmentCare,rates.employmentCare.toString())
             editor.apply()
         } else {
-            rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0").toDouble()
-            rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0").toDouble()
-            rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
-            rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
+            rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
+            rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
+            rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
+            rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
         }
         //debug("세율",rates)
     }
@@ -118,10 +118,10 @@ object Services {
     fun initInsuranceRates(prefs: SharedPreferences){
         debug("[initInsuranceRates] 적용세율 초기화")
         val rates = calculator.insurance.rates
-        rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0").toDouble()
-        rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0").toDouble()
-        rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0").toDouble()
-        rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0").toDouble()
+        rates.nationalPension = prefs.getString(Services.DefaultRatesPrefKey.nationalPension, "0")?.toDouble() ?: 0.0
+        rates.healthCare = prefs.getString(Services.DefaultRatesPrefKey.healthCare, "0")?.toDouble() ?: 0.0
+        rates.longTermCare = prefs.getString(Services.DefaultRatesPrefKey.longTermCare, "0")?.toDouble() ?: 0.0
+        rates.employmentCare = prefs.getString(Services.DefaultRatesPrefKey.employmentCare, "0")?.toDouble() ?: 0.0
     }
 
     /**
