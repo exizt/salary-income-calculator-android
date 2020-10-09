@@ -34,16 +34,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        //네비게이션 드로워 셋팅
-        onCreateNavigationDrawer()
+        // 네비게이션 셋팅
+        onCreateNavigationDrawer() // 네비게이션 드로워 셋팅
+        NavigationItemFactory.onItemFirst(this) // 첫번째 메뉴 호출
 
-        //기본 Fragment 지정
-        onNavigationItemFirst()
-
-        //Services 초기화 및 인스턴스 가져오기, 처음 한번만 호출하도록 함.
+        //Services 초기화 및 인스턴스 가져오기
         Services.load(this)
 
-        //firebaseAnalytics 호출
+        // Firebase Analytics 초기화
         firebaseAnalytics = Firebase.analytics
 
         // Admob 호출
