@@ -129,7 +129,7 @@ object Services {
     fun setDefaultInsuranceRates(context: Context){
         debug("[setDefaultInsuranceRates] 초기화세율 값을 DB 값에서 배치")
 
-        // 조건절이 이용될 yearmonth ('201902' 같은 형식) 을 만드는 구문.
+        // 조건절이 이용될 year-month ('201902' 같은 형식) 을 만드는 구문.
         val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR).toString()
         val month = cal.get(Calendar.MONTH).toString().padStart(2,'0')
@@ -150,6 +150,7 @@ object Services {
 
 
             // 세율 정보를 '설정 변수' 에 넣어준다.
+            // '세율 초기화'에서 이용된다.
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = prefs.edit()
             editor.putString(DefaultRatesPrefKey.nationalPension, rates.nationalPension.toString())

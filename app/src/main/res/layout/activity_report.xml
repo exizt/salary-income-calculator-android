@@ -3,14 +3,12 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/outer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="kr.asv.apps.salarycalculator.activities.ReportActivity">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_content"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
@@ -22,7 +20,6 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/AppTheme.AppBarOverlay">
@@ -45,25 +42,21 @@
                     app:tabIndicatorColor="@color/colorTabIndicator">
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabItem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/report_tabBar_item_01" />
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabItem2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/report_tabBar_item_02" />
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabItem3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/report_tabBar_item_03" />
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabItem4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/report_tabBar_item_04" />

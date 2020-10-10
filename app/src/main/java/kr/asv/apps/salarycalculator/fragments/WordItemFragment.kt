@@ -2,18 +2,17 @@ package kr.asv.apps.salarycalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordPageActivity
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
-import kr.asv.apps.salarycalculator.R
 
 /**
  * 형태 : 리스트 형 Fragment

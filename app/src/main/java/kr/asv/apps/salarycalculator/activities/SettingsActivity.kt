@@ -10,21 +10,19 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.preference.*
-import androidx.annotation.RequiresApi
-import androidx.core.app.NavUtils
 import android.text.InputFilter
 import android.view.MenuItem
+import android.view.WindowManager
+import androidx.core.app.NavUtils
+import androidx.core.content.ContextCompat
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.AppCompatPreferenceActivity
 import kr.asv.apps.salarycalculator.BuildConfig
-import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
+import kr.asv.apps.salarycalculator.Services
 import org.jetbrains.anko.defaultSharedPreferences
-import androidx.core.content.ContextCompat
-import android.view.WindowManager
-
 
 
 /**
