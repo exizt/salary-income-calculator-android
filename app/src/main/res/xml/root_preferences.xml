@@ -1,0 +1,105 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="퀵 설정">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="false"
+            app:title="퀵계산 설정 사용" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_input_criteria"
+            app:dependency="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"
+            app:title="연봉,월급 구분 기준액" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_family"
+            app:dependency="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"
+            app:title="부양가족수" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_child"
+            app:dependency="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:title="20세 이하 자녀수" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_tax_exemption"
+            app:dependency="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="100000"
+            app:useSimpleSummaryProvider="true"
+            app:title="비과세액" />
+
+        <SwitchPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_severance"
+            app:dependency="@string/pref_key_quick_settings_enabled"
+            app:defaultValue="false"
+            app:title="퇴직금 포함여부" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="세율 설정">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_custom_rates_enabled"
+            app:defaultValue="false"
+            app:title="세율 고급설정 사용" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:title="세율설정 변경 초기화"
+            app:key="rate_reset_button"
+            app:dependency="@string/pref_key_custom_rates_enabled"
+            app:summary="세율설정을 원래 값으로 돌려놓습니다."/>
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_custom_national_pension_rate"
+            app:dependency="@string/pref_key_custom_rates_enabled"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:title="국민연금 세율" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_custom_health_care_rate"
+            app:dependency="@string/pref_key_custom_rates_enabled"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:title="건강보험 세율" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_custom_long_term_care_rate"
+            app:dependency="@string/pref_key_custom_rates_enabled"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:title="장기요양보험 세율" />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_custom_employment_care_rate"
+            app:dependency="@string/pref_key_custom_rates_enabled"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:title="고용보험 세율" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

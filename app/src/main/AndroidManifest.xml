@@ -55,7 +55,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.AppSettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/activity_settings_title">
 
+        </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6702794513299112~9173067732" />
