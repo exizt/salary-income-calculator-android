@@ -1,8 +1,8 @@
 apply plugin: 'java'
 
 dependencies {
-    compile 'org.xerial:sqlite-jdbc:3.20.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.xerial:sqlite-jdbc:3.20.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 compileJava.options.encoding = 'UTF-8'

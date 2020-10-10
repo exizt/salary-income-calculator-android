@@ -3,16 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.asv.apps.salarycalculator">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
@@ -51,13 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kr.asv.apps.salarycalculator.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.AppSettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/activity_settings_title">
 
+        </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6702794513299112~9173067732" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>
