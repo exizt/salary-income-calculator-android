@@ -30,7 +30,7 @@ class TaxCalculatorReportFragment : BaseFragment() {
     private fun initEventListener() {
         // 닫기 버튼 클릭시
         findViewById(R.id.id_btn_close).setOnClickListener {
-            activity!!.supportFragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

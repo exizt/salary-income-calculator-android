@@ -105,7 +105,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
     /**
      * Fragment_wordItem.xml 과 연관된 클래스
      */
-    class MyWordItemRecyclerViewAdapter(private val mValues: List<WordDictionaryContent.Item>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
+    class MyWordItemRecyclerViewAdapter(private val mValues: List<Item>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
 
         /**
          * onCreateViewHolder
@@ -135,7 +135,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
             //val mIdView: TextView = mView.findViewById<View>(R.id.id) as TextView
             val mContentView: TextView = mView.findViewById<View>(R.id.content) as TextView
-            var mItem: WordDictionaryContent.Item? = null
+            var mItem: Item? = null
 
             override fun toString(): String = super.toString() + " '" + mContentView.text + "'"
         }
