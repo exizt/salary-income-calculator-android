@@ -38,13 +38,12 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.preference:preference-ktx:1.1.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.6.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.2'
     implementation 'com.google.firebase:firebase-ads:19.4.0'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
     implementation 'org.jetbrains.anko:anko-commons:0.10.4'
-    implementation 'androidx.preference:preference:1.1.1'
 
     testImplementation 'junit:junit:4.13'
 }
