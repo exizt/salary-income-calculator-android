@@ -94,7 +94,6 @@ class TaxCalculatorFragment : BaseFragment() {
         //Intent intent=new Intent(getActivity(),ReportActivity.class);
         //startActivity(intent);
         val fragment = TaxCalculatorReportFragment.newInstance()
-        assert(activity != null)
         (activity as MainActivity).replaceFragments(fragment)
     }
 

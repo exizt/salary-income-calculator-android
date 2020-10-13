@@ -4,13 +4,12 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_about.*
 import kr.asv.apps.salarycalculator.R
-import org.jetbrains.anko.defaultSharedPreferences
 
 /**
  */
