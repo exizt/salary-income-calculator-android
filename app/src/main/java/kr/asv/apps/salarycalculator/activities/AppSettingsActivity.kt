@@ -33,11 +33,11 @@ class AppSettingsActivity : AppCompatActivity() {
 
         // @todo 퇴직금 포함 여부 빠짐.
         private fun eventMapping(){
-            // quick
-            val qMoneyBase: EditTextPreference? = findPreference(Services.AppPrefKeys.inputBase)
+            // 기본값 설정
             val qFamily: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.family)
             val qChild: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.child)
             val qExemption: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.taxExemption)
+            val qMoneyBase: EditTextPreference? = findPreference(Services.AppPrefKeys.inputBase)
 
             // summary 바인딩
             qMoneyBase?.summaryProvider = summaryProviderMoney
@@ -56,7 +56,6 @@ class AppSettingsActivity : AppCompatActivity() {
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
                 editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99999999))
             }
-
             qFamily?.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
                 editText.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))

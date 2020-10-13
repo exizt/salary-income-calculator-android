@@ -206,15 +206,17 @@ object Services {
 
     object AppPrefKeys {
         const val customRateEnable = "rate_settings_enable"
-        const val quickSettingEnable = "quick_settings_enable"
         const val inputBase = "quick_input_criteria"
 
         object DefaultInput {
-            // 퇴직금 포함 여부
-            const val severance = "quick_settings_severance"
+            // 부양가족수 (@string/pref_key_quick_family)
             const val family = "quick_settings_family"
+            // 20세 이하 자녀수 (@string/pref_key_quick_child)
             const val child = "quick_settings_child"
+            // 비과세액 (@string/pref_key_quick_tax_exemption)
             const val taxExemption = "quick_settings_tax_exemption"
+            // 퇴직금 포함 여부 (@string/pref_key_quick_severance)
+            const val severance = "quick_settings_severance"
         }
         object CustomRates {
             // @string/pref_key_custom_national_pension_rate

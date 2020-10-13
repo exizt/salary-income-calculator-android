@@ -48,9 +48,6 @@ class QuickCalculatorFragment : BaseFragment() {
         super.onResume()
         //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
         val prefs = PreferenceManager.getDefaultSharedPreferences(this.activity)
-        if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
-            Toast.makeText(activity, "'퀵계산설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 퀵계산 설정] 을 변경해주세요.", Toast.LENGTH_LONG).show()
-        }
         if (prefs.getBoolean(getString(R.string.pref_key_custom_rates_enabled), false)) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }

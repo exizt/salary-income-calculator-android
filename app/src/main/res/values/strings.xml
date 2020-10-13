@@ -84,8 +84,6 @@
     <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
     <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>
     <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
-    <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
-    <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
     <string name="report_option_rates">계산 기준 세율</string>
 
     <string name="about_info_card_title">App Information</string>

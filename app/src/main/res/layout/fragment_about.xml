@@ -56,7 +56,6 @@
                     style="@style/Card_ListItem_Label"/>
 
                 <TextView
-                    android:id="@+id/tvDBVersion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Card_ListItem_Value"/>
