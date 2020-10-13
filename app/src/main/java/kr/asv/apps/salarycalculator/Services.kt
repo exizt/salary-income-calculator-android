@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
-import androidx.preference.PreferenceManager
 import android.util.Log
+import androidx.preference.PreferenceManager
 import kr.asv.apps.salarycalculator.databases.AppDatabaseHandler
 import kr.asv.apps.salarycalculator.model.IncomeTaxDao
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 import org.jetbrains.anko.doAsync
-import java.util.*
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -30,7 +29,7 @@ object Services {
     @SuppressLint("StaticFieldLeak")
     lateinit var appDatabaseHandler : AppDatabaseHandler
 
-    private val appPrefs : MutableMap<String, String> = mutableMapOf()
+    val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
     /**
      * 기본 세율값
@@ -47,6 +46,7 @@ object Services {
      * getInstance 에서 호출한다.
      */
     fun load(context: Context) {
+        loadAppPrefs(context)
         // 앱이 켜지고 최초 1회에만 시도된다. appDatabasePath 가 초기값이 "" 이므로, 아직 값이 정해지기 전이다.
         // 동작이 되고 나면 appDatabasePath 값이 생성된다.
         // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
@@ -88,7 +88,7 @@ object Services {
 
     /**
      * 세율 초기화 메서드
-     * 세율 값을 Pref 의 Default 값으로 재조정한다.
+     * 계산기의 세율 값을 Pref 의 Default 값으로 재조정한다.
      */
     fun setInsuranceRatesToDefault(){
         debug("[initInsuranceRates] 적용세율 초기화")
@@ -116,6 +116,87 @@ object Services {
         }
     }
 
+    /**
+     * Preferences 에 저장된 값들을 로컬 변수로 불러온다.
+     */
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun loadAppPrefs(context: Context){
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+
+        //val prefsAll = prefs.all as MutableMap<String, Any>
+        //appPrefs.putAll(prefsAll)
+
+
+        // 세율 정보
+        assignAppPref(prefs, AppPrefKeys.customRateEnable, "Boolean")
+        assignAppPref(prefs, AppPrefKeys.CustomRates.nationalPension)
+        assignAppPref(prefs, AppPrefKeys.CustomRates.healthCare)
+        assignAppPref(prefs, AppPrefKeys.CustomRates.longTermCare)
+        assignAppPref(prefs, AppPrefKeys.CustomRates.employmentCare)
+
+        // 기본 입력값 설정
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
+
+    }
+
+    /**
+     * Preferences 에 저장된 값을 로컬 변수로 불러온다.
+     */
+    private fun assignAppPref(prefs: SharedPreferences, key: String, type: String="String"){
+        when (type) {
+            "String" -> {
+                prefs.getString(key,null)?.let { setAppPref(key, it) }
+            }
+            "Boolean" -> {
+                setAppPref(key, prefs.getBoolean(key,false))
+            }
+            "Int" -> {
+                setAppPref(key, prefs.getInt(key,0))
+            }
+        }
+    }
+
+    /**
+     * 설정을 모아둔 변수에 값을 대입.
+     */
+    fun setAppPref(key: String, value: Any){
+
+        // 여기서 로컬 변수에 값을 할당.
+        appPrefs[key] = value
+    }
+
+    /**
+     * '설정 변수' with 'Pref' 에 같이 대입하는 메서드.
+     * Read 하는 데서 발생하는 load 를 줄이기 위함. (with 디버깅도 편하게 하고)
+     */
+    fun setAppPrefWithPref(context: Context, key: String, value: Any){
+        setPrefValue(context, key, value)
+
+        setAppPref(key, value)
+    }
+
+    /**
+     * 설정값을 반환.
+     * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
+     */
+    fun getAppPref(key:String): String {
+        //return appPrefs[key]? : ""
+        return ""
+    }
+
+    /**
+     * Preferences 에 값을 지정하는 메서드.
+     */
+    private fun setPrefValue(context: Context, key: String, value: Any){
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = prefs.edit()
+        editor.putString(key, value.toString())
+        editor.apply()
+    }
+
     class TaxCalculatorRates {
         var nationalRate: Double = 0.toDouble()
         var healthCareRate: Double = 0.toDouble()
@@ -123,10 +204,27 @@ object Services {
         var employmentCareRate: Double = 0.toDouble()
     }
 
-    object DefaultRatesPrefKey {
-        const val nationalPension = "rate_default_national_pension"
-        const val healthCare = "rate_default_health_care"
-        const val longTermCare = "rate_default_long_term_care"
-        const val employmentCare = "rate_default_employment_care"
+    object AppPrefKeys {
+        const val customRateEnable = "rate_settings_enable"
+        const val quickSettingEnable = "quick_settings_enable"
+        const val inputBase = "quick_input_criteria"
+
+        object DefaultInput {
+            // 퇴직금 포함 여부
+            const val severance = "quick_settings_severance"
+            const val family = "quick_settings_family"
+            const val child = "quick_settings_child"
+            const val taxExemption = "quick_settings_tax_exemption"
+        }
+        object CustomRates {
+            // @string/pref_key_custom_national_pension_rate
+            const val nationalPension = "rate_national_pension"
+            // @string/pref_key_custom_health_care_rate
+            const val healthCare = "rate_health_care"
+            // @string/pref_key_custom_long_term_care_rate
+            const val longTermCare = "rate_longterm_care"
+            // @string/pref_key_custom_employment_care_rate
+            const val employmentCare = "rate_employment_care"
+        }
     }
 }

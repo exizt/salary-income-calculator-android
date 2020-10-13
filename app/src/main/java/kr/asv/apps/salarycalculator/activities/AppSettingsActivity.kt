@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import kr.asv.androidutils.inputfilter.InputFilterDoubleMinMax
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.R
@@ -32,12 +31,13 @@ class AppSettingsActivity : AppCompatActivity() {
             eventMapping()
         }
 
+        // @todo 퇴직금 포함 여부 빠짐.
         private fun eventMapping(){
             // quick
-            val qMoneyBase: EditTextPreference? = findPreference(getString(R.string.pref_key_quick_input_criteria))
-            val qFamily: EditTextPreference? = findPreference(getString(R.string.pref_key_quick_family))
-            val qChild: EditTextPreference? = findPreference(getString(R.string.pref_key_quick_child))
-            val qExemption: EditTextPreference? = findPreference(getString(R.string.pref_key_quick_tax_exemption))
+            val qMoneyBase: EditTextPreference? = findPreference(Services.AppPrefKeys.inputBase)
+            val qFamily: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.family)
+            val qChild: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.child)
+            val qExemption: EditTextPreference? = findPreference(Services.AppPrefKeys.DefaultInput.taxExemption)
 
             // summary 바인딩
             qMoneyBase?.summaryProvider = summaryProviderMoney
@@ -45,11 +45,18 @@ class AppSettingsActivity : AppCompatActivity() {
             qChild?.summaryProvider = summaryProviderPerson
             qExemption?.summaryProvider = summaryProviderMoney
 
+            // change 바인딩
+            qMoneyBase?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            qFamily?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            qChild?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            qExemption?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+
             // 입력값 필터
             qMoneyBase?.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
                 editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99999999))
             }
+
             qFamily?.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
                 editText.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
@@ -64,16 +71,22 @@ class AppSettingsActivity : AppCompatActivity() {
             }
 
             // rates
-            val rNationalPension: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_national_pension_rate))
-            val rHealthCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_health_care_rate))
-            val rLongTermCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_long_term_care_rate))
-            val rEmploymentCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_employment_care_rate))
+            val rNationalPension: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.nationalPension)
+            val rHealthCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.healthCare)
+            val rLongTermCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.longTermCare)
+            val rEmploymentCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.employmentCare)
 
             // summary 바인딩
             rNationalPension?.summaryProvider = summaryProviderRate
             rHealthCare?.summaryProvider = summaryProviderRate
             rLongTermCare?.summaryProvider = summaryProviderRate
             rEmploymentCare?.summaryProvider = summaryProviderRate
+
+            // change 바인딩
+            rNationalPension?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            rHealthCare?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            rLongTermCare?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
+            rEmploymentCare?.onPreferenceChangeListener = changeListenerSyncServicesAppPref
 
             // 입력값 필터
             rNationalPension?.setOnBindEditTextListener(editTextListenerRates)
@@ -120,16 +133,24 @@ class AppSettingsActivity : AppCompatActivity() {
         }
 
         /**
+         * Services.appPrefs 에도 값을 대입해둔다. (디버깅이 편하고 사용이 편하려고)
+         */
+        private val changeListenerSyncServicesAppPref = Preference.OnPreferenceChangeListener { pref, newValue ->
+            Services.setAppPref(pref.key, newValue)
+            true
+        }
+
+        /**
          * 세율 설정을 초기화.
          */
         private fun resetRates(): Boolean{
-            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+            // PreferenceManager.getDefaultSharedPreferences(activity)
 
             // rates
-            val rNationalPension: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_national_pension_rate))
-            val rHealthCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_health_care_rate))
-            val rLongTermCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_long_term_care_rate))
-            val rEmploymentCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_employment_care_rate))
+            val rNationalPension: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.nationalPension)
+            val rHealthCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.healthCare)
+            val rLongTermCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.longTermCare)
+            val rEmploymentCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.employmentCare)
 
             rNationalPension?.text = Services.DefaultRates.nationalPension.toString()
             rHealthCare?.text = Services.DefaultRates.healthCare.toString()
