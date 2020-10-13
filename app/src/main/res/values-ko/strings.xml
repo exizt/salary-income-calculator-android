@@ -1,4 +1,6 @@
 <resources>
+    <string name="nav_about">이 앱에 대해서</string>
+
     <string name="app_name">연봉계산기</string>
     <string name="nav_header_title">월급 실수령액 계산기</string>
     <string name="nav_group_settings">환경 설정</string>
@@ -67,4 +69,9 @@
     <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
     <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
     <string name="report_option_rates">계산 기준 세율</string>
+
+    <string name="about_info_card_title">정보</string>
+    <string name="about_app_version_label">앱 버전</string>
+    <string name="about_db_version_label">데이터베이스 버전</string>
+    <string name="about_desc">실수령액 계산기 앱 \n\n 이 앱은 연봉/월급 실수령액과 4대보험, 세금납부액을 계산해보기 위한 용도로 만들어졌습니다. \n\n 개인정보를 수집하거나 전송하지 않습니다. \n\n 편리성을 위한 기능은 계속 추가될 예정에 있습니다.</string>
 </resources>

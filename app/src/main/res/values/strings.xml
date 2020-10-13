@@ -1,4 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="nav_about">About</string>
+
     <string name="ad_unit_id_banner" translatable="false">ca-app-pub-6702794513299112/8570432502</string>
     <string name="ad_unit_id_banner_test" translatable="false" tools:keep="@string/ad_unit_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="value_default_number" translatable="false">0</string>
@@ -76,6 +78,7 @@
     <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
     <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
     <string name="pref_key_quick_settings_enabled" translatable="false">quick_settings_enable</string>
+
     <string name="pref_key_quick_input_criteria" translatable="false">quick_input_criteria</string>
     <string name="pref_key_quick_severance" translatable="false">quick_settings_severance</string>
     <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
@@ -84,4 +87,9 @@
     <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
     <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
     <string name="report_option_rates">계산 기준 세율</string>
+
+    <string name="about_info_card_title">App Information</string>
+    <string name="about_app_version_label">App version</string>
+    <string name="about_db_version_label">DB version</string>
+    <string name="about_desc">Loan Calculator \n\n This app is designed to calculate Loan Payment Schedules.</string>
 </resources>
