@@ -10,7 +10,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import android.view.MenuItem
 import android.view.View
 import kr.asv.apps.salarycalculator.activities.AppSettingsActivity
-import kr.asv.apps.salarycalculator.activities.SettingsActivity
 import kr.asv.apps.salarycalculator.fragments.*
 
 
@@ -55,10 +54,6 @@ class NavigationItemFactory {
                 R.id.nav_calculator_tax -> {
                     val fragment = TaxCalculatorFragment()
                     replaceFragments(activity, fragment, backStack)
-                    isDone = true
-                }
-                R.id.nav_settings -> {
-                    activity.startActivity(Intent(activity, SettingsActivity::class.java))
                     isDone = true
                 }
                 R.id.nav_settings2 -> {
