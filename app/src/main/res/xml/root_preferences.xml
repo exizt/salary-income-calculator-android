@@ -43,7 +43,7 @@
             app:useSimpleSummaryProvider="true"
             app:title="비과세액" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             app:key="@string/pref_key_quick_severance"
             app:dependency="@string/pref_key_quick_settings_enabled"

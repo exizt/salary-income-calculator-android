@@ -23,7 +23,7 @@ import kr.asv.apps.salarycalculator.R
  * 특정 수치를 기준으로, 연봉 or 월급을 나누고 간이 계산한다.
  */
 class QuickCalculatorFragment : BaseFragment() {
-
+    private val isDebug = true
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
@@ -222,6 +222,16 @@ class QuickCalculatorFragment : BaseFragment() {
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)
         startActivity(intent)
+    }
+
+    /**
+     * 디버깅 메서드
+     */
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
+        if (isDebug) {
+            Services.debugLog("QuickCalculatorFragment", msg, msg2)
+        }
     }
 
     companion object {
