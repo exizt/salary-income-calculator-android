@@ -206,7 +206,7 @@ class QuickCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?:0.0
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?:0.0
         } else {
-            Services.initInsuranceRates(prefs)
+            Services.setInsuranceRatesToDefault()
         }
 
         // 연봉, 월급, 4대 보험 계산

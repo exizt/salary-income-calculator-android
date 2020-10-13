@@ -131,10 +131,10 @@ class AppSettingsActivity : AppCompatActivity() {
             val rLongTermCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_long_term_care_rate))
             val rEmploymentCare: EditTextPreference? = findPreference(getString(R.string.pref_key_custom_employment_care_rate))
 
-            rNationalPension?.text = prefs.getString( Services.DefaultRatesPrefKey.nationalPension,"")
-            rHealthCare?.text = prefs.getString( Services.DefaultRatesPrefKey.healthCare,"")
-            rLongTermCare?.text = prefs.getString( Services.DefaultRatesPrefKey.longTermCare,"")
-            rEmploymentCare?.text = prefs.getString( Services.DefaultRatesPrefKey.employmentCare,"")
+            rNationalPension?.text = Services.DefaultRates.nationalPension.toString()
+            rHealthCare?.text = Services.DefaultRates.healthCare.toString()
+            rLongTermCare?.text = Services.DefaultRates.longTermCare.toString()
+            rEmploymentCare?.text = Services.DefaultRates.employmentCare.toString()
 
             return true
         }

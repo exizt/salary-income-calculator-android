@@ -120,7 +120,7 @@ class AppDatabaseHandler (context: Context) : DatabaseAssetCopyHandler(context) 
                 // 여기서 버전 히스토리를 남겨도 좋을 듯 한데... 어디다 남길지 모르겠음...
 
                 // 세율 정보값에 변경된 값을 반영함.
-                Services.setDefaultInsuranceRates(context)
+                // Services.setDefaultInsuranceRates(context)
             } else {
                 debug("[copyFirebaseStorageDbFile] 새로운 버전이 아니므로, 복사 안 함")
             }
