@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_quick_calculator.idTaxFreeOption
 import kotlinx.android.synthetic.main.fragment_quick_calculator.raMoneyYearly
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
+import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
 import kr.asv.apps.salarycalculator.R
@@ -72,78 +73,89 @@ class QuickCalculatorFragment : BaseFragment() {
             calculate()// 계산하기 버튼 클릭시
         }
 
-        // 금액 추가 버튼 +천만
-        idBtnPlus1000.setOnClickListener {
-            addInputMoney(10000000)
-        }
-
-        // 금액 추가 버튼 +백만
-        idBtnPlus100.setOnClickListener {
-            addInputMoney(1000000)
-        }
-
-        // 금액 추가 버튼 +십만
-        idBtnPlus10.setOnClickListener {
-            addInputMoney(100000)
-        }
-
-        // 금액 감소 버튼 -천만
-        idBtnMinus1000.setOnClickListener {
-            minusInputMoney(10000000)
-        }
-
-        // 금액 감소 버튼 -백만
-        idBtnMinus100.setOnClickListener {
-            minusInputMoney(1000000)
-        }
-
-        // 금액 감소 버튼 - 십만
-        idBtnMinus10.setOnClickListener {
-            minusInputMoney(100000)
-        }
-
         // 금액 정정 버튼
         btnClearInput_QM.setOnClickListener {
             idEditTextMoney.setText("0")
         }
+        
+        // 플러스, 마이너스 버튼 이벤트들
+        pmButtonsEventListener()
+
+        // 부양가족수 입력 필터
+        idFamilyOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
+
+        // 20세이하 자녀수 입력 필터
+        idChildOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
+
+        // 비과세 입력 필터
+        idTaxFreeOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999999999))
     }
 
     /**
-     *
+     * 증감 관련 버튼 이벤트 리스너
      */
-    private fun minusInputMoney(value: Int) {
+    private fun pmButtonsEventListener(){
+        // 금액 추가 버튼 +천만
+        idBtnPlus1000.setOnClickListener {
+            plusMinusInputMoney(10000000)
+        }
+
+        // 금액 추가 버튼 +백만
+        idBtnPlus100.setOnClickListener {
+            plusMinusInputMoney(1000000)
+        }
+
+        // 금액 추가 버튼 +십만
+        idBtnPlus10.setOnClickListener {
+            plusMinusInputMoney(100000)
+        }
+
+        // 금액 감소 버튼 -천만
+        idBtnMinus1000.setOnClickListener {
+            plusMinusInputMoney(-10000000)
+        }
+
+        // 금액 감소 버튼 -백만
+        idBtnMinus100.setOnClickListener {
+            plusMinusInputMoney(-1000000)
+        }
+
+        // 금액 감소 버튼 - 십만
+        idBtnMinus10.setOnClickListener {
+            plusMinusInputMoney(-100000)
+        }
+    }
+
+    /**
+     * 입력 금액에 증감을 하는 메서드.
+     */
+    private fun plusMinusInputMoney(value: Int) {
         val editText = findViewById(R.id.idEditTextMoney) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
         var inputMoney = MoneyTextWatcher.getValue(editText)
-        /*
-        if (editInputMoney.getText().length() <= 1) {
-            inputMoney = 0;
-        } else {
-            inputMoney = Integer.parseInt(editInputMoney.getText().toString());
-        }
-        */
-        inputMoney -= value.toLong()
+        inputMoney += value.toLong()
 
         if (inputMoney < 0) inputMoney = 0
         editText.setText(inputMoney.toString())
     }
 
     /**
-     *
+     * 숫자값을 가져올 때, 이상이 있거나 할 때에는 최소값으로 전환시킴.
+     * 주의 Int 로 반환함.
      */
-    private fun addInputMoney(value: Int) {
-        val editInputMoney = findViewById(R.id.idEditTextMoney) as EditText
-        //long inputMoney = getValueEditText(R.id.editMoney_QMode);
-        var inputMoney = MoneyTextWatcher.getValue(editInputMoney)
-        /*
-        if (editInputMoney.getText().length() <= 1) {
-            inputMoney = 0;
-        } else {
-            inputMoney = Integer.parseInt(editInputMoney.getText().toString());
+    private fun getEditTextNumber(editText: EditText, min: Int): Int{
+        return try{
+            val i= Integer.parseInt(editText.text.toString())
+            if(i < min){
+                idFamilyOption.setText(min.toString())
+                min
+            } else {
+                i
+            }
+        } catch(e: Exception){
+            editText.setText(min.toString())
+            min
         }
-        */
-        inputMoney += value.toLong()
-        editInputMoney.setText(inputMoney.toString())
     }
 
     /**
@@ -156,32 +168,26 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         // 입력 금액
-        val inputMoney: Long = try {
-            MoneyTextWatcher.getValue(idEditTextMoney)
-        } catch (e: Exception) {
-            0
+        val inputMoney: Long = MoneyTextWatcher.getValue(idEditTextMoney)
+        if(inputMoney <= 0){
+            idEditTextMoney.setText("0")
         }
 
         // 부양 가족수
-        if (idFamilyOption.text.toString().length <= 1) {
-            idFamilyOption.setText("1")
-        }
-        val family = Integer.parseInt(idFamilyOption.text.toString())
+        // 1 보다 큰 값이어야 함. (물론 입력에서 체크하도록 해야함. 여기는 마지노선 체크)
+        val family: Int = getEditTextNumber(idFamilyOption,1)
 
         // 20세 이하 자녀수
-        val child: Int = Integer.parseInt(idChildOption.text.toString())
-        if (idChildOption.text.toString().length <= 1) {
-            idChildOption.setText("0")
-        }
+        val child: Int = getEditTextNumber(idChildOption,0)
 
         // 연봉기준인지, 월급기준인지 구분
         val annualBasis = raMoneyYearly.isChecked
 
         // 비과세 금액
-        if (idTaxFreeOption.text.toString().length <= 1) {
+        val taxFree: Long = MoneyTextWatcher.getValue(idTaxFreeOption)
+        if(taxFree <= 0){
             idTaxFreeOption.setText("0")
         }
-        val taxFree: Long = MoneyTextWatcher.getValue(idTaxFreeOption)
 
         //옵션의 기본값
         val includedSeverance = checkSeverance.isChecked // 퇴직금 포함인지
@@ -207,11 +213,12 @@ class QuickCalculatorFragment : BaseFragment() {
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
         if (Services.isCustomRateMode()) {
+            val cKeys = Services.AppPrefKeys.CustomRates
             val rates = calculator.insurance.rates
-            rates.nationalPension = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.nationalPension) as Double
-            rates.healthCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.healthCare) as Double
-            rates.longTermCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.longTermCare) as Double
-            rates.employmentCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.employmentCare) as Double
+            rates.nationalPension = Services.getAppPrefValue(cKeys.nationalPension) as Double
+            rates.healthCare = Services.getAppPrefValue(cKeys.healthCare) as Double
+            rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
+            rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
         } else {
             Services.setInsuranceRatesToDefault()
         }

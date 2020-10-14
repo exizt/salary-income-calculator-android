@@ -62,7 +62,7 @@ class AppSettingsActivity : AppCompatActivity() {
             }
             qChild?.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
-                editText.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
+                editText.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
             }
             qExemption?.setOnBindEditTextListener { editText ->
                 editText.inputType = InputType.TYPE_CLASS_NUMBER
