@@ -126,19 +126,19 @@ object Services {
         //val prefsAll = prefs.all as MutableMap<String, Any>
         //appPrefs.putAll(prefsAll)
 
+        // 기본 입력값 설정
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
 
-        // 세율 정보
+        // 세율 커스텀 설정값
         assignAppPref(prefs, AppPrefKeys.customRateEnable, "Boolean")
         assignAppPref(prefs, AppPrefKeys.CustomRates.nationalPension)
         assignAppPref(prefs, AppPrefKeys.CustomRates.healthCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.longTermCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.employmentCare)
 
-        // 기본 입력값 설정
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
 
     }
 
@@ -185,6 +185,18 @@ object Services {
     fun getAppPref(key:String): String {
         //return appPrefs[key]? : ""
         return ""
+    }
+
+    /**
+     * appPref 에 저장된 값을 반환.
+     * (SharedPreferences 를 거치지 않음)
+     */
+    fun getAppPrefValue(key: String): Any? {
+        return appPrefs[key]
+    }
+
+    fun isCustomRateMode() : Boolean {
+        return getAppPrefValue(AppPrefKeys.customRateEnable) as Boolean
     }
 
     /**

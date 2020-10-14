@@ -12,9 +12,9 @@ import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
 import kotlinx.android.synthetic.main.fragment_quick_calculator.checkSeverance
-import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionChild
-import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionFamily
-import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionTaxFree
+import kotlinx.android.synthetic.main.fragment_quick_calculator.idChildOption
+import kotlinx.android.synthetic.main.fragment_quick_calculator.idFamilyOption
+import kotlinx.android.synthetic.main.fragment_quick_calculator.idTaxFreeOption
 import kotlinx.android.synthetic.main.fragment_quick_calculator.raMoneyYearly
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
@@ -51,9 +51,9 @@ class QuickCalculatorFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this.activity)
-        if (prefs.getBoolean(getString(R.string.pref_key_custom_rates_enabled), false)) {
+
+        // 퀵 계산 모드인 경우에 알려준다.
+        if (Services.isCustomRateMode()) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
     }
@@ -73,32 +73,32 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         // 금액 추가 버튼 +천만
-        btnPlus1000.setOnClickListener {
+        idBtnPlus1000.setOnClickListener {
             addInputMoney(10000000)
         }
 
         // 금액 추가 버튼 +백만
-        btnPlus100.setOnClickListener {
+        idBtnPlus100.setOnClickListener {
             addInputMoney(1000000)
         }
 
         // 금액 추가 버튼 +십만
-        btnPlus10.setOnClickListener {
+        idBtnPlus10.setOnClickListener {
             addInputMoney(100000)
         }
 
         // 금액 감소 버튼 -천만
-        btnMinus1000.setOnClickListener {
+        idBtnMinus1000.setOnClickListener {
             minusInputMoney(10000000)
         }
 
         // 금액 감소 버튼 -백만
-        btnMinus100.setOnClickListener {
+        idBtnMinus100.setOnClickListener {
             minusInputMoney(1000000)
         }
 
         // 금액 감소 버튼 - 십만
-        btnMinus10.setOnClickListener {
+        idBtnMinus10.setOnClickListener {
             minusInputMoney(100000)
         }
 
@@ -112,9 +112,9 @@ class QuickCalculatorFragment : BaseFragment() {
      *
      */
     private fun minusInputMoney(value: Int) {
-        val editInputMoney = findViewById(R.id.idEditTextMoney) as EditText
+        val editText = findViewById(R.id.idEditTextMoney) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
-        var inputMoney = MoneyTextWatcher.getValue(editInputMoney)
+        var inputMoney = MoneyTextWatcher.getValue(editText)
         /*
         if (editInputMoney.getText().length() <= 1) {
             inputMoney = 0;
@@ -125,7 +125,7 @@ class QuickCalculatorFragment : BaseFragment() {
         inputMoney -= value.toLong()
 
         if (inputMoney < 0) inputMoney = 0
-        editInputMoney.setText(inputMoney.toString())
+        editText.setText(inputMoney.toString())
     }
 
     /**
@@ -163,25 +163,25 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         // 부양 가족수
-        if (edOptionFamily.text.toString().length <= 1) {
-            edOptionFamily.setText("1")
+        if (idFamilyOption.text.toString().length <= 1) {
+            idFamilyOption.setText("1")
         }
-        val family = Integer.parseInt(edOptionFamily.text.toString())
+        val family = Integer.parseInt(idFamilyOption.text.toString())
 
         // 20세 이하 자녀수
-        val child: Int = Integer.parseInt(edOptionChild.text.toString())
-        if (edOptionChild.text.toString().length <= 1) {
-            edOptionChild.setText("0")
+        val child: Int = Integer.parseInt(idChildOption.text.toString())
+        if (idChildOption.text.toString().length <= 1) {
+            idChildOption.setText("0")
         }
 
         // 연봉기준인지, 월급기준인지 구분
         val annualBasis = raMoneyYearly.isChecked
 
         // 비과세 금액
-        if (edOptionTaxFree.text.toString().length <= 1) {
-            edOptionTaxFree.setText("0")
+        if (idTaxFreeOption.text.toString().length <= 1) {
+            idTaxFreeOption.setText("0")
         }
-        val taxFree: Long = MoneyTextWatcher.getValue(edOptionTaxFree)
+        val taxFree: Long = MoneyTextWatcher.getValue(idTaxFreeOption)
 
         //옵션의 기본값
         val includedSeverance = checkSeverance.isChecked // 퇴직금 포함인지
@@ -205,14 +205,13 @@ class QuickCalculatorFragment : BaseFragment() {
         options.setIncomeTaxCalculationDisabled(true)
 
         // 세율 정보 가져오기
-        // 커스텀 설정했을 경우에는 preferences 의 값을 가져오고, 아닌 경우에는 기본값들을 가져온다.
-        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
+        // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
+        if (Services.isCustomRateMode()) {
             val rates = calculator.insurance.rates
-            rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0")?.toDouble() ?:0.0
-            rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0")?.toDouble() ?:0.0
-            rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?:0.0
-            rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?:0.0
+            rates.nationalPension = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.nationalPension) as Double
+            rates.healthCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.healthCare) as Double
+            rates.longTermCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.longTermCare) as Double
+            rates.employmentCare = Services.getAppPrefValue(Services.AppPrefKeys.CustomRates.employmentCare) as Double
         } else {
             Services.setInsuranceRatesToDefault()
         }

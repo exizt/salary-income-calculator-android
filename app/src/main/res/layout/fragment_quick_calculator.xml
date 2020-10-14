@@ -37,13 +37,12 @@
             tools:ignore="LabelFor" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnPlus1000"
+                android:id="@+id/idBtnPlus1000"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +50,7 @@
                 android:text="@string/btn_plus_1000" />
 
             <Button
-                android:id="@+id/btnPlus100"
+                android:id="@+id/idBtnPlus100"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +58,7 @@
                 android:text="@string/btn_plus_100" />
 
             <Button
-                android:id="@+id/btnPlus10"
+                android:id="@+id/idBtnPlus10"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +73,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnMinus1000"
+                android:id="@+id/idBtnMinus1000"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,7 +81,7 @@
                 android:text="@string/btn_minus_1000" />
 
             <Button
-                android:id="@+id/btnMinus100"
+                android:id="@+id/idBtnMinus100"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,7 +89,7 @@
                 android:text="@string/btn_minus_100" />
 
             <Button
-                android:id="@+id/btnMinus10"
+                android:id="@+id/idBtnMinus10"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +129,7 @@
                 android:text="@string/label_family_input" />
 
             <EditText
-                android:id="@+id/edOptionFamily"
+                android:id="@+id/idFamilyOption"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -155,7 +154,7 @@
                 android:text="@string/label_child_input" />
 
             <EditText
-                android:id="@+id/edOptionChild"
+                android:id="@+id/idChildOption"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -180,7 +179,7 @@
                 android:text="@string/label_taxfree_input" />
 
             <EditText
-                android:id="@+id/edOptionTaxFree"
+                android:id="@+id/idTaxFreeOption"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
