@@ -3,26 +3,11 @@
 
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="퀵 설정">
-
-        <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
-            app:key="@string/pref_key_quick_settings_enabled"
-            app:defaultValue="false"
-            app:title="퀵계산 설정 사용" />
-
-        <EditTextPreference
-            app:iconSpaceReserved="false"
-            app:key="@string/pref_key_quick_input_criteria"
-            app:dependency="@string/pref_key_quick_settings_enabled"
-            app:defaultValue="1"
-            app:useSimpleSummaryProvider="true"
-            app:title="연봉,월급 구분 기준액" />
+        app:title="기본 입력값 설정">
 
         <EditTextPreference
             app:iconSpaceReserved="false"
             app:key="@string/pref_key_quick_family"
-            app:dependency="@string/pref_key_quick_settings_enabled"
             app:defaultValue="1"
             app:useSimpleSummaryProvider="true"
             app:title="부양가족수" />
@@ -30,7 +15,6 @@
         <EditTextPreference
             app:iconSpaceReserved="false"
             app:key="@string/pref_key_quick_child"
-            app:dependency="@string/pref_key_quick_settings_enabled"
             app:defaultValue="0"
             app:useSimpleSummaryProvider="true"
             app:title="20세 이하 자녀수" />
@@ -38,20 +22,31 @@
         <EditTextPreference
             app:iconSpaceReserved="false"
             app:key="@string/pref_key_quick_tax_exemption"
-            app:dependency="@string/pref_key_quick_settings_enabled"
             app:defaultValue="100000"
             app:useSimpleSummaryProvider="true"
             app:title="비과세액" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             app:key="@string/pref_key_quick_severance"
-            app:dependency="@string/pref_key_quick_settings_enabled"
             app:defaultValue="false"
             app:title="퇴직금 포함여부" />
 
+
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="고급 설정">
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_key_quick_input_criteria"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"
+            app:title="연봉,월급 구분 기준액" />
+
+    </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="세율 설정">

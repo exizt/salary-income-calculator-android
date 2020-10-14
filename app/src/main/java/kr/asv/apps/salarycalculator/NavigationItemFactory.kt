@@ -10,11 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import android.view.MenuItem
 import android.view.View
 import kr.asv.apps.salarycalculator.activities.AppSettingsActivity
-import kr.asv.apps.salarycalculator.activities.SettingsActivity
-import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.WordItemFragment
+import kr.asv.apps.salarycalculator.fragments.*
 
 
 /**
@@ -60,16 +56,17 @@ class NavigationItemFactory {
                     replaceFragments(activity, fragment, backStack)
                     isDone = true
                 }
-                R.id.nav_settings -> {
-                    activity.startActivity(Intent(activity, SettingsActivity::class.java))
-                    isDone = true
-                }
                 R.id.nav_settings2 -> {
                     activity.startActivity(Intent(activity, AppSettingsActivity::class.java))
                     isDone = true
                 }
                 R.id.nav_word_dictionary -> {
                     replaceFragments(activity, WordItemFragment(), backStack)
+                    isDone = true
+                }
+                R.id.nav_about -> {
+                    val fragment = AboutFragment()
+                    replaceFragments(activity, fragment, backStack)
                     isDone = true
                 }
                 else -> isDone = false

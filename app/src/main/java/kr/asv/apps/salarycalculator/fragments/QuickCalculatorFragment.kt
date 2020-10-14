@@ -23,7 +23,7 @@ import kr.asv.apps.salarycalculator.R
  * 특정 수치를 기준으로, 연봉 or 월급을 나누고 간이 계산한다.
  */
 class QuickCalculatorFragment : BaseFragment() {
-
+    private val isDebug = true
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
@@ -48,9 +48,6 @@ class QuickCalculatorFragment : BaseFragment() {
         super.onResume()
         //[퀵계산 설정 사용] 일 때 세부옵션들을 불러온다.
         val prefs = PreferenceManager.getDefaultSharedPreferences(this.activity)
-        if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
-            Toast.makeText(activity, "'퀵계산설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 퀵계산 설정] 을 변경해주세요.", Toast.LENGTH_LONG).show()
-        }
         if (prefs.getBoolean(getString(R.string.pref_key_custom_rates_enabled), false)) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
@@ -206,7 +203,7 @@ class QuickCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?:0.0
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?:0.0
         } else {
-            Services.initInsuranceRates(prefs)
+            Services.setInsuranceRatesToDefault()
         }
 
         // 연봉, 월급, 4대 보험 계산
@@ -222,6 +219,16 @@ class QuickCalculatorFragment : BaseFragment() {
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)
         startActivity(intent)
+    }
+
+    /**
+     * 디버깅 메서드
+     */
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
+        if (isDebug) {
+            Services.debugLog("QuickCalculatorFragment", msg, msg2)
+        }
     }
 
     companion object {

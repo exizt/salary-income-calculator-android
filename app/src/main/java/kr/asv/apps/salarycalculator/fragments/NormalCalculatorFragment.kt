@@ -32,8 +32,8 @@ class NormalCalculatorFragment : BaseFragment() {
         setActionBarTitle(resources.getString(R.string.nav_menu_detail_calculator))
 
         //세자리마다 쉼표표시
-        val edMoney = findViewById(R.id.edMoney) as EditText
-        val edOptionTaxFree = findViewById(R.id.edOptionTaxFree) as EditText
+        //val edMoney = findViewById(R.id.edMoney) as EditText
+        //val edOptionTaxFree = findViewById(R.id.edOptionTaxFree) as EditText
         edMoney.addTextChangedListener(MoneyTextWatcher(edMoney))
         edOptionTaxFree.addTextChangedListener(MoneyTextWatcher(edOptionTaxFree))
 
@@ -180,7 +180,7 @@ class NormalCalculatorFragment : BaseFragment() {
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?: 0.0
             rates.employmentCare = prefs.getString(resources.getString(R.string.pref_key_custom_employment_care_rate), "0")?.toDouble() ?: 0.0
         } else {
-            Services.initInsuranceRates(prefs)
+            Services.setInsuranceRatesToDefault()
         }
 
         // 연봉, 월급, 4대 보험 계산

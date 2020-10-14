@@ -30,36 +30,18 @@
             android:name=".activities.ReportActivity"
             android:label="@string/activity_report_title"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            tools:targetApi="jelly_bean">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.apps.salarycalculator.MainActivity" />
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".activities.WordPageActivity"
             android:label="@string/activity_word_title"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            tools:targetApi="jelly_bean">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.apps.salarycalculator.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/activity_settings_title"
-            android:parentActivityName=".MainActivity"
-            tools:targetApi="jelly_bean">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="kr.asv.apps.salarycalculator.MainActivity" />
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".activities.AppSettingsActivity"
             android:parentActivityName=".MainActivity"
             android:label="@string/activity_settings_title">
-
         </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
