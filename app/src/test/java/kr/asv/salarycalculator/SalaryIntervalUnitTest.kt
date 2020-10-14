@@ -17,6 +17,26 @@ class SalaryIntervalUnitTest {
         println("c [$c]")
     }
 
+    @Test
+    fun advancedUnitTest(){
+        val value = 5568000.0
+        val result = when {
+            value <= 1500 * 1000 -> {
+                calcIntervalMedium(value, 5000)
+            }
+            value <= 3000 * 1000 -> {
+                calcIntervalMedium(value, 10000)
+            }
+            value <= 10000 * 1000 -> {
+                calcIntervalMedium(value, 20000)
+            }
+            else -> {
+                value
+            }
+        }
+        println("result [$result]")
+    }
+
     @Suppress("SameParameterValue")
     private fun a(value: Double) : Double {
         return if (value % 10000 > 5000) {
@@ -33,11 +53,11 @@ class SalaryIntervalUnitTest {
 
     @Suppress("SameParameterValue")
     private fun c(value: Double) : Double {
-        return getIntervalMedium(value, 5000)
+        return calcIntervalMedium(value, 5000)
     }
 
     @Suppress("SameParameterValue")
-    private fun getIntervalMedium(value: Double, interval : Int) : Double {
+    private fun calcIntervalMedium(value: Double, interval : Int) : Double {
         return floor(value / interval) * interval + (interval / 2)
     }
 }

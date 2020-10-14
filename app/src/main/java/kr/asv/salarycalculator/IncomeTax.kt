@@ -4,13 +4,16 @@ import kotlin.math.floor
 
 class IncomeTax {
     /**
+     * 디버깅유무
+     */
+    var isDebug = false
+
+    /**
      * 소득세
      */
     var earnedIncomeTax = 0.0
-        /**
-         * 소득세 를 지정하고, 동시에 지방세도 같이 계산한다.
-         */
         set(value) {
+            // 소득세 를 지정하고, 동시에 지방세도 같이 계산한다.
             localTax = calculateLocalTax(value)
             field = value
         }
@@ -22,14 +25,16 @@ class IncomeTax {
         private set
 
     /**
-     * 디버깅유무
-     */
-    private var debug = false
-
-    /**
      * 국민연금 금액
      */
     private var nationalInsurance = 0.0
+        set(value) {
+            field = if (value > 0) {
+                value
+            } else {
+                0.0
+            }
+        }
 
     /**
      * 지방세 계산식
@@ -40,7 +45,7 @@ class IncomeTax {
     private fun calculateLocalTax(incomeTax: Double): Double {
         var tax = incomeTax * 0.1
         // 원단위 절삭
-        tax = Math.floor(tax / 10) * 10
+        tax = floor(tax / 10) * 10
         return tax
     }
 
@@ -52,14 +57,14 @@ class IncomeTax {
      * @param child  int child
      */
     fun execute(salary: Double, family: Int, child: Int) {
-        if (debug) {
+        if (isDebug) {
             debug("소득세 계산 시작 ")
-            debug("월급:$salary")
-            debug("가족수:$family")
-            debug("아이수:$child")
+            debug("월급: ", salary)
+            debug("가족수:", family)
+            debug("아이수:", child)
         }
         earnedIncomeTax = calculateEarnedTax(salary, family, child)
-        localTax = calculateLocalTax(earnedIncomeTax)
+        //localTax = calculateLocalTax(earnedIncomeTax)
     }
 
     /**
@@ -78,52 +83,46 @@ class IncomeTax {
          * 300만원 까지는 10000원 단위 간격
          * 1000만원 까지는 20000원 단위 간격
          */
-        var salary = _salary
-        when {
-            salary <= 1500 * 1000 -> {
-                salary = if (salary % 10000 > 5000) {
-                    Math.floor(salary / 10000) * 10000 + 7500
-                } else {
-                    Math.floor(salary / 10000) * 10000 + 2500
-                }
+        val salary = when {
+            _salary <= 1500 * 1000 -> {
+                calcIntervalMedium(_salary, 5000)
             }
-            salary <= 3000 * 1000 -> {
-                salary = Math.floor(salary / 10000) * 10000 + 5000
+            _salary <= 3000 * 1000 -> {
+                calcIntervalMedium(_salary, 10000)
             }
-            salary <= 10000 * 1000 -> {
-                salary = if ((salary + 1) % 20000 > 0) {
-                    Math.floor(salary / 20000) * 20000 + 10000
-                } else {
-                    Math.floor(salary / 20000) * 20000
-                }
+            _salary <= 10000 * 1000 -> {
+                calcIntervalMedium(_salary, 20000)
+            }
+            else -> {
+                _salary
             }
         }
-        if (debug) debug("확정된 연산기준 기본급:$salary")
+        debug("확정된 연산기준 기본급:", salary)
 
         // [2.연간 근로소득금액 산출]
         // 연간 근로소득금액 = 연간급여 - 비과세 소득(0) - 근로소득공제
         val earned1 = calculateBasicDeduction(salary)
-        if (debug) debug("연간근로소득금액(기초공제 후):$earned1")
+        debug("연간근로소득금액(기초공제 후):", earned1)
 
         // [3. 종합소득공제 산출(인적공제, 연금보험료공제, 특별소득공제 등)]
         val deduction = calculateIntegratedDeduction(salary, family, child)
-        if (debug) debug("종합소득공제액:$deduction")
+        debug("종합소득공제액:", deduction)
 
         // [4. 과세표준 산출]
         // 근로소득금액 - 종합소득공제 = 근로소득과세표준
         val taxBaseEarned = earned1 - deduction
-        if (debug) debug("과세표준:$taxBaseEarned")
+        debug("과세표준:", taxBaseEarned)
 
         // [5. 결정세액 산출]
         var tax = calcTaxEarnedTotal(salary, taxBaseEarned)
-        if (debug) debug("결정세액:$tax")
+        debug("결정세액:", tax)
 
         // [6. 간이세액 산출]
         // (산출세액 - 세액공제) / 12 = 간이세액
-        tax = tax / 12
+        tax /= 12
         // 원단위 이하 절사
-        tax = Math.floor(tax / 10) * 10
-        if (debug) debug("간이세액:$tax")
+        tax = floor(tax / 10) * 10
+        debug("간이세액:", tax)
 
         // 마이너스 방지
         if (tax < 0) tax = 0.0
@@ -142,25 +141,30 @@ class IncomeTax {
          * 연간의 기준 근로소득을 계산한 후, 그 금액에 따른 차등적인 소득공제를 한다.
          */
         val earnedIncomeBefore = salary * 12 // 연간 기준 금액 산출
-        if (debug) debug("소득기준금액-공제전(연기준)$earnedIncomeBefore")
-        val deduction: Double
-        deduction = if (earnedIncomeBefore <= 500 * 10000) {
-            earnedIncomeBefore * 0.7
-        } else if (earnedIncomeBefore <= 1500 * 10000) {
-            350 * 10000 + (earnedIncomeBefore - 500 * 10000) * 0.4
-        } else if (earnedIncomeBefore <= 4500 * 10000) {
-            750 * 10000 + (earnedIncomeBefore - 1500 * 10000) * 0.15
-        } else if (earnedIncomeBefore <= 10000 * 10000) {
-            1200 * 10000 + (earnedIncomeBefore - 4500 * 10000) * 0.05
-        } else {
-            1475 * 10000 + (earnedIncomeBefore - 10000 * 10000) * 0.02
+        debug("소득기준금액-공제전(연기준) ", earnedIncomeBefore)
+        val deduction = when {
+            earnedIncomeBefore <= 500 * 10000 -> {
+                earnedIncomeBefore * 0.7
+            }
+            earnedIncomeBefore <= 1500 * 10000 -> {
+                350 * 10000 + (earnedIncomeBefore - 500 * 10000) * 0.4
+            }
+            earnedIncomeBefore <= 4500 * 10000 -> {
+                750 * 10000 + (earnedIncomeBefore - 1500 * 10000) * 0.15
+            }
+            earnedIncomeBefore <= 10000 * 10000 -> {
+                1200 * 10000 + (earnedIncomeBefore - 4500 * 10000) * 0.05
+            }
+            else -> {
+                1475 * 10000 + (earnedIncomeBefore - 10000 * 10000) * 0.02
+            }
         }
-        if (debug) debug("근로소득공제액(연기준):$deduction")
+        debug("근로소득공제액(연기준):", deduction)
 
         // 2)줄어든 근로소득금액 산출
         // 근로소득 금액(연간) = 기존의 기준 근로소득 금액 - 근로소득공제
         val adjustedIncomeYearly = earnedIncomeBefore - deduction // 근로소득금액
-        if (debug) debug("소득기준금액-근로소득공제 후(연기준):$adjustedIncomeYearly")
+        debug("소득기준금액-근로소득공제 후(연기준):", adjustedIncomeYearly)
         return adjustedIncomeYearly
     }
 
@@ -175,15 +179,15 @@ class IncomeTax {
         // 인적공제, 연금보험료공제, 특별소득공제 등
         // 1) 인적공제
         val familyDeduction = 150 * 10000 * (family + child).toDouble()
-        if (debug) debug("인적공제:$familyDeduction")
+        debug("인적공제:", familyDeduction)
 
         // 2) 연금보험 공제
-        val pensionDeduction = getNationalInsurance() * 12
-        if (debug) debug("연금보험료공제:$pensionDeduction")
+        val pensionDeduction = nationalInsurance * 12
+        debug("연금보험료공제:", pensionDeduction)
 
         // 3) 특별소득공제
         val deductionEarnedETC = calculateOtherDeduction(salary, family, child)
-        if (debug) debug("특별소득공제:$deductionEarnedETC")
+        debug("특별소득공제:", deductionEarnedETC)
         return familyDeduction + pensionDeduction + deductionEarnedETC
     }
 
@@ -267,12 +271,12 @@ class IncomeTax {
                 3760 * 10000 + (taxBase - 15000 * 10000) * 0.38
             }
         }
-        tax = Math.floor(tax / 10) * 10 // 원단위 이하 절사
-        if (debug) debug("산출세액:$tax")
+        tax = floor(tax / 10) * 10 // 원단위 이하 절사
+        debug("산출세액:", tax)
 
         // 근로소득세액공제 처리
         val incomeTaxCredit = calculateTaxCredit(baseSalary, tax)
-        if (debug) debug("근로소득세액공제:$incomeTaxCredit")
+        debug("근로소득세액공제:", incomeTaxCredit)
         tax -= incomeTaxCredit
         return tax
     }
@@ -309,32 +313,15 @@ class IncomeTax {
 
         // 한도를 넘었을 시 한도 내로 재 지정
         if (taxCredit >= creditMax) taxCredit = creditMax
-        taxCredit = Math.floor(taxCredit / 10) * 10 // 원단위 이하 절사
+        taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
         return taxCredit
     }
 
-    private fun getIntervalMedium(value: Double, interval : Int) : Double {
-        return floor(value / interval) * interval + (interval / 2)
-    }
-
-    private fun debug(str: String) {
-        println(str)
-    }
-
     /**
-     * 디버깅을 위한 toString 메서드
+     * 구간의 중간값을 계산하는 메서드.
      */
-    override fun toString(): String {
-        var result = "\n<소득세 연산 클래스>\n"
-        result += """
-             소득세 : $earnedIncomeTax
-             
-             """.trimIndent()
-        result += """
-             지방세 : $localTax
-             
-             """.trimIndent()
-        return result
+    private fun calcIntervalMedium(value: Double, interval : Int) : Double {
+        return floor(value / interval) * interval + (interval / 2)
     }
 
     /**
@@ -347,24 +334,22 @@ class IncomeTax {
     }
 
     /**
-     * 국민연금료 입력
-     *
-     * @param nationalInsurance double
+     * 디버깅을 위한 toString 메서드
      */
-    fun setNationalInsurance(nationalInsurance: Double) {
-        this.nationalInsurance = nationalInsurance
-    }
-
-    private fun getNationalInsurance(): Double {
-        return if (nationalInsurance >= 0) nationalInsurance else 0.0
+    override fun toString(): String {
+        return """
+            <소득세 연산 클래스>
+            소득세 : $earnedIncomeTax
+            지방세 : $localTax
+        """.trimIndent()
     }
 
     /**
-     * 디버깅 설정값
-     *
-     * @param debug boolean
+     * 디버깅 메서드
      */
-    fun setDebug(debug: Boolean) {
-        this.debug = debug
+    private fun debug(msg: Any, msg2: Any = "") {
+        if(isDebug){
+            println("$msg $msg2")
+        }
     }
 }

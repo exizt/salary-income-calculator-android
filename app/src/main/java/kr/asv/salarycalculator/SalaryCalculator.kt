@@ -77,7 +77,7 @@ class SalaryCalculator {
      */
     fun run() {
         if (options.isDebug) {
-            incomeTax.setDebug(true)
+            incomeTax.isDebug = true
         }
 
         // 연봉, 월급, 4대보험 계산
