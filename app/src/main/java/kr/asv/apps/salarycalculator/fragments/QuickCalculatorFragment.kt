@@ -3,7 +3,6 @@ package kr.asv.apps.salarycalculator.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +10,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
-import kotlinx.android.synthetic.main.fragment_quick_calculator.checkSeverance
-import kotlinx.android.synthetic.main.fragment_quick_calculator.idChildOption
-import kotlinx.android.synthetic.main.fragment_quick_calculator.idFamilyOption
-import kotlinx.android.synthetic.main.fragment_quick_calculator.idTaxFreeOption
-import kotlinx.android.synthetic.main.fragment_quick_calculator.raMoneyYearly
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.ReportActivity
-import kr.asv.apps.salarycalculator.R
 
 
 /**

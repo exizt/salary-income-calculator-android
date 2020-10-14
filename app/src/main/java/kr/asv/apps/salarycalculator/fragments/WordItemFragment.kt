@@ -140,9 +140,6 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
             override fun toString(): String = super.toString() + " '" + mContentView.text + "'"
         }
     }
-    companion object {
-        fun newInstance(): WordItemFragment = WordItemFragment()
-    }
 }
 
 interface OnListFragmentInteractionListener {

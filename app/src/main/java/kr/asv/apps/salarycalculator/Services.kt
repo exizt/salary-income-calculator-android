@@ -29,7 +29,7 @@ object Services {
     @SuppressLint("StaticFieldLeak")
     lateinit var appDatabaseHandler : AppDatabaseHandler
 
-    val appPrefs : MutableMap<String, Any> = mutableMapOf()
+    private val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
     /**
      * 기본 세율값
@@ -172,6 +172,7 @@ object Services {
      * '설정 변수' with 'Pref' 에 같이 대입하는 메서드.
      * Read 하는 데서 발생하는 load 를 줄이기 위함. (with 디버깅도 편하게 하고)
      */
+    @Suppress("unused")
     fun setAppPrefWithPref(context: Context, key: String, value: Any){
         setPrefValue(context, key, value)
 
@@ -182,6 +183,7 @@ object Services {
      * 설정값을 반환.
      * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
      */
+    @Suppress("unused")
     fun getAppPref(key:String): String {
         //return appPrefs[key]? : ""
         return ""

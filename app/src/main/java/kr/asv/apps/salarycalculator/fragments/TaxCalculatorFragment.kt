@@ -13,6 +13,7 @@ import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.MainActivity
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
+import kotlin.math.roundToLong
 
 /**
  *
@@ -119,7 +120,7 @@ class TaxCalculatorFragment : BaseFragment() {
      */
     private fun getRates(origin: Double, interest: Double): Double {
         val result = interest / origin * 100.0
-        return Math.round(result * 10000).toDouble() / 10000 //반올림
+        return (result * 10000).roundToLong().toDouble() / 10000 //반올림
         //return (double)Math.floor(result * 10) / 10; //버림
         //return (double)Math.ceil(result * 10) / 10; //올림
         //return  ((double)interest / (double)origin) * 100.0;
@@ -138,15 +139,4 @@ class TaxCalculatorFragment : BaseFragment() {
     private fun parseDouble(editText: EditText): Double =
             java.lang.Double.parseDouble(editText.text.toString())
 
-    companion object {
-
-        /**
-         */
-        fun newInstance(): TaxCalculatorFragment {
-            val fragment = TaxCalculatorFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
-    }
 }
