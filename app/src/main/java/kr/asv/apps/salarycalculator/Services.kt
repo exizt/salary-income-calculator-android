@@ -29,7 +29,7 @@ object Services {
     @SuppressLint("StaticFieldLeak")
     lateinit var appDatabaseHandler : AppDatabaseHandler
 
-    val appPrefs : MutableMap<String, Any> = mutableMapOf()
+    private val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
     /**
      * 기본 세율값
@@ -126,19 +126,19 @@ object Services {
         //val prefsAll = prefs.all as MutableMap<String, Any>
         //appPrefs.putAll(prefsAll)
 
+        // 기본 입력값 설정
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
 
-        // 세율 정보
+        // 세율 커스텀 설정값
         assignAppPref(prefs, AppPrefKeys.customRateEnable, "Boolean")
         assignAppPref(prefs, AppPrefKeys.CustomRates.nationalPension)
         assignAppPref(prefs, AppPrefKeys.CustomRates.healthCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.longTermCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.employmentCare)
 
-        // 기본 입력값 설정
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
 
     }
 
@@ -172,6 +172,7 @@ object Services {
      * '설정 변수' with 'Pref' 에 같이 대입하는 메서드.
      * Read 하는 데서 발생하는 load 를 줄이기 위함. (with 디버깅도 편하게 하고)
      */
+    @Suppress("unused")
     fun setAppPrefWithPref(context: Context, key: String, value: Any){
         setPrefValue(context, key, value)
 
@@ -182,9 +183,22 @@ object Services {
      * 설정값을 반환.
      * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
      */
+    @Suppress("unused")
     fun getAppPref(key:String): String {
         //return appPrefs[key]? : ""
         return ""
+    }
+
+    /**
+     * appPref 에 저장된 값을 반환.
+     * (SharedPreferences 를 거치지 않음)
+     */
+    fun getAppPrefValue(key: String): Any? {
+        return appPrefs[key]
+    }
+
+    fun isCustomRateMode() : Boolean {
+        return getAppPrefValue(AppPrefKeys.customRateEnable) as Boolean
     }
 
     /**

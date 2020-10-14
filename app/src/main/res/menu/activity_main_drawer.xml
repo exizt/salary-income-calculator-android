@@ -6,10 +6,6 @@
                 android:id="@+id/nav_calculator_quick"
                 android:icon="@drawable/ic_menu_calculate"
                 android:title="@string/nav_menu_quick_calculator" />
-            <item
-                android:id="@+id/nav_calculator_older"
-                android:icon="@drawable/ic_menu_calculate"
-                android:title="@string/nav_menu_detail_calculator" />
         </menu>
     </item>
 

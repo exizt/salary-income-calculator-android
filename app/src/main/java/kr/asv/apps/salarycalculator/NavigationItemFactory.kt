@@ -46,11 +46,6 @@ class NavigationItemFactory {
                     replaceFragments(activity, fragment, backStack)
                     isDone = true
                 }
-                R.id.nav_calculator_older -> {
-                    val fragment = NormalCalculatorFragment()
-                    replaceFragments(activity, fragment, backStack)
-                    isDone = true
-                }
                 R.id.nav_calculator_tax -> {
                     val fragment = TaxCalculatorFragment()
                     replaceFragments(activity, fragment, backStack)
