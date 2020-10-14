@@ -11,6 +11,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_quick_calculator.*
+import kotlinx.android.synthetic.main.fragment_quick_calculator.checkSeverance
+import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionChild
+import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionFamily
+import kotlinx.android.synthetic.main.fragment_quick_calculator.edOptionTaxFree
+import kotlinx.android.synthetic.main.fragment_quick_calculator.raMoneyYearly
 import kr.asv.androidutils.MoneyTextWatcher
 import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.apps.salarycalculator.Services
@@ -30,7 +35,7 @@ class QuickCalculatorFragment : BaseFragment() {
         setFragmentView(view)
         setActionBarTitle(resources.getString(R.string.nav_menu_quick_calculator))
 
-        val editMoney = findViewById(R.id.editMoney_QMode) as EditText
+        val editMoney = findViewById(R.id.idEditTextMoney) as EditText
         editMoney.addTextChangedListener(MoneyTextWatcher(editMoney))
         editMoney.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
 
@@ -41,7 +46,7 @@ class QuickCalculatorFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initEventListeners()
 
-        editMoney_QMode.requestFocus()
+        idEditTextMoney.requestFocus()
     }
 
     override fun onResume() {
@@ -99,7 +104,7 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 금액 정정 버튼
         btnClearInput_QM.setOnClickListener {
-            editMoney_QMode.setText("0")
+            idEditTextMoney.setText("0")
         }
     }
 
@@ -107,7 +112,7 @@ class QuickCalculatorFragment : BaseFragment() {
      *
      */
     private fun minusInputMoney(value: Int) {
-        val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
+        val editInputMoney = findViewById(R.id.idEditTextMoney) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
         var inputMoney = MoneyTextWatcher.getValue(editInputMoney)
         /*
@@ -127,7 +132,7 @@ class QuickCalculatorFragment : BaseFragment() {
      *
      */
     private fun addInputMoney(value: Int) {
-        val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
+        val editInputMoney = findViewById(R.id.idEditTextMoney) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
         var inputMoney = MoneyTextWatcher.getValue(editInputMoney)
         /*
@@ -146,48 +151,53 @@ class QuickCalculatorFragment : BaseFragment() {
      */
     private fun calculate() {
         // validate checking
-        if (editMoney_QMode.text.length <= 1) {
+        if (idEditTextMoney.text.length <= 1) {
             return
         }
-        //val editInputMoney = findViewById(R.id.editMoney_QMode) as EditText
 
-        // get money value
+        // 입력 금액
         val inputMoney: Long = try {
-            MoneyTextWatcher.getValue(editMoney_QMode)
+            MoneyTextWatcher.getValue(idEditTextMoney)
         } catch (e: Exception) {
             0
         }
 
-        /*
-         * 연봉기준인지 월급기준인지 구분.
-         * 1000만원 이상이면 연봉입력으로 생각하고 계산. (아래에서, 퀵 설정 시 커스텀 처리 구문 추가됨)
-         */
-        var annualBasis = inputMoney >= 10000000
+        // 부양 가족수
+        if (edOptionFamily.text.toString().length <= 1) {
+            edOptionFamily.setText("1")
+        }
+        val family = Integer.parseInt(edOptionFamily.text.toString())
 
-        //옵션의 기본값
-        var taxExemption: Long = 100000 // 비과세
-        var family = 1 // 부양가족수
-        var child = 0 // 20세 이하 자녀수
-        var includedSeverance = false // 퇴직금 포함인지
-
-        //[퀵계산 설정 사용]일 때는 미리 설정한 값들을 불러온다.
-        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        if (prefs.getBoolean(getString(R.string.pref_key_quick_settings_enabled), false)) {
-            // 설정된 값을 기준으로 연봉/월급을 재조정
-            annualBasis = inputMoney >= Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_input_criteria), "0")?:"")
-            // 이하 값들을 설정된 값으로 보정
-            family = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_family), "default")?:"")
-            child = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_child), "0")?:"")
-            taxExemption = Integer.parseInt(prefs.getString(getString(R.string.pref_key_quick_tax_exemption), "100000")?:"").toLong()
-            includedSeverance = prefs.getBoolean(getString(R.string.pref_key_quick_severance), false)
+        // 20세 이하 자녀수
+        val child: Int = Integer.parseInt(edOptionChild.text.toString())
+        if (edOptionChild.text.toString().length <= 1) {
+            edOptionChild.setText("0")
         }
 
+        // 연봉기준인지, 월급기준인지 구분
+        val annualBasis = raMoneyYearly.isChecked
+
+        // 비과세 금액
+        if (edOptionTaxFree.text.toString().length <= 1) {
+            edOptionTaxFree.setText("0")
+        }
+        val taxFree: Long = MoneyTextWatcher.getValue(edOptionTaxFree)
+
+        //옵션의 기본값
+        val includedSeverance = checkSeverance.isChecked // 퇴직금 포함인지
+
+        // 비과세보다 적은 경우는 그냥 계산하지 말기.
+        if(inputMoney < taxFree){
+            return
+        }
+        
+        // 실수령액 계산기 클래스
         val calculator = Services.calculator
 
         // 옵션값 셋팅
         val options = calculator.options
         options.inputMoney = inputMoney.toDouble()
-        options.taxExemption = taxExemption.toDouble()
+        options.taxExemption = taxFree.toDouble()
         options.family = family
         options.child = child
         options.setAnnualBasis(annualBasis)
@@ -196,8 +206,9 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 세율 정보 가져오기
         // 커스텀 설정했을 경우에는 preferences 의 값을 가져오고, 아닌 경우에는 기본값들을 가져온다.
-        val rates = calculator.insurance.rates
+        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         if (prefs.getBoolean(resources.getString(R.string.pref_key_custom_rates_enabled), false)) {
+            val rates = calculator.insurance.rates
             rates.nationalPension = prefs.getString(resources.getString(R.string.pref_key_custom_national_pension_rate), "0")?.toDouble() ?:0.0
             rates.healthCare = prefs.getString(resources.getString(R.string.pref_key_custom_health_care_rate), "0")?.toDouble() ?:0.0
             rates.longTermCare = prefs.getString(resources.getString(R.string.pref_key_custom_long_term_care_rate), "0")?.toDouble() ?:0.0
