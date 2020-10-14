@@ -12,10 +12,26 @@ class SalaryCalculator {
     /**
      * Options 값들. 가족수, 자녀수, 비과세액 등
      */
-    val options: SalaryCalculatorOptions
-    val insurance: Insurance
-    val incomeTax: IncomeTax
-    val salary: Salary
+    val options = SalaryCalculatorOptions()
+
+    /**
+     * 4대 보험
+     */
+    val insurance = Insurance()
+
+    /**
+     * 소득세
+     */
+    val incomeTax = IncomeTax()
+
+    /**
+     * 급여 정보
+     */
+    val salary = Salary()
+
+    /**
+     * 월 실수령액
+     */
     var netSalary = 0.0
         private set
 
@@ -32,14 +48,15 @@ class SalaryCalculator {
      * (Options 클래스 를 몰라도 되게 하기 위해서) 필수값들을 하나씩 set 해줌.
      * (역할이 섞이지 않게 한 것임. 자꾸 까먹어서 적어두는 것....)
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     fun calculateSalaries() {
         if (options.isDebug) debug(options)
 
         // 필수값 지정
-        salary.setInputMoney(options.getInputMoney()) // 입력 금액
-        salary.setTaxExemption(options.taxExemption) // 비과세 금액
-        salary.setAnnualBasis(options.isAnnualBasis) // 입력값이 연봉인지 유무. true 이면 연봉, false 이면 월급
-        salary.setSeveranceIncluded(options.isIncludedSeverance) // 퇴직금 포함 금액인지 유무. true 이면 포함된 금액임.
+        salary.inputMoney = options.inputMoney // 입력 금액
+        salary.taxExemption = options.taxExemption // 비과세 금액
+        salary.isAnnualBasis = options.isAnnualBasis // 입력값이 연봉인지 유무. true 이면 연봉, false 이면 월급
+        salary.isSeveranceIncluded = options.isIncludedSeverance // 퇴직금 포함 금액인지 유무. true 이면 포함된 금액임.
 
         // 계산
         salary.calculate()
@@ -49,6 +66,7 @@ class SalaryCalculator {
      * 4대 보험을 계산함.
      * 입력된 기준금액을 통하여 계산함.
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     fun calculateInsurances(basicSalary: Double) {
         insurance.execute(basicSalary)
         if (options.isDebug) debug(insurance)
@@ -68,7 +86,7 @@ class SalaryCalculator {
         // 소득세 계산
         if (!options.isIncomeTaxCalculationDisabled) {
             incomeTax.setNationalInsurance(insurance.nationalPension)
-            incomeTax.execute(salary.basicSalary, options.getFamily(), options.getChild())
+            incomeTax.execute(salary.basicSalary, options.family, options.child)
             if (options.isDebug) debug(incomeTax)
         }
 
@@ -82,7 +100,7 @@ class SalaryCalculator {
      */
     fun calculateOnlyNetSalary() {
         netSalary = salary.basicSalary - insurance.get() - incomeTax.get() + options.taxExemption
-        salary.setNetSalary(netSalary)
+        salary.netSalary = netSalary
         if (options.isDebug) debug("실수령액 : $netSalary\n")
     }
 
@@ -90,16 +108,7 @@ class SalaryCalculator {
         println(obj)
     }
 
+    @Suppress("unused")
     val netAnnualSalary: Double
         get() = netSalary * 12
-
-    /**
-     * 생성자
-     */
-    init {
-        options = SalaryCalculatorOptions()
-        insurance = InsuranceImpl()
-        incomeTax = IncomeTax()
-        salary = SalaryImpl()
-    }
 }

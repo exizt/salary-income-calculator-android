@@ -1,5 +1,7 @@
 package kr.asv.salarycalculator
 
+import kotlin.math.floor
+
 class IncomeTax {
     /**
      * 소득세
@@ -65,15 +67,18 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun calculateEarnedTax(salary: Double, family: Int, child: Int): Double {
+    private fun calculateEarnedTax(_salary: Double, family: Int, child: Int): Double {
 
         /*
          * [1.연산기준 산출]
+         * '총급여액' : 급여액이 속한 급여구간의 중간 값.
+         *
+         * 급여 구간
          * 150만원 까지는 5000원 단위 간격
          * 300만원 까지는 10000원 단위 간격
          * 1000만원 까지는 20000원 단위 간격
          */
-        var salary = salary
+        var salary = _salary
         when {
             salary <= 1500 * 1000 -> {
                 salary = if (salary % 10000 > 5000) {
@@ -306,6 +311,10 @@ class IncomeTax {
         if (taxCredit >= creditMax) taxCredit = creditMax
         taxCredit = Math.floor(taxCredit / 10) * 10 // 원단위 이하 절사
         return taxCredit
+    }
+
+    private fun getIntervalMedium(value: Double, interval : Int) : Double {
+        return floor(value / interval) * interval + (interval / 2)
     }
 
     private fun debug(str: String) {

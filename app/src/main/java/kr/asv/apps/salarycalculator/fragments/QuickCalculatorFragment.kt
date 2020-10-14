@@ -202,7 +202,7 @@ class QuickCalculatorFragment : BaseFragment() {
         options.child = child
         options.isAnnualBasis = annualBasis
         options.isIncludedSeverance = includedSeverance
-        options.setIncomeTaxCalculationDisabled(true)
+        options.isIncomeTaxCalculationDisabled = true
 
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
