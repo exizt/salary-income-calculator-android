@@ -200,8 +200,8 @@ class QuickCalculatorFragment : BaseFragment() {
         options.taxExemption = taxFree.toDouble()
         options.family = family
         options.child = child
-        options.setAnnualBasis(annualBasis)
-        options.setIncludedSeverance(includedSeverance)
+        options.isAnnualBasis = annualBasis
+        options.isIncludedSeverance = includedSeverance
         options.setIncomeTaxCalculationDisabled(true)
 
         // 세율 정보 가져오기
