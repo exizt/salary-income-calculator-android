@@ -19,6 +19,10 @@ class InsuranceRates {
                 0.0
             }
         }
+        get() {
+            return field * 0.01
+        }
+
     /**
      * 건강보험 요율
      */
@@ -29,6 +33,9 @@ class InsuranceRates {
             } else {
                 0.0
             }
+        }
+        get() {
+            return field * 0.01
         }
 
     /**
@@ -42,6 +49,9 @@ class InsuranceRates {
                 0.0
             }
         }
+        get() {
+            return field * 0.01
+        }
 
     /**
      * 고용보험 요율
@@ -53,6 +63,9 @@ class InsuranceRates {
             } else {
                 0.0
             }
+        }
+        get() {
+            return field * 0.01
         }
 
     /**

@@ -56,7 +56,7 @@ class Insurance {
         adjustedSalary = floor(adjustedSalary / 1000) * 1000
 
         // 연산식
-        val result = adjustedSalary * 0.01 * rates.nationalPension
+        val result = adjustedSalary * rates.nationalPension
 
         // 보험료값 원단위 절사
         nationalPension = floor(result / 10) * 10
@@ -78,8 +78,8 @@ class Insurance {
      * @param adjustedSalary double
      */
     private fun calculateHealthCare(adjustedSalary: Double) {
-        var result = adjustedSalary * 0.01 * rates.healthCare
-        result = Math.floor(result / 10) * 10
+        var result = adjustedSalary * rates.healthCare
+        result = floor(result / 10) * 10
 
         // 상한액
         if (result >= HC_UP_LIMIT) {
@@ -95,7 +95,7 @@ class Insurance {
      *
      */
     private fun calculateLongTermCare(healthCare: Double) {
-        val result = healthCare * 0.01 * rates.longTermCare
+        val result = healthCare * rates.longTermCare
         // 원단위 절삭
         longTermCare = floor(result / 10) * 10
     }
@@ -104,7 +104,7 @@ class Insurance {
      * 고용보험 계산식
      */
     private fun calculateEmploymentCare(adjustedSalary: Double) {
-        val result = adjustedSalary * 0.01 * rates.employmentCare
+        val result = adjustedSalary * rates.employmentCare
         // 원단위 절삭
         employmentCare = floor(result / 10) * 10
     }
