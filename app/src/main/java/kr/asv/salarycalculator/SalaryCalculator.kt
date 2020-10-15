@@ -38,8 +38,8 @@ class SalaryCalculator {
     /**
      * 연봉, 월급, 4대보험 계산
      */
-    fun calculateSalariesWithInsurances() {
-        calculateSalaries()
+    fun calculateSalaryWithInsurances() {
+        calculateSalary()
         calculateInsurances(salary.basicSalary)
     }
 
@@ -49,8 +49,8 @@ class SalaryCalculator {
      * (역할이 섞이지 않게 한 것임. 자꾸 까먹어서 적어두는 것....)
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    fun calculateSalaries() {
-        if (options.isDebug) debug(options)
+    fun calculateSalary() {
+        debug(options)
 
         // 필수값 지정
         salary.inputMoney = options.inputMoney // 입력 금액
@@ -69,7 +69,7 @@ class SalaryCalculator {
     @Suppress("MemberVisibilityCanBePrivate")
     fun calculateInsurances(basicSalary: Double) {
         insurance.execute(basicSalary)
-        if (options.isDebug) debug(insurance)
+        debug(insurance)
     }
 
     /**
@@ -80,17 +80,16 @@ class SalaryCalculator {
             incomeTax.isDebug = true
         }
 
-        // 연봉, 월급, 4대보험 계산
-        calculateSalariesWithInsurances()
+        // <1> 연봉, 월급, 4대보험 계산
+        calculateSalaryWithInsurances()
 
-        // 소득세 계산
-        if (!options.isIncomeTaxCalculationDisabled) {
-            incomeTax.setNationalInsurance(insurance.nationalPension)
-            incomeTax.execute(salary.basicSalary, options.family, options.child)
-            if (options.isDebug) debug(incomeTax)
-        }
+        // <2> 소득세, 지방세 계산
+        // '계산된 국민연금 납부액'을 넘겨주어야 한다.
+        incomeTax.nationalInsurance = insurance.nationalPension
+        incomeTax.execute(salary.basicSalary, options.family, options.child)
+        debug(incomeTax)
 
-        // 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+        // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
         calculateOnlyNetSalary()
     }
 
@@ -101,14 +100,15 @@ class SalaryCalculator {
     fun calculateOnlyNetSalary() {
         netSalary = salary.basicSalary - insurance.get() - incomeTax.get() + options.taxExemption
         salary.netSalary = netSalary
-        if (options.isDebug) debug("실수령액 : $netSalary\n")
+        debug("실수령액 : ", netSalary)
     }
 
-    private fun debug(obj: Any) {
-        println(obj)
+    /**
+     * 디버깅 메서드
+     */
+    private fun debug(msg: Any, msg2: Any = "") {
+        if(options.isDebug){
+            println("$msg $msg2")
+        }
     }
-
-    @Suppress("unused")
-    val netAnnualSalary: Double
-        get() = netSalary * 12
 }

@@ -27,7 +27,7 @@ class IncomeTax {
     /**
      * 국민연금 금액
      */
-    private var nationalInsurance = 0.0
+    var nationalInsurance = 0.0
         set(value) {
             field = if (value > 0) {
                 value

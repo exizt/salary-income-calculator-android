@@ -218,7 +218,7 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         // 연봉, 월급, 4대 보험 계산
-        calculator.calculateSalariesWithInsurances()
+        calculator.calculateSalaryWithInsurances()
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
