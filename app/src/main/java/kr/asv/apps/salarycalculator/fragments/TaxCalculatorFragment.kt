@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_tax_calculator.*
-import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.MoneyTextWatcher
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.MainActivity
-import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
+import kr.asv.apps.salarycalculator.Services
 import kotlin.math.floor
-import kotlin.math.roundToLong
 
 /**
  *

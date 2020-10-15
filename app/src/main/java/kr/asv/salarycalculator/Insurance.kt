@@ -1,6 +1,8 @@
 package kr.asv.salarycalculator
 
 import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 
 class Insurance {
     /**
@@ -28,13 +30,6 @@ class Insurance {
      */
     val rates = InsuranceRates()
 
-    // 국민연금 상한, 하한액
-    private val NP_DOWN_LIMIT = 300000
-    private val NP_UP_LIMIT = 4680000
-
-    // 건강보험 상한액
-    private val HC_UP_LIMIT = 3182760
-
     /**
      * 4대 보험 계산
      * 각각의 보험요율을 계산한다.
@@ -48,22 +43,23 @@ class Insurance {
     /**
      * 국민연금 계산식
      *
-     * @param adjustedSalary 세금의 기준 봉급액(기본급 - 비과세)
+     * @param _adjustedSalary Double 세금의 기준 봉급액(기본급 - 비과세)
      */
-    private fun calculateNationalPension(adjustedSalary: Double) {
-        // 최소 최대값 보정
-        var adjustedSalary = adjustedSalary
-        if (adjustedSalary < NP_DOWN_LIMIT) adjustedSalary = NP_DOWN_LIMIT.toDouble()
-        if (adjustedSalary > NP_UP_LIMIT) adjustedSalary = NP_UP_LIMIT.toDouble()
+    private fun calculateNationalPension(_adjustedSalary: Double) {
+        var adjustedSalary = _adjustedSalary
+
+        // 상한 하한 보정
+        adjustedSalary = max(adjustedSalary, NP_DOWN_LIMIT) // 하한 기준 보정
+        adjustedSalary = min(adjustedSalary, NP_UP_LIMIT) // 상한 기준 보정
 
         // 소득월액 천원미만 절사
-        adjustedSalary = Math.floor(adjustedSalary / 1000) * 1000
+        adjustedSalary = floor(adjustedSalary / 1000) * 1000
 
         // 연산식
         val result = adjustedSalary * 0.01 * rates.nationalPension
 
         // 보험료값 원단위 절사
-        nationalPension = Math.floor(result / 10) * 10
+        nationalPension = floor(result / 10) * 10
     }
 
     /**
@@ -87,11 +83,11 @@ class Insurance {
 
         // 상한액
         if (result >= HC_UP_LIMIT) {
-            result = HC_UP_LIMIT.toDouble()
+            result = HC_UP_LIMIT
         }
 
         // 보험료값 원단위 절사
-        healthCare = Math.floor(result / 10) * 10
+        healthCare = floor(result / 10) * 10
     }
 
     /**
@@ -101,7 +97,7 @@ class Insurance {
     private fun calculateLongTermCare(healthCare: Double) {
         val result = healthCare * 0.01 * rates.longTermCare
         // 원단위 절삭
-        longTermCare = Math.floor(result / 10) * 10
+        longTermCare = floor(result / 10) * 10
     }
 
     /**
@@ -110,7 +106,7 @@ class Insurance {
     private fun calculateEmploymentCare(adjustedSalary: Double) {
         val result = adjustedSalary * 0.01 * rates.employmentCare
         // 원단위 절삭
-        employmentCare = Math.floor(result / 10) * 10
+        employmentCare = floor(result / 10) * 10
     }
 
     /**
@@ -131,5 +127,14 @@ class Insurance {
             장기요양 :   $longTermCare
             고용보험료 : $employmentCare
         """.trimIndent()
+    }
+
+    companion object {
+        // 국민연금 상한, 하한액
+        private const val NP_DOWN_LIMIT = 300000.toDouble()
+        private const val NP_UP_LIMIT = 4680000.toDouble()
+
+        // 건강보험 상한액
+        private const val HC_UP_LIMIT = 3182760.toDouble()
     }
 }

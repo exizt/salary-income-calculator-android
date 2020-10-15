@@ -1,7 +1,6 @@
 package kr.asv.salarycalculator
 
 import org.junit.Test
-import kotlin.math.floor
 
 class SalaryCalculatorUnitTest {
     @Test

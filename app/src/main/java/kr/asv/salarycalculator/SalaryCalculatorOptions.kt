@@ -1,5 +1,7 @@
 package kr.asv.salarycalculator
 
+import kotlin.math.max
+
 class SalaryCalculatorOptions {
     /**
      * 입력 금액
@@ -18,14 +20,14 @@ class SalaryCalculatorOptions {
      */
     var family = 1
         set(value) {
-            field = Math.max(value, 1)
+            field = max(value, 1)
         }
     /**
      * 20세 이하 자녀수
      */
     var child = 0
         set(value) {
-            field = Math.max(value, 0)
+            field = max(value, 0)
         }
     /**
      * 비과세

@@ -25,14 +25,14 @@ class MoneyTextWatcher(private val editText: EditText) : TextWatcher {
         //입력이 끝났을 때
         editText.removeTextChangedListener(this)
         try {
-            var given_string = s.toString()
-            val long_val: Long
-            if (given_string.contains(",")) {
-                given_string = given_string.replace(",".toRegex(), "")
+            var givenString = s.toString()
+            val longVal: Long
+            if (givenString.contains(",")) {
+                givenString = givenString.replace(",".toRegex(), "")
             }
-            long_val = given_string.toLong()
+            longVal = givenString.toLong()
             val formatter = DecimalFormat("#,###,###")
-            val formattedString = formatter.format(long_val)
+            val formattedString = formatter.format(longVal)
             editText.setText(formattedString)
             editText.setSelection(editText.text.length)
             // to place the cursor at the end of text
