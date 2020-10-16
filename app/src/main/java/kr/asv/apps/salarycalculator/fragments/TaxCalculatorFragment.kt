@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_tax_calculator.*
-import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.MoneyTextWatcher
+import kr.asv.androidutils.inputfilter.InputFilterLongMinMax
 import kr.asv.androidutils.inputfilter.InputFilterMinMax
 import kr.asv.apps.salarycalculator.MainActivity
-import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.R
-import kotlin.math.roundToLong
+import kr.asv.apps.salarycalculator.Services
+import kotlin.math.floor
 
 /**
  *
@@ -116,11 +116,11 @@ class TaxCalculatorFragment : BaseFragment() {
             getRates(origin.toDouble(), interest.toDouble())
 
     /**
-     *
+     * 소수점 반올림 후 반환
      */
     private fun getRates(origin: Double, interest: Double): Double {
         val result = interest / origin * 100.0
-        return (result * 10000).roundToLong().toDouble() / 10000 //반올림
+        return floor(result * 10000) / 10000 //반올림
         //return (double)Math.floor(result * 10) / 10; //버림
         //return (double)Math.ceil(result * 10) / 10; //올림
         //return  ((double)interest / (double)origin) * 100.0;

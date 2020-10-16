@@ -200,9 +200,9 @@ class QuickCalculatorFragment : BaseFragment() {
         options.taxExemption = taxFree.toDouble()
         options.family = family
         options.child = child
-        options.setAnnualBasis(annualBasis)
-        options.setIncludedSeverance(includedSeverance)
-        options.setIncomeTaxCalculationDisabled(true)
+        options.isAnnualBasis = annualBasis
+        options.isIncludedSeverance = includedSeverance
+        options.isIncomeTaxCalculationDisabled = true
 
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
@@ -218,7 +218,7 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         // 연봉, 월급, 4대 보험 계산
-        calculator.calculateSalariesWithInsurances()
+        calculator.calculateSalaryWithInsurances()
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
