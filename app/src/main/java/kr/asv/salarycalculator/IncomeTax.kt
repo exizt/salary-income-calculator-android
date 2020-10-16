@@ -1,6 +1,8 @@
 package kr.asv.salarycalculator
 
 import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
 
 class IncomeTax {
     /**
@@ -15,39 +17,25 @@ class IncomeTax {
         set(value) {
             // 소득세 를 지정하고, 동시에 지방세도 같이 계산한다.
             localTax = calculateLocalTax(value)
-            field = value
+            field = max(value, 0.0) // 음수 방지
         }
 
     /**
      * 지방세
      */
     var localTax = 0.0
-        private set
+        private set(value) {
+            field = max(value, 0.0) // 음수 방지
+        }
 
     /**
      * 국민연금 금액
      */
     var nationalInsurance = 0.0
         set(value) {
-            field = if (value > 0) {
-                value
-            } else {
-                0.0
-            }
+            field = max(value, 0.0) // 음수 방지
         }
 
-    /**
-     * 지방세 계산식
-     * 근로소득세의 10%
-     *
-     * @return double
-     */
-    private fun calculateLocalTax(incomeTax: Double): Double {
-        var tax = incomeTax * 0.1
-        // 원단위 절삭
-        tax = floor(tax / 10) * 10
-        return tax
-    }
 
     /**
      * 계산 동작
@@ -58,10 +46,10 @@ class IncomeTax {
      */
     fun execute(salary: Double, family: Int, child: Int) {
         if (isDebug) {
-            debug("소득세 계산 시작 ")
-            debug("월급: ", salary)
-            debug("가족수:", family)
-            debug("아이수:", child)
+            debug("<소득세 계산 시작>")
+            debug("기준 월급: ", salary)
+            debug("기준 가족수:", family)
+            debug("기준 아이수:", child)
         }
         earnedIncomeTax = calculateEarnedTax(salary, family, child)
         //localTax = calculateLocalTax(earnedIncomeTax)
@@ -70,12 +58,13 @@ class IncomeTax {
     /**
      * 근로소득세(소득세) 계산식
      *
+     * @param salary 비과세를 뺀 월 소득
      * @return double
      */
     private fun calculateEarnedTax(_salary: Double, family: Int, child: Int): Double {
 
         /*
-         * [1.연산기준 산출]
+         * <0. 연산 기준 산출>
          * '총급여액' : 급여액이 속한 급여구간의 중간 값.
          *
          * 급여 구간
@@ -130,8 +119,9 @@ class IncomeTax {
     }
 
     /**
-     * [소득세 계산 : 근로소득 금액 산출(근로소득 기초공제 후 남는 근로소득금액(연간)]
-     * 근로소득공제를 제한 후의 연간근로소득금액을 구합니다.
+     * <근로소득 공제>
+     *     [소득세 계산 : 근로소득 금액 산출(근로소득 기초공제 후 남는 근로소득금액(연간)]
+     *     근로소득공제를 제한 후의 연간근로소득금액을 구합니다.
      *
      * @return double
      */
@@ -169,8 +159,9 @@ class IncomeTax {
     }
 
     /**
-     * 종합소득공제 산출
-     * 인적공제, 연금보험료공제, 특별소득공제 등 의 합계를 반환
+     * <종합소득공제 산출>
+     *     각종 소득공제 = 인적공제 + 연금보험료공제 + 특별소득공제 등
+     *     간이 계산식에서는 연금보험료에 '국민연금'만을 계산하도록 함.
      *
      * @return double
      */
@@ -192,8 +183,14 @@ class IncomeTax {
     }
 
     /**
-     * 소득세 중 특별소득공제등
+     * <특별소득공제 산출>
+     *     공제대상가족 수를 통해서 간이 계산함.
+     *     이 내용은 '근로소득 간이세액표 (조견표)'에 게시된 내용을 따름.
+     *     공제대상가족수 = 부양가족수+자녀수 (= 자녀제외 가족수 + 2*자녀수)
      *
+     * @param salaryY 총급여액
+     * @param family 부양가족수
+     * @param child 20세 미만 자녀수
      * @return double
      */
     private fun calculateOtherDeduction(baseSalary: Double, family: Int, child: Int): Double {
@@ -247,13 +244,23 @@ class IncomeTax {
     }
 
     /**
-     * 소득세 중 산출세액
+     * <산출세액 계산>
      *
+     * 산출세액 = 과세표준 * 누진세율
+     *
+     * @param agiSalaryY 과세 표준 연봉
      * @return double
      */
     private fun calcTaxEarnedTotal(baseSalary: Double, taxBase: Double): Double {
 
-        // 세금구간에 따라서, 소득세의 비율 차등 조정
+        /**
+         * 누진 세율에 맞춘 산출 세액 계산
+         *
+         * 산출 세액 = 과세표준 * 세율 (누진)
+         *
+         * 기존에는 합산(덧셈)이었으나, 현재는 간이 계산을 위해 공제(밸셈)식으로 계산.
+         * (결과는 동일함)
+         */
         var tax: Double = when {
             taxBase <= 1200 * 10000 -> {
                 taxBase * 0.06
@@ -282,8 +289,12 @@ class IncomeTax {
     }
 
     /**
+     * <세액 공제 산출>
+     *
      * 근로 소득 세액공제 계산식
      *
+     * @param baseSalaryY 총급여액
+     * @param tax 산출세액
      * @return double
      */
     private fun calculateTaxCredit(baseSalary: Double, tax: Double): Double {
@@ -315,6 +326,21 @@ class IncomeTax {
         if (taxCredit >= creditMax) taxCredit = creditMax
         taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
         return taxCredit
+    }
+
+
+    /**
+     * 지방세 계산식
+     * 근로소득세의 10%
+     *
+     * @return double
+     */
+    private fun calculateLocalTax(incomeTax: Double): Double {
+        var tax = incomeTax * 0.1
+        // 십원 미만 절사 (원단위 절삭)
+        //tax = floor(tax / 10) * 10
+        tax = CalcMath.roundFloor(tax, -1)
+        return tax
     }
 
     /**
