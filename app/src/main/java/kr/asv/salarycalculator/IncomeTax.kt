@@ -85,13 +85,13 @@ class IncomeTax {
          */
         val salary = when {
             _salary <= 1500 * 1000 -> {
-                calcIntervalMedium(_salary, 5000)
+                calcIntervalMedian(_salary, 5000)
             }
             _salary <= 3000 * 1000 -> {
-                calcIntervalMedium(_salary, 10000)
+                calcIntervalMedian(_salary, 10000)
             }
             _salary <= 10000 * 1000 -> {
-                calcIntervalMedium(_salary, 20000)
+                calcIntervalMedian(_salary, 20000)
             }
             else -> {
                 _salary
@@ -320,7 +320,7 @@ class IncomeTax {
     /**
      * 구간의 중간값을 계산하는 메서드.
      */
-    private fun calcIntervalMedium(value: Double, interval : Int) : Double {
+    private fun calcIntervalMedian(value: Double, interval : Int) : Double {
         return floor(value / interval) * interval + (interval / 2)
     }
 
