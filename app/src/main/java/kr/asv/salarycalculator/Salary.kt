@@ -1,5 +1,8 @@
 package kr.asv.salarycalculator
 
+import kotlin.math.max
+import kotlin.math.min
+
 class Salary {
     /**
      * 사용자가 입력한 값
@@ -7,11 +10,8 @@ class Salary {
     var inputMoney = 0.0
         set(value) {
             val maximum = 1000000000000000.0
-            field = if (value > maximum){
-                maximum
-            } else {
-                value
-            }
+            field = max(value, 0.0) // 음수 방지
+            field = min(value, maximum)
         }
 
     /**

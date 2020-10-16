@@ -1,5 +1,7 @@
 package kr.asv.salarycalculator
 
+import kotlin.math.max
+
 /**
  * 4대 보험요율 의 모델 클래스.
  * getter/setter 가 전부
@@ -13,11 +15,7 @@ class InsuranceRates {
      */
     var nationalPension = 4.5
         set(value) {
-            field = if (value > 0) {
-                value
-            } else {
-                0.0
-            }
+            field = max(value, 0.0) // 음수 방지
         }
         get() {
             return field * 0.01
@@ -28,11 +26,7 @@ class InsuranceRates {
      */
     var healthCare = 3.06
         set(value) {
-            field = if (value > 0) {
-                value
-            } else {
-                0.0
-            }
+            field = max(value, 0.0) // 음수 방지
         }
         get() {
             return field * 0.01
@@ -43,11 +37,7 @@ class InsuranceRates {
      */
     var longTermCare = 6.55
         set(value) {
-            field = if (value > 0) {
-                value
-            } else {
-                0.0
-            }
+            field = max(value, 0.0) // 음수 방지
         }
         get() {
             return field * 0.01
@@ -58,11 +48,7 @@ class InsuranceRates {
      */
     var employmentCare = 0.65
         set(value) {
-            field = if (value > 0) {
-                value
-            } else {
-                0.0
-            }
+            field = max(value, 0.0) // 음수 방지
         }
         get() {
             return field * 0.01

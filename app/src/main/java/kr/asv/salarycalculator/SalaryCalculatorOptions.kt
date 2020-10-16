@@ -8,11 +8,7 @@ class SalaryCalculatorOptions {
      */
     var inputMoney = 0.0
         set(value) {
-            field = if (value < 0) {
-                0.0
-            } else {
-                value
-            }
+            field = max(value, 0.0) // 음수 방지
         }
 
     /**
@@ -27,18 +23,14 @@ class SalaryCalculatorOptions {
      */
     var child = 0
         set(value) {
-            field = max(value, 0)
+            field = max(value, 0) // 음수 방지
         }
     /**
      * 비과세
      */
     var taxExemption = 0.0
         set(value) {
-            field = if (value < 0) {
-                0.0
-            } else {
-                value
-            }
+            field = max(value, 0.0) // 음수 방지
         }
 
     /**

@@ -11,6 +11,7 @@ import kr.asv.apps.salarycalculator.model.IncomeTaxDao
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 import org.jetbrains.anko.doAsync
+import java.util.*
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -35,10 +36,10 @@ object Services {
      * 기본 세율값
      */
     object DefaultRates {
-        const val nationalPension: Double = 4.5
-        const val healthCare: Double = 3.23
-        const val longTermCare: Double = 8.51
-        const val employmentCare: Double = 0.65
+        var nationalPension: Double = 4.5
+        var healthCare: Double = 3.23
+        var longTermCare: Double = 8.51
+        var employmentCare: Double = 0.65
     }
 
     /**

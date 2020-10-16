@@ -1,5 +1,7 @@
 package kr.asv.salarycalculator
 
+import java.util.*
+
 /**
  * 실수령액 계산 클래스.
  * 실제적으로 컨트롤 하는 클래스 이다.
@@ -35,12 +37,94 @@ class SalaryCalculator {
     var netSalary = 0.0
         private set
 
+    fun init(){
+        initializeSettings()
+    }
+    /**
+     * 세율, 상한, 하한 설정에 대한 조정
+     */
+    private fun initializeSettings(){
+        val rates = insurance.rates
+        val ymd = getYmd()
+        // 연도별 인상 추이가 있으므로, 이것에 따른 처리를 해줄 필요가 있음.
+        // 앱 로딩 시에 1회 실행함.
+
+        /**
+         * 국민 연금 설정
+         */
+        // 국민연금율
+        rates.nationalPension = 4.5
+        // 국민 연금 기준액 상한
+        insurance.limitNpUp = if(ymd >= 20200701){
+            5030000.toDouble()
+        } else {
+            4860000.toDouble()
+        }
+        // 국민 연금 기준액 하한
+        insurance.limitNpDown = if(ymd >= 20200701){
+            320000.toDouble()
+        } else {
+            310000.toDouble()
+        }
+
+        /**
+         * 건강 보험, 요양 보험 관련 설정
+         */
+        // 건강보험율
+        rates.healthCare = if(ymd >= 20210101){
+            3.43
+        } else {
+            3.335
+        }
+        // 건강보험료 상한
+        insurance.limitHcUp = if(ymd >= 20200101){
+            3322170.toDouble()
+        } else {
+            3182760.toDouble()
+        }
+        // 건강보험료 하한
+        insurance.limitHcDown = if(ymd >= 20200101){
+            18600.toDouble()
+        } else {
+            18020.toDouble()
+        }
+
+        // 요양보험율
+        rates.longTermCare = if(ymd >= 20210101){
+            11.52
+        } else {
+            10.25
+        }
+
+        /**
+         * 고용 보험 관련 설정
+         */
+        // 고용보험요율
+        rates.employmentCare = if(ymd >= 20190101){
+            0.8
+        } else {
+            0.65
+        }
+
+    }
+    
     /**
      * 연봉, 월급, 4대보험 계산
      */
     fun calculateSalaryWithInsurances() {
         calculateSalary()
         calculateInsurances(salary.basicSalary)
+    }
+
+    private fun getYmd(): Int {
+        return Calendar.getInstance().run {
+            val y = get(Calendar.YEAR)
+            val m = get(Calendar.MONTH) + 1
+            val d = get(Calendar.DAY_OF_MONTH)
+            y * 10000 + m * 100 + d
+            //String.format("%d%d%d",y,m,d).toInt()
+            //"{$y}{$m}{$d}".toInt()
+        }
     }
 
     /**
