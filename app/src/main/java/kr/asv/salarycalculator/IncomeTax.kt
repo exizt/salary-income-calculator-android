@@ -4,6 +4,21 @@ import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 
+/**
+ * 소득세 계산
+ *
+ * 2020년 이후로 계산과 '간이세액표'의 오차가 발생할 수 밖에 없는 구조가 됨에 따라,
+ * 간이 세액표 xls 를 참조로 계산하는 방식으로 변경하고, 이 클래스의 계산식은 점차적으로 폐기하여야 할 듯함.
+ *
+ * 오차 발생 사유
+ * 국민연금을 변수로 사용해야 하는데, 국민연금의 세율, 상한, 하한이 연 단위가 아니라 7월부터 시행된다거나 하는 경우가 생김.
+ * 2월에 발생한 간이세액표가 7월에 변경된 국민연금으로 인해 오차가 발생할 수 밖에 없는 구조.
+ * (쉽게 말해, 간이세액표 자체가 틀리기 매우 쉽다는 얘기임)
+ * 법정 근거는 '간이세액표'(대통령령)이므로 여기에 맞춰서 계산하는 것이 맞는 것임.
+ *
+ * 어려운 부분은 간이세액표는 게시 시점을 예측할 수 없다는 점... 아무때나 바뀐다...
+ * 개정 기록을 살펴보면 1월, 7월, 9월, 9월 등 다양함...
+ */
 class IncomeTax {
     /**
      * 디버깅유무
@@ -288,7 +303,7 @@ class IncomeTax {
      * @param agiSalaryY 과세 표준 연봉
      * @return double
      */
-    fun calculateTax(agiSalaryY: Double): Double {
+    private fun calculateTax(agiSalaryY: Double): Double {
 
         /**
          * 누진 세율에 맞춘 산출 세액 계산
@@ -345,7 +360,6 @@ class IncomeTax {
      * @return double
      */
     private fun calculateTaxCredit(baseSalaryY: Double, tax: Double): Double {
-        var taxCredit: Double
         var creditMax = 0.0
 
         // 근로소득세액공제 상한 지정
@@ -367,7 +381,7 @@ class IncomeTax {
         }
 
         // 근로소득세액공제 처리
-        taxCredit = if (tax <= 130 * 10000) {
+        var taxCredit: Double = if (tax <= 130 * 10000) {
             tax * 0.55
         } else {
             715 * 1000 + (tax - 130 * 10000) * 0.30

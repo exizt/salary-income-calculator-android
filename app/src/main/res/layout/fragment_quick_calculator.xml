@@ -67,7 +67,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -110,7 +109,6 @@
                 android:text="@string/option_annual_salary" />
 
             <RadioButton
-                android:id="@+id/raMoneyMonthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_monthly_salary" />
@@ -193,7 +191,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/divYearlyOpSeverance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible">
@@ -214,7 +211,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"

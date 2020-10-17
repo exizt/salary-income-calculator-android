@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    @Suppress("unused")
     @JvmOverloads
     fun replaceFragments(fragment: Fragment, backStack: Boolean = true) {
         val manager: FragmentManager = supportFragmentManager

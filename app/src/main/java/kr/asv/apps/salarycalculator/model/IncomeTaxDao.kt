@@ -5,7 +5,7 @@ import kr.asv.apps.salarycalculator.Services
 import java.util.*
 
 class IncomeTaxDao(private val db: SQLiteDatabase) {
-    private val isDebug = false
+    var isDebug = false
 
     fun getValue(_money: Long, _family: Int, _yearmonth: String) : Long{
         debug("getCurrentRates 호출")
@@ -30,9 +30,9 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
         val searchMoneyUnit = money / 1000
 
         // 확인
-        debug("기준 금액 검색 단위",searchMoneyUnit)
-        debug("가족 수 (보정됨)",family)
-        debug("년월 (보정됨)",yearmonth)
+        debug("기준 금액 검색 단위:",searchMoneyUnit)
+        debug("가족 수 (보정됨):",family)
+        debug("년월 (보정됨):",yearmonth)
 
         // 결과값
         var resultTax : Long = 0
@@ -149,7 +149,7 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
     /**
      * 디버깅 메서드
      */
-    @Suppress("unused", "UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER", "SameParameterValue")
     private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
             Services.debugLog("IncomeTaxDao", msg)

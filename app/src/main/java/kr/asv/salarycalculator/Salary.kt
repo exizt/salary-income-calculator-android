@@ -88,17 +88,16 @@ class Salary {
          * 입력값이 연봉일 경우에는 퇴직금 포함과 미포함 이 있다. 포함인 경우는 월급은 /13이 되고,
          * 실질 연봉은 입력값/13*12 가 된다.
          */
-        // 연봉 기준 입력인 경우, 월급을 환산
         grossSalary = if (isAnnualBasis) {
-            /*
-             * 퇴직금 포함의 연봉인 경우는, 13개월로 나눠야 월소득이 나온다.
-             */
+            // 연봉 기준 입력인 경우, 월급을 환산
             if (isSeveranceIncluded) {
+                // 퇴직금 포함의 연봉인 경우는, 13개월로 나눠야 월소득이 나온다.
                 inputMoney / 13
             } else {
                 inputMoney / 12
             }
         } else {
+            // 월급 기준 입력인 경우
             inputMoney
         }
 

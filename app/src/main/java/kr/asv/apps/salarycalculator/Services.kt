@@ -85,11 +85,12 @@ object Services {
     }
 
     /**
-     * 세율 초기화 메서드
-     * 계산기의 세율 값을 Pref 의 Default 값으로 재조정한다.
+     * 세율을 기본값으로 변경해주는 메서드.
+     *
+     * 설정값에서 변경한 세율값을 기본값으로 돌릴 때 이용한다.
      */
     fun setInsuranceRatesToDefault(){
-        debug("[initInsuranceRates] 적용세율 초기화")
+        debug("[setInsuranceRatesToDefault] 적용세율 초기화")
         val rates = calculator.insurance.rates
         rates.nationalPension = DefaultRates.nationalPension
         rates.healthCare = DefaultRates.healthCare

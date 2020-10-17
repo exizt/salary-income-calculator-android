@@ -235,7 +235,7 @@ class QuickCalculatorFragment : BaseFragment() {
     /**
      * 디버깅 메서드
      */
-    @Suppress("unused", "UNUSED_PARAMETER")
+    @Suppress("unused", "UNUSED_PARAMETER", "SameParameterValue")
     private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
             Services.debugLog("QuickCalculatorFragment", msg, msg2)
