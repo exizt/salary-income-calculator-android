@@ -13,9 +13,9 @@ class SalaryCalculatorUnitTest {
          */
         val options = calculator.options
         // 입력한 연봉 or 월급
-        options.inputMoney = 200 * 10000.0
+        options.inputMoney = 9800 * 1000
         // 비과세액
-        options.taxExemption = 100000.0
+        options.taxExemption = 0
         // 부양가족수 (본인포함)
         options.family = 1
         // 20세 이하 자녀수

@@ -1,14 +1,17 @@
 package kr.asv.salarycalculator
 
 import kotlin.math.max
+import kotlin.math.min
 
 class SalaryCalculatorOptions {
     /**
      * 입력 금액
      */
-    var inputMoney = 0.0
+    var inputMoney: Long = 0
         set(value) {
-            field = max(value, 0.0) // 음수 방지
+            val maximum = 1000000000000 // 1조....
+            field = max(value, 0) // 음수 방지
+            field = min(value, maximum)
         }
 
     /**
@@ -28,9 +31,11 @@ class SalaryCalculatorOptions {
     /**
      * 비과세
      */
-    var taxExemption = 0.0
+    var taxExemption: Long = 0
         set(value) {
-            field = max(value, 0.0) // 음수 방지
+            val maximum = 1000000000000 // 1조....
+            field = max(value, 0) // 음수 방지
+            field = min(value, maximum)
         }
 
     /**

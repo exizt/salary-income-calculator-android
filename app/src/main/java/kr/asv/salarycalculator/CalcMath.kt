@@ -10,11 +10,43 @@ import kotlin.math.round
 /**
  * CalcMathUtil 계산 관련 유틸.
  * @author exizt
- * @version 2.0
- * @since 2020-10-17
+ * @version 2.1
+ * @since 2020-10-18
  */
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 internal object CalcMath {
+
+    /**
+     * 절삭 처리.
+     *
+     * @param v 값 (Long)
+     * @param digits 자리수 (Int) : 2 또는 -2 (100의 자리로) / 0 (1의 자리로)
+     * @return Double
+     */
+    fun floor(v: Long, digits: Int): Long{
+        var multiplier = 1
+        repeat( abs(digits) ) {
+            multiplier *= 10
+        }
+        return (v / multiplier) * multiplier
+    }
+
+    /**
+     * 절삭 처리.
+     *
+     * @param v 값 (BigInteger)
+     * @param digits 자리수 (Int) : 양수, 0 (아무것도 안 함) / -2 (100의 자리로)
+     * @return BigInteger
+     */
+    fun floor(v: BigInteger, digits: Int): BigInteger {
+        var multiplier = 1
+        repeat( abs(digits) ) {
+            multiplier *= 10
+        }
+        return (v / multiplier.toBigInteger()) * multiplier.toBigInteger()
+        //return round(v, digits, RoundingMode.FLOOR)
+    }
+
     /**
      * 소수점에서 반올림
      *
@@ -98,17 +130,6 @@ internal object CalcMath {
     }
 
     /**
-     * 절삭 처리.
-     *
-     * @param v 값 (BigInteger)
-     * @param digits 자리수 (Int) : 양수, 0 (아무것도 안 함) / -2 (100의 자리로)
-     * @return BigInteger
-     */
-    fun roundFloor(v: BigInteger, digits: Int): BigInteger {
-        return round(v, digits, RoundingMode.FLOOR)
-    }
-
-    /**
      * 가끔 비교식이 안 맞을 때가 있으므로 이걸 사용.
      * BigDecimal.equals 메서드는 이슈가 있다. (12340 != 1.234E+4 의 이슈)
      */
@@ -153,5 +174,9 @@ internal object CalcMath {
      */
     fun divide(dividend: BigInteger, divisor: Int, digits: Int, mode: RoundingMode = RoundingMode.HALF_UP): BigDecimal {
         return divide(dividend.toBigDecimal(), divisor.toBigDecimal(), digits, mode)
+    }
+
+    fun multiply(a:Long, b:Double): Long{
+        return (a.toBigDecimal() * b.toBigDecimal()).toLong()
     }
 }

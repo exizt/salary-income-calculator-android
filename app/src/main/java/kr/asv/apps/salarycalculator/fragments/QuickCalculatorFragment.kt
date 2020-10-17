@@ -23,7 +23,7 @@ import kr.asv.apps.salarycalculator.activities.ReportActivity
  * 특정 수치를 기준으로, 연봉 or 월급을 나누고 간이 계산한다.
  */
 class QuickCalculatorFragment : BaseFragment() {
-    private val isDebug = true
+    private val isDebug = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
@@ -196,8 +196,8 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 옵션값 셋팅
         val options = calculator.options
-        options.inputMoney = inputMoney.toDouble()
-        options.taxExemption = taxFree.toDouble()
+        options.inputMoney = inputMoney
+        options.taxExemption = taxFree
         options.family = family
         options.child = child
         options.isAnnualBasis = annualBasis
@@ -217,17 +217,17 @@ class QuickCalculatorFragment : BaseFragment() {
             Services.setInsuranceRatesToDefault()
         }
 
-        //
-        calculator.prepare()
+        // 비과세 제외 계산 등
+        calculator.calculateSalary()
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
-        val incomeTaxDao = Services.getIncomeTaxDao()
-        incomeTaxDao.isDebug = isDebug
-        val earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
-        debug("incomeTax:",earnedIncomeTax)
+        //val incomeTaxDao = Services.getIncomeTaxDao()
+        //incomeTaxDao.isDebug = isDebug
+        //val earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary, family, "201802")
+        //debug("incomeTax:",earnedIncomeTax)
 
         // 실수령액 계산
-        calculator.run(earnedIncomeTax)
+        calculator.run()
 
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)

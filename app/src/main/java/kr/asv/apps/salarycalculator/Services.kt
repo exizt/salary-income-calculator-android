@@ -82,7 +82,7 @@ object Services {
         DefaultRates.healthCare = rates.healthCare * 100
         DefaultRates.longTermCare = rates.longTermCare * 100
         DefaultRates.employmentCare = rates.employmentCare * 100
-        debug("[init] 기본 세율 값 가져옴")
+        debug("[init] 기본 세율 값 셋팅")
     }
 
     /**
@@ -94,6 +94,7 @@ object Services {
         return TermDictionaryDao(db)
     }
 
+    @Suppress("unused")
     fun getIncomeTaxDao(): IncomeTaxDao{
         val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
         return IncomeTaxDao(db)
@@ -105,7 +106,7 @@ object Services {
      * 설정값에서 변경한 세율값을 기본값으로 돌릴 때 이용한다.
      */
     fun setInsuranceRatesToDefault(){
-        debug("[setInsuranceRatesToDefault] 적용세율 초기화")
+        debug("[setInsuranceRatesToDefault] 기본값으로 세율 적용")
         val rates = calculator.insurance.rates
         rates.nationalPension = DefaultRates.nationalPension
         rates.healthCare = DefaultRates.healthCare
@@ -197,7 +198,7 @@ object Services {
      * 설정값을 반환.
      * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
      */
-    @Suppress("unused")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun getAppPref(key:String): String {
         //return appPrefs[key]? : ""
         return ""

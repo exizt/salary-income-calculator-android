@@ -1,70 +1,59 @@
 package kr.asv.salarycalculator
 
-import kotlin.math.max
-import kotlin.math.min
-
 class Salary {
-    /**
-     * 사용자가 입력한 값
-     */
-    var inputMoney = 0.0
-        set(value) {
-            val maximum = 1000000000000000.0
-            field = max(value, 0.0) // 음수 방지
-            field = min(value, maximum)
-        }
 
     /**
-     * 월급(세전, 통상월급)
+     * 월급 : 비과세 포함
      */
-    var grossSalary = 0.0
+    var grossSalary: Long = 0
         set(value) {
             grossAnnualSalary = value * 12
             field = value
         }
 
     /**
-     * 총연봉
+     * 연봉 : 비과세 포함
      */
-    var grossAnnualSalary = 0.0
+    var grossAnnualSalary: Long = 0
         private set
 
     /**
-     * 과세기준액 : 세금 기준 월급
+     * 월급여액 : 월급 - 비과세
      * (해당금액 = grossSalary - taxExemption)
      */
-    var basicSalary = 0.0
+    var basicSalary: Long = 0
         set(value) {
             basicAnnualSalary = value * 12
             field = value
         }
+    
     /**
-     *
+     * 총급여액 : 월급여액 (월급 - 비과세) * 12
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    var basicAnnualSalary = 0.0
+    var basicAnnualSalary: Long = 0
         private set
 
     /**
-     *
+     * 월 실수령액
      */
-    var netSalary = 0.0
+    var netSalary: Long = 0
         set(value) {
             netAnnualSalary = value * 12
             field = value
         }
 
     /**
-     *
+     * 연 실수령액
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    var netAnnualSalary = 0.0
+    var netAnnualSalary: Long = 0
         private set
 
     /**
      * 비과세 금액 (월단위)
      */
-    var taxExemption = 0.0
+    var taxExemption: Long = 0
 
     /**
      * 입력값이 연 기준인지 여부
@@ -78,9 +67,9 @@ class Salary {
 
     /**
      * 연봉, 월급 계산 하는 메서드
-     * inputMoney, taxExemption 등의 값이 미리 지정되어 있어야 한다.
+     * taxExemption 등의 값이 미리 지정되어 있어야 한다.
      */
-    fun calculate() {
+    fun calculate(inputMoney: Long) {
         /*
          * 월급을 먼저 계산해주어야 한다. 연봉을 계산 후 월급을 계산한다.
          * 입력값이 월급일 경우. 연봉은 월급 * 12
@@ -90,6 +79,7 @@ class Salary {
          */
         grossSalary = if (isAnnualBasis) {
             // 연봉 기준 입력인 경우, 월급을 환산
+            // 소수점 처리에 대해서는 고민 좀 해봐야함.
             if (isSeveranceIncluded) {
                 // 퇴직금 포함의 연봉인 경우는, 13개월로 나눠야 월소득이 나온다.
                 inputMoney / 13

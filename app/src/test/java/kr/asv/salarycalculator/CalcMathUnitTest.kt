@@ -9,8 +9,18 @@ import java.math.RoundingMode
 
 
 class CalcMathUnitTest {
+
+    @Test
+    fun doubleTest(){
+        val a: Long = 95002400
+        val b: BigDecimal = a.toBigDecimal() * 0.35.toBigDecimal()
+
+        println(b.toLong())
+    }
+
     @Test
     fun unitTest(){
+
         /**
          * 반올림 테스트
          */

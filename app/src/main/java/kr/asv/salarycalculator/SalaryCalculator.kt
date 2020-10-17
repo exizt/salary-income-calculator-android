@@ -11,7 +11,6 @@ import java.util.*
  * prepare() 이후에 setOptions() 등을 호출 하고 마지막에 run 을 실행하면 결과를 산출한다.
  */
 class SalaryCalculator {
-    var isPrepared = false
 
     /**
      * Options 값들. 가족수, 자녀수, 비과세액 등
@@ -36,7 +35,7 @@ class SalaryCalculator {
     /**
      * 월 실수령액
      */
-    var netSalary = 0.0
+    var netSalary: Long = 0
         private set
 
     fun init(){
@@ -59,15 +58,15 @@ class SalaryCalculator {
         rates.nationalPension = 4.5
         // 국민 연금 기준액 상한
         insurance.limitNpUp = if(ymd >= 20200701){
-            5030000.toDouble()
+            5030000
         } else {
-            4860000.toDouble()
+            4860000
         }
         // 국민 연금 기준액 하한
         insurance.limitNpDown = if(ymd >= 20200701){
-            320000.toDouble()
+            320000
         } else {
-            310000.toDouble()
+            310000
         }
 
         /**
@@ -81,15 +80,15 @@ class SalaryCalculator {
         }
         // 건강보험료 상한
         insurance.limitHcUp = if(ymd >= 20200101){
-            3322170.toDouble()
+            3322170
         } else {
-            3182760.toDouble()
+            3182760
         }
         // 건강보험료 하한
         insurance.limitHcDown = if(ymd >= 20200101){
-            18600.toDouble()
+            18600
         } else {
-            18020.toDouble()
+            18020
         }
 
         // 요양보험율
@@ -110,29 +109,6 @@ class SalaryCalculator {
         }
     }
 
-    fun prepare(){
-        isPrepared = true
-        calculateSalary()
-    }
-
-    /**
-     * 계산 실행
-     */
-    fun run(earnedIncomeTax: Double){
-        // 디버깅 옵션
-        incomeTax.isDebug = options.isDebug
-
-        // 간이소득세액표 에서 가져온 값 대입
-        incomeTax.earnedIncomeTax = earnedIncomeTax
-
-        // <1> 연봉, 월급, 4대보험 계산
-        calculateSalary()
-        calculateInsurances(salary.basicSalary)
-
-        // <2> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
-        calculateOnlyNetSalary()
-    }
-
     /**
      * 계산 실행
      *
@@ -142,26 +118,20 @@ class SalaryCalculator {
         // 디버깅 옵션
         incomeTax.isDebug = options.isDebug
 
-        // <1> 연봉, 월급, 4대보험 계산
+        // 1. 연봉, 월급
         calculateSalary()
+
+        // 2. 4대 보험 계산
         calculateInsurances(salary.basicSalary)
 
-        // <2> 소득세, 지방세 계산
+        // 3. 소득세, 지방세 계산
         // '계산된 국민연금 납부액'을 넘겨주어야 한다.
-        incomeTax.nationalInsurance = insurance.nationalPension
+        // incomeTax.nationalInsurance = insurance.nationalPension // 자체 계산으로 변경함.
         incomeTax.calculate(salary.basicSalary, options.family, options.child)
         debug(incomeTax)
 
-        // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+        // 4. 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
         calculateOnlyNetSalary()
-    }
-
-    /**
-     * 연봉, 월급, 4대보험 계산
-     */
-    private fun calculateSalaryWithInsurances() {
-        calculateSalary()
-        calculateInsurances(salary.basicSalary)
     }
 
     /**
@@ -174,13 +144,12 @@ class SalaryCalculator {
         debug(options)
 
         // 필수값 지정
-        salary.inputMoney = options.inputMoney // 입력 금액
         salary.taxExemption = options.taxExemption // 비과세 금액
         salary.isAnnualBasis = options.isAnnualBasis // 입력값이 연봉인지 유무. true 이면 연봉, false 이면 월급
         salary.isSeveranceIncluded = options.isIncludedSeverance // 퇴직금 포함 금액인지 유무. true 이면 포함된 금액임.
 
         // 계산
-        salary.calculate()
+        salary.calculate(options.inputMoney)
     }
 
     /**
@@ -188,7 +157,7 @@ class SalaryCalculator {
      * 입력된 기준금액을 통하여 계산함.
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    fun calculateInsurances(basicSalary: Double) {
+    fun calculateInsurances(basicSalary: Long) {
         insurance.calculate(basicSalary)
         debug(insurance)
     }
