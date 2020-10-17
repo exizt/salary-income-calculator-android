@@ -78,7 +78,7 @@ class Insurance {
         adjustedSalary = CalcMath.floor(adjustedSalary, 3)
 
         // 연산식
-        val result = adjustedSalary * rates.nationalPension
+        val result = N(adjustedSalary) * rates.nationalPension
 
         // 보험료값 십원 미만 절사 (원단위 절사)
         //nationalPension = floor(result / 10) * 10
@@ -91,7 +91,7 @@ class Insurance {
      * @param adjustedSalary double
      */
     private fun computeHealthCare(adjustedSalary: Long): Long {
-        val calc = adjustedSalary * rates.healthCare
+        val calc = N(adjustedSalary) * rates.healthCare
 
         // 십원 미만 절사.
         //result = floor(result / 10) * 10
@@ -112,7 +112,7 @@ class Insurance {
      *
      */
     private fun computeLongTermCare(healthCare: Long): Long {
-        val result = healthCare * rates.longTermCare
+        val result = N(healthCare) * rates.longTermCare
 
         // 십원 미만 절사 (원단위 절삭)
         //longTermCare = floor(result / 10) * 10
@@ -123,7 +123,7 @@ class Insurance {
      * 고용보험 계산식
      */
     private fun computeEmploymentCare(adjustedSalary: Long): Long {
-        val result = adjustedSalary * rates.employmentCare
+        val result = N(adjustedSalary) * rates.employmentCare
 
         // 십원 미만 절사 (원단위 절삭)
         //employmentCare = floor(result / 10) * 10

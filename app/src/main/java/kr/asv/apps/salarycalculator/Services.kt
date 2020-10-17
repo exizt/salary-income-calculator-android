@@ -94,6 +94,7 @@ object Services {
         return TermDictionaryDao(db)
     }
 
+    @Suppress("unused")
     fun getIncomeTaxDao(): IncomeTaxDao{
         val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
         return IncomeTaxDao(db)
@@ -197,7 +198,7 @@ object Services {
      * 설정값을 반환.
      * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
      */
-    @Suppress("unused")
+    @Suppress("unused", "UNUSED_PARAMETER")
     fun getAppPref(key:String): String {
         //return appPrefs[key]? : ""
         return ""

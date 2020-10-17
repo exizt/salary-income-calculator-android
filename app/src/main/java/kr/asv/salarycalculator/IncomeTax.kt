@@ -1,8 +1,8 @@
 package kr.asv.salarycalculator
 
-import java.math.BigDecimal
 import kotlin.math.max
 import kotlin.math.min
+
 
 /**
  * 소득세 계산
@@ -20,6 +20,7 @@ import kotlin.math.min
  * 개정 기록을 살펴보면 1월, 7월, 9월, 9월 등 다양함...
  */
 class IncomeTax {
+
     /**
      * 디버깅유무
      */
@@ -76,19 +77,19 @@ class IncomeTax {
 
         val incomeTax = when {
             baseSalary <= 14000 * 1000 -> {
-                baseIncomeTax + (baseSalary - 10000 * 1000) * 0.98 * 0.35
+                N(baseIncomeTax) + N(baseSalary - 10000 * 1000) * 0.98 * 0.35
             }
             baseSalary <= 28000 * 1000 -> {
-                baseIncomeTax + 1372000 + (baseSalary - 14000 * 1000) * 0.98 * 0.38
+                N(baseIncomeTax) + 1372000 + N(baseSalary - 14000 * 1000) * 0.98 * 0.38
             }
             baseSalary <= 30000 * 1000 -> {
-                baseIncomeTax + 6585600 + (baseSalary - 28000 * 1000) * 0.98 * 0.40
+                N(baseIncomeTax) + 6585600 + N(baseSalary - 28000 * 1000) * 0.98 * 0.40
             }
             baseSalary <= 450000 * 1000 -> {
-                baseIncomeTax + 7385600 + (baseSalary - 30000 * 1000) * 0.40
+                N(baseIncomeTax) + 7385600 + N(baseSalary - 30000 * 1000) * 0.40
             }
             else -> {
-                baseIncomeTax + 13385600 + (baseSalary - 450000 * 1000) * 0.42
+                N(baseIncomeTax) + 13385600 + N(baseSalary - 450000 * 1000) * 0.42
             }
         }
         debug("최종 보정 세액:", incomeTax)
@@ -201,27 +202,30 @@ class IncomeTax {
          * 1)기준 근로소득 공제 산출
          * 연간의 기준 근로소득을 계산한 후, 그 금액에 따른 차등적인 소득공제를 한다.
          */
-        var deduction = when {
+        val deduction = when {
             baseSalaryY <= 500 * 10000 -> {
-                baseSalaryY * 0.7
+                // baseSalaryY * 0.7
+                N(baseSalaryY) * 0.7
             }
             baseSalaryY <= 1500 * 10000 -> {
-                350 * 10000 + (baseSalaryY - 500 * 10000) * 0.4
+                // 350 * 10000 + (baseSalaryY - 500 * 10000) * 0.4
+                N(350 * 10000) + N(baseSalaryY - 500 * 10000) * 0.4
             }
             baseSalaryY <= 4500 * 10000 -> {
-                750 * 10000 + (baseSalaryY - 1500 * 10000) * 0.15
+                //750 * 10000 + (baseSalaryY - 1500 * 10000) * 0.15
+                N(750 * 10000) + N(baseSalaryY - 1500 * 10000) * 0.15
             }
             baseSalaryY <= 10000 * 10000 -> {
-                1200 * 10000 + (baseSalaryY - 4500 * 10000) * 0.05
+                //1200 * 10000 + (baseSalaryY - 4500 * 10000) * 0.05
+                N(1200 * 10000) + N(baseSalaryY - 4500 * 10000) * 0.05
             }
             else -> {
-                1475 * 10000 + (baseSalaryY - 10000 * 10000) * 0.02
+                //1475 * 10000 + (baseSalaryY - 10000 * 10000) * 0.02
+                N(1475 * 10000) + N(baseSalaryY - 10000 * 10000) * 0.02
             }
         }
         // 상한 2천만원 한도 (개정됨)
-        deduction = min(deduction, 2000*10000.0)
-
-        return deduction.toLong()
+        return min(deduction.toLong(), 2000*10000)
     }
 
     /**
@@ -246,10 +250,12 @@ class IncomeTax {
         adjustedSalary = max(adjustedSalary, 290000) // 하한 기준 보정
         adjustedSalary = min(adjustedSalary, 4490000) // 상한 기준 보정
 
-        val a = adjustedSalary.toBigDecimal() * 0.045.toBigDecimal()
+        // a = adjustedSalary * 0.045
+        val a = N(adjustedSalary) * 0.045
         return CalcMath.floor(a.toLong(),1)
         //return (salaryY * 0.045).toLong()
     }
+
     /**
      * <인적 공제>
      *
@@ -273,72 +279,76 @@ class IncomeTax {
      */
     fun computeOtherDeduction(salaryY: Long, family: Int, child: Int): Long {
         val calcFamily = family + child
-        var deduct: Double
+        var deduct:N
 
         if (calcFamily == 1) {
             // 공제대상자 1명인 경우
             deduct = when {
                 salaryY <= 3000 * 10000 -> {
-                    310 * 10000 + salaryY * 0.04
+                    //310 * 10000 + salaryY * 0.04
+                    N(310 * 10000) + N(salaryY) * 0.04
                 }
                 salaryY <= 4500 * 10000 -> {
-                    310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+                    //310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+                    N(310 * 10000) + N(salaryY) * 0.04 - N(salaryY - 3000 * 10000) * 0.05
                 }
                 salaryY <= 7000 * 10000 -> {
-                    310 * 10000 + salaryY * 0.015
+                    //310 * 10000 + salaryY * 0.015
+                    N(310 * 10000) + N(salaryY) * 0.015
                 }
                 salaryY <= 12000 * 10000 -> {
-                    310 * 10000 + salaryY * 0.005
+                    //310 * 10000 + salaryY * 0.005
+                    N(310 * 10000) + N(salaryY) * 0.005
                 }
                 else -> {
-                    0.0
+                    N(0)
                 }
             }
         } else if (calcFamily == 2) {
             // 공제대상자 2명인 경우
             deduct = when {
                 salaryY <= 3000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.04
+                    N(360 * 10000) + N(salaryY) * 0.04
                 }
                 salaryY <= 4500 * 10000 -> {
-                    360 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+                    N(360 * 10000) + N(salaryY) * 0.04 - N(salaryY - 3000 * 10000) * 0.05
                 }
                 salaryY <= 7000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.02
+                    N(360 * 10000) + N(salaryY) * 0.02
                 }
                 salaryY <= 12000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.01
+                    N(360 * 10000) + N(salaryY) * 0.01
                 }
                 else -> {
-                    0.0
+                    N(0)
                 }
             }
         } else if(calcFamily >= 3){
             // 공제대상자 3명 이상인 경우
             deduct = when {
                 salaryY <= 3000 * 10000 -> {
-                    500 * 10000 + salaryY * 0.07
+                    N(500 * 10000) + N(salaryY) * 0.07
                 }
                 salaryY <= 4500 * 10000 -> {
-                    500 * 10000 + salaryY * 0.07 - (salaryY - 3000 * 10000) * 0.05
+                    N(500 * 10000) + N(salaryY) * 0.07 - N(salaryY - 3000 * 10000) * 0.05
                 }
                 salaryY <= 7000 * 10000 -> {
-                    500 * 10000 + salaryY * 0.05
+                    N(500 * 10000) + N(salaryY) * 0.05
                 }
                 salaryY <= 12000 * 10000 -> {
-                    500 * 10000 + salaryY * 0.03
+                    N(500 * 10000) + N(salaryY) * 0.03
                 }
                 else -> {
-                    0.0
+                    N(0)
                 }
             }
             // 추가공제
             if (salaryY >= 4000 * 10000) {
-                deduct += (salaryY - 4000 * 10000) * 0.04
+                deduct += N(salaryY - 4000 * 10000) * 0.04
             }
         } else {
             // 이 경우는 발생하지 않는 경우임. 입력이 잘못된 경우임.
-            deduct = 0.0
+            deduct = N(0)
         }
         return deduct.toLong()
     }
@@ -360,41 +370,38 @@ class IncomeTax {
          * 기존에는 합산(덧셈)이었으나, 현재는 간이 계산을 위해 공제(밸셈)식으로 계산.
          * (결과는 동일함)
          */
-        var tax: Double = when {
+        val tax = when {
             agiSalaryY <= 1200 * 10000 -> {
-                agiSalaryY * 0.06
+                N(agiSalaryY) * 0.06
             }
             agiSalaryY <= 4600 * 10000 -> {
                 //72 * 10000 + (taxBase - 1200 * 10000) * 0.15
-                agiSalaryY * 0.15 - 108 * 10000
+                N(agiSalaryY) * 0.15 - 108 * 10000
             }
             agiSalaryY <= 8800 * 10000 -> {
                 //582 * 10000 + (taxBase - 4600 * 10000) * 0.24
-                agiSalaryY * 0.24 - 522 * 10000
+                N(agiSalaryY) * 0.24 - 522 * 10000
             }
             agiSalaryY <= 15000 * 10000 -> {
                 //1590 * 10000 + (taxBase - 8800 * 10000) * 0.35
-                agiSalaryY * 0.35 - 1490 * 10000
+                N(agiSalaryY) * 0.35 - 1490 * 10000
             }
             agiSalaryY <= 30000 * 10000 -> {
                 //1590 * 10000 + (taxBase - 8800 * 10000) * 0.38
-                agiSalaryY * 0.38 - 1940 * 10000
+                N(agiSalaryY) * 0.38 - 1940 * 10000
             }
             agiSalaryY <= 50000 * 10000 -> {
                 //1590 * 10000 + (taxBase - 8800 * 10000) * 0.40
-                agiSalaryY * 0.40 - 2540 * 10000
+                N(agiSalaryY) * 0.40 - 2540 * 10000
             }
             else -> {
                 //3760 * 10000 + (taxBase - 15000 * 10000) * 0.42
-                agiSalaryY * 0.42 - 3540 * 10000
+                N(agiSalaryY) * 0.42 - 3540 * 10000
             }
         }
         // 십원 미만 절사 (원단위 절사)
         //tax = floor(tax / 10) * 10 // 원단위 이하 절사
-        tax = CalcMath.roundFloor(tax, -1)
-        // debug("산출세액:", tax)
-
-        return tax.toLong()
+        return CalcMath.floor(tax.toLong(), 1)
     }
 
     /**
@@ -416,10 +423,10 @@ class IncomeTax {
         /**
          * 근로소득세액공제 계산
          */
-        val calcTaxCredit: Double = if (tax <= 130 * 10000) {
-            tax * 0.55
+        val calcTaxCredit = if (tax <= 130 * 10000) {
+            N(tax) * 0.55
         } else {
-            715 * 1000 + (tax - 130 * 10000) * 0.30
+            N(715 * 1000) + N(tax - 130 * 10000) * 0.30
         }
         var taxCredit: Long = calcTaxCredit.toLong()
 
@@ -474,10 +481,10 @@ class IncomeTax {
         /**
          * 근로소득세액공제 계산
          */
-        val calcTaxCredit: Double = if (tax <= 50 * 10000) {
-            tax * 0.55
+        val calcTaxCredit = if (tax <= 50 * 10000) {
+            N(tax) * 0.55
         } else {
-            275 * 1000 + (tax - 50 * 10000) * 0.30
+            N(275 * 1000) + N(tax - 50 * 10000) * 0.30
         }
         var taxCredit: Long = calcTaxCredit.toLong()
 
@@ -516,7 +523,7 @@ class IncomeTax {
      * @return Long
      */
     private fun computeLocalTax(incomeTax: Long): Long {
-        val calc = incomeTax * 0.1
+        val calc = N(incomeTax) * 0.1
         // 십원 미만 절사 (원단위 절삭)
         //tax = floor(tax / 10) * 10
         return CalcMath.floor(calc.toLong(), 1)

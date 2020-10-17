@@ -11,7 +11,6 @@ import java.util.*
  * prepare() 이후에 setOptions() 등을 호출 하고 마지막에 run 을 실행하면 결과를 산출한다.
  */
 class SalaryCalculator {
-    private var isPrepared = false
 
     /**
      * Options 값들. 가족수, 자녀수, 비과세액 등

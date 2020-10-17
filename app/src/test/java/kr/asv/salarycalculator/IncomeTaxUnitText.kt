@@ -1,26 +1,30 @@
 package kr.asv.salarycalculator
 
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 
 class IncomeTaxUnitText {
     @Test
     fun unitTest(){
-        println(a(34800000.0))
-
         val incomeTax = IncomeTax()
         val calculator = SalaryCalculator()
         calculator.init()
 
-        val salary: Long = 290 * 10000
+        val salary: Long = 1250 * 1000
         val family = 1
         val child = 0
         incomeTax.isDebug = true
-        incomeTax.nationalInsurance = calculator.insurance.computeNationalPension(salary)
         incomeTax.calculate(salary, family, child)
     }
 
-    private fun a(salaryY: Double): Double{
-        return 310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+    /**
+     * 특별 공제 테스트
+     */
+    @Test
+    fun computeOtherDeductionUnitTest(){
+        val incomeTax = IncomeTax()
+        assertEquals(4252000, incomeTax.computeOtherDeduction(3480*10000, 1, 0))
     }
+
 }

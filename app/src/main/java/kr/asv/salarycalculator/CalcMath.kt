@@ -175,4 +175,8 @@ internal object CalcMath {
     fun divide(dividend: BigInteger, divisor: Int, digits: Int, mode: RoundingMode = RoundingMode.HALF_UP): BigDecimal {
         return divide(dividend.toBigDecimal(), divisor.toBigDecimal(), digits, mode)
     }
+
+    fun multiply(a:Long, b:Double): Long{
+        return (a.toBigDecimal() * b.toBigDecimal()).toLong()
+    }
 }
