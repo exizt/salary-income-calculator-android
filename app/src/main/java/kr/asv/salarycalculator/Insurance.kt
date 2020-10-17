@@ -41,10 +41,11 @@ class Insurance {
      * 4대 보험 계산
      * 각각의 보험요율을 계산한다.
      */
-    fun execute(adjustedSalary: Double) {
-        calculateNationalPension(adjustedSalary) // 국민연금
-        calculateHealthCareWithLongTermCare(adjustedSalary) // 건강보험 과 요양보험
-        calculateEmploymentCare(adjustedSalary) // 고용보험
+    fun calculate(adjustedSalary: Double) {
+        nationalPension = computeNationalPension(adjustedSalary) // 국민연금
+        healthCare = computeHealthCare(adjustedSalary) // 건강보험
+        longTermCare = computeLongTermCare(healthCare) // 요양보험
+        employmentCare = computeEmploymentCare(adjustedSalary) // 고용보험
     }
 
     /**
@@ -52,7 +53,7 @@ class Insurance {
      *
      * @param _adjustedSalary Double 세금의 기준 봉급액(기본급 - 비과세)
      */
-    private fun calculateNationalPension(_adjustedSalary: Double) {
+    fun computeNationalPension(_adjustedSalary: Double): Double {
         var adjustedSalary = _adjustedSalary
 
         // 상한,하한 보정
@@ -68,7 +69,7 @@ class Insurance {
 
         // 보험료값 십원 미만 절사 (원단위 절사)
         //nationalPension = floor(result / 10) * 10
-        nationalPension = CalcMath.roundFloor(result, -1)
+        return CalcMath.roundFloor(result, -1)
     }
 
     /**
@@ -76,17 +77,7 @@ class Insurance {
      *
      * @param adjustedSalary double
      */
-    private fun calculateHealthCareWithLongTermCare(adjustedSalary: Double) {
-        calculateHealthCare(adjustedSalary)
-        calculateLongTermCare(healthCare)
-    }
-
-    /**
-     * 건강보험 계산식
-     *
-     * @param adjustedSalary double
-     */
-    private fun calculateHealthCare(adjustedSalary: Double) {
+    private fun computeHealthCare(adjustedSalary: Double):Double {
         var result = adjustedSalary * rates.healthCare
 
         // 십원 미만 절사.
@@ -100,30 +91,30 @@ class Insurance {
         // 보험료값 십원 미만 절사 (원단위 절사)
         //healthCare = floor(result / 10) * 10
         //healthCare = CalcMath.roundFloor(result, -1)
-        healthCare = result
+        return result
     }
 
     /**
      * 장기요양보험 계산식
      *
      */
-    private fun calculateLongTermCare(healthCare: Double) {
+    private fun computeLongTermCare(healthCare: Double): Double {
         val result = healthCare * rates.longTermCare
 
         // 십원 미만 절사 (원단위 절삭)
         //longTermCare = floor(result / 10) * 10
-        longTermCare = CalcMath.roundFloor(result, -1)
+        return CalcMath.roundFloor(result, -1)
     }
 
     /**
      * 고용보험 계산식
      */
-    private fun calculateEmploymentCare(adjustedSalary: Double) {
+    private fun computeEmploymentCare(adjustedSalary: Double): Double {
         val result = adjustedSalary * rates.employmentCare
 
         // 십원 미만 절사 (원단위 절삭)
         //employmentCare = floor(result / 10) * 10
-        employmentCare = CalcMath.round(result, -1)
+        return CalcMath.round(result, -1)
     }
 
     /**
