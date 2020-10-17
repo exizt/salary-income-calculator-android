@@ -1,6 +1,5 @@
 package kr.asv.salarycalculator
 
-import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 
@@ -28,27 +27,27 @@ class IncomeTax {
     /**
      * 소득세
      */
-    var earnedIncomeTax = 0.0
+    var earnedIncomeTax: Long = 0
         set(value) {
             // 소득세 를 지정하고, 동시에 지방세도 같이 계산한다.
             localTax = computeLocalTax(value)
-            field = max(value, 0.0) // 음수 방지
+            field = max(value, 0) // 음수 방지
         }
 
     /**
      * 지방세
      */
-    var localTax = 0.0
+    var localTax: Long = 0
         private set(value) {
-            field = max(value, 0.0) // 음수 방지
+            field = max(value, 0) // 음수 방지
         }
 
     /**
      * 국민연금 금액
      */
-    var nationalInsurance = 0.0
+    var nationalInsurance: Long = 0
         set(value) {
-            field = max(value, 0.0) // 음수 방지
+            field = max(value, 0) // 음수 방지
         }
 
 
@@ -59,7 +58,7 @@ class IncomeTax {
      * @param family int family
      * @param child  int child
      */
-    fun calculate(salary: Double, family: Int, child: Int) {
+    fun calculate(salary: Long, family: Int, child: Int) {
         if (isDebug) {
             debug("----------------")
             debug("<소득세 계산 시작>")
@@ -77,7 +76,7 @@ class IncomeTax {
      * @param salary 비과세를 뺀 월 소득
      * @return double
      */
-    private fun calculateIncomeTax(salary: Double, family: Int, child: Int): Double {
+    private fun calculateIncomeTax(salary: Long, family: Int, child: Int): Long {
 
         /*
          * <0. 연산 기준 산출>
@@ -151,11 +150,11 @@ class IncomeTax {
 
         // 십원 미만 절사 (원단위 이하 절사)
         // tax = floor(tax / 10) * 10
-        tax = CalcMath.roundFloor(tax, -1)
+        tax = CalcMath.floor(tax, 1)
         debug("결정세액(월. 원단위 절사):", tax)
 
         // 마이너스 방지
-        if (tax < 0) tax = 0.0
+        if (tax < 0) tax = 0
         return tax
     }
 
@@ -166,7 +165,7 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun computeEarnedDeduction(baseSalaryY: Double): Double {
+    private fun computeEarnedDeduction(baseSalaryY: Long): Long {
         /*
          * 1)기준 근로소득 공제 산출
          * 연간의 기준 근로소득을 계산한 후, 그 금액에 따른 차등적인 소득공제를 한다.
@@ -191,7 +190,7 @@ class IncomeTax {
         // 상한 2천만원 한도 (개정됨)
         deduction = min(deduction, 2000*10000.0)
 
-        return deduction
+        return deduction.toLong()
     }
 
     /**
@@ -199,7 +198,7 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun computeInsuranceDeduction(): Double {
+    private fun computeInsuranceDeduction(): Long {
         return nationalInsurance * 12
     }
 
@@ -209,8 +208,8 @@ class IncomeTax {
      * 1인당 150만원
      * 인원 기준 : 본인 포함 부양가족 수.
      */
-    private fun computePersonalDeduction(family: Int, child: Int): Double {
-        return 150 * 10000 * (family + child).toDouble()
+    private fun computePersonalDeduction(family: Int, child: Int): Long {
+        return 150 * 10000 * (family + child).toLong()
     }
     
     /**
@@ -224,7 +223,7 @@ class IncomeTax {
      * @param child 20세 미만 자녀수
      * @return double
      */
-    private fun computeOtherDeduction(salaryY: Double, family: Int, child: Int): Double {
+    private fun computeOtherDeduction(salaryY: Long, family: Int, child: Int): Long {
         val calcFamily = family + child
         var deduct: Double
 
@@ -293,7 +292,7 @@ class IncomeTax {
             // 이 경우는 발생하지 않는 경우임. 입력이 잘못된 경우임.
             deduct = 0.0
         }
-        return deduct
+        return deduct.toLong()
     }
 
     /**
@@ -303,7 +302,7 @@ class IncomeTax {
      * @param agiSalaryY 과세 표준 연봉
      * @return double
      */
-    private fun computeTax(agiSalaryY: Double): Double {
+    private fun computeTax(agiSalaryY: Long): Long {
 
         /**
          * 누진 세율에 맞춘 산출 세액 계산
@@ -347,7 +346,7 @@ class IncomeTax {
         tax = CalcMath.roundFloor(tax, -1)
         // debug("산출세액:", tax)
 
-        return tax
+        return tax.toLong()
     }
 
     /**
@@ -359,7 +358,7 @@ class IncomeTax {
      * @param tax 산출세액
      * @return double
      */
-    private fun computeIncomeTaxCredit(baseSalaryY: Double, tax: Double): Double {
+    private fun computeIncomeTaxCredit(baseSalaryY: Long, tax: Long): Long {
         var creditMax = 0.0
 
         // 근로소득세액공제 상한 지정
@@ -394,7 +393,7 @@ class IncomeTax {
         // 원단위 절사
         //taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
         taxCredit = CalcMath.roundFloor(taxCredit, -1)
-        return taxCredit
+        return taxCredit.toLong()
     }
 
 
@@ -404,27 +403,26 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun computeLocalTax(incomeTax: Double): Double {
-        var tax = incomeTax * 0.1
+    private fun computeLocalTax(incomeTax: Long): Long {
+        val calc = incomeTax * 0.1
         // 십원 미만 절사 (원단위 절삭)
         //tax = floor(tax / 10) * 10
-        tax = CalcMath.roundFloor(tax, -1)
-        return tax
+        return CalcMath.floor(calc.toLong(), 1)
     }
 
     /**
      * 구간의 중간값을 계산하는 메서드.
      */
-    private fun calcIntervalMedian(value: Double, interval : Int) : Double {
-        return floor(value / interval) * interval + (interval / 2)
+    private fun calcIntervalMedian(value: Long, interval : Int) : Long {
+        return (value / interval) * interval + (interval / 2)
     }
 
     /**
      * 소득세금 전체 금액 (소득세 + 지역세(주민세))
      *
-     * @return double
+     * @return Long
      */
-    fun get(): Double {
+    fun get(): Long {
         return earnedIncomeTax + localTax
     }
 

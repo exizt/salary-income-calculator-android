@@ -12,7 +12,7 @@ class IncomeTaxUnitText {
         val calculator = SalaryCalculator()
         calculator.init()
 
-        val salary = 290 * 10000.0
+        val salary: Long = 290 * 10000
         val family = 1
         val child = 0
         incomeTax.isDebug = true
@@ -20,7 +20,7 @@ class IncomeTaxUnitText {
         incomeTax.calculate(salary, family, child)
     }
 
-    fun a(salaryY: Double): Double{
+    private fun a(salaryY: Double): Double{
         return 310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
     }
 }

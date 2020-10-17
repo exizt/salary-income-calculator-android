@@ -196,8 +196,8 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 옵션값 셋팅
         val options = calculator.options
-        options.inputMoney = inputMoney.toDouble()
-        options.taxExemption = taxFree.toDouble()
+        options.inputMoney = inputMoney
+        options.taxExemption = taxFree
         options.family = family
         options.child = child
         options.isAnnualBasis = annualBasis
@@ -223,7 +223,7 @@ class QuickCalculatorFragment : BaseFragment() {
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
         incomeTaxDao.isDebug = isDebug
-        val earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
+        val earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary, family, "201802")
         debug("incomeTax:",earnedIncomeTax)
 
         // 실수령액 계산

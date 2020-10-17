@@ -11,7 +11,7 @@ import java.util.*
  * prepare() 이후에 setOptions() 등을 호출 하고 마지막에 run 을 실행하면 결과를 산출한다.
  */
 class SalaryCalculator {
-    var isPrepared = false
+    private var isPrepared = false
 
     /**
      * Options 값들. 가족수, 자녀수, 비과세액 등
@@ -36,7 +36,7 @@ class SalaryCalculator {
     /**
      * 월 실수령액
      */
-    var netSalary = 0.0
+    var netSalary: Long = 0
         private set
 
     fun init(){
@@ -59,15 +59,15 @@ class SalaryCalculator {
         rates.nationalPension = 4.5
         // 국민 연금 기준액 상한
         insurance.limitNpUp = if(ymd >= 20200701){
-            5030000.toDouble()
+            5030000
         } else {
-            4860000.toDouble()
+            4860000
         }
         // 국민 연금 기준액 하한
         insurance.limitNpDown = if(ymd >= 20200701){
-            320000.toDouble()
+            320000
         } else {
-            310000.toDouble()
+            310000
         }
 
         /**
@@ -81,15 +81,15 @@ class SalaryCalculator {
         }
         // 건강보험료 상한
         insurance.limitHcUp = if(ymd >= 20200101){
-            3322170.toDouble()
+            3322170
         } else {
-            3182760.toDouble()
+            3182760
         }
         // 건강보험료 하한
         insurance.limitHcDown = if(ymd >= 20200101){
-            18600.toDouble()
+            18600
         } else {
-            18020.toDouble()
+            18020
         }
 
         // 요양보험율
@@ -118,7 +118,7 @@ class SalaryCalculator {
     /**
      * 계산 실행
      */
-    fun run(earnedIncomeTax: Double){
+    fun run(earnedIncomeTax: Long){
         // 디버깅 옵션
         incomeTax.isDebug = options.isDebug
 
@@ -157,14 +157,6 @@ class SalaryCalculator {
     }
 
     /**
-     * 연봉, 월급, 4대보험 계산
-     */
-    private fun calculateSalaryWithInsurances() {
-        calculateSalary()
-        calculateInsurances(salary.basicSalary)
-    }
-
-    /**
      * 연봉 클래스 만 먼저 계산. 연봉/월급 을 계산함.
      * (Options 클래스 를 몰라도 되게 하기 위해서) 필수값들을 하나씩 set 해줌.
      * (역할이 섞이지 않게 한 것임. 자꾸 까먹어서 적어두는 것....)
@@ -174,13 +166,12 @@ class SalaryCalculator {
         debug(options)
 
         // 필수값 지정
-        salary.inputMoney = options.inputMoney // 입력 금액
         salary.taxExemption = options.taxExemption // 비과세 금액
         salary.isAnnualBasis = options.isAnnualBasis // 입력값이 연봉인지 유무. true 이면 연봉, false 이면 월급
         salary.isSeveranceIncluded = options.isIncludedSeverance // 퇴직금 포함 금액인지 유무. true 이면 포함된 금액임.
 
         // 계산
-        salary.calculate()
+        salary.calculate(options.inputMoney)
     }
 
     /**
@@ -188,7 +179,7 @@ class SalaryCalculator {
      * 입력된 기준금액을 통하여 계산함.
      */
     @Suppress("MemberVisibilityCanBePrivate")
-    fun calculateInsurances(basicSalary: Double) {
+    fun calculateInsurances(basicSalary: Long) {
         insurance.calculate(basicSalary)
         debug(insurance)
     }
