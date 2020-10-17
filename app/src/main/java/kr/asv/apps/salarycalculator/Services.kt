@@ -11,7 +11,6 @@ import kr.asv.apps.salarycalculator.model.IncomeTaxDao
 import kr.asv.apps.salarycalculator.model.TermDictionaryDao
 import kr.asv.salarycalculator.SalaryCalculator
 import org.jetbrains.anko.doAsync
-import java.util.*
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -22,8 +21,6 @@ object Services {
 
     // 계산기 클래스
     val calculator = SalaryCalculator()
-    // 세율 클래스
-    val taxCalculatorRates = TaxCalculatorRates()
     // private set
     private var appDatabasePath = ""
     // Database Handler
@@ -210,13 +207,6 @@ object Services {
         val editor = prefs.edit()
         editor.putString(key, value.toString())
         editor.apply()
-    }
-
-    class TaxCalculatorRates {
-        var nationalRate: Double = 0.toDouble()
-        var healthCareRate: Double = 0.toDouble()
-        var longTermCareRate: Double = 0.toDouble()
-        var employmentCareRate: Double = 0.toDouble()
     }
 
     object AppPrefKeys {

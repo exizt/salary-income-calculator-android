@@ -12,10 +12,6 @@
     <item android:title="@string/nav_group_others">
         <menu>
             <item
-                android:id="@+id/nav_calculator_tax"
-                android:icon="@drawable/ic_menu_calculate"
-                android:title="@string/nav_menu_rate_calculator" />
-            <item
                 android:id="@+id/nav_word_dictionary"
                 android:icon="@drawable/ic_menu_info"
                 android:title="@string/nav_menu_word_dictionary" />

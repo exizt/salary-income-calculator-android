@@ -46,11 +46,6 @@ class NavigationItemFactory {
                     replaceFragments(activity, fragment, backStack)
                     isDone = true
                 }
-                R.id.nav_calculator_tax -> {
-                    val fragment = TaxCalculatorFragment()
-                    replaceFragments(activity, fragment, backStack)
-                    isDone = true
-                }
                 R.id.nav_settings2 -> {
                     activity.startActivity(Intent(activity, AppSettingsActivity::class.java))
                     isDone = true

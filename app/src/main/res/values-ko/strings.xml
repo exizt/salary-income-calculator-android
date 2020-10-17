@@ -5,7 +5,6 @@
     <string name="nav_group_calculators">실수령액 계산기</string>
     <string name="nav_menu_quick_calculator">실수령액 계산</string>
     <string name="nav_group_others">부가 기능</string>
-    <string name="nav_menu_rate_calculator">세율 계산</string>
     <string name="nav_menu_word_dictionary">용어 사전</string>
     <string name="nav_group_settings">환경 설정</string>
     <string name="nav_menu_preferences">환경설정</string>
@@ -16,12 +15,10 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="label_monthly_input">월급입력</string>
     <string name="included_severance_status">퇴직금여부</string>
     <string name="calculate">계산하기</string>
     <string name="included">포함</string>
     <string name="btn_clear">정정</string>
-    <string name="close">닫기</string>
     <string name="btn_plus_1000">+ 천만원</string>
     <string name="btn_plus_100">+ 백만원</string>
     <string name="btn_plus_10">+ 십만원</string>
@@ -39,11 +36,6 @@
     <string name="tax_calc_health_care_rate">건강보험 요율(%)</string>
     <string name="tax_calc_longterm_care_rate">요양보험 요율(%)</string>
     <string name="tax_calc_employment_care_rate">고용보험 요율(%)</string>
-    <string name="label_taxfree">비과세(원)</string>
-    <string name="label_national_pension">국민연금(원)</string>
-    <string name="label_health_care">건강보험(원)</string>
-    <string name="label_longterm_care">요양보험(원)</string>
-    <string name="label_employee_care">고용보험(원)</string>
 
     <string name="activity_report_title">ReportActivity</string>
     <string name="report_tabBar_item_01">요약</string>

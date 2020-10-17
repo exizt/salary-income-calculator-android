@@ -32,14 +32,6 @@ abstract class BaseFragment : Fragment() {
     protected fun findViewById(id: Int): View = this.fragmentView!!.findViewById(id)
 
     /**
-     * 키보드 내리기
-     */
-    protected fun hideSoftKeyboard() {
-        val activity = (activity as MainActivity?)!!
-        activity.hideSoftKeyboard()
-    }
-
-    /**
      * 액션바 타이틀 변경
      */
     protected fun setActionBarTitle(title: String) {
