@@ -149,7 +149,7 @@ class SalaryCalculator {
         // <2> 소득세, 지방세 계산
         // '계산된 국민연금 납부액'을 넘겨주어야 한다.
         incomeTax.nationalInsurance = insurance.nationalPension
-        incomeTax.execute(salary.basicSalary, options.family, options.child)
+        incomeTax.calculate(salary.basicSalary, options.family, options.child)
         debug(incomeTax)
 
         // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
