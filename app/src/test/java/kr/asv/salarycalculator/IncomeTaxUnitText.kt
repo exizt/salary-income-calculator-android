@@ -6,6 +6,8 @@ import org.junit.Test
 class IncomeTaxUnitText {
     @Test
     fun unitTest(){
+        println(a(34800000.0))
+
         val incomeTax = IncomeTax()
         val calculator = SalaryCalculator()
         calculator.init()
@@ -16,5 +18,9 @@ class IncomeTaxUnitText {
         incomeTax.isDebug = true
         incomeTax.nationalInsurance = calculator.insurance.computeNationalPension(salary)
         incomeTax.calculate(salary, family, child)
+    }
+
+    fun a(salaryY: Double): Double{
+        return 310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
     }
 }

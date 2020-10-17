@@ -219,7 +219,7 @@ class IncomeTax {
      *     이 내용은 '근로소득 간이세액표 (조견표)'에 게시된 내용을 따름.
      *     공제대상가족수 = 부양가족수+자녀수 (= 자녀제외 가족수 + 2*자녀수)
      *
-     * @param salaryY 총급여액
+     * @param salaryY 총급여액 : 월 급여(비과세소득 제외 급여) x 12
      * @param family 부양가족수
      * @param child 20세 미만 자녀수
      * @return double
