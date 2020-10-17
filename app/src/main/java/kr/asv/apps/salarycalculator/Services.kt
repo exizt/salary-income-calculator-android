@@ -44,6 +44,7 @@ object Services {
      * getInstance 에서 호출한다.
      */
     fun load(context: Context) {
+        init()
         loadAppPrefs(context)
         // 앱이 켜지고 최초 1회에만 시도된다. appDatabasePath 가 초기값이 "" 이므로, 아직 값이 정해지기 전이다.
         // 동작이 되고 나면 appDatabasePath 값이 생성된다.
@@ -68,6 +69,20 @@ object Services {
                 // setDefaultInsuranceRates(context)
             }
         }
+    }
+
+    private fun init(){
+        // SalaryCalculator 의 세율, 상한 하한값 등을 셋팅한다.
+        calculator.init()
+        debug("[init] 초기화")
+
+        // 세율의 기본값을 가져와서 DefaultRates 에 기록해둔다.
+        val rates = calculator.insurance.rates
+        DefaultRates.nationalPension = rates.nationalPension * 100
+        DefaultRates.healthCare = rates.healthCare * 100
+        DefaultRates.longTermCare = rates.longTermCare * 100
+        DefaultRates.employmentCare = rates.employmentCare * 100
+        debug("[init] 기본 세율 값 가져옴")
     }
 
     /**

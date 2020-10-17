@@ -56,10 +56,10 @@ class ReportInputFragment : BaseFragment() {
         txInputTaxExemption.append(" 원")
 
         // 세율 값도 보여주게 처리.
-        (findViewById(R.id.txNationPensionRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.nationalPension)
-        (findViewById(R.id.txHealthCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.healthCare)
-        (findViewById(R.id.txLongtermCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.longTermCare)
-        (findViewById(R.id.txEmploymentCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.employmentCare)
+        (findViewById(R.id.txNationPensionRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.nationalPension*100)
+        (findViewById(R.id.txHealthCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.healthCare*100)
+        (findViewById(R.id.txLongtermCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.longTermCare*100)
+        (findViewById(R.id.txEmploymentCareRate) as TextView).text = String.format("%.2f %%", calculator.insurance.rates.employmentCare*100)
 
     }
 

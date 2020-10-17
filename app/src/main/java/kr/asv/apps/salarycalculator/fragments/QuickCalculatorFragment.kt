@@ -217,15 +217,17 @@ class QuickCalculatorFragment : BaseFragment() {
             Services.setInsuranceRatesToDefault()
         }
 
-        // 연봉, 월급, 4대 보험 계산
-        calculator.calculateSalaryWithInsurances()
+        //
+        calculator.prepare()
 
         // 소득세 계산 (데이터베이스 에서 읽어오기)
         val incomeTaxDao = Services.getIncomeTaxDao()
-        calculator.incomeTax.earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
+        incomeTaxDao.isDebug = isDebug
+        val earnedIncomeTax = incomeTaxDao.getValue(calculator.salary.basicSalary.toLong(), family, "201802").toDouble()
+        debug("incomeTax:",earnedIncomeTax)
 
         // 실수령액 계산
-        calculator.calculateOnlyNetSalary()
+        calculator.run(earnedIncomeTax)
 
         //결과 화면 호출
         val intent = Intent(activity, ReportActivity::class.java)

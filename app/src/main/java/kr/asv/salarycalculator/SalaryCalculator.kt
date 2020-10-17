@@ -11,6 +11,8 @@ import java.util.*
  * prepare() 이후에 setOptions() 등을 호출 하고 마지막에 run 을 실행하면 결과를 산출한다.
  */
 class SalaryCalculator {
+    var isPrepared = false
+
     /**
      * Options 값들. 가족수, 자녀수, 비과세액 등
      */
@@ -40,6 +42,7 @@ class SalaryCalculator {
     fun init(){
         initializeSettings()
     }
+
     /**
      * 세율, 상한, 하한 설정에 대한 조정
      */
@@ -105,26 +108,60 @@ class SalaryCalculator {
         } else {
             0.65
         }
-
     }
-    
+
+    fun prepare(){
+        isPrepared = true
+        calculateSalary()
+    }
+
+    /**
+     * 계산 실행
+     */
+    fun run(earnedIncomeTax: Double){
+        // 디버깅 옵션
+        incomeTax.isDebug = options.isDebug
+
+        // 간이소득세액표 에서 가져온 값 대입
+        incomeTax.earnedIncomeTax = earnedIncomeTax
+
+        // <1> 연봉, 월급, 4대보험 계산
+        calculateSalary()
+        calculateInsurances(salary.basicSalary)
+
+        // <2> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+        calculateOnlyNetSalary()
+    }
+
+    /**
+     * 계산 실행
+     *
+     * @deprecated 앞으로 안 쓰게 될 것임. 소득세 이슈...
+     */
+    fun run() {
+        // 디버깅 옵션
+        incomeTax.isDebug = options.isDebug
+
+        // <1> 연봉, 월급, 4대보험 계산
+        calculateSalary()
+        calculateInsurances(salary.basicSalary)
+
+        // <2> 소득세, 지방세 계산
+        // '계산된 국민연금 납부액'을 넘겨주어야 한다.
+        incomeTax.nationalInsurance = insurance.nationalPension
+        incomeTax.execute(salary.basicSalary, options.family, options.child)
+        debug(incomeTax)
+
+        // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+        calculateOnlyNetSalary()
+    }
+
     /**
      * 연봉, 월급, 4대보험 계산
      */
-    fun calculateSalaryWithInsurances() {
+    private fun calculateSalaryWithInsurances() {
         calculateSalary()
         calculateInsurances(salary.basicSalary)
-    }
-
-    private fun getYmd(): Int {
-        return Calendar.getInstance().run {
-            val y = get(Calendar.YEAR)
-            val m = get(Calendar.MONTH) + 1
-            val d = get(Calendar.DAY_OF_MONTH)
-            y * 10000 + m * 100 + d
-            //String.format("%d%d%d",y,m,d).toInt()
-            //"{$y}{$m}{$d}".toInt()
-        }
     }
 
     /**
@@ -157,34 +194,27 @@ class SalaryCalculator {
     }
 
     /**
-     * 계산 실행
-     */
-    fun run() {
-        if (options.isDebug) {
-            incomeTax.isDebug = true
-        }
-
-        // <1> 연봉, 월급, 4대보험 계산
-        calculateSalaryWithInsurances()
-
-        // <2> 소득세, 지방세 계산
-        // '계산된 국민연금 납부액'을 넘겨주어야 한다.
-        incomeTax.nationalInsurance = insurance.nationalPension
-        incomeTax.execute(salary.basicSalary, options.family, options.child)
-        debug(incomeTax)
-
-        // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
-        calculateOnlyNetSalary()
-    }
-
-    /**
      * 실수령액 계산
      * 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
      */
-    fun calculateOnlyNetSalary() {
+    private fun calculateOnlyNetSalary() {
         netSalary = salary.basicSalary - insurance.get() - incomeTax.get() + options.taxExemption
         salary.netSalary = netSalary
         debug("실수령액 : ", netSalary)
+    }
+
+    /**
+     * YYYYMMDD 반환
+     */
+    private fun getYmd(): Int {
+        return Calendar.getInstance().run {
+            val y = get(Calendar.YEAR)
+            val m = get(Calendar.MONTH) + 1
+            val d = get(Calendar.DAY_OF_MONTH)
+            y * 10000 + m * 100 + d
+            //String.format("%d%d%d",y,m,d).toInt()
+            //"{$y}{$m}{$d}".toInt()
+        }
     }
 
     /**
