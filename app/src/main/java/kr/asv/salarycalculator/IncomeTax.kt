@@ -46,13 +46,14 @@ class IncomeTax {
      */
     fun execute(salary: Double, family: Int, child: Int) {
         if (isDebug) {
+            debug("----------------")
             debug("<소득세 계산 시작>")
-            debug("기준 월급: ", salary)
-            debug("기준 가족수:", family)
-            debug("기준 아이수:", child)
+            debug("   (옵션) 월급: ", salary)
+            debug("   (옵션) 가족수:", family)
+            debug("   (옵션) 아이수:", child)
+            debug("----------------")
         }
-        earnedIncomeTax = calculateEarnedTax(salary, family, child)
-        //localTax = calculateLocalTax(earnedIncomeTax)
+        earnedIncomeTax = calculateIncomeTax(salary, family, child)
     }
 
     /**
@@ -61,7 +62,7 @@ class IncomeTax {
      * @param salary 비과세를 뺀 월 소득
      * @return double
      */
-    private fun calculateEarnedTax(salary: Double, family: Int, child: Int): Double {
+    private fun calculateIncomeTax(salary: Double, family: Int, child: Int): Double {
 
         /*
          * <0. 연산 기준 산출>
@@ -73,13 +74,13 @@ class IncomeTax {
          * 1000만원 까지는 20000원 단위 간격
          */
         val baseSalary = when {
-            salary <= 1500 * 1000 -> {
+            salary <= 150 * 10000 -> {
                 calcIntervalMedian(salary, 5000)
             }
-            salary <= 3000 * 1000 -> {
+            salary <= 300 * 10000 -> {
                 calcIntervalMedian(salary, 10000)
             }
-            salary <= 10000 * 1000 -> {
+            salary <= 1000 * 10000 -> {
                 calcIntervalMedian(salary, 20000)
             }
             else -> {
@@ -91,7 +92,8 @@ class IncomeTax {
         debug("계산 기준 연 급여 :", baseSalaryY)
 
         // <2. 근로소득공제 금액 산출>
-        val basicDeduction = calculateBasicDeduction(baseSalaryY)
+        val basicDeduction = getEarnedDeduction(baseSalaryY)
+        debug("근로소득공제액(연기준):", basicDeduction)
 
         // <3. 근로소득금액 산출>
         // 근로소득금액 (연) = 총급여액 (연) - 근로소득공제(연)
@@ -99,9 +101,20 @@ class IncomeTax {
         debug("근로소득금액 (연) = 소득기준금액 - 근로소득공제:", calcSalaryY)
 
         // <4. 종합소득공제(각종 소득공제) 산출 (인적공제, 연금보험료공제, 특별소득공제 등)>
-        val deduction = calculateIntegratedDeduction(baseSalaryY, family, child)
-        debug("종합소득공제액:", deduction)
+        // 4.1 연금보험료 공제
+        var deduction = getInsuranceDeduction()
+        debug("연금보험료 공제:", deduction)
 
+        // 4.2 인적공제
+        val personalDeduction = getPersonalDeduction(family, child)
+        debug("인적공제:", personalDeduction)
+        deduction += personalDeduction
+        
+        // 특별소득공제
+        val otherDeduction = calculateOtherDeduction(baseSalaryY, family, child)
+        debug("특별소득공제:", otherDeduction)
+        deduction += otherDeduction
+        
         // <5. 과세표준 산출>
         // 근로소득 과세표준 = 근로소득금액 - 종합소득공제(각종 소득공제)
         val agiSalaryY = calcSalaryY - deduction
@@ -112,7 +125,7 @@ class IncomeTax {
         debug("산출세액:", tax)
 
         // 근로소득세액공제 처리
-        val incomeTaxCredit = calculateTaxCredit(baseSalaryY, tax)
+        val incomeTaxCredit = calculateTaxCredit(agiSalaryY, tax)
         debug("근로소득세액공제:", incomeTaxCredit)
         tax -= incomeTaxCredit
 
@@ -138,7 +151,7 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun calculateBasicDeduction(baseSalaryY: Double): Double {
+    private fun getEarnedDeduction(baseSalaryY: Double): Double {
         /*
          * 1)기준 근로소득 공제 산출
          * 연간의 기준 근로소득을 계산한 후, 그 금액에 따른 차등적인 소득공제를 한다.
@@ -163,49 +176,28 @@ class IncomeTax {
         // 상한 2천만원 한도 (개정됨)
         deduction = min(deduction, 2000*10000.0)
 
-        debug("근로소득공제액(연기준):", deduction)
         return deduction
     }
 
     /**
-     * <종합소득공제 산출>
-     *     각종 소득공제 = 인적공제 + 연금보험료공제 + 특별소득공제 등
-     *     간이 계산식에서는 연금보험료에 '국민연금'만을 계산하도록 함.
+     * <연금보험료 공제>
      *
      * @return double
      */
-    private fun calculateIntegratedDeduction(salaryY: Double, family: Int, child: Int): Double {
-        var deduction: Double
-
-        /**
-         * 인적공제
-         * 
-         * 1인당 150만원
-         * 인원 기준 : 본인 포함 부양가족 수.
-         */
-        val familyDeduction = 150 * 10000 * (family + child).toDouble()
-        debug("인적공제:", familyDeduction)
-        deduction = familyDeduction
-
-        /**
-         * 연금보험료공제
-         *
-         * 연간 연금보험료(국민연금 등) 전액
-         */
-        val pensionDeduction = nationalInsurance * 12
-        debug("연금보험료공제:", pensionDeduction)
-        deduction += pensionDeduction
-
-        /**
-         * 특별소득공제
-         */
-        val otherDeduction = calculateOtherDeduction(salaryY, family, child)
-        debug("특별소득공제:", otherDeduction)
-        deduction += otherDeduction
-
-        return deduction
+    private fun getInsuranceDeduction(): Double {
+        return nationalInsurance * 12
     }
 
+    /**
+     * <인적 공제>
+     *
+     * 1인당 150만원
+     * 인원 기준 : 본인 포함 부양가족 수.
+     */
+    private fun getPersonalDeduction(family: Int, child: Int): Double {
+        return 150 * 10000 * (family + child).toDouble()
+    }
+    
     /**
      * <특별소득공제 산출>
      *     공제대상가족 수를 통해서 간이 계산함.
@@ -291,13 +283,12 @@ class IncomeTax {
 
     /**
      * <산출세액 계산>
-     *
-     * 산출세액 = 과세표준 * 누진세율
-     *
+     *     산출세액 = 과세표준 * 누진세율
+     *     과세표준을 기준으로 세율을 적용시켜서 세금을 계산한다.
      * @param agiSalaryY 과세 표준 연봉
      * @return double
      */
-    private fun calculateTax(agiSalaryY: Double): Double {
+    fun calculateTax(agiSalaryY: Double): Double {
 
         /**
          * 누진 세율에 맞춘 산출 세액 계산
@@ -357,7 +348,7 @@ class IncomeTax {
         var taxCredit: Double
         var creditMax = 0.0
 
-        // 근로소득세액공제 한도 지정
+        // 근로소득세액공제 상한 지정
         when {
             baseSalaryY <= 3300 * 10000 -> {
                 // 최대 74만원
@@ -383,8 +374,12 @@ class IncomeTax {
         }
 
         // 한도를 넘었을 시 한도 내로 재 지정
-        if (taxCredit >= creditMax) taxCredit = creditMax
-        taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
+        //if (taxCredit >= creditMax) taxCredit = creditMax
+        taxCredit = min(taxCredit, creditMax)
+
+        // 원단위 절사
+        //taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
+        taxCredit = CalcMath.roundFloor(taxCredit, -1)
         return taxCredit
     }
 
