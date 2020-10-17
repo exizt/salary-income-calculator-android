@@ -93,18 +93,24 @@ class IncomeTax {
         // <2. 근로소득공제 금액 산출>
         val basicDeduction = calculateBasicDeduction(baseSalaryY)
 
-        // [3. 종합소득공제 산출(인적공제, 연금보험료공제, 특별소득공제 등)]
-        val deduction = calculateIntegratedDeduction(salary, family, child)
+        // <3. 근로소득금액 산출>
+        // 근로소득금액 (연) = 총급여액 (연) - 근로소득공제(연)
+        val calcSalaryY = baseSalaryY - basicDeduction
+        debug("근로소득금액 (연) = 소득기준금액 - 근로소득공제:", calcSalaryY)
+
+        // <4. 종합소득공제(각종 소득공제) 산출 (인적공제, 연금보험료공제, 특별소득공제 등)>
+        val deduction = calculateIntegratedDeduction(baseSalaryY, family, child)
         debug("종합소득공제액:", deduction)
 
-        // [4. 과세표준 산출]
-        // 근로소득금액 - 종합소득공제 = 근로소득과세표준
-        val taxBaseEarned = earned1 - deduction
-        debug("과세표준:", taxBaseEarned)
+        // <5. 과세표준 산출>
+        // 근로소득 과세표준 = 근로소득금액 - 종합소득공제(각종 소득공제)
+        val agiSalaryY = calcSalaryY - deduction
+        debug("과세표준:", agiSalaryY)
 
-        // [5. 결정세액 산출]
-        var tax = calcTaxEarnedTotal(salary, taxBaseEarned)
-        debug("결정세액:", tax)
+        // <6. 결정세액 산출>
+        var tax = calculateTax(agiSalaryY)
+        debug("산출세액:", tax)
+
         // 근로소득세액공제 처리
         val incomeTaxCredit = calculateTaxCredit(baseSalaryY, tax)
         debug("근로소득세액공제:", incomeTaxCredit)
@@ -132,37 +138,33 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun calculateBasicDeduction(salary: Double): Double {
+    private fun calculateBasicDeduction(baseSalaryY: Double): Double {
         /*
          * 1)기준 근로소득 공제 산출
          * 연간의 기준 근로소득을 계산한 후, 그 금액에 따른 차등적인 소득공제를 한다.
          */
-        val earnedIncomeBefore = salary * 12 // 연간 기준 금액 산출
-        debug("소득기준금액-공제전(연기준) ", earnedIncomeBefore)
-        val deduction = when {
-            earnedIncomeBefore <= 500 * 10000 -> {
-                earnedIncomeBefore * 0.7
+        var deduction = when {
+            baseSalaryY <= 500 * 10000 -> {
+                baseSalaryY * 0.7
             }
-            earnedIncomeBefore <= 1500 * 10000 -> {
-                350 * 10000 + (earnedIncomeBefore - 500 * 10000) * 0.4
+            baseSalaryY <= 1500 * 10000 -> {
+                350 * 10000 + (baseSalaryY - 500 * 10000) * 0.4
             }
-            earnedIncomeBefore <= 4500 * 10000 -> {
-                750 * 10000 + (earnedIncomeBefore - 1500 * 10000) * 0.15
+            baseSalaryY <= 4500 * 10000 -> {
+                750 * 10000 + (baseSalaryY - 1500 * 10000) * 0.15
             }
-            earnedIncomeBefore <= 10000 * 10000 -> {
-                1200 * 10000 + (earnedIncomeBefore - 4500 * 10000) * 0.05
+            baseSalaryY <= 10000 * 10000 -> {
+                1200 * 10000 + (baseSalaryY - 4500 * 10000) * 0.05
             }
             else -> {
-                1475 * 10000 + (earnedIncomeBefore - 10000 * 10000) * 0.02
+                1475 * 10000 + (baseSalaryY - 10000 * 10000) * 0.02
             }
         }
-        debug("근로소득공제액(연기준):", deduction)
+        // 상한 2천만원 한도 (개정됨)
+        deduction = min(deduction, 2000*10000.0)
 
-        // 2)줄어든 근로소득금액 산출
-        // 근로소득 금액(연간) = 기존의 기준 근로소득 금액 - 근로소득공제
-        val adjustedIncomeYearly = earnedIncomeBefore - deduction // 근로소득금액
-        debug("소득기준금액-근로소득공제 후(연기준):", adjustedIncomeYearly)
-        return adjustedIncomeYearly
+        debug("근로소득공제액(연기준):", deduction)
+        return deduction
     }
 
     /**
@@ -172,21 +174,36 @@ class IncomeTax {
      *
      * @return double
      */
-    private fun calculateIntegratedDeduction(salary: Double, family: Int, child: Int): Double {
-        // 종합소득공제 산출(인적공제, 연금보험료공제, 특별소득공제 등)
-        // 인적공제, 연금보험료공제, 특별소득공제 등
-        // 1) 인적공제
+    private fun calculateIntegratedDeduction(salaryY: Double, family: Int, child: Int): Double {
+        var deduction: Double
+
+        /**
+         * 인적공제
+         * 
+         * 1인당 150만원
+         * 인원 기준 : 본인 포함 부양가족 수.
+         */
         val familyDeduction = 150 * 10000 * (family + child).toDouble()
         debug("인적공제:", familyDeduction)
+        deduction = familyDeduction
 
-        // 2) 연금보험 공제
+        /**
+         * 연금보험료공제
+         *
+         * 연간 연금보험료(국민연금 등) 전액
+         */
         val pensionDeduction = nationalInsurance * 12
         debug("연금보험료공제:", pensionDeduction)
+        deduction += pensionDeduction
 
-        // 3) 특별소득공제
-        val deductionEarnedETC = calculateOtherDeduction(salary, family, child)
-        debug("특별소득공제:", deductionEarnedETC)
-        return familyDeduction + pensionDeduction + deductionEarnedETC
+        /**
+         * 특별소득공제
+         */
+        val otherDeduction = calculateOtherDeduction(salaryY, family, child)
+        debug("특별소득공제:", otherDeduction)
+        deduction += otherDeduction
+
+        return deduction
     }
 
     /**
@@ -200,11 +217,49 @@ class IncomeTax {
      * @param child 20세 미만 자녀수
      * @return double
      */
-    private fun calculateOtherDeduction(baseSalary: Double, family: Int, child: Int): Double {
-        val salaryY = baseSalary * 12
+    private fun calculateOtherDeduction(salaryY: Double, family: Int, child: Int): Double {
         val calcFamily = family + child
         var deduct: Double
-        if (calcFamily >= 3) {
+
+        if (calcFamily == 1) {
+            // 공제대상자 1명인 경우
+            deduct = when {
+                salaryY <= 3000 * 10000 -> {
+                    310 * 10000 + salaryY * 0.04
+                }
+                salaryY <= 4500 * 10000 -> {
+                    310 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+                }
+                salaryY <= 7000 * 10000 -> {
+                    310 * 10000 + salaryY * 0.015
+                }
+                salaryY <= 12000 * 10000 -> {
+                    310 * 10000 + salaryY * 0.005
+                }
+                else -> {
+                    0.0
+                }
+            }
+        } else if (calcFamily == 2) {
+            // 공제대상자 2명인 경우
+            deduct = when {
+                salaryY <= 3000 * 10000 -> {
+                    360 * 10000 + salaryY * 0.04
+                }
+                salaryY <= 4500 * 10000 -> {
+                    360 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
+                }
+                salaryY <= 7000 * 10000 -> {
+                    360 * 10000 + salaryY * 0.02
+                }
+                salaryY <= 12000 * 10000 -> {
+                    360 * 10000 + salaryY * 0.01
+                }
+                else -> {
+                    0.0
+                }
+            }
+        } else if(calcFamily >= 3){
             // 공제대상자 3명 이상인 경우
             deduct = when {
                 salaryY <= 3000 * 10000 -> {
@@ -224,28 +279,12 @@ class IncomeTax {
                 }
             }
             // 추가공제
-            if (salaryY >= 4000) {
+            if (salaryY >= 4000 * 10000) {
                 deduct += (salaryY - 4000 * 10000) * 0.04
             }
         } else {
-            // 공제대상자 2명 이하인 경우
-            deduct = when {
-                salaryY <= 3000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.04
-                }
-                salaryY <= 4500 * 10000 -> {
-                    360 * 10000 + salaryY * 0.04 - (salaryY - 3000 * 10000) * 0.05
-                }
-                salaryY <= 7000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.02
-                }
-                salaryY <= 12000 * 10000 -> {
-                    360 * 10000 + salaryY * 0.01
-                }
-                else -> {
-                    0.0
-                }
-            }
+            // 이 경우는 발생하지 않는 경우임. 입력이 잘못된 경우임.
+            deduct = 0.0
         }
         return deduct
     }
@@ -258,7 +297,7 @@ class IncomeTax {
      * @param agiSalaryY 과세 표준 연봉
      * @return double
      */
-    private fun calcTaxEarnedTotal(baseSalary: Double, taxBase: Double): Double {
+    private fun calculateTax(agiSalaryY: Double): Double {
 
         /**
          * 누진 세율에 맞춘 산출 세액 계산
@@ -269,20 +308,32 @@ class IncomeTax {
          * (결과는 동일함)
          */
         var tax: Double = when {
-            taxBase <= 1200 * 10000 -> {
-                taxBase * 0.06
+            agiSalaryY <= 1200 * 10000 -> {
+                agiSalaryY * 0.06
             }
-            taxBase <= 4600 * 10000 -> {
-                72 * 10000 + (taxBase - 1200 * 10000) * 0.15
+            agiSalaryY <= 4600 * 10000 -> {
+                //72 * 10000 + (taxBase - 1200 * 10000) * 0.15
+                agiSalaryY * 0.15 - 108 * 10000
             }
-            taxBase <= 8800 * 10000 -> {
-                582 * 10000 + (taxBase - 4600 * 10000) * 0.24
+            agiSalaryY <= 8800 * 10000 -> {
+                //582 * 10000 + (taxBase - 4600 * 10000) * 0.24
+                agiSalaryY * 0.24 - 522 * 10000
             }
-            taxBase <= 15000 * 10000 -> {
-                1590 * 10000 + (taxBase - 8800 * 10000) * 0.35
+            agiSalaryY <= 15000 * 10000 -> {
+                //1590 * 10000 + (taxBase - 8800 * 10000) * 0.35
+                agiSalaryY * 0.35 - 1490 * 10000
+            }
+            agiSalaryY <= 30000 * 10000 -> {
+                //1590 * 10000 + (taxBase - 8800 * 10000) * 0.38
+                agiSalaryY * 0.38 - 1940 * 10000
+            }
+            agiSalaryY <= 50000 * 10000 -> {
+                //1590 * 10000 + (taxBase - 8800 * 10000) * 0.40
+                agiSalaryY * 0.40 - 2540 * 10000
             }
             else -> {
-                3760 * 10000 + (taxBase - 15000 * 10000) * 0.38
+                //3760 * 10000 + (taxBase - 15000 * 10000) * 0.42
+                agiSalaryY * 0.42 - 3540 * 10000
             }
         }
         // 십원 미만 절사 (원단위 절사)
@@ -308,22 +359,27 @@ class IncomeTax {
 
         // 근로소득세액공제 한도 지정
         when {
-            salaryY <= 5500 * 10000 -> {
-                creditMax = 660000.0
+            baseSalaryY <= 3300 * 10000 -> {
+                // 최대 74만원
+                creditMax = 740000.0
             }
-            salaryY <= 7000 * 10000 -> {
-                creditMax = 630000.0
+            baseSalaryY <= 7000 * 10000 -> {
+                // 즉 상한선이 74 ~ 66만원 사이
+                creditMax = 74*10000 - (baseSalaryY - 3300* 10000) * 0.008
+                if(creditMax < 66 * 10000) creditMax = 66 * 10000.0
             }
-            salaryY > 7000 * 10000 -> {
-                creditMax = 500000.0
+            baseSalaryY > 7000 * 10000 -> {
+                // 즉 상한성이 66 ~ 50만원 사이
+                creditMax = 66 * 10000 - (baseSalaryY - 7000* 10000) * 0.5
+                if(creditMax < 50 * 10000) creditMax = 50 * 10000.0
             }
         }
 
         // 근로소득세액공제 처리
-        taxCredit = if (tax <= 50 * 10000) {
+        taxCredit = if (tax <= 130 * 10000) {
             tax * 0.55
         } else {
-            275 * 1000 + (tax - 50 * 10000) * 0.30
+            715 * 1000 + (tax - 130 * 10000) * 0.30
         }
 
         // 한도를 넘었을 시 한도 내로 재 지정
