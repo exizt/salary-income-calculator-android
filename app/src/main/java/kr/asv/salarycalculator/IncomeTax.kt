@@ -43,18 +43,9 @@ class IncomeTax {
         }
 
     /**
-     * 국민연금 금액
-     */
-    var nationalInsurance: Long = 0
-        set(value) {
-            field = max(value, 0) // 음수 방지
-        }
-
-
-    /**
      * 계산 동작
      *
-     * @param salary double Salary
+     * @param salary Long Salary
      * @param family int family
      * @param child  int child
      */
@@ -74,7 +65,7 @@ class IncomeTax {
      * 근로소득세(소득세) 계산식
      *
      * @param salary 비과세를 뺀 월 소득
-     * @return double
+     * @return Long
      */
     private fun calculateIncomeTax(salary: Long, family: Int, child: Int): Long {
 
@@ -94,7 +85,7 @@ class IncomeTax {
             salary <= 300 * 10000 -> {
                 calcIntervalMedian(salary, 10000)
             }
-            salary <= 1000 * 10000 -> {
+            salary < 1000 * 10000 -> {
                 calcIntervalMedian(salary, 20000)
             }
             else -> {
@@ -102,8 +93,8 @@ class IncomeTax {
             }
         }
         val baseSalaryY = baseSalary * 12
-        debug("계산 기준 월 급여 :", baseSalary)
-        debug("계산 기준 연 급여 :", baseSalaryY)
+        debug("월급여액 (구간중간값)(비과세 제외) :", baseSalary)
+        debug("연간 총급여액 (구간중간값) :", baseSalaryY)
 
         // <2. 근로소득공제 금액 산출>
         val basicDeduction = computeEarnedDeduction(baseSalaryY)
@@ -114,17 +105,20 @@ class IncomeTax {
         val calcSalaryY = baseSalaryY - basicDeduction
         debug("근로소득금액 (연) = 소득기준금액 - 근로소득공제:", calcSalaryY)
 
-        // <4. 종합소득공제(각종 소득공제) 산출 (인적공제, 연금보험료공제, 특별소득공제 등)>
-        // 4.1 연금보험료 공제
-        var deduction = computeInsuranceDeduction()
-        debug("연금보험료 공제:", deduction)
+        var deduction: Long = 0
 
-        // 4.2 인적공제
+        // <4. 종합소득공제(각종 소득공제) 산출 (인적공제, 연금보험료공제, 특별소득공제 등)>
+        // 4.1 인적공제
         val personalDeduction = computePersonalDeduction(family, child)
         debug("인적공제:", personalDeduction)
         deduction += personalDeduction
-        
-        // 특별소득공제
+
+        // 4.2 연금보험료 공제
+        val insuranceDeduction = computeInsuranceDeduction(baseSalary)
+        debug("연금보험료 공제:", insuranceDeduction)
+        deduction += insuranceDeduction
+
+        // 4.3 특별소득공제
         val otherDeduction = computeOtherDeduction(baseSalaryY, family, child)
         debug("특별소득공제:", otherDeduction)
         deduction += otherDeduction
@@ -139,7 +133,7 @@ class IncomeTax {
         debug("산출세액:", tax)
 
         // 근로소득세액공제 처리
-        val incomeTaxCredit = computeIncomeTaxCredit(agiSalaryY, tax)
+        val incomeTaxCredit = computeIncomeTaxCreditLegacy(tax, agiSalaryY)
         debug("근로소득세액공제:", incomeTaxCredit)
         tax -= incomeTaxCredit
 
@@ -155,6 +149,9 @@ class IncomeTax {
 
         // 마이너스 방지
         if (tax < 0) tax = 0
+
+        // 왜인지 모르겠으나 1000 이하는 그냥 감면하는 듯 함.
+        if (tax < 1000) tax = 0
         return tax
     }
 
@@ -163,7 +160,7 @@ class IncomeTax {
      *     [소득세 계산 : 근로소득 금액 산출(근로소득 기초공제 후 남는 근로소득금액(연간)]
      *     근로소득공제를 제한 후의 연간근로소득금액을 구합니다.
      *
-     * @return double
+     * @return Long
      */
     private fun computeEarnedDeduction(baseSalaryY: Long): Long {
         /*
@@ -196,7 +193,8 @@ class IncomeTax {
     /**
      * <연금보험료 공제>
      *
-     * @return double
+     * @param baseSalary 기준 월급여액 (구간 중간값)
+     * @return Long
      */
     private fun computeInsuranceDeduction(): Long {
         return nationalInsurance * 12
@@ -221,9 +219,9 @@ class IncomeTax {
      * @param salaryY 총급여액 : 월 급여(비과세소득 제외 급여) x 12
      * @param family 부양가족수
      * @param child 20세 미만 자녀수
-     * @return double
+     * @return Long
      */
-    private fun computeOtherDeduction(salaryY: Long, family: Int, child: Int): Long {
+    fun computeOtherDeduction(salaryY: Long, family: Int, child: Int): Long {
         val calcFamily = family + child
         var deduct: Double
 
@@ -300,7 +298,7 @@ class IncomeTax {
      *     산출세액 = 과세표준 * 누진세율
      *     과세표준을 기준으로 세율을 적용시켜서 세금을 계산한다.
      * @param agiSalaryY 과세 표준 연봉
-     * @return double
+     * @return Long
      */
     private fun computeTax(agiSalaryY: Long): Long {
 
@@ -350,13 +348,17 @@ class IncomeTax {
     }
 
     /**
-     * <세액 공제 산출>
+     * <근로소득 세액 공제 산출>
+     *     근로 소득 세액공제 계산식
      *
-     * 근로 소득 세액공제 계산식
+     *     참고) 개정된 방식이다. 연말정산에 이용되는 방식.
+     *     2020년 기준으로는 '근로소득 간이세액표'에 적용하지 않는 듯하다.
+     *     computeIncomeTaxCreditLegacy 메서드를 이용할 것.
      *
-     * @param baseSalaryY 총급여액
+     *
      * @param tax 산출세액
-     * @return double
+     * @param baseSalaryY 총급여액
+     * @return Long
      */
     private fun computeIncomeTaxCredit(baseSalaryY: Long, tax: Long): Long {
         var creditMax = 0.0
@@ -381,27 +383,64 @@ class IncomeTax {
 
         // 근로소득세액공제 처리
         var taxCredit: Double = if (tax <= 130 * 10000) {
+    }
+
+    /**
+     * <근로소득 세액 공제 산출>
+     *     근로 소득 세액공제 계산식
+     *
+     *     참고) 2020년까지는 이 방식을 적용중이다.
+     *
+     * @param tax 산출세액
+     * @param baseSalaryY 총급여액
+     * @return Long
+     */
+    @Suppress("unused")
+    private fun computeIncomeTaxCreditLegacy(tax: Long, baseSalaryY: Long): Long {
+
+        /**
+         * 근로소득세액공제 계산
+         */
+        val calcTaxCredit: Double = if (tax <= 50 * 10000) {
             tax * 0.55
         } else {
-            715 * 1000 + (tax - 130 * 10000) * 0.30
+            275 * 1000 + (tax - 50 * 10000) * 0.30
+        }
+        var taxCredit: Long = calcTaxCredit.toLong()
+
+        /**
+         * 공제액 상한 설정
+         */
+        var max: Long = 0
+        when {
+            baseSalaryY <= 5500 * 10000 -> {
+                max = 66 * 10000
+            }
+            baseSalaryY <= 7000 * 10000 -> {
+                max = 63 * 10000
+            }
+            baseSalaryY > 7000 * 10000 -> {
+                max = 50 * 10000
+            }
         }
 
-        // 한도를 넘었을 시 한도 내로 재 지정
+        /**
+         * 공제액 상한 보정
+         */
         //if (taxCredit >= creditMax) taxCredit = creditMax
-        taxCredit = min(taxCredit, creditMax)
+        taxCredit = min(taxCredit, max)
 
         // 원단위 절사
         //taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
-        taxCredit = CalcMath.roundFloor(taxCredit, -1)
-        return taxCredit.toLong()
+        taxCredit = CalcMath.floor(taxCredit, 1)
+        return taxCredit
     }
-
 
     /**
      * 지방세 계산식
      * 근로소득세의 10%
      *
-     * @return double
+     * @return Long
      */
     private fun computeLocalTax(incomeTax: Long): Long {
         val calc = incomeTax * 0.1
