@@ -1,5 +1,6 @@
 package kr.asv.salarycalculator
 
+import java.math.BigDecimal
 import kotlin.math.max
 import kotlin.math.min
 
@@ -58,7 +59,40 @@ class IncomeTax {
             debug("   (옵션) 아이수:", child)
             debug("----------------")
         }
-        earnedIncomeTax = calculateIncomeTax(salary, family, child)
+        earnedIncomeTax = if(salary <= 1000 * 10000){
+            calculateIncomeTax(salary, family, child)
+        } else {
+            calculateExtendIncomeTax(salary, family, child)
+        }
+    }
+
+    /**
+     * 월 1천만원 이상의 고급자 계산
+     */
+    private fun calculateExtendIncomeTax(baseSalary: Long, family: Int, child: Int): Long{
+        debug("월 1천 이상 보정 계산")
+        // 1억일 때의 간이세액을 계산한다.
+        val baseIncomeTax = calculateIncomeTax(1000 * 10000, family, child)
+
+        val incomeTax = when {
+            baseSalary <= 14000 * 1000 -> {
+                baseIncomeTax + (baseSalary - 10000 * 1000) * 0.98 * 0.35
+            }
+            baseSalary <= 28000 * 1000 -> {
+                baseIncomeTax + 1372000 + (baseSalary - 14000 * 1000) * 0.98 * 0.38
+            }
+            baseSalary <= 30000 * 1000 -> {
+                baseIncomeTax + 6585600 + (baseSalary - 28000 * 1000) * 0.98 * 0.40
+            }
+            baseSalary <= 450000 * 1000 -> {
+                baseIncomeTax + 7385600 + (baseSalary - 30000 * 1000) * 0.40
+            }
+            else -> {
+                baseIncomeTax + 13385600 + (baseSalary - 450000 * 1000) * 0.42
+            }
+        }
+        debug("최종 보정 세액:", incomeTax)
+        return incomeTax.toLong()
     }
 
     /**
@@ -196,10 +230,26 @@ class IncomeTax {
      * @param baseSalary 기준 월급여액 (구간 중간값)
      * @return Long
      */
-    private fun computeInsuranceDeduction(): Long {
-        return nationalInsurance * 12
+    private fun computeInsuranceDeduction(baseSalary: Long): Long {
+        return computeNationPension(baseSalary) * 12
     }
 
+    /**
+     * 자체적으로 국민연금 계산
+     * (개정될 때까지는 예전 방식을 사용한다. 개정되었을 때 변경할 것)
+     *
+     * @param baseSalary 기준 월급여액 (구간 중간값)
+     * @return Long
+     */
+    private fun computeNationPension(baseSalary: Long): Long{
+        var adjustedSalary: Long = baseSalary
+        adjustedSalary = max(adjustedSalary, 290000) // 하한 기준 보정
+        adjustedSalary = min(adjustedSalary, 4490000) // 상한 기준 보정
+
+        val a = adjustedSalary.toBigDecimal() * 0.045.toBigDecimal()
+        return CalcMath.floor(a.toLong(),1)
+        //return (salaryY * 0.045).toLong()
+    }
     /**
      * <인적 공제>
      *
@@ -360,29 +410,52 @@ class IncomeTax {
      * @param baseSalaryY 총급여액
      * @return Long
      */
-    private fun computeIncomeTaxCredit(baseSalaryY: Long, tax: Long): Long {
-        var creditMax = 0.0
+    @Suppress("unused")
+    private fun computeIncomeTaxCredit(tax: Long, baseSalaryY: Long): Long {
 
-        // 근로소득세액공제 상한 지정
+        /**
+         * 근로소득세액공제 계산
+         */
+        val calcTaxCredit: Double = if (tax <= 130 * 10000) {
+            tax * 0.55
+        } else {
+            715 * 1000 + (tax - 130 * 10000) * 0.30
+        }
+        var taxCredit: Long = calcTaxCredit.toLong()
+
+        /**
+         * 공제액 상한 설정
+         */
+        var max: Long = 0
         when {
             baseSalaryY <= 3300 * 10000 -> {
                 // 최대 74만원
-                creditMax = 740000.0
+                max = 74 * 10000
             }
             baseSalaryY <= 7000 * 10000 -> {
                 // 즉 상한선이 74 ~ 66만원 사이
-                creditMax = 74*10000 - (baseSalaryY - 3300* 10000) * 0.008
-                if(creditMax < 66 * 10000) creditMax = 66 * 10000.0
+                val t = 74 * 10000 - (baseSalaryY - 3300* 10000) * 0.008
+                max = t.toLong()
+                if(max < 66 * 10000) max = 66 * 10000
             }
             baseSalaryY > 7000 * 10000 -> {
                 // 즉 상한성이 66 ~ 50만원 사이
-                creditMax = 66 * 10000 - (baseSalaryY - 7000* 10000) * 0.5
-                if(creditMax < 50 * 10000) creditMax = 50 * 10000.0
+                val t = 66 * 10000 - (baseSalaryY - 7000* 10000) * 0.5
+                max - t.toLong()
+                if(max < 50 * 10000) max = 50 * 10000
             }
         }
 
-        // 근로소득세액공제 처리
-        var taxCredit: Double = if (tax <= 130 * 10000) {
+        /**
+         * 공제액 상한 보정
+         */
+        //if (taxCredit >= creditMax) taxCredit = creditMax
+        taxCredit = min(taxCredit, max)
+
+        // 원단위 절사
+        //taxCredit = floor(taxCredit / 10) * 10 // 원단위 이하 절사
+        taxCredit = CalcMath.floor(taxCredit, 1)
+        return taxCredit
     }
 
     /**
