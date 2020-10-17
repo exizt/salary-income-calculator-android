@@ -152,7 +152,7 @@ class SalaryCalculator {
      */
     @Suppress("MemberVisibilityCanBePrivate")
     fun calculateInsurances(basicSalary: Double) {
-        insurance.execute(basicSalary)
+        insurance.calculate(basicSalary)
         debug(insurance)
     }
 
