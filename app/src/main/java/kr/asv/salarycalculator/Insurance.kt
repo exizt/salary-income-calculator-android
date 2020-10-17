@@ -66,7 +66,7 @@ class Insurance {
      *
      * @param _adjustedSalary Double 세금의 기준 봉급액(기본급 - 비과세)
      */
-    fun computeNationalPension(_adjustedSalary: Long): Long {
+    private fun computeNationalPension(_adjustedSalary: Long): Long {
         var adjustedSalary = _adjustedSalary
 
         // 상한,하한 보정

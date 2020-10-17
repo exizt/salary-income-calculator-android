@@ -110,29 +110,6 @@ class SalaryCalculator {
         }
     }
 
-    fun prepare(){
-        isPrepared = true
-        calculateSalary()
-    }
-
-    /**
-     * 계산 실행
-     */
-    fun run(earnedIncomeTax: Long){
-        // 디버깅 옵션
-        incomeTax.isDebug = options.isDebug
-
-        // 간이소득세액표 에서 가져온 값 대입
-        incomeTax.earnedIncomeTax = earnedIncomeTax
-
-        // <1> 연봉, 월급, 4대보험 계산
-        calculateSalary()
-        calculateInsurances(salary.basicSalary)
-
-        // <2> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
-        calculateOnlyNetSalary()
-    }
-
     /**
      * 계산 실행
      *
@@ -142,17 +119,19 @@ class SalaryCalculator {
         // 디버깅 옵션
         incomeTax.isDebug = options.isDebug
 
-        // <1> 연봉, 월급, 4대보험 계산
+        // 1. 연봉, 월급
         calculateSalary()
+
+        // 2. 4대 보험 계산
         calculateInsurances(salary.basicSalary)
 
-        // <2> 소득세, 지방세 계산
+        // 3. 소득세, 지방세 계산
         // '계산된 국민연금 납부액'을 넘겨주어야 한다.
-        incomeTax.nationalInsurance = insurance.nationalPension
+        // incomeTax.nationalInsurance = insurance.nationalPension // 자체 계산으로 변경함.
         incomeTax.calculate(salary.basicSalary, options.family, options.child)
         debug(incomeTax)
 
-        // <3> 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
+        // 4. 최종 실수령액 계산 = 월수령액 - 4대보험 - 소득세(+지방세) + 비과세액
         calculateOnlyNetSalary()
     }
 
