@@ -13,7 +13,6 @@ import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 
 class AppSettingsActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
@@ -34,6 +33,7 @@ class AppSettingsActivity : AppCompatActivity() {
         private fun customCreatePreferences() {
             val context = preferenceManager.context
             val screen = preferenceManager.createPreferenceScreen(context)
+            val keys = Services.AppPref.Keys
 
             /**
              * 기본 입력값 설정
@@ -46,7 +46,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 부양가족수
             val familyPreference = EditTextPreference(context).apply {
-                key = Services.AppPrefKeys.DefaultInput.family
+                key = Services.AppPref.Keys.DefaultInput.family
                 title = "부양가족수"
                 setDefaultValue("1")
                 isIconSpaceReserved = false
@@ -62,7 +62,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 20세 이하 자녀수
             val childPreference = EditTextPreference(context).apply {
-                key = Services.AppPrefKeys.DefaultInput.child
+                key = Services.AppPref.Keys.DefaultInput.child
                 title = "20세 이하 자녀수"
                 setDefaultValue("0")
                 isIconSpaceReserved = false
@@ -78,7 +78,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 비과세액
             val taxFreePreference = EditTextPreference(context).apply {
-                key = Services.AppPrefKeys.DefaultInput.taxFree
+                key = Services.AppPref.Keys.DefaultInput.taxFree
                 title = "비과세액"
                 setDefaultValue("100000")
                 isIconSpaceReserved = false
@@ -94,7 +94,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 입력 초기값
             val moneyPreference = EditTextPreference(context).apply {
-                key = Services.AppPrefKeys.DefaultInput.money
+                key = Services.AppPref.Keys.DefaultInput.money
                 title = "금액 입력 초기값"
                 setDefaultValue("2000000")
                 isIconSpaceReserved = false
@@ -121,7 +121,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 세율 고급설정 사용 여부
             val rateOptionSwitch = SwitchPreferenceCompat(context).apply {
-                key = Services.AppPrefKeys.customRateEnable
+                key = Services.AppPref.Keys.customRateEnable
                 title = "세율 고급설정 사용"
                 setDefaultValue(false)
                 isIconSpaceReserved = false
@@ -142,7 +142,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 국민연금 세율
             val rateNpPreference = EditTextPreference(context).apply {
-                key = Services.AppPrefKeys.CustomRates.nationalPension
+                key = Services.AppPref.Keys.CustomRates.nationalPension
                 title = "국민연금 세율"
                 setDefaultValue("0")
                 //dependency = Services.AppPrefKeys.customRateEnable
@@ -156,7 +156,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 건강보험 세율
             val rateHcPreference = EditTextPreference(context).apply{
-                key = Services.AppPrefKeys.CustomRates.healthCare
+                key = Services.AppPref.Keys.CustomRates.healthCare
                 title = "건강보험 세율"
                 setDefaultValue("0")
                 //dependency = Services.AppPrefKeys.customRateEnable
@@ -170,7 +170,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 장기요양보험 세율
             val rateLcPreference = EditTextPreference(context).apply{
-                key = Services.AppPrefKeys.CustomRates.longTermCare
+                key = Services.AppPref.Keys.CustomRates.longTermCare
                 title = "장기요양보험 세율"
                 setDefaultValue("0")
                 //dependency = Services.AppPrefKeys.customRateEnable
@@ -184,7 +184,7 @@ class AppSettingsActivity : AppCompatActivity() {
 
             // 고용보험 세율
             val rateEcPreference = EditTextPreference(context).apply{
-                key = Services.AppPrefKeys.CustomRates.employmentCare
+                key = Services.AppPref.Keys.CustomRates.employmentCare
                 title = "고용보험 세율"
                 setDefaultValue("0")
                 //dependency = Services.AppPrefKeys.customRateEnable
@@ -200,11 +200,11 @@ class AppSettingsActivity : AppCompatActivity() {
 
 
             // 연결성 설정 (뒷부분에 있어야 하는 듯...)
-            rateNpPreference.dependency = Services.AppPrefKeys.customRateEnable
-            rateHcPreference.dependency = Services.AppPrefKeys.customRateEnable
-            rateLcPreference.dependency = Services.AppPrefKeys.customRateEnable
-            rateEcPreference.dependency = Services.AppPrefKeys.customRateEnable
-            resetRates.dependency = Services.AppPrefKeys.customRateEnable
+            rateNpPreference.dependency = Services.AppPref.Keys.customRateEnable
+            rateHcPreference.dependency = Services.AppPref.Keys.customRateEnable
+            rateLcPreference.dependency = Services.AppPref.Keys.customRateEnable
+            rateEcPreference.dependency = Services.AppPref.Keys.customRateEnable
+            resetRates.dependency = Services.AppPref.Keys.customRateEnable
         }
 
 
@@ -259,10 +259,10 @@ class AppSettingsActivity : AppCompatActivity() {
             // PreferenceManager.getDefaultSharedPreferences(activity)
 
             // rates
-            val rNationalPension: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.nationalPension)
-            val rHealthCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.healthCare)
-            val rLongTermCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.longTermCare)
-            val rEmploymentCare: EditTextPreference? = findPreference(Services.AppPrefKeys.CustomRates.employmentCare)
+            val rNationalPension: EditTextPreference? = findPreference(Services.AppPref.Keys.CustomRates.nationalPension)
+            val rHealthCare: EditTextPreference? = findPreference(Services.AppPref.Keys.CustomRates.healthCare)
+            val rLongTermCare: EditTextPreference? = findPreference(Services.AppPref.Keys.CustomRates.longTermCare)
+            val rEmploymentCare: EditTextPreference? = findPreference(Services.AppPref.Keys.CustomRates.employmentCare)
 
             rNationalPension?.text = Services.DefaultRates.nationalPension.toString()
             rHealthCare?.text = Services.DefaultRates.healthCare.toString()

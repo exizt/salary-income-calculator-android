@@ -88,27 +88,27 @@ class QuickCalculatorFragment : BaseFragment() {
 
     private fun displayInitValues(){
         // 기본 입력값
-        val money = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.money,"0")
+        val money = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.money,"0")
         if (money.isNotEmpty()) {
             idInputMoney.setText(money)
         }
 
         //val taxFree = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.taxFree) as? String
-        val taxFree = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.taxFree,"0")
+        val taxFree = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.taxFree,"0")
         if (taxFree.isNotEmpty()) {
             idTaxFreeOption.setText(taxFree)
         } else {
             idTaxFreeOption.setText("0")
         }
 
-        val family = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.family,"1")
+        val family = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.family,"1")
         if (family.isNotEmpty()) {
             idFamilyOption.setText(family)
         } else {
             idFamilyOption.setText("1")
         }
 
-        val child = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.child, "0")
+        val child = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.child, "0")
         if (child.isNotEmpty()) {
             idChildOption.setText(child)
         } else {
@@ -282,7 +282,7 @@ class QuickCalculatorFragment : BaseFragment() {
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
         if (Services.isCustomRateMode()) {
-            val cKeys = Services.AppPrefKeys.CustomRates
+            val cKeys = Services.AppPref.Keys.CustomRates
             val rates = calculator.insurance.rates
             rates.nationalPension = Services.AppPref.getString(cKeys.nationalPension, "0").toDouble()
             rates.healthCare = Services.AppPref.getString(cKeys.healthCare, "0").toDouble()

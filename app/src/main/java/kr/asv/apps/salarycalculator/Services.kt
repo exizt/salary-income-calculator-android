@@ -21,8 +21,10 @@ object Services {
 
     // 계산기 클래스
     val calculator = SalaryCalculator()
+
     // private set
     private var appDatabasePath = ""
+
     // Database Handler
     @SuppressLint("StaticFieldLeak")
     lateinit var appDatabaseHandler : AppDatabaseHandler
@@ -142,18 +144,18 @@ object Services {
         //appPrefs.putAll(prefsAll)
 
         // 기본 입력값 설정
-        readAppPref(prefs, AppPrefKeys.DefaultInput.money) //기본 금액 입력값
-        readAppPref(prefs, AppPrefKeys.DefaultInput.family) //기본 가족수
-        readAppPref(prefs, AppPrefKeys.DefaultInput.child) //기본 자녀수
-        readAppPref(prefs, AppPrefKeys.DefaultInput.taxFree) //비과세액
-        readAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
+        readAppPref(prefs, AppPref.Keys.DefaultInput.money) //기본 금액 입력값
+        readAppPref(prefs, AppPref.Keys.DefaultInput.family) //기본 가족수
+        readAppPref(prefs, AppPref.Keys.DefaultInput.child) //기본 자녀수
+        readAppPref(prefs, AppPref.Keys.DefaultInput.taxFree) //비과세액
+        readAppPref(prefs, AppPref.Keys.DefaultInput.severance, "Boolean")
 
         // 세율 커스텀 설정값
-        readAppPref(prefs, AppPrefKeys.customRateEnable, "Boolean")
-        readAppPref(prefs, AppPrefKeys.CustomRates.nationalPension)
-        readAppPref(prefs, AppPrefKeys.CustomRates.healthCare)
-        readAppPref(prefs, AppPrefKeys.CustomRates.longTermCare)
-        readAppPref(prefs, AppPrefKeys.CustomRates.employmentCare)
+        readAppPref(prefs, AppPref.Keys.customRateEnable, "Boolean")
+        readAppPref(prefs, AppPref.Keys.CustomRates.nationalPension)
+        readAppPref(prefs, AppPref.Keys.CustomRates.healthCare)
+        readAppPref(prefs, AppPref.Keys.CustomRates.longTermCare)
+        readAppPref(prefs, AppPref.Keys.CustomRates.employmentCare)
     }
 
     fun debugAppPrefs(){
@@ -187,7 +189,7 @@ object Services {
     }
 
     fun isCustomRateMode() : Boolean {
-        return AppPref.getBoolean(AppPrefKeys.customRateEnable, false)
+        return AppPref.getBoolean(AppPref.Keys.customRateEnable, false)
     }
 
     /**
@@ -241,38 +243,35 @@ object Services {
         fun getValue(key: String):Any?{
             return appPrefs[key]
         }
-    }
 
-    /**
-     * 쉽게 설정의 key 를 이용하기 위한 object
-     * 변경 시 @string 에 있는 값도 맞춰서 변경해줘야 한다. (root_preferences 에서 이용됨)
-     */
-    object AppPrefKeys {
-        const val customRateEnable = "rate_settings_enable"
-        @Suppress("unused")
-        const val inputBase = "quick_input_criteria"
+        /**
+         * 쉽게 설정의 key 를 이용하기 위한 object
+         * 변경 시 @string 에 있는 값도 맞춰서 변경해줘야 한다. (root_preferences 에서 이용됨)
+         */
+        object Keys {
+            const val customRateEnable = "rate_settings_enable"
+            @Suppress("unused")
+            const val inputBase = "quick_input_criteria"
 
-        object DefaultInput {
-            // 부양가족수 (@string/pref_key_quick_family)
-            const val family = "quick_settings_family"
-            // 20세 이하 자녀수 (@string/pref_key_quick_child)
-            const val child = "quick_settings_child"
-            // 비과세액 (@string/pref_key_quick_tax_exemption)
-            const val taxFree = "quick_settings_tax_exemption"
-            // 퇴직금 포함 여부 (@string/pref_key_quick_severance)
-            const val severance = "quick_settings_severance"
-            // 기본 입력 금액
-            const val money = "default_input_money"
-        }
-        object CustomRates {
-            // @string/pref_key_custom_national_pension_rate
-            const val nationalPension = "rate_national_pension"
-            // @string/pref_key_custom_health_care_rate
-            const val healthCare = "rate_health_care"
-            // @string/pref_key_custom_long_term_care_rate
-            const val longTermCare = "rate_longterm_care"
-            // @string/pref_key_custom_employment_care_rate
-            const val employmentCare = "rate_employment_care"
+            object DefaultInput {
+                // 부양가족수 (@string/pref_key_quick_family)
+                const val family = "quick_settings_family"
+                // 20세 이하 자녀수 (@string/pref_key_quick_child)
+                const val child = "quick_settings_child"
+                // 비과세액 (@string/pref_key_quick_tax_exemption)
+                const val taxFree = "quick_settings_tax_exemption"
+                // 퇴직금 포함 여부 (@string/pref_key_quick_severance)
+                const val severance = "quick_settings_severance"
+                // 기본 입력 금액
+                const val money = "default_input_money"
+            }
+            object CustomRates {
+                const val nationalPension = "rate_national_pension"
+                const val healthCare = "rate_health_care"
+                const val longTermCare = "rate_longterm_care"
+                const val employmentCare = "rate_employment_care"
+            }
         }
     }
+
 }
