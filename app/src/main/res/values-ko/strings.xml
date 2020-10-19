@@ -19,9 +19,9 @@
     <string name="calculate">계산하기</string>
     <string name="included">포함</string>
     <string name="btn_clear">정정</string>
-    <string name="btn_plus_1000">+ 천만원</string>
-    <string name="btn_plus_100">+ 백만원</string>
-    <string name="btn_plus_10">+ 십만원</string>
+    <string name="btn_plus_1000">+1000만</string>
+    <string name="btn_plus_100">+100만</string>
+    <string name="btn_plus_10">+10만</string>
     <string name="btn_minus_1000">- 천만원</string>
     <string name="btn_minus_100">- 백만원</string>
     <string name="btn_minus_10">- 십만원</string>

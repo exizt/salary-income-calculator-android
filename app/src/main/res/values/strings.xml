@@ -3,7 +3,7 @@
     <string name="ad_unit_id_banner_test" translatable="false" tools:keep="@string/ad_unit_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="value_default_number" translatable="false">0</string>
     <string name="value_default_family" translatable="false">1</string>
-    <string name="value_default_taxfree" translatable="false">100,000</string>
+    <string name="value_default_taxfree" translatable="false">100000</string>
     <string name="default_string" translatable="false">.</string>
 
     <string name="pref_key_custom_rates_enabled" translatable="false">rate_settings_enable</string>
@@ -16,6 +16,7 @@
     <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
     <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>
     <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
+
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
