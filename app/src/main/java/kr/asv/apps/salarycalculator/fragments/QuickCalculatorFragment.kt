@@ -3,7 +3,9 @@ package kr.asv.apps.salarycalculator.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,25 +25,95 @@ import kr.asv.apps.salarycalculator.activities.ReportActivity
  * 특정 수치를 기준으로, 연봉 or 월급을 나누고 간이 계산한다.
  */
 class QuickCalculatorFragment : BaseFragment() {
-    private val isDebug = false
+    private val isDebug = true
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
         setFragmentView(view)
         setActionBarTitle(resources.getString(R.string.nav_menu_quick_calculator))
 
-        val editMoney = findViewById(R.id.idEditTextMoney) as EditText
-        editMoney.addTextChangedListener(MoneyTextWatcher(editMoney))
-        editMoney.filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
+        (findViewById(R.id.idInputMoney) as EditText).apply{
+            //addTextChangedListener(MoneyTextWatcher(this))
+            filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
+            addTextChangedListener(inputMoneyTextWatcher())
+        }
 
         return view
     }
 
+    private fun inputMoneyTextWatcher(): TextWatcher{
+        return object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                //입력하기 전에
+                //debug("[inputMoneyTextWatcher] beforeTextChanged")
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                //입력되는 텍스트에 변화가 있을 때
+                //debug("[inputMoneyTextWatcher] onTextChanged")
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                //입력이 끝났을 때
+                //debug("[inputMoneyTextWatcher] afterTextChanged")
+                //debug(s.toString())
+                val l = s.toString().toLongOrNull()
+                autoChangeAnnuallyFromMoney(l)
+            }
+        }
+    }
+
+    fun autoChangeAnnuallyFromMoney(money: Long?){
+        money?.let{
+            if(it >= 10000000){
+                //
+                raMoneyYearly.isChecked = true
+                raMoneyMonthly.isChecked = false
+            } else {
+                //
+                raMoneyYearly.isChecked = false
+                raMoneyMonthly.isChecked = true
+            }
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        debug("onActivityCreated")
         initEventListeners()
 
-        idEditTextMoney.requestFocus()
+        displayInitValues()
+        //idEditTextMoney.requestFocus()
+    }
+
+    private fun displayInitValues(){
+        // 기본 입력값
+        val money = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.money,"0")
+        if (money.isNotEmpty()) {
+            idInputMoney.setText(money)
+        }
+
+        //val taxFree = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.taxFree) as? String
+        val taxFree = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.taxFree,"0")
+        if (taxFree.isNotEmpty()) {
+            idTaxFreeOption.setText(taxFree)
+        } else {
+            idTaxFreeOption.setText("0")
+        }
+
+        val family = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.family,"1")
+        if (family.isNotEmpty()) {
+            idFamilyOption.setText(family)
+        } else {
+            idFamilyOption.setText("1")
+        }
+
+        val child = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.child, "0")
+        if (child.isNotEmpty()) {
+            idChildOption.setText(child)
+        } else {
+            idChildOption.setText("0")
+        }
     }
 
     override fun onResume() {
@@ -69,7 +141,7 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 금액 정정 버튼
         btnClearInput_QM.setOnClickListener {
-            idEditTextMoney.setText("0")
+            idInputMoney.setText("0")
         }
         
         // 플러스, 마이너스 버튼 이벤트들
@@ -83,6 +155,8 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 비과세 입력 필터
         idTaxFreeOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999999999))
+
+        Services.debugAppPrefs()
     }
 
     /**
@@ -103,7 +177,7 @@ class QuickCalculatorFragment : BaseFragment() {
         idBtnPlus10.setOnClickListener {
             plusMinusInputMoney(100000)
         }
-
+        /*
         // 금액 감소 버튼 -천만
         idBtnMinus1000.setOnClickListener {
             plusMinusInputMoney(-10000000)
@@ -118,13 +192,14 @@ class QuickCalculatorFragment : BaseFragment() {
         idBtnMinus10.setOnClickListener {
             plusMinusInputMoney(-100000)
         }
+        */
     }
 
     /**
      * 입력 금액에 증감을 하는 메서드.
      */
     private fun plusMinusInputMoney(value: Int) {
-        val editText = findViewById(R.id.idEditTextMoney) as EditText
+        val editText = findViewById(R.id.idInputMoney) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
         var inputMoney = MoneyTextWatcher.getValue(editText)
         inputMoney += value.toLong()
@@ -157,14 +232,14 @@ class QuickCalculatorFragment : BaseFragment() {
      */
     private fun calculate() {
         // validate checking
-        if (idEditTextMoney.text.length <= 1) {
+        if (idInputMoney.text.length <= 1) {
             return
         }
 
         // 입력 금액
-        val inputMoney: Long = MoneyTextWatcher.getValue(idEditTextMoney)
+        val inputMoney: Long = MoneyTextWatcher.getValue(idInputMoney)
         if(inputMoney <= 0){
-            idEditTextMoney.setText("0")
+            idInputMoney.setText("0")
         }
 
         // 부양 가족수
@@ -184,7 +259,7 @@ class QuickCalculatorFragment : BaseFragment() {
         }
 
         //옵션의 기본값
-        val includedSeverance = checkSeverance.isChecked // 퇴직금 포함인지
+        //val includedSeverance = checkSeverance.isChecked // 퇴직금 포함인지
 
         // 비과세보다 적은 경우는 그냥 계산하지 말기.
         if(inputMoney < taxFree){
@@ -201,18 +276,23 @@ class QuickCalculatorFragment : BaseFragment() {
         options.family = family
         options.child = child
         options.isAnnualBasis = annualBasis
-        options.isIncludedSeverance = includedSeverance
+        //options.isIncludedSeverance = includedSeverance
         options.isIncomeTaxCalculationDisabled = true
 
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
         if (Services.isCustomRateMode()) {
-            val cKeys = Services.AppPrefKeys.CustomRates
+            val cKeys = Services.AppPref.Keys.CustomRates
             val rates = calculator.insurance.rates
-            rates.nationalPension = Services.getAppPrefValue(cKeys.nationalPension) as Double
-            rates.healthCare = Services.getAppPrefValue(cKeys.healthCare) as Double
-            rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
-            rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
+            rates.nationalPension = Services.AppPref.getString(cKeys.nationalPension, "0").toDouble()
+            rates.healthCare = Services.AppPref.getString(cKeys.healthCare, "0").toDouble()
+            rates.longTermCare = Services.AppPref.getString(cKeys.longTermCare, "0").toDouble()
+            rates.employmentCare = Services.AppPref.getString(cKeys.employmentCare, "0").toDouble()
+
+            //rates.nationalPension = Services.getAppPrefValue(cKeys.nationalPension) as Double
+            //rates.healthCare = Services.getAppPrefValue(cKeys.healthCare) as Double
+            //rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
+            //rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
         } else {
             Services.setInsuranceRatesToDefault()
         }

@@ -10,12 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingBottom="100dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment"
-        >
+        tools:context="kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,7 +22,7 @@
             android:text="@string/calc_inputmoney_label" />
 
         <EditText
-            android:id="@+id/idEditTextMoney"
+            android:id="@+id/idInputMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -40,6 +39,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnClearInput_QM"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_clear"
+                />
 
             <Button
                 android:id="@+id/idBtnPlus1000"
@@ -66,36 +74,6 @@
                 android:text="@string/btn_plus_10" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/idBtnMinus1000"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_minus_1000" />
-
-            <Button
-                android:id="@+id/idBtnMinus100"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_minus_100" />
-
-            <Button
-                android:id="@+id/idBtnMinus10"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_minus_10" />
-        </LinearLayout>
-
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +87,7 @@
                 android:text="@string/option_annual_salary" />
 
             <RadioButton
+                android:id="@+id/raMoneyMonthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_monthly_salary" />
@@ -193,36 +172,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/included_severance_status" />
-
-            <CheckBox
-                android:id="@+id/checkSeverance"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:text="@string/included" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnClearInput_QM"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_clear"
-                />
 
             <Button
                 android:id="@+id/btnExecute_QMode"
