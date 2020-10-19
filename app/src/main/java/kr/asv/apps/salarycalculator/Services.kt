@@ -131,6 +131,21 @@ object Services {
         }
     }
 
+    fun initWithLoadPrefs(context: Context){
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        prefs.getString(AppPrefKeys.DefaultInput.family,"")
+
+        val editor = prefs.edit()
+        //editor.putString(key, value.toString())
+
+
+        if(!prefs.getBoolean(AppPrefKeys.customRateEnable, false)){
+            editor.putBoolean(AppPrefKeys.customRateEnable, false)
+        }
+
+        editor.apply()
+    }
+
     /**
      * Preferences 에 저장된 값들을 로컬 변수로 불러온다.
      */
@@ -142,9 +157,10 @@ object Services {
         //appPrefs.putAll(prefsAll)
 
         // 기본 입력값 설정
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.family)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.child)
-        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxExemption) //비과세액
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.money) //기본 금액 입력값
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.family) //기본 가족수
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.child) //기본 자녀수
+        assignAppPref(prefs, AppPrefKeys.DefaultInput.taxFree) //비과세액
         assignAppPref(prefs, AppPrefKeys.DefaultInput.severance, "Boolean")
 
         // 세율 커스텀 설정값
@@ -153,8 +169,10 @@ object Services {
         assignAppPref(prefs, AppPrefKeys.CustomRates.healthCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.longTermCare)
         assignAppPref(prefs, AppPrefKeys.CustomRates.employmentCare)
+    }
 
-
+    fun debugAppPrefs(){
+        debug(appPrefs)
     }
 
     /**
@@ -195,16 +213,6 @@ object Services {
     }
 
     /**
-     * 설정값을 반환.
-     * Preferences 를 거치지 않고 갖고 있는 값으로 반환.
-     */
-    @Suppress("unused", "UNUSED_PARAMETER")
-    fun getAppPref(key:String): String {
-        //return appPrefs[key]? : ""
-        return ""
-    }
-
-    /**
      * appPref 에 저장된 값을 반환.
      * (SharedPreferences 를 거치지 않음)
      */
@@ -226,6 +234,10 @@ object Services {
         editor.apply()
     }
 
+    /**
+     * 쉽게 설정의 key 를 이용하기 위한 object
+     * 변경 시 @string 에 있는 값도 맞춰서 변경해줘야 한다. (root_preferences 에서 이용됨)
+     */
     object AppPrefKeys {
         const val customRateEnable = "rate_settings_enable"
         const val inputBase = "quick_input_criteria"
@@ -236,9 +248,11 @@ object Services {
             // 20세 이하 자녀수 (@string/pref_key_quick_child)
             const val child = "quick_settings_child"
             // 비과세액 (@string/pref_key_quick_tax_exemption)
-            const val taxExemption = "quick_settings_tax_exemption"
+            const val taxFree = "quick_settings_tax_exemption"
             // 퇴직금 포함 여부 (@string/pref_key_quick_severance)
             const val severance = "quick_settings_severance"
+            // 기본 입력 금액
+            const val money = "default_input_money"
         }
         object CustomRates {
             // @string/pref_key_custom_national_pension_rate
