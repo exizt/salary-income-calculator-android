@@ -131,21 +131,6 @@ object Services {
         }
     }
 
-    fun initWithLoadPrefs(context: Context){
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        prefs.getString(AppPrefKeys.DefaultInput.family,"")
-
-        val editor = prefs.edit()
-        //editor.putString(key, value.toString())
-
-
-        if(!prefs.getBoolean(AppPrefKeys.customRateEnable, false)){
-            editor.putBoolean(AppPrefKeys.customRateEnable, false)
-        }
-
-        editor.apply()
-    }
-
     /**
      * Preferences 에 저장된 값들을 로컬 변수로 불러온다.
      */
@@ -199,25 +184,6 @@ object Services {
 
         // 여기서 로컬 변수에 값을 할당.
         appPrefs[key] = value
-    }
-
-    /**
-     * '설정 변수' with 'Pref' 에 같이 대입하는 메서드.
-     * Read 하는 데서 발생하는 load 를 줄이기 위함. (with 디버깅도 편하게 하고)
-     */
-    @Suppress("unused")
-    fun setAppPrefWithPref(context: Context, key: String, value: Any){
-        setPrefValue(context, key, value)
-
-        setAppPref(key, value)
-    }
-
-    /**
-     * appPref 에 저장된 값을 반환.
-     * (SharedPreferences 를 거치지 않음)
-     */
-    fun getAppPrefValue(key: String): Any? {
-        return appPrefs[key]
     }
 
     fun isCustomRateMode() : Boolean {

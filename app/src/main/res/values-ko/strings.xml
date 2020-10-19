@@ -15,16 +15,11 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="included_severance_status">퇴직금여부</string>
     <string name="calculate">계산하기</string>
-    <string name="included">포함</string>
     <string name="btn_clear">정정</string>
     <string name="btn_plus_1000">+1000만</string>
     <string name="btn_plus_100">+100만</string>
     <string name="btn_plus_10">+10만</string>
-    <string name="btn_minus_1000">- 천만원</string>
-    <string name="btn_minus_100">- 백만원</string>
-    <string name="btn_minus_10">- 십만원</string>
     <string name="quick_calculator_description">설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다.</string>
 
     <string name="activity_word_title">WordActivity</string>
