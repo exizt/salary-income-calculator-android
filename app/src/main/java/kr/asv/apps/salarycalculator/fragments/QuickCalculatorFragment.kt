@@ -88,27 +88,28 @@ class QuickCalculatorFragment : BaseFragment() {
 
     private fun displayInitValues(){
         // 기본 입력값
-        val money = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.money) as? String
-        if (money is String && money.isNotEmpty()) {
+        val money = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.money,"0")
+        if (money.isNotEmpty()) {
             idInputMoney.setText(money)
         }
 
-        val taxFree = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.taxFree) as? String
-        if (taxFree is String && taxFree.isNotEmpty()) {
+        //val taxFree = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.taxFree) as? String
+        val taxFree = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.taxFree,"0")
+        if (taxFree.isNotEmpty()) {
             idTaxFreeOption.setText(taxFree)
         } else {
             idTaxFreeOption.setText("0")
         }
 
-        val family = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.family) as? String
-        if (family is String && family.isNotEmpty()) {
+        val family = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.family,"1")
+        if (family.isNotEmpty()) {
             idFamilyOption.setText(family)
         } else {
             idFamilyOption.setText("1")
         }
 
-        val child = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.child) as? String
-        if (child is String && child.isNotEmpty()) {
+        val child = Services.AppPref.getString(Services.AppPrefKeys.DefaultInput.child, "0")
+        if (child.isNotEmpty()) {
             idChildOption.setText(child)
         } else {
             idChildOption.setText("0")
@@ -283,10 +284,15 @@ class QuickCalculatorFragment : BaseFragment() {
         if (Services.isCustomRateMode()) {
             val cKeys = Services.AppPrefKeys.CustomRates
             val rates = calculator.insurance.rates
-            rates.nationalPension = Services.getAppPrefValue(cKeys.nationalPension) as Double
-            rates.healthCare = Services.getAppPrefValue(cKeys.healthCare) as Double
-            rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
-            rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
+            rates.nationalPension = Services.AppPref.getString(cKeys.nationalPension, "0").toDouble()
+            rates.healthCare = Services.AppPref.getString(cKeys.healthCare, "0").toDouble()
+            rates.longTermCare = Services.AppPref.getString(cKeys.longTermCare, "0").toDouble()
+            rates.employmentCare = Services.AppPref.getString(cKeys.employmentCare, "0").toDouble()
+
+            //rates.nationalPension = Services.getAppPrefValue(cKeys.nationalPension) as Double
+            //rates.healthCare = Services.getAppPrefValue(cKeys.healthCare) as Double
+            //rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
+            //rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
         } else {
             Services.setInsuranceRatesToDefault()
         }
