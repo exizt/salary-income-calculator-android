@@ -14,4 +14,33 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Card_Layout">
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <style name="Card_Container">
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="Card_Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textColor">#CACACA</item>
+    </style>
+
+    <style name="Card_ListItem">
+        <item name="android:paddingBottom">6dp</item>
+    </style>
+
+    <style name="Card_ListItem_Label">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Card_ListItem_Value">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">end</item>
+    </style>
 </resources>

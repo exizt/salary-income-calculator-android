@@ -4,84 +4,86 @@
     <string name="value_default_number" translatable="false">0</string>
     <string name="value_default_family" translatable="false">1</string>
     <string name="value_default_taxfree" translatable="false">100,000</string>
+    <string name="default_string" translatable="false">.</string>
+
+    <string name="pref_key_custom_rates_enabled" translatable="false">rate_settings_enable</string>
+    <string name="pref_key_custom_national_pension_rate" translatable="false">rate_national_pension</string>
+    <string name="pref_key_custom_health_care_rate" translatable="false">rate_health_care</string>
+    <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
+    <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
+    <string name="pref_key_quick_input_criteria" translatable="false">quick_input_criteria</string>
+    <string name="pref_key_quick_severance" translatable="false">quick_settings_severance</string>
+    <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
+    <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>
+    <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
     <string name="app_name">Korean Salary Calculator</string>
+
     <string name="nav_header_title">Korean Salary Calculator</string>
-    <string name="nav_group_settings">Settings</string>
     <string name="nav_group_calculators">Calculators</string>
+    <string name="nav_menu_quick_calculator">Income Salary Calculator</string>
     <string name="nav_group_others">Other Calculators</string>
-    <string name="nav_menu_quick_calculator">Net Salary Calculator (Simple Mode)</string>
-    <string name="nav_menu_detail_calculator">Net Salary Calculator</string>
-    <string name="nav_menu_rate_calculator">Rate Calculator</string>
     <string name="nav_menu_word_dictionary">Dictionary</string>
+    <string name="nav_group_settings">Settings</string>
     <string name="nav_menu_preferences">Preferences</string>
-    <string name="activity_report_title">ReportActivity</string>
-    <string name="activity_word_title">WordActivity</string>
-    <string name="activity_settings_title">Settings</string>
-    <string name="report_tabBar_item_01">Summary</string>
-    <string name="report_tabBar_item_02">Insurances Tax</string>
-    <string name="report_tabBar_item_03">Income Tax</string>
-    <string name="report_tabBar_item_04">Input</string>
-    <string name="word_activity_subtitle_01">Summary</string>
-    <string name="word_activity_subtitle_02">Calculate</string>
-    <string name="word_activity_subtitle_03">History</string>
+    <string name="nav_about">About</string>
+
     <string name="option_annual_salary">연봉입력</string>
     <string name="option_monthly_salary">월급입력</string>
-    <string name="label_taxfree">비과세(원)</string>
-    <string name="label_national_pension">국민연금(원)</string>
-    <string name="label_health_care">건강보험(원)</string>
-    <string name="label_longterm_care">요양보험(원)</string>
-    <string name="label_employee_care">고용보험(원)</string>
-    <string name="label_monthly_input">월급입력</string>
-    <string name="label_salary_input">연봉입력(원)</string>
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="quick_calculator_description">quick calculator</string>
-    <string name="quick_calculator_page_title">simple calculator</string>
-    <string name="report_option_salary">입력한연봉</string>
-    <string name="report_option_salary_monthly">입력한월급</string>
-    <string name="report_option_family">부양가족수</string>
-    <string name="report_option_child">20세이하자녀수</string>
-    <string name="report_option_taxfree">입력한비과세액</string>
-    <string name="tax_calc_national_pension_rate">National Pension Rates(%)</string>
-    <string name="tax_calc_health_care_rate">Health Care Rates(%)</string>
-    <string name="tax_calc_longterm_care_rate">Longterm Care Rates(%)</string>
-    <string name="tax_calc_employment_care_rate">Employment Care Rates(%)</string>
+    <string name="included_severance_status">Severance include</string>
+    <string name="calculate">Calculate</string>
+    <string name="included">Included</string>
+    <string name="btn_clear">Clear</string>
     <string name="btn_plus_1000">+ 천만원</string>
     <string name="btn_plus_100">+ 백만원</string>
     <string name="btn_plus_10">+ 십만원</string>
     <string name="btn_minus_1000">- 천만원</string>
     <string name="btn_minus_100">- 백만원</string>
     <string name="btn_minus_10">- 십만원</string>
-    <string name="btn_clear">Clear</string>
-    <string name="calculate">Calculate</string>
-    <string name="included">Included</string>
+    <string name="quick_calculator_description">quick calculator</string>
+
+    <string name="activity_word_title">WordActivity</string>
+    <string name="word_activity_subtitle_01">Summary</string>
+    <string name="word_activity_subtitle_02">Calculate</string>
+    <string name="word_activity_subtitle_03">History</string>
+
+    <string name="tax_calc_national_pension_rate">National Pension Rates(%)</string>
+    <string name="tax_calc_health_care_rate">Health Care Rates(%)</string>
+    <string name="tax_calc_longterm_care_rate">Longterm Care Rates(%)</string>
+    <string name="tax_calc_employment_care_rate">Employment Care Rates(%)</string>
+
+    <string name="activity_report_title">ReportActivity</string>
+    <string name="report_tabBar_item_01">Summary</string>
+    <string name="report_tabBar_item_02">Insurances Tax</string>
+    <string name="report_tabBar_item_03">Income Tax</string>
+    <string name="report_tabBar_item_04">Input</string>
+    <string name="report_option_salary">입력한연봉</string>
+    <string name="report_option_salary_monthly">입력한월급</string>
+    <string name="report_option_family">부양가족수</string>
+    <string name="report_option_child">20세이하자녀수</string>
+    <string name="report_option_taxfree">입력한비과세액</string>
+    <string name="report_option_rates">계산 기준 세율</string>
+    <string name="report_summary_subtitle_02">total tax</string>
+
+    <string name="activity_settings_title">Settings</string>
     <string name="income_tax">income tax</string>
     <string name="local_tax">local tax</string>
     <string name="national_pension">National Pension</string>
-    <string name="employee_care">Employment Care</string>
-    <string name="longterm_care">LongTerm Care</string>
     <string name="health_care">Health Care</string>
+    <string name="longterm_care">LongTerm Care</string>
+    <string name="employee_care">Employment Care</string>
     <string name="workers_compensation" tools:keep="@string/workers_compensation">Worker\'s compensation</string>
     <string name="income_net_salary">income net salary</string>
-    <string name="report_summary_subtitle_02">total tax</string>
-    <string name="close">Close</string>
-    <string name="included_severance_status">Severance include</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="default_string" translatable="false">.</string>
-    <string name="pref_key_custom_rates_enabled" translatable="false">rate_settings_enable</string>
-    <string name="pref_key_custom_national_pension_rate" translatable="false">rate_national_pension</string>
-    <string name="pref_key_custom_health_care_rate" translatable="false">rate_health_care</string>
-    <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
-    <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
-    <string name="pref_key_quick_settings_enabled" translatable="false">quick_settings_enable</string>
-    <string name="pref_key_quick_input_criteria" translatable="false">quick_input_criteria</string>
-    <string name="pref_key_quick_severance" translatable="false">quick_settings_severance</string>
-    <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
-    <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>
-    <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
-    <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
-    <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
-    <string name="report_option_rates">계산 기준 세율</string>
+
+    <string name="about_info_card_title">App Information</string>
+    <string name="about_app_version_label">App version</string>
+    <string name="about_db_version_label">DB version</string>
+    <string name="about_desc">Loan Calculator \n\n This app is designed to calculate Loan Payment Schedules.</string>
+
+    <string name="calc_inputmoney_label">금액 입력</string>
 </resources>

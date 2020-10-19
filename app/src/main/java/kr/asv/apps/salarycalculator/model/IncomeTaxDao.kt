@@ -1,11 +1,11 @@
 package kr.asv.apps.salarycalculator.model
 
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
+import kr.asv.apps.salarycalculator.Services
 import java.util.*
 
 class IncomeTaxDao(private val db: SQLiteDatabase) {
-
+    var isDebug = false
 
     fun getValue(_money: Long, _family: Int, _yearmonth: String) : Long{
         debug("getCurrentRates 호출")
@@ -30,9 +30,9 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
         val searchMoneyUnit = money / 1000
 
         // 확인
-        debug("기준 금액 검색 단위",searchMoneyUnit)
-        debug("가족 수 (보정됨)",family)
-        debug("년월 (보정됨)",yearmonth)
+        debug("기준 금액 검색 단위:",searchMoneyUnit)
+        debug("가족 수 (보정됨):",family)
+        debug("년월 (보정됨):",yearmonth)
 
         // 결과값
         var resultTax : Long = 0
@@ -148,19 +148,11 @@ class IncomeTaxDao(private val db: SQLiteDatabase) {
 
     /**
      * 디버깅 메서드
-     * 변수가 두개 넘어올 경우의 처리 추가
-     * @param msg 메시지
      */
-    @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
-        @Suppress("ConstantConditionIf")
+    @Suppress("unused", "UNUSED_PARAMETER", "SameParameterValue")
+    private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
-            Log.d(TAG, "$msg $msg2")
+            Services.debugLog("IncomeTaxDao", msg)
         }
-    }
-
-    companion object {
-        private const val TAG = "[EXIZT-DEBUG][IncomeTaxDao]"
-        private const val isDebug = false
     }
 }

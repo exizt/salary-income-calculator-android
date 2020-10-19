@@ -1,15 +1,14 @@
 package kr.asv.apps.salarycalculator.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.androidutils.AdmobAdapter
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.model.TermDictionary
-import kr.asv.apps.salarycalculator.R
 
 /**
  * 용어 상세 정보를 보여주는 페이지 액티비티 이다.
@@ -86,10 +85,10 @@ class WordPageActivity : AppCompatActivity() {
     }
 
     /**
-     * 디버깅
-     * @param msg
+     * 디버깅 메서드
      */
-    fun debug(msg: String) {
-        Log.d("[EXIZT-DEBUG]", "[WordPageActivity]$msg")
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
+        Services.debugLog("WordPageActivity", msg)
     }
 }

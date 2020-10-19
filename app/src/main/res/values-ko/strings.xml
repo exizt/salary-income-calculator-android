@@ -1,70 +1,69 @@
 <resources>
     <string name="app_name">연봉계산기</string>
+
     <string name="nav_header_title">월급 실수령액 계산기</string>
-    <string name="nav_group_settings">환경 설정</string>
     <string name="nav_group_calculators">실수령액 계산기</string>
+    <string name="nav_menu_quick_calculator">실수령액 계산</string>
     <string name="nav_group_others">부가 기능</string>
-    <string name="nav_menu_quick_calculator">실수령액 계산 (퀵 모드)</string>
-    <string name="nav_menu_detail_calculator">실수령액 계산 (일반 모드)</string>
-    <string name="nav_menu_rate_calculator">세율 계산</string>
     <string name="nav_menu_word_dictionary">용어 사전</string>
+    <string name="nav_group_settings">환경 설정</string>
     <string name="nav_menu_preferences">환경설정</string>
-    <string name="activity_report_title">ReportActivity</string>
-    <string name="activity_word_title">WordActivity</string>
-    <string name="activity_settings_title">환경설정</string>
-    <string name="report_tabBar_item_01">요약</string>
-    <string name="report_tabBar_item_02">4대보험</string>
-    <string name="report_tabBar_item_03">소득세</string>
-    <string name="report_tabBar_item_04">입력값</string>
-    <string name="word_activity_subtitle_01">용어 설명</string>
-    <string name="word_activity_subtitle_02">계산 과정</string>
-    <string name="word_activity_subtitle_03">세율 기록</string>
+    <string name="nav_about">이 앱에 대해서</string>
+
     <string name="option_annual_salary">연봉 입력</string>
     <string name="option_monthly_salary">월급 입력</string>
-    <string name="label_taxfree">비과세(원)</string>
-    <string name="label_national_pension">국민연금(원)</string>
-    <string name="label_health_care">건강보험(원)</string>
-    <string name="label_longterm_care">요양보험(원)</string>
-    <string name="label_employee_care">고용보험(원)</string>
-    <string name="label_monthly_input">월급입력</string>
-    <string name="label_salary_input">연봉입력(원)</string>
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="quick_calculator_description">설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다.</string>
-    <string name="quick_calculator_page_title">간이 계산</string>
-    <string name="report_option_salary">입력된 연봉</string>
-    <string name="report_option_salary_monthly">입력된 월급</string>
-    <string name="report_option_family">부양 가족 수</string>
-    <string name="report_option_child">20세이하 자녀 수</string>
-    <string name="report_option_taxfree">입력한 비과세액</string>
-    <string name="tax_calc_national_pension_rate">국민연금 요율(%)</string>
-    <string name="tax_calc_health_care_rate">건강보험 요율(%)</string>
-    <string name="tax_calc_longterm_care_rate">요양보험 요율(%)</string>
-    <string name="tax_calc_employment_care_rate">고용보험 요율(%)</string>
+    <string name="included_severance_status">퇴직금여부</string>
+    <string name="calculate">계산하기</string>
+    <string name="included">포함</string>
+    <string name="btn_clear">정정</string>
     <string name="btn_plus_1000">+ 천만원</string>
     <string name="btn_plus_100">+ 백만원</string>
     <string name="btn_plus_10">+ 십만원</string>
     <string name="btn_minus_1000">- 천만원</string>
     <string name="btn_minus_100">- 백만원</string>
     <string name="btn_minus_10">- 십만원</string>
-    <string name="btn_clear">정정</string>
-    <string name="calculate">계산하기</string>
-    <string name="included">포함</string>
+    <string name="quick_calculator_description">설명 : 알아서 실수령액을 계산합니다. 기준값보다 크면 연봉으로, 작은 경우는 월급으로 계산합니다. 기준값은 [환경설정]에서 변경가능합니다.</string>
+
+    <string name="activity_word_title">WordActivity</string>
+    <string name="word_activity_subtitle_01">용어 설명</string>
+    <string name="word_activity_subtitle_02">계산 과정</string>
+    <string name="word_activity_subtitle_03">세율 기록</string>
+
+    <string name="tax_calc_national_pension_rate">국민연금 요율(%)</string>
+    <string name="tax_calc_health_care_rate">건강보험 요율(%)</string>
+    <string name="tax_calc_longterm_care_rate">요양보험 요율(%)</string>
+    <string name="tax_calc_employment_care_rate">고용보험 요율(%)</string>
+
+    <string name="activity_report_title">ReportActivity</string>
+    <string name="report_tabBar_item_01">요약</string>
+    <string name="report_tabBar_item_02">4대보험</string>
+    <string name="report_tabBar_item_03">소득세</string>
+    <string name="report_tabBar_item_04">입력값</string>
+    <string name="report_option_salary">입력된 연봉</string>
+    <string name="report_option_salary_monthly">입력된 월급</string>
+    <string name="report_option_family">부양 가족 수</string>
+    <string name="report_option_child">20세이하 자녀 수</string>
+    <string name="report_option_taxfree">입력한 비과세액</string>
+    <string name="report_summary_subtitle_02">4대보험+세금</string>
+    <string name="report_option_rates">계산 기준 세율</string>
+
+    <string name="activity_settings_title">환경설정</string>
     <string name="income_tax">소득세</string>
     <string name="local_tax">주민세</string>
     <string name="national_pension">국민 연금</string>
-    <string name="employee_care">고용 보험</string>
-    <string name="longterm_care">요양 보험</string>
     <string name="health_care">건강 보험</string>
+    <string name="longterm_care">요양 보험</string>
+    <string name="employee_care">고용 보험</string>
     <string name="workers_compensation">산재 보험</string>
     <string name="income_net_salary">실수령액</string>
-    <string name="report_summary_subtitle_02">4대보험+세금</string>
-    <string name="close">닫기</string>
-    <string name="included_severance_status">퇴직금여부</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="ui_act_settings_menu_qc">퀵 계산 설정</string>
-    <string name="ui_act_settings_menu_tr">고급 설정 (세율 설정)</string>
-    <string name="report_option_rates">계산 기준 세율</string>
+
+    <string name="about_info_card_title">정보</string>
+    <string name="about_app_version_label">앱 버전</string>
+    <string name="about_db_version_label">데이터베이스 버전</string>
+    <string name="about_desc">실수령액 계산기 앱 \n\n 이 앱은 연봉/월급 실수령액과 4대보험, 세금납부액을 계산해보기 위한 용도로 만들어졌습니다. \n\n 개인정보를 수집하거나 전송하지 않습니다. \n\n 편리성을 위한 기능은 계속 추가될 예정에 있습니다.</string>
+
+    <string name="calc_inputmoney_label">금액 입력</string>
 </resources>

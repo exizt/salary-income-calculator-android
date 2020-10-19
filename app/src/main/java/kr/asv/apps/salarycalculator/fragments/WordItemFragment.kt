@@ -2,18 +2,17 @@ package kr.asv.apps.salarycalculator.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kr.asv.apps.salarycalculator.R
 import kr.asv.apps.salarycalculator.Services
 import kr.asv.apps.salarycalculator.activities.WordPageActivity
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent
 import kr.asv.apps.salarycalculator.fragments.dummy.WordDictionaryContent.Item
-import kr.asv.apps.salarycalculator.R
 
 /**
  * 형태 : 리스트 형 Fragment
@@ -21,7 +20,7 @@ import kr.asv.apps.salarycalculator.R
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-
+    private val isDebug = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         debug("onCreate")
@@ -94,21 +93,19 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
     /**
      * 디버깅 메서드
-     * 변수가 두개 넘어올 경우의 처리 추가
-     * @param msg 메시지
      */
-    @Suppress("unused")
-    private fun debug(msg: String, msg2 : Any = "") {
-        @Suppress("ConstantConditionIf")
+    @Suppress("unused", "UNUSED_PARAMETER")
+    private fun debug(msg: Any, msg2 : Any = "") {
         if (isDebug) {
-            Log.d(TAG, "$msg $msg2")
+            Services.debugLog("WordItemFragment", msg)
         }
     }
+
 
     /**
      * Fragment_wordItem.xml 과 연관된 클래스
      */
-    class MyWordItemRecyclerViewAdapter(private val mValues: List<WordDictionaryContent.Item>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
+    class MyWordItemRecyclerViewAdapter(private val mValues: List<Item>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
 
         /**
          * onCreateViewHolder
@@ -138,15 +135,10 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
             //val mIdView: TextView = mView.findViewById<View>(R.id.id) as TextView
             val mContentView: TextView = mView.findViewById<View>(R.id.content) as TextView
-            var mItem: WordDictionaryContent.Item? = null
+            var mItem: Item? = null
 
             override fun toString(): String = super.toString() + " '" + mContentView.text + "'"
         }
-    }
-    companion object {
-        private const val TAG = "[EXIZT-DEBUG][WordItemFragment]"
-        private const val isDebug = false
-        fun newInstance(): WordItemFragment = WordItemFragment()
     }
 }
 

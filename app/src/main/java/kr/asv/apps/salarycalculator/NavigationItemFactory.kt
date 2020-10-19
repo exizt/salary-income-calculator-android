@@ -1,76 +1,76 @@
 package kr.asv.apps.salarycalculator
 
 import android.content.Intent
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import android.view.MenuItem
 import android.view.View
-import kr.asv.apps.salarycalculator.activities.SettingsActivity
-import kr.asv.apps.salarycalculator.fragments.NormalCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.QuickCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.TaxCalculatorFragment
-import kr.asv.apps.salarycalculator.fragments.WordItemFragment
+import kr.asv.apps.salarycalculator.activities.AppSettingsActivity
+import kr.asv.apps.salarycalculator.fragments.*
 
 
 /**
  * 메인 액티비티 등에서 상단 좌측의 메뉴 네비게이션
- * Created by EXIZT on 2016-06-08.
  */
 class NavigationItemFactory {
     companion object {
+        private const val defaultMenuId = R.id.nav_calculator_quick
+
         /**
-         * 네비게이션 메뉴 부분
+         * 네비게이션 메뉴 선택시
          */
         fun onItemSelected(activity: FragmentActivity, item: MenuItem, backStack: Boolean): Boolean {
-            val isAvailable: Boolean
+            val isAvailable: Boolean = onItemSelectedEvent(activity, item.itemId, backStack)
 
-            when (item.itemId) {
-                R.id.nav_calculator_quick -> {
-                    // 퀵계산
-                    val fragment = QuickCalculatorFragment()
-                    replaceFragments(activity, fragment, backStack)
-                    isAvailable = true
-                }
-                R.id.nav_calculator_older -> {
-                    //실 수령액 계산
-                    val fragment = NormalCalculatorFragment()
-                    replaceFragments(activity, fragment, backStack)
-                    isAvailable = true
-                }
-                R.id.nav_calculator_tax -> {
-                    // 세율 계산
-                    val fragment = TaxCalculatorFragment()
-                    replaceFragments(activity, fragment, backStack)
-                    isAvailable = true
-                }
-                R.id.nav_settings -> {
-                    // 환경 설정
-                    activity.startActivity(Intent(activity, SettingsActivity::class.java))
-                    isAvailable = true
-                }
-                R.id.nav_word_dictionary -> {
-                    // 용어 사전
-                    //activity.startActivity(Intent(activity, WordListActivity::class.java))
-                    replaceFragments(activity, WordItemFragment(), backStack)
-                    isAvailable = true
-                }
-                else -> isAvailable = false
-            }
-
-            /*
-            액티비티 또는 프레그먼트 호출 후에 처리.
-            navigationDrawer(메뉴부분) 을 close 하는 부분.
-            해당 메뉴가 없을 시에는 SnackBar 호출
-             */
+            // 해당 메뉴를 선택하고 fragment 전환이 이루어졌으므로 네비게이션을 close 한다.
             if (isAvailable) {
                 val drawerLayout = activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             return isAvailable
+        }
+
+        /**
+         * 메뉴 ID 와 변경될 것들의 처리
+         */
+        private fun onItemSelectedEvent(activity: FragmentActivity, itemId: Int, backStack: Boolean): Boolean {
+            val isDone : Boolean
+
+            when (itemId) {
+                R.id.nav_calculator_quick -> {
+                    val fragment = QuickCalculatorFragment()
+                    replaceFragments(activity, fragment, backStack)
+                    isDone = true
+                }
+                R.id.nav_settings2 -> {
+                    activity.startActivity(Intent(activity, AppSettingsActivity::class.java))
+                    isDone = true
+                }
+                R.id.nav_word_dictionary -> {
+                    replaceFragments(activity, WordItemFragment(), backStack)
+                    isDone = true
+                }
+                R.id.nav_about -> {
+                    val fragment = AboutFragment()
+                    replaceFragments(activity, fragment, backStack)
+                    isDone = true
+                }
+                else -> isDone = false
+            }
+            return isDone
+        }
+
+        /**
+         * default 로 로딩하는 fragment
+         * navigation menu 의 특정 항목을 불러오게함.
+         * 백스택 히스토리에는 기록하지 않는다.
+         */
+        fun onItemFirst(activity: FragmentActivity) {
+            onItemSelectedEvent(activity, defaultMenuId, false)
         }
 
         /**
