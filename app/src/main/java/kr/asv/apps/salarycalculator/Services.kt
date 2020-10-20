@@ -79,6 +79,7 @@ object Services {
         debug("[init] 초기화")
 
         // 세율의 기본값을 가져와서 DefaultRates 에 기록해둔다.
+        // 순서에 주의. calculator.init() 이 먼저 와야 한다. (세율을 조정)
         val rates = calculator.insurance.rates
         DefaultRates.nationalPension = rates.nationalPension * 100
         DefaultRates.healthCare = rates.healthCare * 100
@@ -144,28 +145,24 @@ object Services {
         //appPrefs.putAll(prefsAll)
 
         // 기본 입력값 설정
-        readAppPref(prefs, AppPref.Keys.DefaultInput.money) //기본 금액 입력값
-        readAppPref(prefs, AppPref.Keys.DefaultInput.family) //기본 가족수
-        readAppPref(prefs, AppPref.Keys.DefaultInput.child) //기본 자녀수
-        readAppPref(prefs, AppPref.Keys.DefaultInput.taxFree) //비과세액
-        readAppPref(prefs, AppPref.Keys.DefaultInput.severance, "Boolean")
+        loadAppPref(prefs, AppPref.Keys.DefaultInput.money) //기본 금액 입력값
+        loadAppPref(prefs, AppPref.Keys.DefaultInput.family) //기본 가족수
+        loadAppPref(prefs, AppPref.Keys.DefaultInput.child) //기본 자녀수
+        loadAppPref(prefs, AppPref.Keys.DefaultInput.taxFree) //비과세액
+        loadAppPref(prefs, AppPref.Keys.DefaultInput.severance, "Boolean")
 
         // 세율 커스텀 설정값
-        readAppPref(prefs, AppPref.Keys.customRateEnable, "Boolean")
-        readAppPref(prefs, AppPref.Keys.CustomRates.nationalPension)
-        readAppPref(prefs, AppPref.Keys.CustomRates.healthCare)
-        readAppPref(prefs, AppPref.Keys.CustomRates.longTermCare)
-        readAppPref(prefs, AppPref.Keys.CustomRates.employmentCare)
-    }
-
-    fun debugAppPrefs(){
-        debug(appPrefs)
+        loadAppPref(prefs, AppPref.Keys.customRateEnable, "Boolean")
+        loadAppPref(prefs, AppPref.Keys.CustomRates.nationalPension)
+        loadAppPref(prefs, AppPref.Keys.CustomRates.healthCare)
+        loadAppPref(prefs, AppPref.Keys.CustomRates.longTermCare)
+        loadAppPref(prefs, AppPref.Keys.CustomRates.employmentCare)
     }
 
     /**
      * Preferences 에 저장된 값을 로컬 변수로 불러온다.
      */
-    private fun readAppPref(prefs: SharedPreferences, key: String, type: String="String"){
+    private fun loadAppPref(prefs: SharedPreferences, key: String, type: String="String"){
         when (type) {
             "String" -> {
                 prefs.getString(key,null)?.let { setAppPref(key, it) }
@@ -188,6 +185,9 @@ object Services {
         appPrefs[key] = value
     }
 
+    /**
+     * 커스텀 세율 모드 인지 여부
+     */
     fun isCustomRateMode() : Boolean {
         return AppPref.getBoolean(AppPref.Keys.customRateEnable, false)
     }
@@ -204,6 +204,7 @@ object Services {
     }
 
     object AppPref {
+        @Suppress("unused")
         fun getString(key: String, default: String): String{
             val v = getValue(key) as? String
             return if (v is String) {
@@ -223,6 +224,7 @@ object Services {
             }
         }
 
+        @Suppress("unused")
         fun getBoolean(key: String, default: Boolean): Boolean{
             val v = getValue(key) as? Boolean
             return if (v is Boolean) {
@@ -240,8 +242,17 @@ object Services {
             return getValue(key)?:default
         }
 
+        /**
+         * 단순히 값을 반환
+         * @return (Any?) 설정값
+         */
         fun getValue(key: String):Any?{
             return appPrefs[key]
+        }
+
+        @Suppress("unused")
+        fun debugAll(){
+            debug(appPrefs)
         }
 
         /**

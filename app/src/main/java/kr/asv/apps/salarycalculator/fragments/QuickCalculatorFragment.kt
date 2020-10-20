@@ -156,7 +156,6 @@ class QuickCalculatorFragment : BaseFragment() {
         // 비과세 입력 필터
         idTaxFreeOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999999999))
 
-        Services.debugAppPrefs()
     }
 
     /**
