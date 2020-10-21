@@ -3,19 +3,9 @@
     <string name="ad_unit_id_banner_test" translatable="false" tools:keep="@string/ad_unit_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="value_default_number" translatable="false">0</string>
     <string name="value_default_family" translatable="false">1</string>
-    <string name="value_default_taxfree" translatable="false">100,000</string>
+    <string name="value_default_taxfree" translatable="false">100000</string>
     <string name="default_string" translatable="false">.</string>
 
-    <string name="pref_key_custom_rates_enabled" translatable="false">rate_settings_enable</string>
-    <string name="pref_key_custom_national_pension_rate" translatable="false">rate_national_pension</string>
-    <string name="pref_key_custom_health_care_rate" translatable="false">rate_health_care</string>
-    <string name="pref_key_custom_long_term_care_rate" translatable="false">rate_longterm_care</string>
-    <string name="pref_key_custom_employment_care_rate" translatable="false">rate_employment_care</string>
-    <string name="pref_key_quick_input_criteria" translatable="false">quick_input_criteria</string>
-    <string name="pref_key_quick_severance" translatable="false">quick_settings_severance</string>
-    <string name="pref_key_quick_tax_exemption" translatable="false">quick_settings_tax_exemption</string>
-    <string name="pref_key_quick_family" translatable="false">quick_settings_family</string>
-    <string name="pref_key_quick_child" translatable="false">quick_settings_child</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
@@ -35,16 +25,11 @@
     <string name="label_family_input">부양가족수(본인포함)</string>
     <string name="label_child_input">20세이하자녀수</string>
     <string name="label_taxfree_input">비과세액(원)</string>
-    <string name="included_severance_status">Severance include</string>
     <string name="calculate">Calculate</string>
-    <string name="included">Included</string>
     <string name="btn_clear">Clear</string>
     <string name="btn_plus_1000">+ 천만원</string>
     <string name="btn_plus_100">+ 백만원</string>
     <string name="btn_plus_10">+ 십만원</string>
-    <string name="btn_minus_1000">- 천만원</string>
-    <string name="btn_minus_100">- 백만원</string>
-    <string name="btn_minus_10">- 십만원</string>
     <string name="quick_calculator_description">quick calculator</string>
 
     <string name="activity_word_title">WordActivity</string>
