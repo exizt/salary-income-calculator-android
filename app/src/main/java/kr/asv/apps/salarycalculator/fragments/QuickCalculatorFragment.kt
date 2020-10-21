@@ -31,14 +31,33 @@ class QuickCalculatorFragment : BaseFragment() {
         val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
         setFragmentView(view)
         setActionBarTitle(resources.getString(R.string.nav_menu_quick_calculator))
+        //debug("onCreateView")
 
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         (findViewById(R.id.idInputMoney) as EditText).apply{
             //addTextChangedListener(MoneyTextWatcher(this))
             filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
             addTextChangedListener(inputMoneyTextWatcher())
         }
+        //debug("onActivityCreated")
+        initEventListeners()
 
-        return view
+        displayInitValues()
+        //idEditTextMoney.requestFocus()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 퀵 계산 모드인 경우에 알려준다.
+        if (Services.isCustomRateMode()) {
+            Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
+        }
+        this.activity?.let { Services.loadDatabase(it) }
     }
 
     private fun inputMoneyTextWatcher(): TextWatcher{
@@ -77,14 +96,6 @@ class QuickCalculatorFragment : BaseFragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        debug("onActivityCreated")
-        initEventListeners()
-
-        displayInitValues()
-        //idEditTextMoney.requestFocus()
-    }
 
     private fun displayInitValues(){
         // 기본 입력값
@@ -116,14 +127,6 @@ class QuickCalculatorFragment : BaseFragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        // 퀵 계산 모드인 경우에 알려준다.
-        if (Services.isCustomRateMode()) {
-            Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
-        }
-    }
 
     @Suppress("unused")
     interface OnFragmentInteractionListener {
