@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_about.*
 import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.app.Services
 
 /**
  */
@@ -26,7 +27,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun displayAbout(){
-        //tvDBVersion.text = Services.dbVersion.toString()
+        tvDBVersion.text = Services.dbVersion.toString()
         //defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
 
         activity?.let {

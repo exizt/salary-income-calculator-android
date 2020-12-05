@@ -1,6 +1,5 @@
 package kr.asv.salarycalculator.app
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
@@ -10,7 +9,6 @@ import kr.asv.salarycalculator.app.databases.AppDatabaseHandler
 import kr.asv.salarycalculator.app.model.IncomeTaxDao
 import kr.asv.salarycalculator.app.model.TermDictionaryDao
 import kr.asv.salarycalculator.calculator.SalaryCalculator
-import org.jetbrains.anko.doAsync
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -24,10 +22,7 @@ object Services {
 
     // private set
     private var appDatabasePath = ""
-
-    // Database Handler
-    @SuppressLint("StaticFieldLeak")
-    lateinit var appDatabaseHandler : AppDatabaseHandler
+    var dbVersion:Int = 0
 
     private val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
@@ -58,21 +53,11 @@ object Services {
             // 데이터베이스도 없는지 확인해야 하는데...음...
             // initializeDefaultInsuranceRates(context)
 
-            doAsync {
-                // 디비 연결 및 생성과 Assets 을 통한 업데이트
-                // debug("[load] > new AppDatabaseHandler")
-                appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
+            val appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
 
-                // 데이터베이스의 경로만 갖는다.
-                appDatabasePath = appDatabaseHandler.databasePath
-
-                // 여기서 firebase 관련 처리를 해야함.
-                appDatabaseHandler.copyFirebaseStorageDbFile()
-
-                // 세율 변경이 필요함.
-                // preferences 를 이용해야함. 데이터베이스를 읽어와서, 세율 값을 적용시킨다.
-                // setDefaultInsuranceRates(context)
-            }
+            // 데이터베이스의 경로만 갖는다.
+            appDatabasePath = appDatabaseHandler.databasePath
+            dbVersion = appDatabaseHandler.getPreferenceDbVersion()
         }
     }
 

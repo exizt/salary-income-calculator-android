@@ -1,17 +1,18 @@
 package kr.asv.salarycalculator.app
 
 import android.content.Intent
+import android.view.MenuItem
+import android.view.View
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import android.view.MenuItem
-import android.view.View
-import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.activities.AppSettingsActivity
-import kr.asv.salarycalculator.app.fragments.*
+import kr.asv.salarycalculator.app.fragments.AboutFragment
+import kr.asv.salarycalculator.app.fragments.QuickCalculatorFragment
+import kr.asv.salarycalculator.app.fragments.WordItemFragment
 
 
 /**

@@ -15,6 +15,7 @@ import java.io.IOException
  */
 abstract class DatabaseAssetCopyHandler (context: Context){
     // context 레퍼런스
+    @Suppress("MemberVisibilityCanBePrivate")
     protected val mContext = context
     // 앱에서 실행되는 DB 의 경로
     var databasePath :String = ""
