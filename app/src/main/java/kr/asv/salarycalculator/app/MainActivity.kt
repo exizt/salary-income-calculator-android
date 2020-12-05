@@ -16,7 +16,6 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.utils.AdmobAdapter
 
 
