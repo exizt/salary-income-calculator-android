@@ -45,6 +45,15 @@ object Services {
         calculator.init()
         //debug("[init] 초기화")
 
+        // 기본 세율값을 가져옴
+        initDefaultRates()
+    }
+
+    /**
+     * '기본 세율값'을 초기화
+     * calculator.init() 이후에 호출되어야 함
+     */
+    private fun initDefaultRates(){
         // 세율의 기본값을 가져와서 DefaultRates 에 기록해둔다.
         // 순서에 주의. calculator.init() 이 먼저 와야 한다. (세율을 조정)
         val rates = calculator.insurance.rates
@@ -56,12 +65,12 @@ object Services {
     }
 
     /**
-     * 세율을 기본값으로 변경해주는 메서드.
+     * 계산할 세율을 기본값으로 변경해주는 메서드.
      *
      * 설정값에서 변경한 세율값을 기본값으로 돌릴 때 이용한다.
      */
     fun setInsuranceRatesToDefault(){
-        debug("[setInsuranceRatesToDefault] 기본값으로 세율 적용")
+        // debug("[setInsuranceRatesToDefault] 기본값으로 세율 계산")
         val rates = calculator.insurance.rates
         rates.nationalPension = DefaultRates.nationalPension
         rates.healthCare = DefaultRates.healthCare
