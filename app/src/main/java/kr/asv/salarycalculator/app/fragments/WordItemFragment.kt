@@ -30,7 +30,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        debug("onCreate")
+        //debug("onCreate")
         //getWordDictionaryListData()
     }
 
@@ -39,7 +39,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        debug("onCreateView")
+        //debug("onCreateView")
         val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
 
         setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
@@ -69,7 +69,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      */
     override fun onListFragmentInteraction(item: Term) {
         val intent = Intent(activity, WordPageActivity::class.java)
-        intent.putExtra("wordKey", item.id)
+        intent.putExtra("termId", item.id)
         startActivity(intent)
     }
 

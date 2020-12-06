@@ -34,15 +34,15 @@ class WordPageActivity : AppCompatActivity() {
 
         val extras = intent.extras
         if (extras != null) {
-            val wordKey = extras.getInt("wordKey") //숫자값. 인덱스.
-            val wordId = extras.getString("wordId") //cid 값. 문자열.
+            val termId = extras.getInt("termId") //숫자값. 인덱스.
+            val termCid = extras.getString("termCid") //cid 값. 문자열.
             //debug("Word ID" + wordId)
             //debug("Word KEY" + wordKey.toString())
 
-            if (wordId == null) {
-                initData(wordKey)
-            } else if (wordId.isNotEmpty()) {
-                initData(wordId)
+            if (termCid == null) {
+                initData(termId)
+            } else if (termCid.isNotEmpty()) {
+                initData(termCid)
             }
         } else {
             debug("extras is null")
@@ -55,8 +55,8 @@ class WordPageActivity : AppCompatActivity() {
     /**
      * 숫자 id (id) 값을 받았을 때.
      */
-    private fun initData(wordKey: Int) {
-        termViewModel.findById(wordKey).observe(this,{t-> appendData(t!!)})
+    private fun initData(termId: Int) {
+        termViewModel.findById(termId).observe(this,{ t-> appendData(t!!)})
 
         //val tableWordDictionary = Services.getTermDictionaryDao()
         //val record = tableWordDictionary.getRow(wordKey)
@@ -66,8 +66,8 @@ class WordPageActivity : AppCompatActivity() {
     /**
      * 문자열 id (cid) 값을 받았을 때.
      */
-    private fun initData(wordId: String) {
-        termViewModel.findByCid(wordId).observe(this,{t-> appendData(t!!)})
+    private fun initData(termCid: String) {
+        termViewModel.findByCid(termCid).observe(this,{ t-> appendData(t!!)})
 
         //val tableWordDictionary = Services.getTermDictionaryDao()
         //val record = tableWordDictionary.getRowFromCID(wordId)

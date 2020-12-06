@@ -43,7 +43,7 @@ object Services {
     private fun init(){
         // SalaryCalculator 의 세율, 상한 하한값 등을 셋팅한다.
         calculator.init()
-        debug("[init] 초기화")
+        //debug("[init] 초기화")
 
         // 세율의 기본값을 가져와서 DefaultRates 에 기록해둔다.
         // 순서에 주의. calculator.init() 이 먼저 와야 한다. (세율을 조정)
@@ -52,7 +52,7 @@ object Services {
         DefaultRates.healthCare = rates.healthCare * 100
         DefaultRates.longTermCare = rates.longTermCare * 100
         DefaultRates.employmentCare = rates.employmentCare * 100
-        debug("[init] 기본 세율 값 셋팅")
+        //debug("[init] 기본 세율 값 셋팅")
     }
 
     /**
