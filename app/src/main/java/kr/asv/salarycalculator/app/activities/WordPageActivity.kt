@@ -3,37 +3,46 @@ package kr.asv.salarycalculator.app.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
-import kr.asv.salarycalculator.utils.AdmobAdapter
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
-import kr.asv.salarycalculator.app.model.TermDictionary
+import kr.asv.salarycalculator.app.model.Term
+import kr.asv.salarycalculator.app.model.TermViewModel
+import kr.asv.salarycalculator.utils.AdmobAdapter
 
 /**
  * 용어 상세 정보를 보여주는 페이지 액티비티 이다.
  */
 class WordPageActivity : AppCompatActivity() {
+    private lateinit var termViewModel: TermViewModel
+    private lateinit var toolbarLayout: CollapsingToolbarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word)
         setSupportActionBar(toolbar)
+        toolbarLayout = findViewById(R.id.toolbar_layout)
+
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }
 
+        termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
+
         val extras = intent.extras
         if (extras != null) {
-            val wordKey = extras.getInt("wordKey") //숫자값. 인덱스.
-            val wordId = extras.getString("wordId") //cid 값. 문자열.
+            val termId = extras.getInt("termId") //숫자값. 인덱스.
+            val termCid = extras.getString("termCid") //cid 값. 문자열.
             //debug("Word ID" + wordId)
             //debug("Word KEY" + wordKey.toString())
 
-            if (wordId == null) {
-                initData(wordKey)
-            } else if (wordId.isNotEmpty()) {
-                initData(wordId)
+            if (termCid == null) {
+                initData(termId)
+            } else if (termCid.isNotEmpty()) {
+                initData(termCid)
             }
         } else {
             debug("extras is null")
@@ -43,31 +52,46 @@ class WordPageActivity : AppCompatActivity() {
         AdmobAdapter.loadBannerAdMob(adView)
     }
 
-    private fun appendData(record: TermDictionary) {
-        val actionBar = supportActionBar
-        actionBar?.title = record.name
-        //word_subject.setText(record.getSubject());
-        word_explanation.text = record.description
-        word_history.text = record.history
-        word_process.text = record.process
-    }
-
     /**
      * 숫자 id (id) 값을 받았을 때.
      */
-    private fun initData(wordKey: Int) {
-        val tableWordDictionary = Services.getTermDictionaryDao()
-        val record = tableWordDictionary.getRow(wordKey)
-        appendData(record)
+    private fun initData(termId: Int) {
+        termViewModel.findById(termId).observe(this,{ t-> appendData(t!!)})
+
+        //val tableWordDictionary = Services.getTermDictionaryDao()
+        //val record = tableWordDictionary.getRow(wordKey)
+        //appendData(record)
     }
 
     /**
      * 문자열 id (cid) 값을 받았을 때.
      */
-    private fun initData(wordId: String) {
-        val tableWordDictionary = Services.getTermDictionaryDao()
-        val record = tableWordDictionary.getRowFromCID(wordId)
-        appendData(record)
+    private fun initData(termCid: String) {
+        termViewModel.findByCid(termCid).observe(this,{ t-> appendData(t!!)})
+
+        //val tableWordDictionary = Services.getTermDictionaryDao()
+        //val record = tableWordDictionary.getRowFromCID(wordId)
+        //appendData(record)
+    }
+
+    /**
+     * 데이터를 보여줌
+     */
+    private fun appendData(item: Term) {
+        //val actionBar = supportActionBar
+        //actionBar?.title = item.name
+
+        //CollapsingToolbarLayout toolbarLayout = (findViewById(R.id.toolbar_layout)) as CollapsingToolbarLayout
+        //val toolbarLayout = toolbar_layout as CollapsingToolbarLayout
+        //val toolbar = findViewById<View>(R.id.toolbar)
+        toolbarLayout.title = item.name
+
+        //CollapsingToolbarLayout toolbarLayout = toolbar_layout
+
+        //word_subject.setText(record.getSubject());
+        word_explanation.text = item.description
+        word_history.text = item.history
+        word_process.text = item.process
     }
 
     /**
