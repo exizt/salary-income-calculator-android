@@ -37,7 +37,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun getDbVersion(application: Context): String {
-        return AppDatabase.getInstance(application)?.openHelper?.readableDatabase?.version.toString()
+        return AppDatabase.getInstance(application).openHelper.readableDatabase?.version.toString()
     }
     /**
      * 이 앱의 버전 조회

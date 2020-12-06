@@ -1,7 +1,6 @@
 package kr.asv.salarycalculator.app.model
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 
@@ -15,7 +14,7 @@ class TermViewModel (application: Application): AndroidViewModel(application){
     }
 
     fun getAll(): LiveData<List<Term>> {
-        Log.d("[EXIZT-SCalculator]", "TermViewModel.getAll")
+        //Log.d("[EXIZT-SCalculator]", "TermViewModel.getAll")
         return terms
     }
 

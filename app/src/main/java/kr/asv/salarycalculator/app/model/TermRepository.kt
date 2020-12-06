@@ -6,7 +6,7 @@ import kr.asv.salarycalculator.app.databases.AppDatabase
 
 class TermRepository (application: Application){
     private val termDao: TermDao by lazy {
-        val db = AppDatabase.getInstance(application)!!
+        val db = AppDatabase.getInstance(application)
         db.termDao()
     }
     private val terms: LiveData<List<Term>> by lazy {

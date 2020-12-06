@@ -15,7 +15,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase? {
+        fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(AppDatabase::class) {
                 INSTANCE ?: Room.databaseBuilder(context.applicationContext,
                         AppDatabase::class.java, "income_salary.db")
@@ -25,8 +25,5 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 }

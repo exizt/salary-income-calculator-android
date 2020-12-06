@@ -2,17 +2,16 @@ package kr.asv.salarycalculator.app.activities
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
-import kr.asv.salarycalculator.utils.AdmobAdapter
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.model.Term
 import kr.asv.salarycalculator.app.model.TermViewModel
+import kr.asv.salarycalculator.utils.AdmobAdapter
 
 /**
  * 용어 상세 정보를 보여주는 페이지 액티비티 이다.
@@ -85,7 +84,7 @@ class WordPageActivity : AppCompatActivity() {
         //CollapsingToolbarLayout toolbarLayout = (findViewById(R.id.toolbar_layout)) as CollapsingToolbarLayout
         //val toolbarLayout = toolbar_layout as CollapsingToolbarLayout
         //val toolbar = findViewById<View>(R.id.toolbar)
-        toolbarLayout?.title = item.name
+        toolbarLayout.title = item.name
 
         //CollapsingToolbarLayout toolbarLayout = toolbar_layout
 

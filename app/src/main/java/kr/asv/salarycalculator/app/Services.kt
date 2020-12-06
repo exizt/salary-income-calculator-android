@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.preference.PreferenceManager
-import kr.asv.salarycalculator.app.databases.AppDatabaseHandler
 import kr.asv.salarycalculator.calculator.SalaryCalculator
 
 /**
@@ -16,10 +15,6 @@ object Services {
 
     // 계산기 클래스
     val calculator = SalaryCalculator()
-
-    // private set
-    private var appDatabasePath = ""
-    var dbVersion:Int = 0
 
     private val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
@@ -43,19 +38,6 @@ object Services {
         // 앱이 켜지고 최초 1회에만 시도된다. appDatabasePath 가 초기값이 "" 이므로, 아직 값이 정해지기 전이다.
         // 동작이 되고 나면 appDatabasePath 값이 생성된다.
         // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
-    }
-
-    fun loadDatabase(context: Context){
-        if(appDatabasePath ==""){
-            // 데이터베이스도 없는지 확인해야 하는데...음...
-            // initializeDefaultInsuranceRates(context)
-
-            val appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
-
-            // 데이터베이스의 경로만 갖는다.
-            appDatabasePath = appDatabaseHandler.databasePath
-            dbVersion = appDatabaseHandler.getPreferenceDbVersion()
-        }
     }
 
     private fun init(){

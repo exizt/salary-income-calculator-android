@@ -2,17 +2,13 @@ package kr.asv.salarycalculator.app.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
@@ -25,7 +21,7 @@ import kr.asv.salarycalculator.app.model.TermViewModel
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
-    private val isDebug = true
+    private val isDebug = false
     private lateinit var termViewModel: TermViewModel
     private lateinit var adapter :MyWordItemRecyclerViewAdapter
 
@@ -56,7 +52,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
             termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
-            termViewModel.getAll().observe(viewLifecycleOwner, Observer<List<Term>>{ t -> adapter.setItems(t!!)})
+            termViewModel.getAll().observe(viewLifecycleOwner, { t -> adapter.setItems(t!!)})
 
             /*
             lifecycleScope.launch {
@@ -65,12 +61,6 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
             */
         }
         return view
-    }
-
-    private fun getTerms(){
-        GlobalScope.launch {
-            termViewModel.getAll()
-        }
     }
 
     /**
@@ -127,7 +117,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         override fun getItemCount(): Int = items.size
 
         fun setItems(items: List<Term>){
-            Log.d("[EXIZT-SCalculator]", "MyWordItemRecyclerViewAdapter.setItems")
+            //Log.d("[EXIZT-SCalculator]", "MyWordItemRecyclerViewAdapter.setItems")
             this.items = items
             notifyDataSetChanged()
         }
