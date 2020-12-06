@@ -2,26 +2,36 @@ package kr.asv.salarycalculator.app.activities
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_word.*
 import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.salarycalculator.utils.AdmobAdapter
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
-import kr.asv.salarycalculator.app.model.TermDictionary
+import kr.asv.salarycalculator.app.model.Term
+import kr.asv.salarycalculator.app.model.TermViewModel
 
 /**
  * 용어 상세 정보를 보여주는 페이지 액티비티 이다.
  */
 class WordPageActivity : AppCompatActivity() {
+    private lateinit var termViewModel: TermViewModel
+    private lateinit var toolbarLayout: CollapsingToolbarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word)
         setSupportActionBar(toolbar)
+        toolbarLayout = findViewById(R.id.toolbar_layout)
+
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }
+
+        termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
 
         val extras = intent.extras
         if (extras != null) {
@@ -43,31 +53,46 @@ class WordPageActivity : AppCompatActivity() {
         AdmobAdapter.loadBannerAdMob(adView)
     }
 
-    private fun appendData(record: TermDictionary) {
-        val actionBar = supportActionBar
-        actionBar?.title = record.name
-        //word_subject.setText(record.getSubject());
-        word_explanation.text = record.description
-        word_history.text = record.history
-        word_process.text = record.process
-    }
-
     /**
      * 숫자 id (id) 값을 받았을 때.
      */
     private fun initData(wordKey: Int) {
-        val tableWordDictionary = Services.getTermDictionaryDao()
-        val record = tableWordDictionary.getRow(wordKey)
-        appendData(record)
+        termViewModel.findById(wordKey).observe(this,{t-> appendData(t!!)})
+
+        //val tableWordDictionary = Services.getTermDictionaryDao()
+        //val record = tableWordDictionary.getRow(wordKey)
+        //appendData(record)
     }
 
     /**
      * 문자열 id (cid) 값을 받았을 때.
      */
     private fun initData(wordId: String) {
-        val tableWordDictionary = Services.getTermDictionaryDao()
-        val record = tableWordDictionary.getRowFromCID(wordId)
-        appendData(record)
+        termViewModel.findByCid(wordId).observe(this,{t-> appendData(t!!)})
+
+        //val tableWordDictionary = Services.getTermDictionaryDao()
+        //val record = tableWordDictionary.getRowFromCID(wordId)
+        //appendData(record)
+    }
+
+    /**
+     * 데이터를 보여줌
+     */
+    private fun appendData(item: Term) {
+        //val actionBar = supportActionBar
+        //actionBar?.title = item.name
+
+        //CollapsingToolbarLayout toolbarLayout = (findViewById(R.id.toolbar_layout)) as CollapsingToolbarLayout
+        //val toolbarLayout = toolbar_layout as CollapsingToolbarLayout
+        //val toolbar = findViewById<View>(R.id.toolbar)
+        toolbarLayout?.title = item.name
+
+        //CollapsingToolbarLayout toolbarLayout = toolbar_layout
+
+        //word_subject.setText(record.getSubject());
+        word_explanation.text = item.description
+        word_history.text = item.history
+        word_process.text = item.process
     }
 
     /**

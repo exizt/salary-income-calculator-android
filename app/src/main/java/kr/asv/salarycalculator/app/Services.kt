@@ -2,12 +2,9 @@ package kr.asv.salarycalculator.app
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import androidx.preference.PreferenceManager
 import kr.asv.salarycalculator.app.databases.AppDatabaseHandler
-import kr.asv.salarycalculator.app.model.IncomeTaxDao
-import kr.asv.salarycalculator.app.model.TermDictionaryDao
 import kr.asv.salarycalculator.calculator.SalaryCalculator
 
 /**
@@ -74,21 +71,6 @@ object Services {
         DefaultRates.longTermCare = rates.longTermCare * 100
         DefaultRates.employmentCare = rates.employmentCare * 100
         debug("[init] 기본 세율 값 셋팅")
-    }
-
-    /**
-     * 메서드가 호출될 때, TermDictionaryDao 를 새로 생성해서 리턴한다.
-     * (가비지 컬렉션을 고려함)
-     */
-    fun getTermDictionaryDao():TermDictionaryDao{
-        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
-        return TermDictionaryDao(db)
-    }
-
-    @Suppress("unused")
-    fun getIncomeTaxDao(): IncomeTaxDao{
-        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
-        return IncomeTaxDao(db)
     }
 
     /**

@@ -57,7 +57,7 @@ class QuickCalculatorFragment : BaseFragment() {
         if (Services.isCustomRateMode()) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
-        this.activity?.let { Services.loadDatabase(it) }
+        // this.activity?.let { Services.loadDatabase(it) }
     }
 
     private fun inputMoneyTextWatcher(): TextWatcher{
