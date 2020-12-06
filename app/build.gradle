@@ -12,8 +12,8 @@ android {
         applicationId 'kr.asv.apps.salarycalculator'
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 37
-        versionName '1.4.37'
+        versionCode 38
+        versionName '1.4.38'
     }
     buildTypes {
         release {
