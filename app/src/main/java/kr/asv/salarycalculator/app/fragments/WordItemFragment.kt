@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
-import kr.asv.salarycalculator.app.fragments.dummy.WordDictionaryContent
-import kr.asv.salarycalculator.app.fragments.dummy.WordDictionaryContent.Item
+import kr.asv.salarycalculator.app.model.Term
+import kr.asv.salarycalculator.app.model.TermViewModel
 
 /**
  * 형태 : 리스트 형 Fragment
@@ -21,10 +22,17 @@ import kr.asv.salarycalculator.app.fragments.dummy.WordDictionaryContent.Item
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
     private val isDebug = false
+    private lateinit var termViewModel: TermViewModel
+    private lateinit var adapter :MyWordItemRecyclerViewAdapter
+
+    /**
+     * onCreate
+     */
+    @Suppress("RedundantOverride")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        debug("onCreate")
-        getWordDictionaryListData()
+        //debug("onCreate")
+        //getWordDictionaryListData()
     }
 
     /**
@@ -32,6 +40,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        //debug("onCreateView")
         val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
 
         setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
@@ -39,9 +48,18 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         // Set the adapter
         if (view is RecyclerView) {
             val context = view.getContext()
+            adapter = MyWordItemRecyclerViewAdapter(this)
             val recyclerView: RecyclerView = view
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = MyWordItemRecyclerViewAdapter(WordDictionaryContent.ITEMS, this)
+            recyclerView.adapter = adapter
+            termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
+            termViewModel.getAll().observe(viewLifecycleOwner, { t -> adapter.setItems(t!!)})
+
+            /*
+            lifecycleScope.launch {
+                termViewModel.getAll()
+            }
+            */
         }
         return view
     }
@@ -50,45 +68,10 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      * item 을 넘겨 받았을 때의 액션
      * WordPageActivity 를 새로 호출.
      */
-    override fun onListFragmentInteraction(item: Item) {
+    override fun onListFragmentInteraction(item: Term) {
         val intent = Intent(activity, WordPageActivity::class.java)
-        intent.putExtra("wordKey", item.id)
+        intent.putExtra("termId", item.id)
         startActivity(intent)
-    }
-
-    /**
-     * 데이터베이스 에서 목록을 조회하는 메서드
-     */
-    private fun getWordDictionaryListData() {
-        if (WordDictionaryContent.isUsed) return
-
-        debug("getWordDictionaryListData")
-        // 객체 를 가져오기만 함
-        val table = Services.getTermDictionaryDao()
-        try {
-            // select 쿼리를 실행함
-            val cur = table.list
-            if (cur.moveToFirst()) {
-
-                while (!cur.isAfterLast) {
-                    //val wItem = WordDictionaryItem()
-                    val item = Item()
-                    item.id = cur.getInt(cur.getColumnIndex("id"))
-                    item.cid = cur.getString(cur.getColumnIndex("cid"))
-                    item.name = cur.getString(cur.getColumnIndex("name"))
-                    //item.explanation = cur.getString(cur.getColumnIndex("explanation"))
-                    //item.process = cur.getString(cur.getColumnIndex("process"))
-                    //item.history = cur.getString(cur.getColumnIndex("history"))
-                    WordDictionaryContent.addItem(item)
-                    // cursor move
-                    cur.moveToNext()
-                }
-            }
-            cur.close()
-        } catch (e: Exception) {
-            debug("[drawDictionary] 데이터 로딩 실패 ",e)
-            throw e
-        }
     }
 
     /**
@@ -105,7 +88,8 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
     /**
      * Fragment_wordItem.xml 과 연관된 클래스
      */
-    class MyWordItemRecyclerViewAdapter(private val mValues: List<Item>, private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
+    class MyWordItemRecyclerViewAdapter(private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
+        private var items: List<Term> = ArrayList()
 
         /**
          * onCreateViewHolder
@@ -120,9 +104,9 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
          *
          */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.mItem = mValues[position]
-            //holder.mIdView.text = mValues[position].id
-            holder.mContentView.text = mValues[position].name
+            holder.mItem = items[position]
+            //holder.mIdView.text = terms[position].id
+            holder.textView.text = items[position].name
 
             holder.mView.setOnClickListener {
                 // 목록에서 클릭을 말함. (컨텐츠가 아니다. 컨텐츠 프레그먼트는 따로 만드셔)
@@ -130,18 +114,25 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
             }
         }
 
-        override fun getItemCount(): Int = mValues.size
+
+        override fun getItemCount(): Int = items.size
+
+        fun setItems(items: List<Term>){
+            //Log.d("[EXIZT-SCalculator]", "MyWordItemRecyclerViewAdapter.setItems")
+            this.items = items
+            notifyDataSetChanged()
+        }
 
         inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
             //val mIdView: TextView = mView.findViewById<View>(R.id.id) as TextView
-            val mContentView: TextView = mView.findViewById<View>(R.id.content) as TextView
-            var mItem: Item? = null
+            val textView: TextView = mView.findViewById<View>(R.id.content) as TextView
+            var mItem: Term? = null
 
-            override fun toString(): String = super.toString() + " '" + mContentView.text + "'"
+            override fun toString(): String = super.toString() + " '" + textView.text + "'"
         }
     }
 }
 
 interface OnListFragmentInteractionListener {
-    fun onListFragmentInteraction(item: Item)
+    fun onListFragmentInteraction(item: Term)
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_about.*
 import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.app.databases.AppDatabase
 
 /**
  */
@@ -31,11 +32,19 @@ class AboutFragment : Fragment() {
 
         activity?.let {
             tvAppVersion.text = getAppVersion(it.applicationContext)
+            tvDBVersion.text = getDbVersion(it.applicationContext)
         }
     }
 
     /**
-     * 이 앱의 버전 조회
+     * 데이터베이스 파일의 버전 정보
+     */
+    private fun getDbVersion(application: Context): String {
+        return AppDatabase.getInstance(application).openHelper.readableDatabase?.version.toString()
+    }
+    
+    /**
+     * 이 앱의 버전 정보
      */
     private fun getAppVersion(context: Context): String{
         var version = ""

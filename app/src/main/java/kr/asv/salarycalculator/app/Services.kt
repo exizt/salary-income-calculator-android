@@ -1,16 +1,10 @@
 package kr.asv.salarycalculator.app
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import androidx.preference.PreferenceManager
-import kr.asv.salarycalculator.app.databases.AppDatabaseHandler
-import kr.asv.salarycalculator.app.model.IncomeTaxDao
-import kr.asv.salarycalculator.app.model.TermDictionaryDao
 import kr.asv.salarycalculator.calculator.SalaryCalculator
-import org.jetbrains.anko.doAsync
 
 /**
  * 전체적인 프로세스를 담당하는 클래스.
@@ -21,13 +15,6 @@ object Services {
 
     // 계산기 클래스
     val calculator = SalaryCalculator()
-
-    // private set
-    private var appDatabasePath = ""
-
-    // Database Handler
-    @SuppressLint("StaticFieldLeak")
-    lateinit var appDatabaseHandler : AppDatabaseHandler
 
     private val appPrefs : MutableMap<String, Any> = mutableMapOf()
 
@@ -53,34 +40,20 @@ object Services {
         // 체크를 안 하면, mainActivity 가 호출될 때마다 호출 된다... (액티비티 전환, 뒤로가기, 화면 상하 전환 등...)
     }
 
-    fun loadDatabase(context: Context){
-        if(appDatabasePath ==""){
-            // 데이터베이스도 없는지 확인해야 하는데...음...
-            // initializeDefaultInsuranceRates(context)
-
-            doAsync {
-                // 디비 연결 및 생성과 Assets 을 통한 업데이트
-                // debug("[load] > new AppDatabaseHandler")
-                appDatabaseHandler = AppDatabaseHandler(context.applicationContext)
-
-                // 데이터베이스의 경로만 갖는다.
-                appDatabasePath = appDatabaseHandler.databasePath
-
-                // 여기서 firebase 관련 처리를 해야함.
-                appDatabaseHandler.copyFirebaseStorageDbFile()
-
-                // 세율 변경이 필요함.
-                // preferences 를 이용해야함. 데이터베이스를 읽어와서, 세율 값을 적용시킨다.
-                // setDefaultInsuranceRates(context)
-            }
-        }
-    }
-
     private fun init(){
         // SalaryCalculator 의 세율, 상한 하한값 등을 셋팅한다.
         calculator.init()
-        debug("[init] 초기화")
+        //debug("[init] 초기화")
 
+        // 기본 세율값을 가져옴
+        initDefaultRates()
+    }
+
+    /**
+     * '기본 세율값'을 초기화
+     * calculator.init() 이후에 호출되어야 함
+     */
+    private fun initDefaultRates(){
         // 세율의 기본값을 가져와서 DefaultRates 에 기록해둔다.
         // 순서에 주의. calculator.init() 이 먼저 와야 한다. (세율을 조정)
         val rates = calculator.insurance.rates
@@ -88,31 +61,16 @@ object Services {
         DefaultRates.healthCare = rates.healthCare * 100
         DefaultRates.longTermCare = rates.longTermCare * 100
         DefaultRates.employmentCare = rates.employmentCare * 100
-        debug("[init] 기본 세율 값 셋팅")
+        //debug("[init] 기본 세율 값 셋팅")
     }
 
     /**
-     * 메서드가 호출될 때, TermDictionaryDao 를 새로 생성해서 리턴한다.
-     * (가비지 컬렉션을 고려함)
-     */
-    fun getTermDictionaryDao():TermDictionaryDao{
-        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
-        return TermDictionaryDao(db)
-    }
-
-    @Suppress("unused")
-    fun getIncomeTaxDao(): IncomeTaxDao{
-        val db = SQLiteDatabase.openOrCreateDatabase(appDatabasePath,  null)
-        return IncomeTaxDao(db)
-    }
-
-    /**
-     * 세율을 기본값으로 변경해주는 메서드.
+     * 계산할 세율을 기본값으로 변경해주는 메서드.
      *
      * 설정값에서 변경한 세율값을 기본값으로 돌릴 때 이용한다.
      */
     fun setInsuranceRatesToDefault(){
-        debug("[setInsuranceRatesToDefault] 기본값으로 세율 적용")
+        // debug("[setInsuranceRatesToDefault] 기본값으로 세율 계산")
         val rates = calculator.insurance.rates
         rates.nationalPension = DefaultRates.nationalPension
         rates.healthCare = DefaultRates.healthCare

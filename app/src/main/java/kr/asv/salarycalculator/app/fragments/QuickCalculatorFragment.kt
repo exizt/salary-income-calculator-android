@@ -57,7 +57,7 @@ class QuickCalculatorFragment : BaseFragment() {
         if (Services.isCustomRateMode()) {
             Toast.makeText(activity, "'세율설정' 을 사용중입니다. 설정을 취소하시려면 [환경설정 > 고급설정 (세율조정)] 을 변경해주세요.", Toast.LENGTH_LONG).show()
         }
-        this.activity?.let { Services.loadDatabase(it) }
+        // this.activity?.let { Services.loadDatabase(it) }
     }
 
     private fun inputMoneyTextWatcher(): TextWatcher{
@@ -284,6 +284,7 @@ class QuickCalculatorFragment : BaseFragment() {
         // 세율 정보 가져오기
         // 커스텀 세율 모드인 경우에는 커스텀 설정을 따름.
         if (Services.isCustomRateMode()) {
+            debug("[calculate] 커스텀 세율로 계산")
             val cKeys = Services.AppPref.Keys.CustomRates
             val rates = calculator.insurance.rates
             rates.nationalPension = Services.AppPref.getString(cKeys.nationalPension, "0").toDouble()
@@ -296,6 +297,7 @@ class QuickCalculatorFragment : BaseFragment() {
             //rates.longTermCare = Services.getAppPrefValue(cKeys.longTermCare) as Double
             //rates.employmentCare = Services.getAppPrefValue(cKeys.employmentCare) as Double
         } else {
+            debug("[calculate] 기본값 세율로 계산")
             Services.setInsuranceRatesToDefault()
         }
 
