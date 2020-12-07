@@ -28,6 +28,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
     /**
      * onCreate
      */
+    @Suppress("RedundantOverride")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug("onCreate")
