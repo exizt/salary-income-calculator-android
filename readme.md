@@ -2,9 +2,10 @@
 
 연봉 실수령액 계산기 안드로이드 앱.
 
-* 개발 문서 : https://swiki.asv.kr/wiki/개발:실수령액_계산기_-_SIC_프로젝트/안드로이드_앱
-* 구글 플레이 : https://play.google.com/store/apps/details?id=kr.asv.apps.salarycalculator
-* 소개 페이지 : https://chosim.asv.kr/softwares/salary-calculator-for-android
+* 개발 문서: <https://swiki.asv.kr/wiki/개발:실수령액_계산기_-_SIC_프로젝트/안드로이드_앱>
+* 스토어: <https://play.google.com/store/apps/details?id=kr.asv.apps.salarycalculator>
+* 소개 페이지: <https://chosim.asv.kr/softwares/salary-calculator-for-android>
+* minSDK: 16
 
 
 

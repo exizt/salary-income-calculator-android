@@ -36,11 +36,15 @@ class AboutFragment : Fragment() {
         }
     }
 
+    /**
+     * 데이터베이스 파일의 버전 정보
+     */
     private fun getDbVersion(application: Context): String {
         return AppDatabase.getInstance(application).openHelper.readableDatabase?.version.toString()
     }
+    
     /**
-     * 이 앱의 버전 조회
+     * 이 앱의 버전 정보
      */
     private fun getAppVersion(context: Context): String{
         var version = ""
