@@ -32,25 +32,26 @@ class ReportInsuranceFragment : BaseFragment() {
     }
 
     private fun onInformationDictionaryWord(view: View) {
-        val id = view.id
-        var keyId = ""
-        when (id) {
+        var termCid = ""
+        when (view.id) {
             R.id.infoNationalPension -> {
-                keyId = "national_pension"
+                termCid = "national_pension"
             }
             R.id.infoHealthCare -> {
-                keyId = "health_care"
+                termCid = "health_care"
             }
             R.id.infoLongTermCare -> {
-                keyId = "long_term_care"
+                termCid = "long_term_care"
             }
             R.id.infoEmployeeCare -> {
-                keyId = "employment_care"
+                termCid = "employment_care"
             }
         }
-        val intent = Intent(activity, WordPageActivity::class.java)
-        intent.putExtra("wordId", keyId)
-        startActivity(intent)
+        if(termCid != ""){
+            val intent = Intent(activity, WordPageActivity::class.java)
+            intent.putExtra("termCid", termCid)
+            startActivity(intent)
+        }
     }
 
     private fun showResult() {

@@ -30,19 +30,20 @@ class ReportTaxFragment : BaseFragment() {
     }
 
     private fun onInformationDictionaryWord(view: View) {
-        val id = view.id
-        var keyId = ""
-        when (id) {
+        var termCid = ""
+        when (view.id) {
             R.id.infoIncomeTax -> {
-                keyId = "income_tax"
+                termCid = "income_tax"
             }
             R.id.infoLocalTax -> {
-                keyId = "income_local_tax"
+                termCid = "income_local_tax"
             }
         }
-        val intent = Intent(activity, WordPageActivity::class.java)
-        intent.putExtra("wordId", keyId)
-        startActivity(intent)
+        if(termCid != ""){
+            val intent = Intent(activity, WordPageActivity::class.java)
+            intent.putExtra("termCid", termCid)
+            startActivity(intent)
+        }
     }
 
     private fun showResult() {
