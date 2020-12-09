@@ -11,7 +11,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/adView"
         android:fitsSystemWindows="true"
         ads:statusBarBackground="@color/colorAccent">
 
@@ -75,12 +74,10 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <FrameLayout
+        android:id="@+id/ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/ad_unit_id_banner" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

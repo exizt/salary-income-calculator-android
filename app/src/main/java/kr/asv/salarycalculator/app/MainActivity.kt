@@ -2,6 +2,7 @@ package kr.asv.salarycalculator.app
 
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -25,6 +28,26 @@ import kr.asv.salarycalculator.utils.AdmobAdapter
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val isDebug = false
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    
+    // AdView 관련
+    private lateinit var adView: AdView
+    private var initialLayoutComplete = false
+    private val adaptiveAdSize: AdSize
+        get() {
+            val display = windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            var adWidthPixels = ad_container.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
+            }
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
+        }
 
     /**
      * 가장 처음에 호출되는 create 메서드
@@ -45,7 +68,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         firebaseAnalytics = Firebase.analytics
 
         // Admob 호출
-        AdmobAdapter.loadBannerAdMob(adView)
+        AdmobAdapter.initMobileAds(this)
+        adView = AdView(this)
+        ad_container.addView(adView)
+        ad_container.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!initialLayoutComplete) {
+                initialLayoutComplete = true
+                adView.adSize = adaptiveAdSize
+                adView.adUnitId = resources.getString(R.string.ad_unit_id_banner)
+                AdmobAdapter.loadBannerAdMob(adView)
+            }
+        }
     }
 
     /**
@@ -123,6 +156,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun setActionBarTitle(title: String) {
         supportActionBar!!.title = title
+    }
+
+    /** Called when leaving the activity  */
+    public override fun onPause() {
+        adView.pause()
+        super.onPause()
+    }
+
+    /** Called when returning to the activity  */
+    public override fun onResume() {
+        super.onResume()
+        adView.resume()
+    }
+
+    /** Called before the activity is destroyed  */
+    public override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
     }
 
     /**

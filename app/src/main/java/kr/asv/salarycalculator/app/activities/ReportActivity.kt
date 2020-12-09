@@ -2,22 +2,48 @@ package kr.asv.salarycalculator.app.activities
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
+import android.util.DisplayMetrics
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_report.*
-import kr.asv.salarycalculator.utils.AdmobAdapter
+import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.fragments.report.ReportInputFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportInsuranceFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportSummaryFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportTaxFragment
-import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.utils.AdmobAdapter
 
 class ReportActivity : AppCompatActivity() {
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
+    // AdView 관련
+    private lateinit var adView: AdView
+    private var initialLayoutComplete = false
+    private val adaptiveAdSize: AdSize
+        get() {
+            val display = windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+
+            var adWidthPixels = ad_container.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
+            }
+
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
+        }
+
+    /**
+     * onCreate
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
@@ -40,7 +66,19 @@ class ReportActivity : AppCompatActivity() {
         setResultReport()
 
         // Admob 호출
-        AdmobAdapter.loadBannerAdMob(adView)
+        // AdmobAdapter.loadBannerAdMob(adView)
+        // Admob 호출
+        AdmobAdapter.initMobileAds(this)
+        adView = AdView(this)
+        ad_container.addView(adView)
+        ad_container.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!initialLayoutComplete) {
+                initialLayoutComplete = true
+                adView.adSize = adaptiveAdSize
+                adView.adUnitId = resources.getString(R.string.ad_unit_id_banner)
+                AdmobAdapter.loadBannerAdMob(adView)
+            }
+        }
     }
 
     /**
@@ -53,6 +91,24 @@ class ReportActivity : AppCompatActivity() {
     }
 
     private fun setResultReport() {
+    }
+
+    /** Called when leaving the activity  */
+    public override fun onPause() {
+        adView.pause()
+        super.onPause()
+    }
+
+    /** Called when returning to the activity  */
+    public override fun onResume() {
+        super.onResume()
+        adView.resume()
+    }
+
+    /** Called before the activity is destroyed  */
+    public override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
     }
 
     /**
