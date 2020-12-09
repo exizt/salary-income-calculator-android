@@ -3,22 +3,20 @@ package kr.asv.salarycalculator.app.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
-import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_report.*
-import kotlinx.android.synthetic.main.activity_report.ad_container
-import kr.asv.salarycalculator.utils.AdmobAdapter
+import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.fragments.report.ReportInputFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportInsuranceFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportSummaryFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportTaxFragment
-import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.utils.AdmobAdapter
 
 class ReportActivity : AppCompatActivity() {
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null

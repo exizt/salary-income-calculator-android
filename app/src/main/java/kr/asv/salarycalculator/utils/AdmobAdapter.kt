@@ -74,10 +74,7 @@ class AdmobAdapter {
             // Initialize the Mobile Ads SDK.
             MobileAds.initialize(context) { }
 
-            // Set your test devices. Check your logcat output for the hashed device ID to
-            // get test ads on a physical device. e.g.
-            // "Use RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("ABCDEF012345"))
-            // to get test ads on this device."
+            // TestDeviceID 지정 및 Build
             MobileAds.setRequestConfiguration(
                     RequestConfiguration.Builder()
                             .setTestDeviceIds(getTestDeviceIds())
