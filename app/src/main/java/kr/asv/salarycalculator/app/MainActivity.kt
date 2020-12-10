@@ -17,8 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+import kr.asv.salarycalculator.app.databinding.ActivityMainBinding
 import kr.asv.salarycalculator.utils.AdmobAdapter
 
 
@@ -28,10 +27,12 @@ import kr.asv.salarycalculator.utils.AdmobAdapter
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val isDebug = false
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    
+    private lateinit var binding: ActivityMainBinding
+
     // AdView 관련
     private lateinit var adView: AdView
     private var initialLayoutComplete = false
+    @Suppress("DEPRECATION")
     private val adaptiveAdSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -40,7 +41,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             val density = outMetrics.density
 
-            var adWidthPixels = ad_container.width.toFloat()
+
+            var adWidthPixels = binding.adContainer.width.toFloat()
             if (adWidthPixels == 0f) {
                 adWidthPixels = outMetrics.widthPixels.toFloat()
             }
@@ -54,8 +56,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        //setContentView(R.layout.activity_main)
+        val view = binding.root
+        setContentView(view)
+
+        //setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(binding.appBarMain.toolbar)
 
         // 네비게이션 셋팅
         onCreateNavigationDrawer() // 네비게이션 드로워 셋팅
@@ -70,8 +78,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Admob 호출
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)
-        ad_container.addView(adView)
-        ad_container.viewTreeObserver.addOnGlobalLayoutListener {
+        binding.adContainer.addView(adView)
+        binding.adContainer.viewTreeObserver.addOnGlobalLayoutListener {
             if (!initialLayoutComplete) {
                 initialLayoutComplete = true
                 adView.adSize = adaptiveAdSize
@@ -79,6 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 AdmobAdapter.loadBannerAdMob(adView)
             }
         }
+
     }
 
     /**
@@ -86,7 +95,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun onCreateNavigationDrawer() {
         val toggle = object : ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                this, binding.drawerLayout, binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 hideSoftKeyboard()
@@ -99,19 +108,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         //drawer.setDrawerListener(toggle);//deprecated
-        drawer_layout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         //네비게이션 바 안에서 메뉴항목 부분
-        nav_view.setNavigationItemSelectedListener(this)
+        binding.navView.setNavigationItemSelectedListener(this)
+    }
+
+    fun closeNavigationDrawer(){
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     /**
      * drawer 형태이고 open 이라면 closeDrawer 호출
      */
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }

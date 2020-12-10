@@ -2,9 +2,6 @@ package kr.asv.salarycalculator.app
 
 import android.content.Intent
 import android.view.MenuItem
-import android.view.View
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -25,13 +22,14 @@ class NavigationItemFactory {
         /**
          * 네비게이션 메뉴 선택시
          */
-        fun onItemSelected(activity: FragmentActivity, item: MenuItem, backStack: Boolean): Boolean {
+        fun onItemSelected(activity: MainActivity, item: MenuItem, backStack: Boolean): Boolean {
             val isAvailable: Boolean = onItemSelectedEvent(activity, item.itemId, backStack)
 
             // 해당 메뉴를 선택하고 fragment 전환이 이루어졌으므로 네비게이션을 close 한다.
             if (isAvailable) {
-                val drawerLayout = activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout
-                drawerLayout.closeDrawer(GravityCompat.START)
+                //val drawerLayout = activity.findViewById<View>(R.id.drawer_layout) as DrawerLayout
+                //drawerLayout.closeDrawer(GravityCompat.START)
+                activity.closeNavigationDrawer()
             }
             return isAvailable
         }

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-kapt'
@@ -13,7 +12,10 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 39
-        versionName '1.5.39'
+        versionName '1.5.40'
+    }
+    buildFeatures {
+        viewBinding true
     }
     buildTypes {
         release {
@@ -44,7 +46,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.3.0'
-    implementation 'com.google.firebase:firebase-ads:19.5.0'
+    implementation 'com.google.firebase:firebase-ads:19.6.0'
     // bug fix
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
 

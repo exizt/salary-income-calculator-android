@@ -21,7 +21,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txInputSalaryAnnual"
+            android:id="@+id/annual_salary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -36,7 +36,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txInputSalary"
+            android:id="@+id/monthly_salary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -51,7 +51,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txInputFamily"
+            android:id="@+id/family_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -66,7 +66,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txInputChild"
+            android:id="@+id/child_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -81,7 +81,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txInputTaxExemption"
+            android:id="@+id/tax_free_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -105,7 +105,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txNationPensionRate"
+            android:id="@+id/national_pension_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -120,7 +120,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txHealthCareRate"
+            android:id="@+id/health_care_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -135,7 +135,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txLongtermCareRate"
+            android:id="@+id/long_term_care_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -150,7 +150,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txEmploymentCareRate"
+            android:id="@+id/employment_care_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

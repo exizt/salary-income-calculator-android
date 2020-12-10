@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
+import kr.asv.salarycalculator.app.databinding.FragmentDictionaryItemBinding
 import kr.asv.salarycalculator.app.model.Term
 import kr.asv.salarycalculator.app.model.TermViewModel
 
@@ -23,7 +23,7 @@ import kr.asv.salarycalculator.app.model.TermViewModel
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
     private val isDebug = false
     private lateinit var termViewModel: TermViewModel
-    private lateinit var adapter :MyWordItemRecyclerViewAdapter
+    private lateinit var adapter :TermItemRecyclerViewAdapter
 
     /**
      * onCreate
@@ -48,7 +48,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         // Set the adapter
         if (view is RecyclerView) {
             val context = view.getContext()
-            adapter = MyWordItemRecyclerViewAdapter(this)
+            adapter = TermItemRecyclerViewAdapter(this)
             val recyclerView: RecyclerView = view
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
@@ -87,49 +87,60 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
     /**
      * Fragment_wordItem.xml 과 연관된 클래스
+     * @see ://developer.android.com/guide/topics/ui/layout/recyclerview
+     * https://stackoverflow.com/questions/60423596/how-to-use-viewbinding-in-a-recyclerview-adapter
      */
-    class MyWordItemRecyclerViewAdapter(private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<MyWordItemRecyclerViewAdapter.ViewHolder>() {
+    class TermItemRecyclerViewAdapter(private val mListener: OnListFragmentInteractionListener?) : RecyclerView.Adapter<TermItemRecyclerViewAdapter.TermViewHolder>() {
         private var items: List<Term> = ArrayList()
+
+
+        inner class TermViewHolder(private val itemBinding: FragmentDictionaryItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+            //val binding : FragmentDictionaryListBinding? = null
+            //private val textView: TextView = itemView.findViewById<View>(R.id.content) as TextView
+            private var mItem: Term? = null
+
+            init {
+                itemView.setOnClickListener{
+                    //mListener?.onListFragmentInteraction(mItem!!)
+                    mItem?.let{
+                        mListener?.onListFragmentInteraction(mItem!!)
+                        //onClick(it)
+                    }
+                }
+            }
+            fun bind(item: Term){
+                mItem = item
+                itemBinding.content.text = item.name
+            }
+            //override fun toString(): String = super.toString() + " '" + itemBinding.content.text + "'"
+        }
 
         /**
          * onCreateViewHolder
          */
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.fragment_dictionary_item, parent, false)
-            return ViewHolder(view)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TermViewHolder {
+            val itemBinding = FragmentDictionaryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return TermViewHolder(itemBinding)
+            //val view = LayoutInflater.from(parent.context)
+            //        .inflate(R.layout.fragment_dictionary_item, parent, false)
+            //return TermViewHolder(view)
         }
 
         /**
          *
          */
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.mItem = items[position]
-            //holder.mIdView.text = terms[position].id
-            holder.textView.text = items[position].name
-
-            holder.mView.setOnClickListener {
-                // 목록에서 클릭을 말함. (컨텐츠가 아니다. 컨텐츠 프레그먼트는 따로 만드셔)
-                mListener?.onListFragmentInteraction(holder.mItem!!)
-            }
+        override fun onBindViewHolder(holder: TermViewHolder, position: Int) {
+            holder.bind(items[position])
         }
 
 
         override fun getItemCount(): Int = items.size
 
         fun setItems(items: List<Term>){
-            //Log.d("[EXIZT-SCalculator]", "MyWordItemRecyclerViewAdapter.setItems")
             this.items = items
             notifyDataSetChanged()
         }
 
-        inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-            //val mIdView: TextView = mView.findViewById<View>(R.id.id) as TextView
-            val textView: TextView = mView.findViewById<View>(R.id.content) as TextView
-            var mItem: Term? = null
-
-            override fun toString(): String = super.toString() + " '" + textView.text + "'"
-        }
     }
 }
 

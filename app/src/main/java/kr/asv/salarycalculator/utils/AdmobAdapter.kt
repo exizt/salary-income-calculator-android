@@ -56,8 +56,8 @@ class AdmobAdapter {
         private fun getTestDeviceIds(): List<String>{
             @Suppress("UnnecessaryVariable", "CanBeVal")
             var testDeviceIds = mutableListOf<String>()
-            testDeviceIds.add("621CBEEDE09F6A5B37180A718E74C41C") // G pro 테스트 기기
-            testDeviceIds.add("2D81264572D2AB096C895509EDBD419F") // Samsung G3 테스트 기기
+            //testDeviceIds.add("621CBEEDE09F6A5B37180A718E74C41C") // G pro 테스트 기기
+            //testDeviceIds.add("2D81264572D2AB096C895509EDBD419F") // Samsung G3 테스트 기기
             return testDeviceIds
         }
 
