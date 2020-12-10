@@ -6,5 +6,7 @@
     android:name="kr.asv.salarycalculator.app.fragments.WordItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="100dp"
+    android:clipToPadding="false"
     tools:context="kr.asv.salarycalculator.app.fragments.WordItemFragment"
     tools:listitem="@layout/fragment_dictionary_item" />

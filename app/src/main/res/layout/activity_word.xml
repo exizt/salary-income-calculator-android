@@ -38,7 +38,7 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_word" />
+        <include layout="@layout/content_word" android:id="@+id/includedLayout" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
