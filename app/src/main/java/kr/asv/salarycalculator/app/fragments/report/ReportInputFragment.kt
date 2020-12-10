@@ -17,7 +17,7 @@ class ReportInputFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         //val view = inflater.inflate(R.layout.fragment_report_input, container, false)
         _binding = FragmentReportInputBinding.inflate(inflater, container, false)
         val view = binding.root

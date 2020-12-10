@@ -32,7 +32,7 @@ class QuickCalculatorFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         debug("onCreateView")
         //val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
         _binding = FragmentQuickCalculatorBinding.inflate(inflater, container, false)
