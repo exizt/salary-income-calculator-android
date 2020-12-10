@@ -6,17 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kr.asv.salarycalculator.app.Services
-import kr.asv.salarycalculator.app.fragments.BaseFragment
 import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.app.Services
+import kr.asv.salarycalculator.app.databinding.FragmentReportInputBinding
+import kr.asv.salarycalculator.app.fragments.BaseFragment
 
 /**
  */
 class ReportInputFragment : BaseFragment() {
+    // view binding
+    private var _binding: FragmentReportInputBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_report_input, container, false)
+        //val view = inflater.inflate(R.layout.fragment_report_input, container, false)
+        _binding = FragmentReportInputBinding.inflate(inflater, container, false)
+        val view = binding.root
         setFragmentView(view)
         return view
     }
@@ -62,6 +68,11 @@ class ReportInputFragment : BaseFragment() {
         (findViewById(R.id.txLongtermCareRate) as TextView).text = rateFormat.format(calculator.insurance.rates.longTermCare)
         (findViewById(R.id.txEmploymentCareRate) as TextView).text = rateFormat.format(calculator.insurance.rates.employmentCare)
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

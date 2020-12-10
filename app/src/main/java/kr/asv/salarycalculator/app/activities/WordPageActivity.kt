@@ -8,10 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import kotlinx.android.synthetic.main.activity_word.*
-import kotlinx.android.synthetic.main.content_word.*
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
+import kr.asv.salarycalculator.app.databinding.ActivityWordBinding
 import kr.asv.salarycalculator.app.model.Term
 import kr.asv.salarycalculator.app.model.TermViewModel
 import kr.asv.salarycalculator.utils.AdmobAdapter
@@ -23,6 +22,7 @@ class WordPageActivity : AppCompatActivity() {
     private val isDebug = false
     private lateinit var termViewModel: TermViewModel
     private lateinit var toolbarLayout: CollapsingToolbarLayout
+    private lateinit var binding: ActivityWordBinding
 
     // AdView 관련
     private lateinit var adView: AdView
@@ -35,7 +35,7 @@ class WordPageActivity : AppCompatActivity() {
 
             val density = outMetrics.density
 
-            var adWidthPixels = ad_container.width.toFloat()
+            var adWidthPixels = binding.adContainer.width.toFloat()
             if (adWidthPixels == 0f) {
                 adWidthPixels = outMetrics.widthPixels.toFloat()
             }
@@ -49,8 +49,15 @@ class WordPageActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_word)
-        setSupportActionBar(toolbar)
+        binding = ActivityWordBinding.inflate(layoutInflater)
+
+        //setContentView(R.layout.activity_word)
+        val view = binding.root
+        setContentView(view)
+
+        //setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
+
         toolbarLayout = findViewById(R.id.toolbar_layout)
 
         supportActionBar?.run {
@@ -80,8 +87,8 @@ class WordPageActivity : AppCompatActivity() {
         //AdmobAdapter.loadBannerAdMob(adView)
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)
-        ad_container.addView(adView)
-        ad_container.viewTreeObserver.addOnGlobalLayoutListener {
+        binding.adContainer.addView(adView)
+        binding.adContainer.viewTreeObserver.addOnGlobalLayoutListener {
             if (!initialLayoutComplete) {
                 initialLayoutComplete = true
                 adView.adSize = adaptiveAdSize
@@ -138,9 +145,15 @@ class WordPageActivity : AppCompatActivity() {
         //CollapsingToolbarLayout toolbarLayout = toolbar_layout
 
         //word_subject.setText(record.getSubject());
-        word_explanation.text = item?.description
-        word_history.text = item?.history
-        word_process.text = item?.process
+
+        //word_explanation.text = item?.description
+        //word_history.text = item?.history
+        //word_process.text = item?.process
+
+        val layout = binding.includedLayout
+        layout.wordExplanation.text = item?.description
+        layout.wordHistory.text = item?.history
+        layout.wordProcess.text = item?.process
     }
 
     /**

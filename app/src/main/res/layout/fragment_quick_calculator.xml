@@ -41,7 +41,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnClearInput_QM"
+                android:id="@+id/btn_input_clear"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnExecute_QMode"
+                android:id="@+id/btn_calculate"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

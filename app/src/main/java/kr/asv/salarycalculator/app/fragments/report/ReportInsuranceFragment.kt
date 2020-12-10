@@ -6,17 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.fragment_report_insurance.*
+import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
+import kr.asv.salarycalculator.app.databinding.FragmentReportInsuranceBinding
 import kr.asv.salarycalculator.app.fragments.BaseFragment
-import kr.asv.salarycalculator.app.R
 
 class ReportInsuranceFragment : BaseFragment() {
+    // view binding
+    private var _binding: FragmentReportInsuranceBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_report_insurance, container, false)
+        //val view = inflater.inflate(R.layout.fragment_report_insurance, container, false)
+        _binding = FragmentReportInsuranceBinding.inflate(inflater, container, false)
+        val view = binding.root
         setFragmentView(view)
         return view
     }
@@ -25,10 +30,10 @@ class ReportInsuranceFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         showResult()
 
-        infoNationalPension.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
-        infoEmployeeCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
-        infoHealthCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
-        infoLongTermCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+        binding.infoNationalPension.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+        binding.infoEmployeeCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+        binding.infoHealthCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+        binding.infoLongTermCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
     }
 
     private fun onInformationDictionaryWord(view: View) {
@@ -79,6 +84,11 @@ class ReportInsuranceFragment : BaseFragment() {
         txEmploymentCare.text = format.format(calculator.insurance.employmentCare)
         txEmploymentCare.append(" 원")
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
