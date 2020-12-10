@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
@@ -36,10 +35,10 @@ class ReportTaxFragment : BaseFragment() {
     private fun onInformationDictionaryWord(view: View) {
         var termCid = ""
         when (view.id) {
-            R.id.infoIncomeTax -> {
+            R.id.info_income_tax -> {
                 termCid = "income_tax"
             }
-            R.id.infoLocalTax -> {
+            R.id.info_local_tax -> {
                 termCid = "income_local_tax"
             }
         }
@@ -56,14 +55,12 @@ class ReportTaxFragment : BaseFragment() {
         val format = java.text.DecimalFormat("###,##0")
 
         //소득세
-        val txEarnedTax = findViewById(R.id.txEarnedTax) as TextView
-        txEarnedTax.text = format.format(calculator.incomeTax.earnedIncomeTax)
-        txEarnedTax.append(" 원")
+        binding.incomeTax.text = format.format(calculator.incomeTax.earnedIncomeTax)
+        binding.incomeTax.append(" 원")
 
         //지방세(주민세)
-        val txLocalTax = findViewById(R.id.txLocalTax) as TextView
-        txLocalTax.text = format.format(calculator.incomeTax.localTax)
-        txLocalTax.append(" 원")
+        binding.localTax.text = format.format(calculator.incomeTax.localTax)
+        binding.localTax.append(" 원")
     }
 
     override fun onDestroyView() {

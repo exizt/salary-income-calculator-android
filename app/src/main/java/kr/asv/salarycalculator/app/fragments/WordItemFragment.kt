@@ -125,6 +125,7 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
 
         inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
             //val mIdView: TextView = mView.findViewById<View>(R.id.id) as TextView
+            
             val textView: TextView = mView.findViewById<View>(R.id.content) as TextView
             var mItem: Term? = null
 

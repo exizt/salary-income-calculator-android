@@ -33,6 +33,7 @@ class QuickCalculatorFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        debug("onCreateView")
         //val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
         _binding = FragmentQuickCalculatorBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -45,7 +46,9 @@ class QuickCalculatorFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (findViewById(R.id.idInputMoney) as EditText).apply{
+        debug("onActivityCreated")
+        // (findViewById(R.id.input_money) as EditText).apply{
+        binding.inputMoney.apply{
             //addTextChangedListener(MoneyTextWatcher(this))
             filters = arrayOf<InputFilter>(InputFilterLongMinMax(0, 999999999999))
             addTextChangedListener(inputMoneyTextWatcher())
@@ -53,7 +56,8 @@ class QuickCalculatorFragment : BaseFragment() {
         //debug("onActivityCreated")
         initEventListeners()
 
-        displayInitValues()
+        // 기본값으로 보여줌.
+        initDisplayDefaultOptions()
         //idEditTextMoney.requestFocus()
     }
 
@@ -84,54 +88,45 @@ class QuickCalculatorFragment : BaseFragment() {
                 //debug("[inputMoneyTextWatcher] afterTextChanged")
                 //debug(s.toString())
                 val l = s.toString().toLongOrNull()
-                autoChangeAnnuallyFromMoney(l)
+                changeYearlyOptions(l)
             }
         }
     }
 
-    fun autoChangeAnnuallyFromMoney(money: Long?){
+    /**
+     * 기준 금액에 따라 연간/월간 옵션을 변경해주는 메서드.
+     */
+    fun changeYearlyOptions(money: Long?){
         money?.let{
             if(it >= 10000000){
                 //
-                binding.raMoneyYearly.isChecked = true
-                binding.raMoneyMonthly.isChecked = false
+                binding.yearlyOption.isChecked = true
+                binding.monthlyOption.isChecked = false
             } else {
                 //
-                binding.raMoneyYearly.isChecked = false
-                binding.raMoneyMonthly.isChecked = true
+                binding.yearlyOption.isChecked = false
+                binding.monthlyOption.isChecked = true
             }
         }
     }
 
-
-    private fun displayInitValues(){
+    /**
+     * 기본 입력값 적용
+     */
+    private fun initDisplayDefaultOptions(){
         // 기본 입력값
         val money = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.money,"0")
-        if (money.isNotEmpty()) {
-            binding.idInputMoney.setText(money)
-        }
+        binding.inputMoney.setText(money)
 
         //val taxFree = Services.getAppPrefValue(Services.AppPrefKeys.DefaultInput.taxFree) as? String
         val taxFree = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.taxFree,"0")
-        if (taxFree.isNotEmpty()) {
-            binding.idTaxFreeOption.setText(taxFree)
-        } else {
-            binding.idTaxFreeOption.setText("0")
-        }
+        binding.taxFreeOption.setText(taxFree)
 
         val family = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.family,"1")
-        if (family.isNotEmpty()) {
-            binding.idFamilyOption.setText(family)
-        } else {
-            binding.idFamilyOption.setText("1")
-        }
+        binding.familyOption.setText(family)
 
         val child = Services.AppPref.getString(Services.AppPref.Keys.DefaultInput.child, "0")
-        if (child.isNotEmpty()) {
-            binding.idChildOption.setText(child)
-        } else {
-            binding.idChildOption.setText("0")
-        }
+        binding.childOption.setText(child)
     }
 
 
@@ -151,20 +146,20 @@ class QuickCalculatorFragment : BaseFragment() {
 
         // 금액 정정 버튼
         binding.btnInputClear.setOnClickListener {
-            binding.idInputMoney.setText("0")
+            binding.inputMoney.setText("0")
         }
         
         // 플러스, 마이너스 버튼 이벤트들
         pmButtonsEventListener()
 
         // 부양가족수 입력 필터
-        binding.idFamilyOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
+        binding.familyOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 99))
 
         // 20세이하 자녀수 입력 필터
-        binding.idChildOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
+        binding.childOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 99))
 
         // 비과세 입력 필터
-        binding.idTaxFreeOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999999999))
+        binding.taxFreeOption.text.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999999999))
 
     }
 
@@ -173,17 +168,17 @@ class QuickCalculatorFragment : BaseFragment() {
      */
     private fun pmButtonsEventListener(){
         // 금액 추가 버튼 +천만
-        binding.idBtnPlus1000.setOnClickListener {
+        binding.btnPlus1000.setOnClickListener {
             plusMinusInputMoney(10000000)
         }
 
         // 금액 추가 버튼 +백만
-        binding.idBtnPlus100.setOnClickListener {
+        binding.btnPlus100.setOnClickListener {
             plusMinusInputMoney(1000000)
         }
 
         // 금액 추가 버튼 +십만
-        binding.idBtnPlus10.setOnClickListener {
+        binding.btnPlus10.setOnClickListener {
             plusMinusInputMoney(100000)
         }
         /*
@@ -208,13 +203,13 @@ class QuickCalculatorFragment : BaseFragment() {
      * 입력 금액에 증감을 하는 메서드.
      */
     private fun plusMinusInputMoney(value: Int) {
-        val editText = findViewById(R.id.idInputMoney) as EditText
+        //val editText = findViewById(R.id.input_money) as EditText
         //long inputMoney = getValueEditText(R.id.editMoney_QMode);
-        var inputMoney = MoneyTextWatcher.getValue(editText)
-        inputMoney += value.toLong()
+        var money = MoneyTextWatcher.getValue(binding.inputMoney)
+        money += value.toLong()
 
-        if (inputMoney < 0) inputMoney = 0
-        editText.setText(inputMoney.toString())
+        if (money < 0) money = 0
+        binding.inputMoney.setText(money.toString())
     }
 
     /**
@@ -225,7 +220,7 @@ class QuickCalculatorFragment : BaseFragment() {
         return try{
             val i= Integer.parseInt(editText.text.toString())
             if(i < min){
-                binding.idFamilyOption.setText(min.toString())
+                binding.familyOption.setText(min.toString())
                 min
             } else {
                 i
@@ -241,30 +236,27 @@ class QuickCalculatorFragment : BaseFragment() {
      */
     private fun calculate() {
         // validate checking
-        if (binding.idInputMoney.text.length <= 1) {
+        if (binding.inputMoney.text.length <= 3) {
             return
         }
 
         // 입력 금액
-        val inputMoney: Long = MoneyTextWatcher.getValue(binding.idInputMoney)
+        val inputMoney: Long = MoneyTextWatcher.getValue(binding.inputMoney)
         if(inputMoney <= 0){
-            binding.idInputMoney.setText("0")
+            binding.inputMoney.setText("0")
         }
 
         // 부양 가족수
         // 1 보다 큰 값이어야 함. (물론 입력에서 체크하도록 해야함. 여기는 마지노선 체크)
-        val family: Int = getEditTextNumber(binding.idFamilyOption,1)
+        val family: Int = getEditTextNumber(binding.familyOption,1)
 
         // 20세 이하 자녀수
-        val child: Int = getEditTextNumber(binding.idChildOption,0)
-
-        // 연봉기준인지, 월급기준인지 구분
-        val annualBasis = binding.raMoneyYearly.isChecked
+        val child: Int = getEditTextNumber(binding.childOption,0)
 
         // 비과세 금액
-        val taxFree: Long = MoneyTextWatcher.getValue(binding.idTaxFreeOption)
+        val taxFree: Long = MoneyTextWatcher.getValue(binding.taxFreeOption)
         if(taxFree <= 0){
-            binding.idTaxFreeOption.setText("0")
+            binding.taxFreeOption.setText("0")
         }
 
         //옵션의 기본값
@@ -275,16 +267,15 @@ class QuickCalculatorFragment : BaseFragment() {
             return
         }
         
-        // 실수령액 계산기 클래스
+        // 실수령액 계산기 클래스 및 옵션값 셋팅
         val calculator = Services.calculator
-
-        // 옵션값 셋팅
         val options = calculator.options
         options.inputMoney = inputMoney
         options.taxExemption = taxFree
         options.family = family
         options.child = child
-        options.isAnnualBasis = annualBasis
+        // 연봉기준인지, 월급기준인지 구분
+        options.isAnnualBasis = binding.yearlyOption.isChecked
         //options.isIncludedSeverance = includedSeverance
         options.isIncomeTaxCalculationDisabled = true
 
@@ -325,6 +316,10 @@ class QuickCalculatorFragment : BaseFragment() {
         startActivity(intent)
     }
 
+    /**
+     * view 소멸 이벤트
+     * view binding 메모리 해제 구문 추가.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

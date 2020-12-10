@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
@@ -31,7 +30,7 @@ class ReportInsuranceFragment : BaseFragment() {
         showResult()
 
         binding.infoNationalPension.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
-        binding.infoEmployeeCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
+        binding.infoEmploymentCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
         binding.infoHealthCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
         binding.infoLongTermCare.setOnClickListener { v -> onInformationDictionaryWord(v!!) }
     }
@@ -39,16 +38,16 @@ class ReportInsuranceFragment : BaseFragment() {
     private fun onInformationDictionaryWord(view: View) {
         var termCid = ""
         when (view.id) {
-            R.id.infoNationalPension -> {
+            R.id.info_national_pension -> {
                 termCid = "national_pension"
             }
-            R.id.infoHealthCare -> {
+            R.id.info_health_care -> {
                 termCid = "health_care"
             }
-            R.id.infoLongTermCare -> {
+            R.id.info_long_term_care -> {
                 termCid = "long_term_care"
             }
-            R.id.infoEmployeeCare -> {
+            R.id.info_employment_care -> {
                 termCid = "employment_care"
             }
         }
@@ -61,28 +60,23 @@ class ReportInsuranceFragment : BaseFragment() {
 
     private fun showResult() {
         val calculator = Services.calculator
-
         val format = java.text.DecimalFormat("###,##0")
 
         //국민연금
-        val txNationPension = findViewById(R.id.txNationPension) as TextView
-        txNationPension.text = format.format(calculator.insurance.nationalPension)
-        txNationPension.append(" 원")
+        binding.nationalPension.text = format.format(calculator.insurance.nationalPension)
+        binding.nationalPension.append(" 원")
 
         //건강보험료
-        val txHealthCare = findViewById(R.id.txHealthCare) as TextView
-        txHealthCare.text = format.format(calculator.insurance.healthCare)
-        txHealthCare.append(" 원")
+        binding.healthCare.text = format.format(calculator.insurance.healthCare)
+        binding.healthCare.append(" 원")
 
         //요양보험료
-        val txLongtermCare = findViewById(R.id.txLongtermCare) as TextView
-        txLongtermCare.text = format.format(calculator.insurance.longTermCare)
-        txLongtermCare.append(" 원")
+        binding.longTermCare.text = format.format(calculator.insurance.longTermCare)
+        binding.longTermCare.append(" 원")
 
         //고용보험
-        val txEmploymentCare = findViewById(R.id.txEmploymentCare) as TextView
-        txEmploymentCare.text = format.format(calculator.insurance.employmentCare)
-        txEmploymentCare.append(" 원")
+        binding.employmentCare.text = format.format(calculator.insurance.employmentCare)
+        binding.employmentCare.append(" 원")
 
     }
 

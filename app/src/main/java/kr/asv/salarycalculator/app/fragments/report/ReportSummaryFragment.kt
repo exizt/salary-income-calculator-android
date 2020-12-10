@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.databinding.FragmentReportSummaryBinding
 import kr.asv.salarycalculator.app.fragments.BaseFragment
@@ -37,15 +35,13 @@ class ReportSummaryFragment : BaseFragment() {
         val format = java.text.DecimalFormat("###,##0")
 
         //실 수령액
-        //val txNetSalary = findViewById(R.id.txNetSalary) as TextView
-        binding.txNetSalary.text = format.format(calculator.netSalary)
-        binding.txNetSalary.append(" 원")
+        binding.netSalary.text = format.format(calculator.netSalary)
+        binding.netSalary.append(" 원")
 
         //4대보험+세금합계
-        val txMinusTotal = findViewById(R.id.txMinusTotal) as TextView
         val minusTotal = calculator.insurance.get() + calculator.incomeTax.get()
-        txMinusTotal.text = format.format(minusTotal)
-        txMinusTotal.append(" 원")
+        binding.totalMinus.text = format.format(minusTotal)
+        binding.totalMinus.append(" 원")
 
     }
 

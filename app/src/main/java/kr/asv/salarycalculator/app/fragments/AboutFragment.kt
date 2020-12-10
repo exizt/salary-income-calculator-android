@@ -35,8 +35,8 @@ class AboutFragment : Fragment() {
         //defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
 
         activity?.let {
-            binding.tvAppVersion.text = getAppVersion(it.applicationContext)
-            binding.tvDBVersion.text = getDbVersion(it.applicationContext)
+            binding.appVersion.text = getAppVersion(it.applicationContext)
+            binding.dbVersion.text = getDbVersion(it.applicationContext)
         }
     }
 

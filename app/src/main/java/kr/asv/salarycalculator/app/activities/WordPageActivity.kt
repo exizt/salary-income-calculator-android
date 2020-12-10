@@ -58,7 +58,8 @@ class WordPageActivity : AppCompatActivity() {
         //setSupportActionBar(toolbar)
         setSupportActionBar(binding.toolbar)
 
-        toolbarLayout = findViewById(R.id.toolbar_layout)
+        //toolbarLayout = findViewById(R.id.toolbar_layout)
+        toolbarLayout = binding.toolbarLayout
 
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)

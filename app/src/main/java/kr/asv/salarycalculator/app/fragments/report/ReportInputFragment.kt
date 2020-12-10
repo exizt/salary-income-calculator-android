@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.databinding.FragmentReportInputBinding
 import kr.asv.salarycalculator.app.fragments.BaseFragment
@@ -39,34 +37,29 @@ class ReportInputFragment : BaseFragment() {
         val format = java.text.DecimalFormat("###,##0")
 
         //계산된 연봉
-        val txInputSalaryAnnual = findViewById(R.id.txInputSalaryAnnual) as TextView
-        txInputSalaryAnnual.text = format.format(calculator.salary.grossAnnualSalary)
-        txInputSalaryAnnual.append(" 원")
+        binding.annualSalary.text = format.format(calculator.salary.grossAnnualSalary)
+        binding.annualSalary.append(" 원")
 
         //계산된 월급
-        val txInputSalary = findViewById(R.id.txInputSalary) as TextView
-        txInputSalary.text = format.format(calculator.salary.grossSalary)
-        txInputSalary.append(" 원")
+        binding.monthlySalary.text = format.format(calculator.salary.grossSalary)
+        binding.monthlySalary.append(" 원")
 
         //부양가족수
-        val txInputFamily = findViewById(R.id.txInputFamily) as TextView
-        txInputFamily.text = String.format("%d 명", calculator.options.family)
+        binding.familyOption.text = String.format("%d 명", calculator.options.family)
 
         //20세이하자녀수
-        val txInputChild = findViewById(R.id.txInputChild) as TextView
-        txInputChild.text = String.format("%d 명", calculator.options.child)
+        binding.childOption.text = String.format("%d 명", calculator.options.child)
 
         //입력한 비과세액
-        val txInputTaxExemption = findViewById(R.id.txInputTaxExemption) as TextView
-        txInputTaxExemption.text = format.format(calculator.options.taxExemption)
-        txInputTaxExemption.append(" 원")
+        binding.taxFreeOption.text = format.format(calculator.options.taxExemption)
+        binding.taxFreeOption.append(" 원")
 
         // 세율 값도 보여주게 처리.
         val rateFormat = java.text.DecimalFormat("###,##0.####%")
-        (findViewById(R.id.txNationPensionRate) as TextView).text = rateFormat.format(calculator.insurance.rates.nationalPension)
-        (findViewById(R.id.txHealthCareRate) as TextView).text = rateFormat.format(calculator.insurance.rates.healthCare)
-        (findViewById(R.id.txLongtermCareRate) as TextView).text = rateFormat.format(calculator.insurance.rates.longTermCare)
-        (findViewById(R.id.txEmploymentCareRate) as TextView).text = rateFormat.format(calculator.insurance.rates.employmentCare)
+        binding.nationalPensionRate.text = rateFormat.format(calculator.insurance.rates.nationalPension)
+        binding.healthCareRate.text = rateFormat.format(calculator.insurance.rates.healthCare)
+        binding.longTermCareRate.text = rateFormat.format(calculator.insurance.rates.longTermCare)
+        binding.employmentCareRate.text = rateFormat.format(calculator.insurance.rates.employmentCare)
 
     }
 

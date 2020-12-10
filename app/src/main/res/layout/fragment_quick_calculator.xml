@@ -22,7 +22,7 @@
             android:text="@string/calc_inputmoney_label" />
 
         <EditText
-            android:id="@+id/idInputMoney"
+            android:id="@+id/input_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -46,11 +46,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/btn_clear"
-                />
+                android:text="@string/btn_clear" />
 
             <Button
-                android:id="@+id/idBtnPlus1000"
+                android:id="@+id/btn_plus_1000"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
                 android:text="@string/btn_plus_1000" />
 
             <Button
-                android:id="@+id/idBtnPlus100"
+                android:id="@+id/btn_plus_100"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,7 +65,7 @@
                 android:text="@string/btn_plus_100" />
 
             <Button
-                android:id="@+id/idBtnPlus10"
+                android:id="@+id/btn_plus_10"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,14 +79,14 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/raMoneyYearly"
+                android:id="@+id/yearly_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/option_annual_salary" />
 
             <RadioButton
-                android:id="@+id/raMoneyMonthly"
+                android:id="@+id/monthly_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_monthly_salary" />
@@ -106,7 +105,7 @@
                 android:text="@string/label_family_input" />
 
             <EditText
-                android:id="@+id/idFamilyOption"
+                android:id="@+id/family_option"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -131,7 +130,7 @@
                 android:text="@string/label_child_input" />
 
             <EditText
-                android:id="@+id/idChildOption"
+                android:id="@+id/child_option"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -156,7 +155,7 @@
                 android:text="@string/label_taxfree_input" />
 
             <EditText
-                android:id="@+id/idTaxFreeOption"
+                android:id="@+id/tax_free_option"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
