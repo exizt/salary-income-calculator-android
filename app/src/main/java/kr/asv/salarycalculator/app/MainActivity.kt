@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // AdView 관련
     private lateinit var adView: AdView
     private var initialLayoutComplete = false
+    @Suppress("DEPRECATION")
     private val adaptiveAdSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -60,8 +61,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //setContentView(R.layout.activity_main)
         val view = binding.root
         setContentView(view)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
+        //setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(binding.appBarMain.toolbar)
 
         // 네비게이션 셋팅
         onCreateNavigationDrawer() // 네비게이션 드로워 셋팅
@@ -93,7 +95,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun onCreateNavigationDrawer() {
         val toggle = object : ActionBarDrawerToggle(
-                this, binding.drawerLayout, findViewById(R.id.toolbar), R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                this, binding.drawerLayout, binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 hideSoftKeyboard()
@@ -111,6 +113,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //네비게이션 바 안에서 메뉴항목 부분
         binding.navView.setNavigationItemSelectedListener(this)
+    }
+
+    fun closeNavigationDrawer(){
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     /**

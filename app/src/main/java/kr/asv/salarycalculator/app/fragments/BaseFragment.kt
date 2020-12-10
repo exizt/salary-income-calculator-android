@@ -25,13 +25,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * findViewById 를 편하게 사용하기 위해서 생성
-     *
-     * @return View view
-     */
-    protected fun findViewById(id: Int): View = this.fragmentView!!.findViewById(id)
-
-    /**
      * 액션바 타이틀 변경
      */
     protected fun setActionBarTitle(title: String) {
