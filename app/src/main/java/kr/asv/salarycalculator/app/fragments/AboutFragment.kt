@@ -21,8 +21,6 @@ class AboutFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

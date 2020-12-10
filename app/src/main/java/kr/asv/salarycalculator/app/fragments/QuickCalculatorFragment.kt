@@ -37,10 +37,8 @@ class QuickCalculatorFragment : BaseFragment() {
         //val view = inflater.inflate(R.layout.fragment_quick_calculator, container, false)
         _binding = FragmentQuickCalculatorBinding.inflate(inflater, container, false)
         val view = binding.root
-        setFragmentView(view)
+        //setFragmentView(view)
         setActionBarTitle(resources.getString(R.string.nav_menu_quick_calculator))
-        //debug("onCreateView")
-
         return view
     }
 
