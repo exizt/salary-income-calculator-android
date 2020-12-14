@@ -20,17 +20,17 @@
     <string name="nav_menu_preferences">Preferences</string>
     <string name="nav_about">About</string>
 
-    <string name="option_annual_salary">연봉입력</string>
-    <string name="option_monthly_salary">월급입력</string>
-    <string name="label_family_input">부양가족수(본인포함)</string>
-    <string name="label_child_input">20세이하자녀수</string>
-    <string name="label_taxfree_input">비과세액(원)</string>
+    <string name="option_annual_salary">Yearly</string>
+    <string name="option_monthly_salary">Monthly</string>
+    <string name="label_family_input">Family(min 1)</string>
+    <string name="label_child_input">Child</string>
+    <string name="label_taxfree_input">nontaxable income(Won)</string>
     <string name="calculate">Calculate</string>
     <string name="btn_clear">Clear</string>
-    <string name="btn_plus_1000">+ 천만원</string>
-    <string name="btn_plus_100">+ 백만원</string>
-    <string name="btn_plus_10">+ 십만원</string>
-    <string name="quick_calculator_description">quick calculator</string>
+    <string name="btn_plus_1000">+1,000만</string>
+    <string name="btn_plus_100">+100만</string>
+    <string name="btn_plus_10">+10만</string>
+    <string name="quick_calculator_description">.</string>
 
     <string name="activity_word_title">WordActivity</string>
     <string name="word_activity_subtitle_01">Summary</string>
@@ -47,12 +47,12 @@
     <string name="report_tabBar_item_02">Insurances Tax</string>
     <string name="report_tabBar_item_03">Income Tax</string>
     <string name="report_tabBar_item_04">Input</string>
-    <string name="report_option_salary">입력한연봉</string>
-    <string name="report_option_salary_monthly">입력한월급</string>
-    <string name="report_option_family">부양가족수</string>
-    <string name="report_option_child">20세이하자녀수</string>
-    <string name="report_option_taxfree">입력한비과세액</string>
-    <string name="report_option_rates">계산 기준 세율</string>
+    <string name="report_option_salary">money input</string>
+    <string name="report_option_salary_monthly">calculated monthly salary</string>
+    <string name="report_option_family">family count</string>
+    <string name="report_option_child">child count</string>
+    <string name="report_option_taxfree">nontaxable income (won)</string>
+    <string name="report_option_rates">Rates based on calculate</string>
     <string name="report_summary_subtitle_02">total tax</string>
 
     <string name="activity_settings_title">Settings</string>
@@ -70,5 +70,5 @@
     <string name="about_db_version_label">DB version</string>
     <string name="about_desc">Loan Calculator \n\n This app is designed to calculate Loan Payment Schedules.</string>
 
-    <string name="calc_inputmoney_label">금액 입력</string>
+    <string name="calc_inputmoney_label">Income</string>
 </resources>
