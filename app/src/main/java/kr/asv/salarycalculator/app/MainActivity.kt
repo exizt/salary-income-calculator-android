@@ -74,6 +74,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Firebase Analytics 초기화
         firebaseAnalytics = Firebase.analytics
+        @Suppress("SpellCheckingInspection")
+        if (BuildConfig.DEBUG) {
+            firebaseAnalytics.setAnalyticsCollectionEnabled(false)
+            //FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
+        }
 
         // Admob 호출
         AdmobAdapter.initMobileAds(this)
