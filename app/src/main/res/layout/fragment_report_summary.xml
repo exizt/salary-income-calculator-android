@@ -20,7 +20,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/txNetSalary"
+        android:id="@+id/net_salary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -35,7 +35,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/txMinusTotal"
+        android:id="@+id/total_minus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"

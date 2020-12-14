@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!--suppress XmlUnusedNamespaceDeclaration -->
+
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/infoNationalPension"
+                android:id="@+id/info_national_pension"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_string"
@@ -37,7 +38,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txNationPension"
+            android:id="@+id/national_pension"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -58,7 +59,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/infoHealthCare"
+                android:id="@+id/info_health_care"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_string"
@@ -66,7 +67,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txHealthCare"
+            android:id="@+id/health_care"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -87,7 +88,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/infoLongTermCare"
+                android:id="@+id/info_long_term_care"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_string"
@@ -95,7 +96,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txLongtermCare"
+            android:id="@+id/long_term_care"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -116,7 +117,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/infoEmployeeCare"
+                android:id="@+id/info_employment_care"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_string"
@@ -124,7 +125,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txEmploymentCare"
+            android:id="@+id/employment_care"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

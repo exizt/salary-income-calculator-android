@@ -8,17 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_about.*
-import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.databases.AppDatabase
+import kr.asv.salarycalculator.app.databinding.FragmentAboutBinding
 
 /**
  */
 class AboutFragment : Fragment() {
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+                              savedInstanceState: Bundle?): View {
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -31,8 +33,8 @@ class AboutFragment : Fragment() {
         //defaultSharedPreferences.getInt("DB_CURRENT_VERSION",0).toString()
 
         activity?.let {
-            tvAppVersion.text = getAppVersion(it.applicationContext)
-            tvDBVersion.text = getDbVersion(it.applicationContext)
+            binding.appVersion.text = getAppVersion(it.applicationContext)
+            binding.dbVersion.text = getDbVersion(it.applicationContext)
         }
     }
 
@@ -57,4 +59,8 @@ class AboutFragment : Fragment() {
         return version
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

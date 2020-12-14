@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_report.*
 import kr.asv.salarycalculator.app.R
+import kr.asv.salarycalculator.app.databinding.ActivityReportBinding
 import kr.asv.salarycalculator.app.fragments.report.ReportInputFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportInsuranceFragment
 import kr.asv.salarycalculator.app.fragments.report.ReportSummaryFragment
@@ -20,10 +20,12 @@ import kr.asv.salarycalculator.utils.AdmobAdapter
 
 class ReportActivity : AppCompatActivity() {
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private lateinit var binding: ActivityReportBinding
 
     // AdView 관련
     private lateinit var adView: AdView
     private var initialLayoutComplete = false
+    @Suppress("DEPRECATION")
     private val adaptiveAdSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -32,7 +34,7 @@ class ReportActivity : AppCompatActivity() {
 
             val density = outMetrics.density
 
-            var adWidthPixels = ad_container.width.toFloat()
+            var adWidthPixels = binding.adContainer.width.toFloat()
             if (adWidthPixels == 0f) {
                 adWidthPixels = outMetrics.widthPixels.toFloat()
             }
@@ -46,19 +48,25 @@ class ReportActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
+        binding = ActivityReportBinding.inflate(layoutInflater)
 
-        setSupportActionBar(toolbar)
+        //setContentView(R.layout.activity_report)
+        val view = binding.root
+        setContentView(view)
+
+        //setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
+
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }
 
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
-        container.adapter = mSectionsPagerAdapter
+        binding.container.adapter = mSectionsPagerAdapter
 
-        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
-        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+        binding.container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabs))
+        binding.tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(binding.container))
 
         title = "실수령액 조회 결과"
 
@@ -66,12 +74,10 @@ class ReportActivity : AppCompatActivity() {
         setResultReport()
 
         // Admob 호출
-        // AdmobAdapter.loadBannerAdMob(adView)
-        // Admob 호출
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)
-        ad_container.addView(adView)
-        ad_container.viewTreeObserver.addOnGlobalLayoutListener {
+        binding.adContainer.addView(adView)
+        binding.adContainer.viewTreeObserver.addOnGlobalLayoutListener {
             if (!initialLayoutComplete) {
                 initialLayoutComplete = true
                 adView.adSize = adaptiveAdSize
