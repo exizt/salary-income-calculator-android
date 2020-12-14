@@ -11,8 +11,8 @@ android {
         applicationId 'kr.asv.apps.salarycalculator'
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 39
-        versionName '1.5.40'
+        versionCode 41
+        versionName '1.5.41'
     }
     buildFeatures {
         viewBinding true
@@ -47,8 +47,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:17.3.0'
     implementation 'com.google.firebase:firebase-ads:19.6.0'
-    // bug fix
-    implementation 'com.google.android.gms:play-services-basement:17.5.0'
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"

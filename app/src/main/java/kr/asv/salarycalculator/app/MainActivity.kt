@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 AdmobAdapter.loadBannerAdMob(adView)
             }
         }
-
     }
 
     /**

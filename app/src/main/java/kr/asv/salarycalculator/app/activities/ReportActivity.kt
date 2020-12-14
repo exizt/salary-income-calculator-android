@@ -25,6 +25,7 @@ class ReportActivity : AppCompatActivity() {
     // AdView 관련
     private lateinit var adView: AdView
     private var initialLayoutComplete = false
+    @Suppress("DEPRECATION")
     private val adaptiveAdSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -72,8 +73,6 @@ class ReportActivity : AppCompatActivity() {
         //로드하면서 결과값을 조회해온다.
         setResultReport()
 
-        // Admob 호출
-        // AdmobAdapter.loadBannerAdMob(adView)
         // Admob 호출
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)

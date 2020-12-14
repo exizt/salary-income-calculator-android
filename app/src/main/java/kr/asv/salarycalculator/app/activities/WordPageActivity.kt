@@ -27,6 +27,7 @@ class WordPageActivity : AppCompatActivity() {
     // AdView 관련
     private lateinit var adView: AdView
     private var initialLayoutComplete = false
+    @Suppress("DEPRECATION")
     private val adaptiveAdSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -85,7 +86,6 @@ class WordPageActivity : AppCompatActivity() {
         }
 
         // Admob 호출
-        //AdmobAdapter.loadBannerAdMob(adView)
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)
         binding.adContainer.addView(adView)
