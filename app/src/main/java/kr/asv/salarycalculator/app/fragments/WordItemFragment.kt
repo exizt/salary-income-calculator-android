@@ -12,6 +12,7 @@ import kr.asv.salarycalculator.app.R
 import kr.asv.salarycalculator.app.Services
 import kr.asv.salarycalculator.app.activities.WordPageActivity
 import kr.asv.salarycalculator.app.databinding.FragmentDictionaryItemBinding
+import kr.asv.salarycalculator.app.databinding.FragmentDictionaryListBinding
 import kr.asv.salarycalculator.app.model.Term
 import kr.asv.salarycalculator.app.model.TermViewModel
 
@@ -21,7 +22,13 @@ import kr.asv.salarycalculator.app.model.TermViewModel
  * xml : fragment_dictionary_list 와 연관됨.
  */
 class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
+    // debug options
     private val isDebug = false
+    // view binding
+    private var _binding: FragmentDictionaryListBinding? = null
+    private val binding get() = _binding!!
+
+    // viewModel
     private lateinit var termViewModel: TermViewModel
     private lateinit var adapter :TermItemRecyclerViewAdapter
 
@@ -39,28 +46,28 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
      * onCreateView
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         //debug("onCreateView")
-        val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
+        //val view = inflater.inflate(R.layout.fragment_dictionary_list, container, false)
+        _binding = FragmentDictionaryListBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         setActionBarTitle(resources.getString(R.string.nav_menu_word_dictionary))
 
         // Set the adapter
-        if (view is RecyclerView) {
-            val context = view.getContext()
-            adapter = TermItemRecyclerViewAdapter(this)
-            val recyclerView: RecyclerView = view
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = adapter
-            termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
-            termViewModel.getAll().observe(viewLifecycleOwner, { t -> adapter.setItems(t!!)})
+        val context = view.context
+        adapter = TermItemRecyclerViewAdapter(this)
+        val recyclerView: RecyclerView = view
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
+        termViewModel = ViewModelProvider(this).get(TermViewModel::class.java)
+        termViewModel.getAll().observe(viewLifecycleOwner, { t -> adapter.setItems(t!!)})
 
-            /*
-            lifecycleScope.launch {
-                termViewModel.getAll()
-            }
-            */
+        /*
+        lifecycleScope.launch {
+            termViewModel.getAll()
         }
+        */
         return view
     }
 
@@ -84,6 +91,14 @@ class WordItemFragment : BaseFragment(), OnListFragmentInteractionListener {
         }
     }
 
+    /**
+     * view 소멸 이벤트
+     * view binding 메모리 해제 구문 추가.
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     /**
      * Fragment_wordItem.xml 과 연관된 클래스

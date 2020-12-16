@@ -60,13 +60,16 @@ class ReportTaxFragment : BaseFragment() {
         binding.localTax.append(" 원")
     }
 
+    /**
+     * view 소멸 이벤트
+     * view binding 메모리 해제 구문 추가.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     companion object {
-
         fun newInstance(): ReportTaxFragment {
             val fragment = ReportTaxFragment()
             val args = Bundle()

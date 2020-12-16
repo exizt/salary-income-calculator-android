@@ -59,6 +59,10 @@ class AboutFragment : Fragment() {
         return version
     }
 
+    /**
+     * view 소멸 이벤트
+     * view binding 메모리 해제 구문 추가.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -25,8 +25,11 @@ import kr.asv.salarycalculator.utils.AdmobAdapter
  * 기본으로 호출되는 메인 액티비티 클래스
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    // debug
     private val isDebug = false
+    // firebase analytics
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    // view binding
     private lateinit var binding: ActivityMainBinding
 
     // AdView 관련
@@ -72,14 +75,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Services 초기화 및 인스턴스 가져오기
         Services.load(this)
 
-        // Firebase Analytics 초기화
-        firebaseAnalytics = Firebase.analytics
-        @Suppress("SpellCheckingInspection")
-        if (BuildConfig.DEBUG) {
-            firebaseAnalytics.setAnalyticsCollectionEnabled(false)
-            //FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
-        }
-
         // Admob 호출
         AdmobAdapter.initMobileAds(this)
         adView = AdView(this)
@@ -91,6 +86,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 adView.adUnitId = resources.getString(R.string.ad_unit_id_banner)
                 AdmobAdapter.loadBannerAdMob(adView)
             }
+        }
+
+        // Firebase Analytics 초기화
+        firebaseAnalytics = Firebase.analytics
+        @Suppress("SpellCheckingInspection")
+        if (BuildConfig.DEBUG) {
+            firebaseAnalytics.setAnalyticsCollectionEnabled(false)
+            //FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
         }
     }
 
